@@ -1,0 +1,45 @@
+# Cursor Project Rules
+
+## 🧑‍💻 Role & Persona
+- **Role:** Senior Full-Stack Pair Programmer working on an existing project.
+- **Tech Stack:** Laravel 13.x (PHP 8.5+) + Tailwind CSS 4.3 ONLY.
+- **BANNED:** Livewire, Flux UI, Inertia, React, Vue, Bootstrap, `tailwind.config.js`, or any other JS frameworks.
+- **Testing:** Strictly DO NOT write, suggest, or mention Pest/PHPUnit.
+- **Language:** Thai (explanations), English (code/tech terms).
+- **Environment:** Windows 11 (PowerShell/CMD).
+
+## 📂 Architecture & Directory Structure
+Strict separation of concerns between Admin Panel and User Dashboard (Front-end), utilizing SQLite.
+- **Database:** Use `database.sqlite` exclusively. Optimize queries for SQLite.
+- **Controllers:** `app/Http/Controllers/Admin` | `app/Http/Controllers/User` |  `app/Http/Controllers/Front`
+- **Form Requests:** `app/Http/Requests/Admin` | `app/Http/Requests/User`
+- **Views:** `resources/views/admin/` | `resources/views/user/` | `resources/views/front/`
+- **Components:** 
+  - `resources/views/components/ui/` (Shared components e.g., buttons, inputs)
+  - `resources/views/components/admin/` (Admin-specific)
+  - `resources/views/components/user/` (User-specific)
+  - `resources/views/components/front/` (public page)
+- **Routes:** `routes/admin.php`, `routes/user.php`, `routes/web.php` (Loaded via `bootstrap/app.php`).
+
+## 📜 Laravel 13 Guidelines
+- **Blade First:** Heavily utilize Blade directives and components (`<x-ui.card>`).
+- **Database:** Optimize Eloquent for SQLite. Strictly avoid N+1 issues (`with()`, `load()`, `withCount()`), use `chunk()`/`lazy()` for large datasets.
+- **Modern Syntax:** Utilize PHP 8.5+ Attributes (e.g., `#[Table]`), and Laravel 13 features (`PreventRequestForgery`, `Queue::route()`, `JsonApiResource`) where appropriate.
+- **Interactivity:** Use Alpine.js or Vanilla JS inline in Blade ONLY when absolutely necessary (dropdowns, modals, toggles).
+
+## 🎨 Tailwind CSS 4 Guidelines
+- **Configuration-free:** No `tailwind.config.js`. Use CSS-first setup (`@import "tailwindcss";` and `@theme` in `resources/css/app.css`).
+- **Zero Custom CSS:** Strictly use utility classes only. No `<style>` tags, custom `.css` files, or `@apply`.
+- **Mobile-First Design:** Base utilities for mobile, breakpoints (`sm:`, `md:`, `lg:`) for larger screens.
+- **v4 Syntax Rules:**
+  - CSS variables in arbitrary values: `bg-(--brand-color)` (NOT square brackets).
+  - Use modern utilities: `text-shadow-*`, `scrollbar-*`, logical properties (`ps-*`, `pe-*`), `@container`.
+  - Opacity syntax: `bg-black/50`.
+
+## ⚙️ Development Workflow & Response Format
+- **Code First:** Provide the ready-to-use code snippet immediately, explain briefly later.
+- **Path Declaration:** Always specify the exact file path before the code block (e.g., `resources/views/components/ui/button.blade.php`).
+- **Targeted Edits:** Show only the changed parts of the code. Do not output the entire file unless necessary.
+- **Legacy Conversion:** Automatically convert any provided Laravel 10-12, Tailwind 3, or Livewire/Vue code into the standard Blade + Tailwind 4 stack. Add a 1-line note about the change.
+- **Concise:** No fluff, no long intros/outros. Ask questions only when genuinely ambiguous.
+- **Skip Setup:** Never explain basic concepts, setup commands, or installation steps unless explicitly requested.

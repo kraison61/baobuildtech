@@ -1,2 +1,11 @@
 @import 'tailwindcss';
 
+@theme {
+    --color-brand: #0E4C4C;
+    --color-brand-dark: #0a3535;
+    --color-ink: #17201E;
+    --color-paper: #F7F6F2;
+    --color-line: #DEDBD3;
+    --font-sans: "IBM Plex Sans Thai", sans-serif;
+    --font-display: "Anuphan", sans-serif;
+}

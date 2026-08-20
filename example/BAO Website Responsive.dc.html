@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Anuphan:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<style type="text/tailwindcss">
+  @theme {
+    --color-brand: #0E4C4C;
+    --color-brand-dark: #0a3535;
+    --color-ink: #17201E;
+    --color-paper: #F7F6F2;
+    --color-line: #DEDBD3;
+    --font-sans: "IBM Plex Sans Thai", sans-serif;
+    --font-display: "Anuphan", sans-serif;
+  }
+  @layer base {
+    a { color: var(--color-brand); text-decoration: none; }
+    a:hover { color: var(--color-brand-dark); }
+  }
+</style>
+<style>
+  body { margin: 0; }
+</style>
+</helmet>
+
+<div class="font-sans text-ink bg-paper antialiased">
+
+  <header class="sticky top-0 z-30 bg-paper/95 backdrop-blur border-b border-line">
+    <div class="mx-auto max-w-[1280px] px-5 lg:px-14 h-16 lg:h-20 flex items-center justify-between gap-4">
+      <a href="#top" class="flex items-center gap-3 shrink-0">
+        <span class="grid size-9 place-items-center bg-brand text-white font-bold">B</span>
+        <span class="flex flex-col leading-tight">
+          <span class="text-base lg:text-lg font-bold tracking-wide">BAO</span>
+          <span class="hidden sm:block text-[10px] tracking-[0.14em] text-neutral-500">BUILD · ASSURE · OPERATE</span>
+        </span>
+      </a>
+      <nav class="hidden lg:flex gap-7 text-sm font-medium text-neutral-700">
+        <a href="#services">บริการ</a>
+        <a href="#work">ผลงาน</a>
+        <a href="#standards">มาตรฐาน</a>
+        <a href="#process">ขั้นตอนงาน</a>
+        <a href="#team">ทีมงาน</a>
+      </nav>
+      <div class="flex items-center gap-3">
+        <a href="tel:0000000000" class="hidden md:block text-sm font-semibold text-brand">0X-XXX-XXXX</a>
+        <a href="#contact" class="hidden sm:block bg-brand text-white text-sm font-semibold px-4 py-2.5 lg:px-5 lg:py-3">ขอใบเสนอราคา</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="mx-auto max-w-[1280px] px-5 lg:px-14">
+
+    <section class="grid gap-10 lg:grid-cols-[1.15fr_.85fr] lg:items-end pt-12 lg:pt-20 pb-10 lg:pb-16">
+      <div class="flex flex-col gap-6">
+        <div class="flex flex-wrap gap-2 text-xs font-semibold tracking-wide text-brand">
+          <span class="border border-brand/30 px-2.5 py-1.5">ขึ้นทะเบียนผู้รับเหมา ชั้น 1</span>
+          <span class="border border-brand/30 px-2.5 py-1.5">ISO 9001 : 2015</span>
+        </div>
+        <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-semibold leading-[1.14] tracking-tight text-pretty">
+          งานโยธาที่ส่งมอบตรงเวลา<br class="hidden sm:block">ระบบอาคารที่ดูแลต่อได้จริง
+        </h1>
+        <p class="max-w-xl text-base lg:text-lg leading-relaxed text-neutral-700 text-pretty">
+          BAO รับเหมางานรั้วและงานโยธา พร้อมงานระบบ Smart Building และ IoT ในสัญญาเดียว ตั้งแต่ออกแบบ ก่อสร้าง ตรวจรับ ไปจนถึงดูแลระบบหลังส่งมอบ
+        </p>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3">
+          <a href="#contact" class="bg-brand text-white text-base font-semibold px-7 py-4 text-center">ส่งแบบ/BOQ ให้ประเมินราคา</a>
+          <a href="#work" class="border border-ink text-base font-semibold px-6 py-4 text-center">ดูผลงานย้อนหลัง</a>
+          <span class="text-sm text-neutral-500 sm:ml-1">ตอบกลับภายใน 1 วันทำการ</span>
+        </div>
+      </div>
+      <dl class="grid grid-cols-2 lg:grid-cols-1 border-t-2 border-ink">
+        <div class="flex flex-col lg:flex-row lg:justify-between gap-1 py-4 border-b border-line pr-4 lg:pr-0">
+          <dt class="text-sm lg:text-[15px] text-neutral-600">โครงการที่ส่งมอบแล้ว</dt>
+          <dd class="font-display text-2xl font-semibold">240+</dd>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:justify-between gap-1 py-4 border-b border-line pr-4 lg:pr-0">
+          <dt class="text-sm lg:text-[15px] text-neutral-600">งานประมูลภาครัฐ</dt>
+          <dd class="font-display text-2xl font-semibold">68 สัญญา</dd>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:justify-between gap-1 py-4 border-b border-line pr-4 lg:pr-0">
+          <dt class="text-sm lg:text-[15px] text-neutral-600">ส่งมอบตรงกำหนด</dt>
+          <dd class="font-display text-2xl font-semibold">97%</dd>
+        </div>
+        <div class="flex flex-col lg:flex-row lg:justify-between gap-1 py-4 border-b border-line lg:border-b-0 pr-4 lg:pr-0">
+          <dt class="text-sm lg:text-[15px] text-neutral-600">ทีมช่างประจำ</dt>
+          <dd class="font-display text-2xl font-semibold">45 คน</dd>
+        </div>
+      </dl>
+    </section>
+
+    <div class="aspect-16/9 sm:aspect-21/9 bg-neutral-200 border border-dashed border-neutral-400 grid place-items-center text-center text-neutral-500 px-6">
+      <div>
+        <p class="text-sm font-semibold">ภาพหน้าปก: งานกำแพงกันดิน/รั้วโครงการ ถ่ายมุมกว้าง</p>
+        <p class="text-xs mt-1.5">แนวนอน 2400×900 px</p>
+      </div>
+    </div>
+
+    <section id="services" class="pt-16 lg:pt-20 pb-16 scroll-mt-24">
+      <div class="flex flex-wrap items-baseline justify-between gap-2 border-b-2 border-ink pb-3.5">
+        <h2 class="font-display text-2xl lg:text-4xl font-semibold">บริการ</h2>
+        <p class="text-sm text-neutral-500">สองสายงานหลัก ทำงานร่วมกันในโครงการเดียว</p>
+      </div>
+      <div class="grid md:grid-cols-2">
+        <div class="py-8 md:pr-10 border-b border-line md:border-r">
+          <p class="text-xs font-semibold tracking-[0.12em] text-brand">01 · CIVIL</p>
+          <h3 class="font-display text-xl lg:text-2xl font-semibold mt-3">รั้ว &amp; งานโยธา</h3>
+          <p class="mt-3 text-base leading-relaxed text-neutral-700">กำแพงกันดิน รั้วรอบโครงการ ถนน ลานคอนกรีต งานระบายน้ำ พร้อมแบบวิศวกรรมและรายการคำนวณสำหรับยื่นตรวจ</p>
+          <ul class="mt-4 flex flex-col gap-2 text-[15px] text-neutral-800">
+            <li>· กำแพงกันดิน คสล. / Sheet pile</li>
+            <li>· รั้วคอนกรีตสำเร็จ &amp; รั้วตะแกรงเหล็ก</li>
+            <li>· ถนน–ลาน คสล. และงานระบายน้ำ</li>
+            <li>· งานปรับพื้นที่และรื้อถอน</li>
+          </ul>
+        </div>
+        <div class="py-8 md:pl-10 border-b border-line">
+          <p class="text-xs font-semibold tracking-[0.12em] text-brand">02 · SYSTEMS</p>
+          <h3 class="font-display text-xl lg:text-2xl font-semibold mt-3">Smart Building &amp; IoT</h3>
+          <p class="mt-3 text-base leading-relaxed text-neutral-700">ระบบควบคุมอาคาร เซ็นเซอร์ และโครงข่ายที่ออกแบบให้ต่อยอดได้ ไม่ต้องรื้อสายใหม่เมื่อเพิ่มอุปกรณ์</p>
+          <ul class="mt-4 flex flex-col gap-2 text-[15px] text-neutral-800">
+            <li>· ระบบควบคุมอาคาร (BMS) และมิเตอร์พลังงาน</li>
+            <li>· AI CCTV ตรวจจับพฤติกรรมและป้ายทะเบียน</li>
+            <li>· ระบบควบคุมการเข้าออกและประตูอัตโนมัติ</li>
+            <li>· เซ็นเซอร์ IoT รายงานสถานะแบบเรียลไทม์</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-7 bg-brand text-white grid gap-6 lg:grid-cols-3 p-8 lg:p-10">
+        <div>
+          <p class="text-xs font-semibold tracking-[0.12em] text-white/60">แนวโน้มปี 2027</p>
+          <p class="font-display text-xl lg:text-2xl font-semibold leading-snug mt-2.5">โครงสร้างที่วางสายให้ระบบอัจฉริยะไว้ตั้งแต่วันแรก</p>
+        </div>
+        <p class="text-[15px] leading-relaxed text-white/80">งานโยธาที่เดินท่อร้อยสาย จุดจ่ายไฟ และตำแหน่งกล้องไว้ล่วงหน้า ทำให้ติดตั้งระบบ IoT ภายหลังได้โดยไม่ต้องสกัดพื้นหรือเจาะผนังใหม่</p>
+        <p class="text-[15px] leading-relaxed text-white/80">AI CCTV เชื่อมกับระบบควบคุมการเข้าออก แจ้งเตือนเหตุผิดปกติในไซต์และในอาคารได้ทันที ลดจำนวน รปภ. ที่ต้องเดินตรวจ</p>
+      </div>
+    </section>
+
+    <section id="work" class="pb-16 scroll-mt-24">
+      <div class="flex flex-wrap items-baseline justify-between gap-3 border-b-2 border-ink pb-3.5">
+        <h2 class="font-display text-2xl lg:text-4xl font-semibold">ผลงาน</h2>
+        <div class="flex gap-4 text-sm font-medium text-neutral-700">
+          <span class="font-bold text-brand">ทั้งหมด</span><span>ภาครัฐ</span><span>โรงงาน</span><span>อสังหาฯ</span>
+        </div>
+      </div>
+      <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-7">
+        <article class="flex flex-col gap-3">
+          <div class="aspect-3/2 bg-neutral-200 border border-dashed border-neutral-400 grid place-items-center text-xs text-neutral-500">ภาพผลงาน 1200×800</div>
+          <p class="text-xs font-semibold tracking-[0.1em] text-brand">ภาครัฐ · 2025</p>
+          <h3 class="font-display text-lg lg:text-xl font-semibold">กำแพงกันดิน คสล. ริมคลอง 480 ม.</h3>
+          <p class="text-[15px] leading-relaxed text-neutral-600">เทศบาลนคร — งานเสาเข็มเจาะ ผนังกันดิน และราวกันตก ส่งมอบก่อนกำหนด 3 สัปดาห์</p>
+        </article>
+        <article class="flex flex-col gap-3">
+          <div class="aspect-3/2 bg-neutral-200 border border-dashed border-neutral-400 grid place-items-center text-xs text-neutral-500">ภาพผลงาน 1200×800</div>
+          <p class="text-xs font-semibold tracking-[0.1em] text-brand">โรงงาน · 2026</p>
+          <h3 class="font-display text-lg lg:text-xl font-semibold">รั้วรอบโรงงาน + AI CCTV 64 จุด</h3>
+          <p class="text-[15px] leading-relaxed text-neutral-600">นิคมอุตสาหกรรม — รั้วตะแกรงเหล็กสูง 2.8 ม. พร้อมระบบตรวจจับการบุกรุกและอ่านป้ายทะเบียน</p>
+        </article>
+        <article class="flex flex-col gap-3 sm:col-span-2 lg:col-span-1">
+          <div class="aspect-3/2 bg-neutral-200 border border-dashed border-neutral-400 grid place-items-center text-xs text-neutral-500">ภาพผลงาน 1200×800</div>
+          <p class="text-xs font-semibold tracking-[0.1em] text-brand">อสังหาฯ · 2026</p>
+          <h3 class="font-display text-lg lg:text-xl font-semibold">ระบบอาคารส่วนกลาง โครงการ 320 ยูนิต</h3>
+          <p class="text-[15px] leading-relaxed text-neutral-600">ผู้พัฒนาอสังหาริมทรัพย์ — BMS มิเตอร์พลังงานแยกอาคาร และระบบเข้าออกด้วยแอป</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <section class="bg-neutral-100 py-14 lg:py-16">
+    <div class="mx-auto max-w-[1280px] px-5 lg:px-14">
+      <h2 class="font-display text-2xl lg:text-4xl font-semibold">ทำไมต้องเลือกเรา</h2>
+      <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 mt-8">
+        <div class="border-t-2 border-brand pt-4">
+          <h3 class="font-display text-lg font-semibold">เอกสารประมูลครบชุด</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-neutral-600">แบบ รายการคำนวณ BOQ และหนังสือรับรองวิศวกร จัดเตรียมตามรูปแบบ TOR ของหน่วยงาน</p>
+        </div>
+        <div class="border-t-2 border-brand pt-4">
+          <h3 class="font-display text-lg font-semibold">ทีมและเครื่องจักรของเราเอง</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-neutral-600">ไม่พึ่งการจ้างช่วงในงานหลัก ทำให้คุมคุณภาพและแผนงานได้ตามสัญญา</p>
+        </div>
+        <div class="border-t-2 border-brand pt-4">
+          <h3 class="font-display text-lg font-semibold">รายงานความคืบหน้ารายสัปดาห์</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-neutral-600">ภาพถ่ายไซต์ ปริมาณงานสะสม และประเด็นที่ต้องตัดสินใจ ส่งให้ผู้ควบคุมงานทุกสัปดาห์</p>
+        </div>
+        <div class="border-t-2 border-brand pt-4">
+          <h3 class="font-display text-lg font-semibold">ดูแลต่อหลังส่งมอบ</h3>
+          <p class="mt-2 text-[15px] leading-relaxed text-neutral-600">รับประกันงานโครงสร้าง 2 ปี และสัญญาบำรุงรักษาระบบรายปีพร้อมทีมเข้าหน้างานภายใน 24 ชม.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="process" class="mx-auto max-w-[1280px] px-5 lg:px-14 py-14 lg:py-16 scroll-mt-24">
+    <h2 class="font-display text-2xl lg:text-4xl font-semibold">ขั้นตอนการทำงาน</h2>
+    <p class="text-[15px] text-neutral-500 mt-2">ตั้งแต่ได้รับแบบจนถึงการดูแลระบบ</p>
+    <ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-5 mt-8">
+      <li class="border-t border-neutral-300 pt-4">
+        <p class="font-display text-3xl font-semibold text-brand">01</p>
+        <h3 class="text-[17px] font-semibold mt-2">สำรวจ &amp; ถอดปริมาณ</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-neutral-600">ลงพื้นที่วัดจริง ถอด BOQ และแจ้งข้อสังเกตของแบบ</p>
+      </li>
+      <li class="border-t border-neutral-300 pt-4">
+        <p class="font-display text-3xl font-semibold text-brand">02</p>
+        <h3 class="text-[17px] font-semibold mt-2">เสนอราคา &amp; แผนงาน</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-neutral-600">ราคาแยกหมวด พร้อม S-curve และแผนใช้เครื่องจักร</p>
+      </li>
+      <li class="border-t border-neutral-300 pt-4">
+        <p class="font-display text-3xl font-semibold text-brand">03</p>
+        <h3 class="text-[17px] font-semibold mt-2">ก่อสร้าง</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-neutral-600">ควบคุมโดยวิศวกรประจำไซต์ พร้อมระบบความปลอดภัย</p>
+      </li>
+      <li class="border-t border-neutral-300 pt-4">
+        <p class="font-display text-3xl font-semibold text-brand">04</p>
+        <h3 class="text-[17px] font-semibold mt-2">ทดสอบ &amp; ส่งมอบ</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-neutral-600">ทดสอบระบบ อบรมผู้ใช้งาน ส่งคู่มือและ as-built</p>
+      </li>
+      <li class="border-t border-neutral-300 pt-4">
+        <p class="font-display text-3xl font-semibold text-brand">05</p>
+        <h3 class="text-[17px] font-semibold mt-2">ดูแลระบบ</h3>
+        <p class="mt-1.5 text-sm leading-relaxed text-neutral-600">ตรวจเช็กตามรอบ และเข้าหน้างานเมื่อแจ้งเหตุ</p>
+      </li>
+    </ol>
+  </section>
+
+  <section id="standards" class="mx-auto max-w-[1280px] px-5 lg:px-14 pb-14 lg:pb-16 scroll-mt-24">
+    <div class="border border-neutral-300 p-6 lg:p-10 grid gap-10 lg:grid-cols-[.8fr_1.2fr]">
+      <div>
+        <h2 class="font-display text-2xl lg:text-3xl font-semibold">ใบอนุญาต &amp; มาตรฐาน</h2>
+        <p class="mt-3 text-base leading-relaxed text-neutral-700">เอกสารทั้งหมดพร้อมให้ตรวจสอบ และดาวน์โหลดเป็นชุดเดียวสำหรับยื่นซองประมูล</p>
+        <a href="#contact" class="inline-block mt-5 border border-brand text-brand text-[15px] font-semibold px-6 py-3">ดาวน์โหลดชุดเอกสารบริษัท (PDF)</a>
+      </div>
+      <dl class="grid sm:grid-cols-2 gap-x-8 gap-y-3.5 text-[15px] text-neutral-800 self-center">
+        <div class="flex justify-between gap-3 border-b border-line pb-2.5"><dt>ผู้รับเหมางานก่อสร้าง ชั้น 1</dt><dd class="text-neutral-500">กรมบัญชีกลาง</dd></div>
+        <div class="flex justify-between gap-3 border-b border-line pb-2.5"><dt>ISO 9001 : 2015</dt><dd class="text-neutral-500">ระบบคุณภาพ</dd></div>
+        <div class="flex justify-between gap-3 border-b border-line pb-2.5"><dt>ISO 45001</dt><dd class="text-neutral-500">อาชีวอนามัย</dd></div>
+        <div class="flex justify-between gap-3 border-b border-line pb-2.5"><dt>สามัญวิศวกรโยธา</dt><dd class="text-neutral-500">สภาวิศวกร</dd></div>
+        <div class="flex justify-between gap-3 border-b border-line pb-2.5"><dt>ใบอนุญาตติดตั้งระบบไฟฟ้า</dt><dd class="text-neutral-500">กรมพัฒนาฝีมือแรงงาน</dd></div>
+        <div class="flex justify-between gap-3 border-b border-line pb-2.5"><dt>ประกันภัยงานก่อสร้าง (CAR)</dt><dd class="text-neutral-500">วงเงิน 50 ลบ.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[1280px] px-5 lg:px-14 pb-14 lg:pb-16">
+    <h2 class="font-display text-2xl lg:text-4xl font-semibold">ลูกค้าอ้างอิง</h2>
+    <div class="grid grid-cols-3 sm:grid-cols-6 gap-4 mt-6">
+      <div class="h-16 bg-neutral-200 grid place-items-center text-xs text-neutral-500">โลโก้</div>
+      <div class="h-16 bg-neutral-200 grid place-items-center text-xs text-neutral-500">โลโก้</div>
+      <div class="h-16 bg-neutral-200 grid place-items-center text-xs text-neutral-500">โลโก้</div>
+      <div class="h-16 bg-neutral-200 grid place-items-center text-xs text-neutral-500">โลโก้</div>
+      <div class="h-16 bg-neutral-200 grid place-items-center text-xs text-neutral-500">โลโก้</div>
+      <div class="h-16 bg-neutral-200 grid place-items-center text-xs text-neutral-500">โลโก้</div>
+    </div>
+    <div class="grid gap-6 md:grid-cols-2 mt-8">
+      <blockquote class="bg-neutral-100 p-7">
+        <p class="text-[17px] lg:text-lg leading-relaxed">“ทีมเข้าหน้างานตรงตามแผน ส่งรายงานทุกสัปดาห์ ทำให้เราปิดงวดงานกับผู้ว่าจ้างได้ไม่ติดขัด”</p>
+        <footer class="text-sm text-neutral-500 mt-4">ผู้ควบคุมงาน · โครงการปรับปรุงริมคลอง</footer>
+      </blockquote>
+      <blockquote class="bg-neutral-100 p-7">
+        <p class="text-[17px] lg:text-lg leading-relaxed">“วางท่อร้อยสายเผื่อไว้ตอนทำรั้ว ปีต่อมาเราเพิ่มกล้องอีก 20 ตัวโดยไม่ต้องรื้อพื้นเลย”</p>
+        <footer class="text-sm text-neutral-500 mt-4">ฝ่ายวิศวกรรมโรงงาน · นิคมอุตสาหกรรม</footer>
+      </blockquote>
+    </div>
+  </section>
+
+  <section id="team" class="bg-ink text-neutral-200 py-14 lg:py-16 scroll-mt-24">
+    <div class="mx-auto max-w-[1280px] px-5 lg:px-14 grid gap-10 lg:grid-cols-2 lg:items-start">
+      <div>
+        <h2 class="font-display text-2xl lg:text-4xl font-semibold text-white">ทีมงาน &amp; เครื่องจักร</h2>
+        <p class="mt-4 text-base leading-relaxed text-neutral-400">วิศวกรโยธา 6 คน วิศวกรไฟฟ้า 3 คน ช่างเทคนิคระบบ 12 คน และทีมช่างก่อสร้างประจำ 45 คน ทำงานร่วมกันในโครงการเดียวกันได้โดยไม่ต้องรอผู้รับเหมาช่วง</p>
+        <ul class="grid sm:grid-cols-2 gap-x-6 gap-y-3 mt-6 text-[15px] text-neutral-300">
+          <li class="border-b border-white/10 pb-2.5">รถขุด 8 คัน</li>
+          <li class="border-b border-white/10 pb-2.5">รถบดสั่นสะเทือน 3 คัน</li>
+          <li class="border-b border-white/10 pb-2.5">เครนล้อยาง 25 ตัน</li>
+          <li class="border-b border-white/10 pb-2.5">ชุดเสาเข็มเจาะ 2 ชุด</li>
+          <li class="border-b border-white/10 pb-2.5">รถกระเช้า 18 ม.</li>
+          <li class="border-b border-white/10 pb-2.5">เครื่องมือวัดและทดสอบระบบ</li>
+        </ul>
+      </div>
+      <div class="aspect-4/3 bg-white/5 border border-dashed border-white/20 grid place-items-center text-sm text-neutral-500 text-center px-6">ภาพทีมงานหน้าไซต์ / เครื่องจักร 1600×1200</div>
+    </div>
+  </section>
+
+  <section id="contact" class="mx-auto max-w-[1280px] px-5 lg:px-14 py-14 lg:py-16 scroll-mt-24">
+    <div class="grid gap-10 lg:gap-14 lg:grid-cols-2">
+      <div>
+        <h2 class="font-display text-2xl lg:text-4xl font-semibold">ขอใบเสนอราคา</h2>
+        <p class="mt-3 text-base leading-relaxed text-neutral-700">แนบแบบหรือ BOQ มาได้เลย ทีมประเมินราคาจะติดต่อกลับภายใน 1 วันทำการ</p>
+        <form class="mt-7 grid gap-4 sm:grid-cols-2">
+          <label class="flex flex-col gap-2 text-sm font-semibold text-neutral-800">ชื่อผู้ติดต่อ
+            <input type="text" class="h-12 border border-neutral-300 bg-white px-3 text-base font-normal outline-none focus:border-brand">
+          </label>
+          <label class="flex flex-col gap-2 text-sm font-semibold text-neutral-800">หน่วยงาน / บริษัท
+            <input type="text" class="h-12 border border-neutral-300 bg-white px-3 text-base font-normal outline-none focus:border-brand">
+          </label>
+          <label class="flex flex-col gap-2 text-sm font-semibold text-neutral-800">เบอร์โทร
+            <input type="tel" class="h-12 border border-neutral-300 bg-white px-3 text-base font-normal outline-none focus:border-brand">
+          </label>
+          <label class="flex flex-col gap-2 text-sm font-semibold text-neutral-800">ประเภทงาน
+            <select class="h-12 border border-neutral-300 bg-white px-3 text-base font-normal outline-none focus:border-brand">
+              <option>รั้ว / งานโยธา</option>
+              <option>Smart Building / IoT</option>
+              <option>ทั้งสองส่วน</option>
+            </select>
+          </label>
+          <label class="flex flex-col gap-2 text-sm font-semibold text-neutral-800 sm:col-span-2">รายละเอียดงาน
+            <textarea rows="4" class="border border-neutral-300 bg-white p-3 text-base font-normal outline-none focus:border-brand"></textarea>
+          </label>
+          <div class="sm:col-span-2 flex flex-col sm:flex-row sm:items-center gap-4">
+            <button type="button" class="bg-brand text-white text-base font-semibold px-8 py-4">ส่งคำขอ</button>
+            <span class="text-sm text-neutral-500">หรือแนบไฟล์ทาง LINE: @baogroup</span>
+          </div>
+        </form>
+      </div>
+      <div class="flex flex-col gap-5">
+        <div class="aspect-4/3 lg:aspect-3/2 bg-neutral-200 border border-dashed border-neutral-400 grid place-items-center text-sm text-neutral-500">แผนที่สำนักงาน</div>
+        <div class="grid sm:grid-cols-2 gap-5 text-[15px] leading-relaxed text-neutral-800">
+          <div>
+            <p class="font-bold">สำนักงาน</p>
+            <p class="text-neutral-600">[ที่อยู่บริษัท]<br>เขต/อำเภอ จังหวัด รหัสไปรษณีย์</p>
+          </div>
+          <div>
+            <p class="font-bold">ติดต่อ</p>
+            <p class="text-neutral-600">โทร 0X-XXX-XXXX<br>LINE: @baogroup<br>bid@bao.co.th</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-brand text-white/80 pb-20 sm:pb-0">
+    <div class="mx-auto max-w-[1280px] px-5 lg:px-14 py-8 flex flex-col sm:flex-row sm:items-center justify-between gap-5 text-sm">
+      <p class="text-white font-semibold tracking-[0.1em]">BAO · BUILD · ASSURE · OPERATE</p>
+      <nav class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="#services" class="text-white/80 hover:text-white">บริการ</a>
+        <a href="#work" class="text-white/80 hover:text-white">ผลงาน</a>
+        <a href="#contact" class="text-white/80 hover:text-white">ร่วมงานกับเรา</a>
+        <a href="#contact" class="text-white/80 hover:text-white">นโยบายความเป็นส่วนตัว</a>
+      </nav>
+    </div>
+  </footer>
+
+  <div class="sm:hidden fixed bottom-0 inset-x-0 z-40 grid grid-cols-2 border-t border-white/10">
+    <a href="tel:0000000000" class="bg-ink text-white text-center py-4 text-[15px] font-semibold">โทรเลย</a>
+    <a href="#contact" class="bg-brand text-white text-center py-4 text-[15px] font-semibold">แชท LINE</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}"></script>
+</body>
+</html>

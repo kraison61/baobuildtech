@@ -9,8 +9,17 @@ export default defineConfig({
             input: ['resources/css/app.css', 'resources/js/app.js'],
             refresh: true,
             fonts: [
-                bunny('Instrument Sans', {
-                    weights: [400, 500, 600],
+                bunny('IBM Plex Sans Thai', {
+                    alias: 'sans',
+                    weights: [400, 500, 600, 700],
+                    subsets: ['latin', 'thai'],
+                    display: 'swap',
+                }),
+                bunny('Anuphan', {
+                    alias: 'display',
+                    weights: [400, 500, 600, 700],
+                    subsets: ['latin', 'thai'],
+                    display: 'swap',
                 }),
             ],
         }),
