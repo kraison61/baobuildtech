@@ -9,7 +9,7 @@
     @fonts
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="font-sans text-ink bg-paper antialiased">
+<body class="bg-white font-sans text-ink antialiased text-pretty">
     <x-front.header />
 
     @hasSection('breadcrumb')
@@ -20,6 +20,7 @@
 
     <x-front.footer />
     <x-front.mobile-cta />
+    <x-front.to-top />
 
     @stack('scripts')
 </body>

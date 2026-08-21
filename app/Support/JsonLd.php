@@ -60,15 +60,27 @@ class JsonLd
     }
 
     /**
-     * สร้าง @graph สำหรับหน้าเว็บ พร้อม BreadcrumbList
+     * สร้าง @graph สำหรับหน้าเว็บ (ใส่ BreadcrumbList เฉพาะเมื่อมี breadcrumbs จริงบนหน้า)
      *
      * @param  array<int, array{label: string, url?: string|null}>  $breadcrumbs
      * @return array<int, array<string, mixed>>
      */
-    public static function pageGraph(string $pageTitle, string $pageUrl, array $breadcrumbs): array
+    public static function pageGraph(string $pageTitle, string $pageUrl, array $breadcrumbs = []): array
     {
         $siteUrl = rtrim((string) config('company.site_url'), '/');
         $pageUrl = rtrim($pageUrl, '/').(parse_url($pageUrl, PHP_URL_PATH) === '/' ? '/' : '');
+
+        $webPage = [
+            '@type' => 'WebPage',
+            '@id' => $pageUrl.'#webpage',
+            'url' => $pageUrl,
+            'name' => self::cleanText($pageTitle),
+            'isPartOf' => ['@id' => $siteUrl.'#website'],
+        ];
+
+        if ($breadcrumbs !== []) {
+            $webPage['breadcrumb'] = ['@id' => $pageUrl.'#breadcrumb'];
+        }
 
         $graph = [
             [
@@ -84,16 +96,12 @@ class JsonLd
                 'name' => self::cleanText((string) config('company.legal_name')),
                 'publisher' => ['@id' => $siteUrl.'#organization'],
             ],
-            [
-                '@type' => 'WebPage',
-                '@id' => $pageUrl.'#webpage',
-                'url' => $pageUrl,
-                'name' => self::cleanText($pageTitle),
-                'isPartOf' => ['@id' => $siteUrl.'#website'],
-                'breadcrumb' => ['@id' => $pageUrl.'#breadcrumb'],
-            ],
-            self::breadcrumbList($pageUrl, $breadcrumbs),
+            $webPage,
         ];
+
+        if ($breadcrumbs !== []) {
+            $graph[] = self::breadcrumbList($pageUrl, $breadcrumbs);
+        }
 
         return $graph;
     }

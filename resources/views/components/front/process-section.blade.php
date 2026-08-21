@@ -1,31 +1,71 @@
-<section id="process" class="mx-auto max-w-[1280px] px-5 lg:px-14 py-14 lg:py-16 scroll-mt-24">
-    <h2 class="font-display text-2xl lg:text-4xl font-semibold">ขั้นตอนการทำงาน</h2>
-    <p class="text-[15px] text-neutral-500 mt-2">ตั้งแต่ได้รับแบบจนถึงการดูแลระบบ</p>
-    <ol class="grid gap-6 sm:grid-cols-2 lg:grid-cols-5 mt-8">
-        <li class="border-t border-neutral-300 pt-4">
-            <p class="font-display text-3xl font-semibold text-brand">01</p>
-            <h3 class="text-[17px] font-semibold mt-2">สำรวจ &amp; ถอดปริมาณ</h3>
-            <p class="mt-1.5 text-sm leading-relaxed text-neutral-600">ลงพื้นที่วัดจริง ถอด BOQ และแจ้งข้อสังเกตของแบบ</p>
-        </li>
-        <li class="border-t border-neutral-300 pt-4">
-            <p class="font-display text-3xl font-semibold text-brand">02</p>
-            <h3 class="text-[17px] font-semibold mt-2">เสนอราคา &amp; แผนงาน</h3>
-            <p class="mt-1.5 text-sm leading-relaxed text-neutral-600">ราคาแยกหมวด พร้อม S-curve และแผนใช้เครื่องจักร</p>
-        </li>
-        <li class="border-t border-neutral-300 pt-4">
-            <p class="font-display text-3xl font-semibold text-brand">03</p>
-            <h3 class="text-[17px] font-semibold mt-2">ก่อสร้าง</h3>
-            <p class="mt-1.5 text-sm leading-relaxed text-neutral-600">ควบคุมโดยวิศวกรประจำไซต์ พร้อมระบบความปลอดภัย</p>
-        </li>
-        <li class="border-t border-neutral-300 pt-4">
-            <p class="font-display text-3xl font-semibold text-brand">04</p>
-            <h3 class="text-[17px] font-semibold mt-2">ทดสอบ &amp; ส่งมอบ</h3>
-            <p class="mt-1.5 text-sm leading-relaxed text-neutral-600">ทดสอบระบบ อบรมผู้ใช้งาน ส่งคู่มือและ as-built</p>
-        </li>
-        <li class="border-t border-neutral-300 pt-4">
-            <p class="font-display text-3xl font-semibold text-brand">05</p>
-            <h3 class="text-[17px] font-semibold mt-2">ดูแลระบบ</h3>
-            <p class="mt-1.5 text-sm leading-relaxed text-neutral-600">ตรวจเช็กตามรอบ และเข้าหน้างานเมื่อแจ้งเหตุ</p>
-        </li>
-    </ol>
+@php
+    $steps = [
+        [
+            'no' => '01',
+            'title' => 'ส่งรูปหน้างาน ประเมินเบื้องต้น',
+            'body' => 'ส่งรูปพื้นที่ ความสูงดิน และแนวเขตทางไลน์ ทีมช่างตอบกลับพร้อมข้อสังเกตภายใน [1] วันทำการ — ไม่มีค่าใช้จ่าย ไม่โทรรบกวนหากไม่ได้ขอ',
+            'emphasis' => false,
+        ],
+        [
+            'no' => '02',
+            'title' => 'สำรวจหน้างานและสภาพดิน',
+            'body' => 'วัดระดับ ตรวจการระบายน้ำ และประเมินชั้นดินเพื่อเลือกชนิดฐานราก ไม่มีค่าใช้จ่าย',
+            'emphasis' => false,
+        ],
+        [
+            'no' => '03',
+            'title' => 'ตรวจสอบก่อนเทคอนกรีต',
+            'body' => 'วิศวกรตรวจเหล็กเสริม ระยะหุ้ม ไม้แบบ และค้ำยัน พร้อมถ่ายภาพเป็นหลักฐาน เจ้าของงานเซ็นรับก่อนเทเสมอ — ถ้าไม่ผ่าน เราไม่เท',
+            'emphasis' => true,
+        ],
+        [
+            'no' => '04',
+            'title' => 'ก่อสร้างและรายงานความคืบหน้า',
+            'body' => 'รายงานภาพหน้างานรายสัปดาห์ พร้อมผลทดสอบวัสดุที่เกี่ยวข้องในแต่ละงวด',
+            'emphasis' => false,
+        ],
+        [
+            'no' => '05',
+            'title' => 'ส่งมอบพร้อมเอกสารครบชุด',
+            'body' => 'แบบก่อสร้างจริง ผลทดสอบ และหนังสือรับประกัน ส่งมอบเป็นแฟ้มเดียวให้เจ้าของงาน',
+            'emphasis' => false,
+        ],
+    ];
+@endphp
+
+<section id="process" class="scroll-mt-24 border-b border-line bg-paper px-5 py-16 lg:py-24">
+    <x-front.container>
+        <div class="max-w-[680px]">
+            <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">ขั้นตอนการทำงาน 5 ขั้น</h2>
+            <p class="mt-4 text-[17px] leading-[1.8] text-muted">ขั้นที่ 3 คือขั้นที่แยกงานโครงสร้างที่ดีออกจากงานที่สวยแต่ผิว</p>
+        </div>
+
+        <ol class="mt-10 grid list-none gap-4 p-0">
+            @foreach ($steps as $step)
+                <li @class([
+                    'grid grid-cols-[56px_minmax(0,680px)] items-start gap-6 rounded-lg border p-6',
+                    'border-brand bg-brand' => $step['emphasis'],
+                    'border-line bg-white' => ! $step['emphasis'],
+                ])>
+                    <span @class([
+                        'grid size-10 place-items-center rounded-lg border font-semibold tabular-nums',
+                        'border-sand/45 text-white' => $step['emphasis'],
+                        'border-line text-brand-mid' => ! $step['emphasis'],
+                    ])>{{ $step['no'] }}</span>
+                    <div>
+                        <h3 @class([
+                            'text-[22px] font-semibold',
+                            'text-white' => $step['emphasis'],
+                            'text-brand' => ! $step['emphasis'],
+                        ])>{{ $step['title'] }}</h3>
+                        <p @class([
+                            'mt-2 text-[17px] leading-[1.8]',
+                            'text-sand' => $step['emphasis'],
+                            'text-muted' => ! $step['emphasis'],
+                        ])>{{ $step['body'] }}</p>
+                    </div>
+                </li>
+            @endforeach
+        </ol>
+    </x-front.container>
 </section>

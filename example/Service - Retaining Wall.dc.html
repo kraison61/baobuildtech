@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: #FFFFFF; font-family: "IBM Plex Sans Thai", system-ui, sans-serif; color: #1B211E; -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+  * { box-sizing: border-box; }
+  a { color: #33564A; text-decoration: none; }
+  a:hover { color: #1E3A32; }
+  summary::-webkit-details-marker { display: none; }
+  summary { list-style: none; }
+  details[open] .om-plus { transform: rotate(45deg); }
+  .om-plus { transition: transform .18s ease; }
+</style>
+</helmet>
+
+<div style="max-width: 100%; overflow-x: hidden">
+
+  <header style="position: sticky; top: 0; z-index: 50; background: #1E3A32; border-bottom: 1px solid rgba(224,217,204,.18)">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+      <a href="./Landing Page.dc.html" onClick="{{ closeMenu }}" style="display: flex; align-items: center; gap: 8px; color: #FFFFFF; min-width: 0">
+        <span style="display: grid; place-items: center; width: 34px; height: 34px; flex: none; border: 1px solid rgba(224,217,204,.45); border-radius: 8px; font-size: 13px; font-weight: 600; letter-spacing: .04em">TP</span>
+        <span style="font-size: 17px; font-weight: 600; white-space: nowrap">ธีรพงษ์การช่าง</span>
+      </a>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <nav style="display: flex; align-items: center; gap: 24px; font-size: 15px">
+          <a href="#types" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">รูปแบบกำแพง</a>
+          <a href="#spec" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">สเปกวัสดุ</a>
+          <a href="#steps" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">ขั้นตอน</a>
+          <a href="#price" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">ปัจจัยราคา</a>
+          <a href="#faq" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">คำถาม</a>
+        </nav>
+        <div style="display: flex; align-items: center; gap: 16px">
+          <a href="tel:0812345678" style="color: #FFFFFF; font-size: 15px; font-variant-numeric: tabular-nums; white-space: nowrap">โทร {{ phone }}</a>
+          <a href="#cta" style="display: inline-flex; align-items: center; background: #C1531F; color: #FFFFFF; font-size: 15px; font-weight: 600; padding: 11px 18px; border-radius: 8px; white-space: nowrap" style-hover="background: #a8461a; color: #FFFFFF">ส่งรูปหน้างาน ประเมินฟรี</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; gap: 8px">
+          <a href="tel:0812345678" style="display: inline-flex; align-items: center; min-height: 46px; padding: 0 14px; border: 1px solid rgba(224,217,204,.45); border-radius: 8px; color: #FFFFFF; font-size: 15px; font-variant-numeric: tabular-nums; white-space: nowrap">{{ phone }}</a>
+          <button type="button" onClick="{{ toggleMenu }}" aria-label="เมนู" aria-expanded="{{ menuOpen }}" style="display: grid; place-items: center; width: 46px; height: 46px; flex: none; background: transparent; border: 1px solid rgba(224,217,204,.45); border-radius: 8px; cursor: pointer; padding: 0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </button>
+        </div>
+      </sc-if>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <nav style="border-top: 1px solid rgba(224,217,204,.2); padding: 8px 20px 20px; display: grid; gap: 2px">
+        <a href="#types" onClick="{{ closeMenu }}" style="color: #FFFFFF; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">รูปแบบกำแพงที่รับ</a>
+        <a href="#spec" onClick="{{ closeMenu }}" style="color: #FFFFFF; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">สเปกวัสดุและเกณฑ์ทดสอบ</a>
+        <a href="#steps" onClick="{{ closeMenu }}" style="color: #FFFFFF; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">ขั้นตอนงานกำแพง</a>
+        <a href="#price" onClick="{{ closeMenu }}" style="color: #FFFFFF; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">ปัจจัยที่ทำให้ราคาต่างกัน</a>
+        <a href="#faq" onClick="{{ closeMenu }}" style="color: #FFFFFF; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">คำถามที่พบบ่อย</a>
+        <a href="./Services.dc.html" onClick="{{ closeMenu }}" style="color: #E0D9CC; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">รวมงานบริการทั้งหมด</a>
+        <a href="#cta" onClick="{{ closeMenu }}" style="display: flex; align-items: center; justify-content: center; background: #C1531F; color: #FFFFFF; font-size: 17px; font-weight: 600; padding: 16px 20px; border-radius: 8px; margin-top: 6px" style-hover="background: #a8461a; color: #FFFFFF">ส่งรูปหน้างาน ประเมินฟรี</a>
+      </nav>
+    </sc-if>
+  </header>
+
+  <section id="top" style="background: #F5F1EA; border-bottom: 1px solid #E0D9CC">
+    <div style="display: grid; grid-template-columns: {{ heroCols }}; align-items: stretch">
+      <div style="max-width: 100%; padding: clamp(80px, 10vw, 128px) clamp(24px, 4vw, 64px) clamp(104px, 12vw, 168px) max(20px, calc((100vw - 1160px) / 2))">
+        <div style="max-width: 680px">
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; letter-spacing: .06em; color: #6B6558">
+            <a href="./Services.dc.html" style="color: #33564A">รวมงานบริการ</a><span>/</span><span>กำแพงกันดิน คสล.</span>
+          </div>
+          <h1 style="margin: 24px 0 0; font-size: clamp(30px, 5.2vw, 44px); font-weight: 600; line-height: 1.35; color: #1E3A32">กำแพงกันดิน คสล. สูงถึง [4.0] เมตร คำนวณจากแรงดันดินจริงหลังกำแพง</h1>
+          <p style="margin: 24px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">กำแพงที่เอนหรือร้าวเกือบทั้งหมดพลาดที่สามจุดเดียวกัน คือฐานรากรับโมเมนต์ไม่พอ เหล็กเสริมด้านรับแรงดึงน้อยกว่าแบบ และไม่มีทางระบายน้ำหลังกำแพง หน้านี้ระบุว่าเราจัดการทั้งสามจุดอย่างไร และคุณตรวจสอบได้ที่ขั้นตอนไหน</p>
+          <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: 40px">
+            <a href="#cta" style="display: inline-flex; align-items: center; background: #C1531F; color: #FFFFFF; font-size: 17px; font-weight: 600; padding: 16px 26px; border-radius: 8px" style-hover="background: #a8461a; color: #FFFFFF">ส่งรูปหน้างาน ประเมินฟรี</a>
+            <a href="#spec" style="font-size: 17px; font-weight: 600; color: #33564A; border-bottom: 1px solid #33564A; padding-bottom: 2px">ดูสเปกวัสดุ</a>
+          </div>
+        </div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?w=1600&q=80&auto=format&fit=crop" alt="โครงเหล็กเสริมกำแพงคอนกรีตระหว่างก่อสร้าง" style="width: 100%; height: 100%; min-height: 300px; object-fit: cover; display: block" />
+    </div>
+  </section>
+
+  <section style="background: transparent; padding: 0 20px clamp(64px, 8vw, 96px); margin-top: -40px; position: relative; z-index: 1">
+    <div style="max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px">
+      <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+        <div style="font-size: 34px; font-weight: 600; color: #1E3A32; font-variant-numeric: tabular-nums">280 ksc</div>
+        <div style="margin-top: 8px; font-size: 15px; line-height: 1.7; color: #6B6558">กำลังอัดคอนกรีตที่ 28 วัน พร้อมผลทดสอบลูกปูน</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+        <div style="font-size: 34px; font-weight: 600; color: #1E3A32; font-variant-numeric: tabular-nums">[4.0] ม.</div>
+        <div style="margin-top: 8px; font-size: 15px; line-height: 1.7; color: #6B6558">ความสูงดินสูงสุดที่เรารับงาน</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+        <div style="font-size: 34px; font-weight: 600; color: #1E3A32; font-variant-numeric: tabular-nums">[28–35] วัน</div>
+        <div style="margin-top: 8px; font-size: 15px; line-height: 1.7; color: #6B6558">ระยะเวลางานกำแพงยาว [60] เมตร รวมเวลาบ่ม</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+        <div style="font-size: 34px; font-weight: 600; color: #1E3A32; font-variant-numeric: tabular-nums">[2] ปี</div>
+        <div style="margin-top: 8px; font-size: 15px; line-height: 1.7; color: #6B6558">รับประกันโครงสร้างเป็นลายลักษณ์อักษร</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="types" style="background: #FFFFFF; padding: 0 20px clamp(64px, 8vw, 96px)">
+    <div style="max-width: 1160px; margin: 0 auto">
+      <div style="max-width: 680px">
+        <h2 style="margin: 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #1E3A32">เลือกรูปแบบกำแพงจากความสูงดินและระยะร่น</h2>
+        <p style="margin: 24px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">รูปแบบไม่ได้เลือกจากราคาที่ถูกที่สุด แต่เลือกจากความสูงดินที่ต้องกั้น พื้นที่ว่างสำหรับฐาน และระยะห่างจากแนวเขตที่ดินข้างเคียง</p>
+      </div>
+      <div style="display: grid; grid-template-columns: {{ threeCols }}; gap: 24px; margin-top: 40px">
+        <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+          <h3 style="margin: 0; font-size: 22px; font-weight: 600; color: #1E3A32">Cantilever</h3>
+          <p style="margin: 8px 0 24px; font-size: 17px; line-height: 1.8; color: #6B6558">รูปแบบมาตรฐานสำหรับที่ดินทั่วไป ฐานยื่นเข้าด้านในเพื่อถ่วงโมเมนต์</p>
+          <dl style="margin: 0; display: grid; gap: 12px; border-top: 1px solid #E0D9CC; padding-top: 24px; font-size: 15px; line-height: 1.7">
+            <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">ความสูงดินเหมาะสม</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">ไม่เกิน [3.0] ม.</dd></div>
+            <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">ความกว้างฐาน</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">[0.5–0.7] ของความสูง</dd></div>
+            <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">เหมาะกับ</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">มีพื้นที่ให้ยื่นฐานเข้าใน</dd></div>
+          </dl>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+          <h3 style="margin: 0; font-size: 22px; font-weight: 600; color: #1E3A32">Counterfort</h3>
+          <p style="margin: 8px 0 24px; font-size: 17px; line-height: 1.8; color: #6B6558">เพิ่มครีบยึดด้านหลังเป็นช่วง ลดความหนาผนังกำแพงเมื่อดินสูงมาก</p>
+          <dl style="margin: 0; display: grid; gap: 12px; border-top: 1px solid #E0D9CC; padding-top: 24px; font-size: 15px; line-height: 1.7">
+            <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">ความสูงดินเหมาะสม</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">[3.0–4.0] ม.</dd></div>
+            <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">ระยะครีบ</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">ทุก [2.5–3.0] ม.</dd></div>
+            <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">เหมาะกับ</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">ดินสูงและงานยาวต่อเนื่อง</dd></div>
+          </dl>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+          <h3 style="margin: 0; font-size: 22px; font-weight: 600; color: #1E3A32">กำแพงเข็มพืด</h3>
+          <p style="margin: 8px 0 24px; font-size: 17px; line-height: 1.8; color: #6B6558">ใช้เมื่อไม่มีพื้นที่ทำฐานยื่น หรือต้องกั้นดินชิดแนวเขตที่ดิน</p>
+          <dl style="margin: 0; display: grid; gap: 12px; border-top: 1px solid #E0D9CC; padding-top: 24px; font-size: 15px; line-height: 1.7">
+            <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">ความสูงดินเหมาะสม</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">[2.0–4.0] ม.</dd></div>
+            <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">ระยะร่นที่ต้องการ</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">น้อยที่สุดในสามแบบ</dd></div>
+            <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">เหมาะกับ</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">ที่ดินแคบ ติดเพื่อนบ้าน</dd></div>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="spec" style="background: #F5F1EA; border-top: 1px solid #E0D9CC; border-bottom: 1px solid #E0D9CC; padding: clamp(64px, 8vw, 96px) 20px">
+    <div style="max-width: 1160px; margin: 0 auto">
+      <div style="max-width: 680px">
+        <h2 style="margin: 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #1E3A32">สเปกวัสดุ เกณฑ์ทดสอบ และเอกสารที่ได้รับ</h2>
+        <p style="margin: 24px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">ทุกบรรทัดในตารางนี้อยู่ในสัญญา และมีเอกสารยืนยันเมื่อส่งมอบงาน</p>
+      </div>
+      <div style="margin-top: 40px; overflow-x: auto">
+        <table style="width: 100%; min-width: 560px; border-collapse: collapse; font-size: 17px; background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px">
+          <thead>
+            <tr>
+              <th style="text-align: left; padding: 16px 24px; border-bottom: 1px solid #E0D9CC; font-weight: 600; color: #1E3A32">รายการ</th>
+              <th style="text-align: left; padding: 16px 24px; border-bottom: 1px solid #E0D9CC; font-weight: 600; color: #1E3A32">สเปกที่ใช้</th>
+              <th style="text-align: left; padding: 16px 24px; border-bottom: 1px solid #E0D9CC; font-weight: 600; color: #1E3A32">เอกสารยืนยัน</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #1B211E">คอนกรีต</td>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #6B6558; line-height: 1.7">ผสมเสร็จ กำลังอัด 280 ksc ค่ายุบตัวควบคุมหน้างาน</td>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #6B6558; line-height: 1.7">ผลทดสอบลูกปูน 7 และ 28 วัน</td>
+            </tr>
+            <tr>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #1B211E">เหล็กเสริม</td>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #6B6558; line-height: 1.7">SD40 DB12–DB16 ระยะเรียงตามแบบ ระยะหุ้ม [5] ซม.</td>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #6B6558; line-height: 1.7">ใบรับรองโรงงาน + ภาพก่อนเทคอนกรีต</td>
+            </tr>
+            <tr>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #1B211E">ฐานรากและเข็ม</td>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #6B6558; line-height: 1.7">เข็มเจาะ Ø35 ซม. ความลึกตามชั้นดินที่สำรวจ</td>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #6B6558; line-height: 1.7">Pile record ทุกต้น</td>
+            </tr>
+            <tr>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #1B211E">ระบายน้ำหลังกำแพง</td>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #6B6558; line-height: 1.7">ท่อ PVC เจาะรู + หินกรอง + แผ่นกรองกันดินอุดตัน</td>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #6B6558; line-height: 1.7">ภาพขั้นตอนติดตั้งก่อนถมกลบ</td>
+            </tr>
+            <tr>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #1B211E">ดินถมหลังกำแพง</td>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #6B6558; line-height: 1.7">บดอัดชั้นละ 30 ซม. [≥ 95% Mod. Proctor]</td>
+              <td style="padding: 16px 24px; border-bottom: 1px solid #E0D9CC; color: #6B6558; line-height: 1.7">ผลทดสอบความหนาแน่นทุกชั้น</td>
+            </tr>
+            <tr>
+              <td style="padding: 16px 24px; color: #1B211E">แบบและการรับประกัน</td>
+              <td style="padding: 16px 24px; color: #6B6558; line-height: 1.7">แบบลงนามโดยวิศวกร [เลขที่ใบ กว.] รับประกัน [2] ปี</td>
+              <td style="padding: 16px 24px; color: #6B6558; line-height: 1.7">แบบก่อสร้างจริง + หนังสือรับประกัน</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="steps" style="background: #FFFFFF; padding: clamp(64px, 8vw, 96px) 20px">
+    <div style="max-width: 1160px; margin: 0 auto">
+      <div style="max-width: 680px">
+        <h2 style="margin: 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #1E3A32">ขั้นตอนงานกำแพงกันดิน 6 ขั้น</h2>
+        <p style="margin: 24px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">ขั้นที่ 4 คือจุดที่เจ้าของงานเซ็นรับก่อนเทคอนกรีต ถ้าไม่ผ่าน เราไม่เท</p>
+      </div>
+      <ol style="list-style: none; margin: 40px 0 0; padding: 0; display: grid; gap: 16px">
+        <li style="display: grid; grid-template-columns: 56px minmax(0, 680px); gap: 24px; align-items: start; background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+          <span style="display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #E0D9CC; border-radius: 8px; color: #33564A; font-weight: 600; font-variant-numeric: tabular-nums">01</span>
+          <div><h3 style="margin: 0; font-size: 22px; font-weight: 600; color: #1E3A32">สำรวจระดับดินและแนวเขต</h3><p style="margin: 8px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">วัดความสูงดินที่ต้องกั้น ระยะร่นจากแนวเขต และทิศทางการไหลของน้ำผิวดิน</p></div>
+        </li>
+        <li style="display: grid; grid-template-columns: 56px minmax(0, 680px); gap: 24px; align-items: start; background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+          <span style="display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #E0D9CC; border-radius: 8px; color: #33564A; font-weight: 600; font-variant-numeric: tabular-nums">02</span>
+          <div><h3 style="margin: 0; font-size: 22px; font-weight: 600; color: #1E3A32">คำนวณและออกแบบโครงสร้าง</h3><p style="margin: 8px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">กำหนดรูปแบบกำแพง ขนาดฐาน ขนาดและระยะเรียงเหล็ก จากแรงดันดินและน้ำหนักบรรทุกบนดินหลังกำแพง</p></div>
+        </li>
+        <li style="display: grid; grid-template-columns: 56px minmax(0, 680px); gap: 24px; align-items: start; background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+          <span style="display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #E0D9CC; border-radius: 8px; color: #33564A; font-weight: 600; font-variant-numeric: tabular-nums">03</span>
+          <div><h3 style="margin: 0; font-size: 22px; font-weight: 600; color: #1E3A32">งานเข็มและฐานราก</h3><p style="margin: 8px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">เจาะเข็มตามตำแหน่งในแบบ ตัดหัวเข็ม เทคอนกรีตหยาบ และผูกเหล็กฐาน</p></div>
+        </li>
+        <li style="display: grid; grid-template-columns: 56px minmax(0, 680px); gap: 24px; align-items: start; background: #1E3A32; border: 1px solid #1E3A32; border-radius: 8px; padding: 24px">
+          <span style="display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid rgba(224,217,204,.45); border-radius: 8px; color: #FFFFFF; font-weight: 600; font-variant-numeric: tabular-nums">04</span>
+          <div><h3 style="margin: 0; font-size: 22px; font-weight: 600; color: #FFFFFF">ตรวจสอบก่อนเทคอนกรีต</h3><p style="margin: 8px 0 0; font-size: 17px; line-height: 1.8; color: #E0D9CC">วิศวกรตรวจระยะเรียงเหล็ก ระยะหุ้มคอนกรีต ไม้แบบ และค้ำยัน ถ่ายภาพเป็นหลักฐานทุกช่วง เจ้าของงานเซ็นรับก่อนเทเสมอ</p></div>
+        </li>
+        <li style="display: grid; grid-template-columns: 56px minmax(0, 680px); gap: 24px; align-items: start; background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+          <span style="display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #E0D9CC; border-radius: 8px; color: #33564A; font-weight: 600; font-variant-numeric: tabular-nums">05</span>
+          <div><h3 style="margin: 0; font-size: 22px; font-weight: 600; color: #1E3A32">เทคอนกรีตและบ่ม</h3><p style="margin: 8px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">เทเป็นช่วงตามรอยต่อที่กำหนด เก็บลูกปูนส่งทดสอบ และบ่มตามระยะเวลาข้อกำหนดโดยไม่ลดเวลาเพื่อเร่งงาน</p></div>
+        </li>
+        <li style="display: grid; grid-template-columns: 56px minmax(0, 680px); gap: 24px; align-items: start; background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+          <span style="display: grid; place-items: center; width: 40px; height: 40px; border: 1px solid #E0D9CC; border-radius: 8px; color: #33564A; font-weight: 600; font-variant-numeric: tabular-nums">06</span>
+          <div><h3 style="margin: 0; font-size: 22px; font-weight: 600; color: #1E3A32">ติดตั้งระบบระบายน้ำและถมกลบ</h3><p style="margin: 8px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">วางท่อระบายและหินกรองหลังกำแพง ถมบดอัดชั้นละ 30 ซม. พร้อมผลทดสอบ แล้วส่งมอบเอกสารครบชุด</p></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="price" style="background: #1E3A32; color: #FFFFFF; padding: clamp(80px, 10vw, 128px) 20px">
+    <div style="max-width: 1160px; margin: 0 auto">
+      <div style="max-width: 680px">
+        <div style="display: flex; align-items: center; gap: 8px; color: #E0D9CC; font-size: 14px; font-weight: 600; letter-spacing: .06em"><span style="width: 28px; height: 1px; background: #E0D9CC"></span>ปัจจัยราคา</div>
+        <h2 style="margin: 24px 0 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #FFFFFF">ทำไมกำแพงยาวเท่ากันแต่ราคาต่างกันได้เท่าตัว</h2>
+        <p style="margin: 24px 0 0; font-size: 17px; line-height: 1.8; color: #E0D9CC">สี่ปัจจัยนี้กำหนดปริมาณเหล็ก คอนกรีต และงานเข็ม ซึ่งเป็นต้นทุนหลักของงานกำแพง หากใบเสนอราคาเจ้าใดถูกกว่าอย่างมีนัย ให้ตรวจว่าตัดอะไรออกในสี่ข้อนี้</p>
+      </div>
+      <div style="display: grid; grid-template-columns: {{ twoCols }}; gap: 24px; margin-top: 40px">
+        <div style="border: 1px solid rgba(224,217,204,.3); border-radius: 8px; padding: 24px">
+          <h3 style="margin: 0; font-size: 22px; font-weight: 600; color: #FFFFFF">ความสูงดินที่ต้องกั้น</h3>
+          <p style="margin: 8px 0 0; font-size: 17px; line-height: 1.8; color: #E0D9CC">แรงดันดินเพิ่มเร็วกว่าความสูงที่เพิ่ม กำแพงสูงขึ้นเท่าตัวไม่ได้ใช้เหล็กเพิ่มเท่าตัว แต่มากกว่านั้น</p>
+        </div>
+        <div style="border: 1px solid rgba(224,217,204,.3); border-radius: 8px; padding: 24px">
+          <h3 style="margin: 0; font-size: 22px; font-weight: 600; color: #FFFFFF">ชั้นดินและชนิดเข็ม</h3>
+          <p style="margin: 8px 0 0; font-size: 17px; line-height: 1.8; color: #E0D9CC">ดินอ่อนต้องใช้เข็มยาวขึ้นหรือเปลี่ยนชนิดเข็ม เป็นรายการที่ผู้รับเหมาราคาถูกมักตัดออกก่อน</p>
+        </div>
+        <div style="border: 1px solid rgba(224,217,204,.3); border-radius: 8px; padding: 24px">
+          <h3 style="margin: 0; font-size: 22px; font-weight: 600; color: #FFFFFF">ทางเข้าหน้างาน</h3>
+          <p style="margin: 8px 0 0; font-size: 17px; line-height: 1.8; color: #E0D9CC">ถ้ารถโม่และเครื่องจักรเข้าไม่ถึง ต้องใช้ปั๊มหรือขนย้ายเพิ่ม ซึ่งกระทบทั้งค่าแรงและระยะเวลา</p>
+        </div>
+        <div style="border: 1px solid rgba(224,217,204,.3); border-radius: 8px; padding: 24px">
+          <h3 style="margin: 0; font-size: 22px; font-weight: 600; color: #FFFFFF">น้ำหนักบรรทุกบนดินหลังกำแพง</h3>
+          <p style="margin: 8px 0 0; font-size: 17px; line-height: 1.8; color: #E0D9CC">ถ้าจะมีถนน ลานจอดรถ หรืออาคารบนดินหลังกำแพง ต้องคำนวณเพิ่มตั้งแต่ออกแบบ ไม่ใช่มาแก้ทีหลัง</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="background: #F5F1EA; border-top: 1px solid #E0D9CC; padding: clamp(64px, 8vw, 96px) 20px">
+    <div style="max-width: 680px; margin: 0 auto">
+      <h2 style="margin: 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #1E3A32">คำถามเฉพาะงานกำแพงกันดิน</h2>
+      <div style="display: grid; gap: 16px; margin-top: 40px">
+        <details style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 4px 24px" open="open">
+          <summary style="display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 0; cursor: pointer; font-size: 17px; font-weight: 600; color: #1E3A32">ไม่ลงเข็มได้ไหม ถ้าดินแข็ง<span class="om-plus" style="color: #33564A; font-size: 20px; line-height: 1">+</span></summary>
+          <p style="margin: 0; padding: 0 0 20px; font-size: 17px; line-height: 1.8; color: #6B6558">ตัดสินจากผลสำรวจชั้นดิน ไม่ใช่จากผิวดินที่เห็น ถ้าผลสำรวจระบุว่ารับได้โดยไม่ต้องลงเข็ม เราจะระบุในแบบและลดรายการนั้นออกจากราคา แต่ถ้าแบบกำหนดให้ลงเข็ม เราไม่รับงานที่ขอตัดเข็มออก</p>
+        </details>
+        <details style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 4px 24px">
+          <summary style="display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 0; cursor: pointer; font-size: 17px; font-weight: 600; color: #1E3A32">กำแพงเดิมเอนแล้ว ซ่อมได้หรือต้องรื้อ<span class="om-plus" style="color: #33564A; font-size: 20px; line-height: 1">+</span></summary>
+          <p style="margin: 0; padding: 0 0 20px; font-size: 17px; line-height: 1.8; color: #6B6558">ขึ้นกับว่าฐานรากยังอยู่ในสภาพรับแรงได้หรือไม่ เราเข้าตรวจและแจ้งเป็นเอกสารสองทางเลือกพร้อมราคา คือเสริมฐานรากและยึดกลับ หรือรื้อสร้างใหม่ โดยระบุความเสี่ยงของแต่ละทางให้ชัดเจน</p>
+        </details>
+        <details style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 4px 24px">
+          <summary style="display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 0; cursor: pointer; font-size: 17px; font-weight: 600; color: #1E3A32">ต้องขออนุญาตก่อสร้างหรือไม่<span class="om-plus" style="color: #33564A; font-size: 20px; line-height: 1">+</span></summary>
+          <p style="margin: 0; padding: 0 0 20px; font-size: 17px; line-height: 1.8; color: #6B6558">กำแพงกันดินที่ความสูงเกินเกณฑ์ของท้องถิ่นต้องยื่นแบบขออนุญาต เราเตรียมแบบและรายการคำนวณลงนามโดยวิศวกรให้ใช้ยื่นได้ ส่วนการยื่นกับหน่วยงานท้องถิ่นเป็นชื่อของเจ้าของที่ดิน</p>
+        </details>
+        <details style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 4px 24px">
+          <summary style="display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 0; cursor: pointer; font-size: 17px; font-weight: 600; color: #1E3A32">งานกระทบเพื่อนบ้านข้างเคียงไหม<span class="om-plus" style="color: #33564A; font-size: 20px; line-height: 1">+</span></summary>
+          <p style="margin: 0; padding: 0 0 20px; font-size: 17px; line-height: 1.8; color: #6B6558">งานเข็มเจาะสั่นสะเทือนน้อยกว่าเข็มตอกอย่างชัดเจน จึงเป็นตัวเลือกหลักเมื่อหน้างานติดบ้านเพื่อนบ้าน เราบันทึกสภาพผนังและพื้นข้างเคียงเป็นภาพก่อนเริ่มงานทุกครั้ง</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta" style="background: #FFFFFF; padding: clamp(80px, 10vw, 128px) 20px">
+    <div style="max-width: 620px; margin: 0 auto; text-align: center">
+      <h2 style="margin: 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #1E3A32">ส่งรูปที่ดินและความสูงดินมาก่อน</h2>
+      <p style="margin: 24px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">บอกความยาวแนวกำแพงที่ต้องการและความสูงดินที่ต้องกั้น ทีมช่างจะตอบว่าเหมาะกับรูปแบบไหน ต้องใช้เข็มหรือไม่ และช่วงราคาคร่าว ๆ ก่อนนัดเข้าสำรวจ โดยไม่มีค่าใช้จ่าย</p>
+      <div style="display: flex; justify-content: center; margin-top: 40px">
+        <a href="#cta" style="display: inline-flex; align-items: center; background: #C1531F; color: #FFFFFF; font-size: 17px; font-weight: 600; padding: 16px 26px; border-radius: 8px" style-hover="background: #a8461a; color: #FFFFFF">ส่งรูปหน้างาน ประเมินฟรี</a>
+      </div>
+      <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 24px; font-size: 17px">
+        <a href="tel:0812345678" style="color: #33564A; font-variant-numeric: tabular-nums; border-bottom: 1px solid #33564A; padding-bottom: 2px">โทร {{ phone }}</a>
+        <span style="color: #6B6558">ไลน์ {{ lineId }}</span>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background: #1E3A32; color: #E0D9CC; border-top: 1px solid rgba(224,217,204,.2); padding: clamp(64px, 8vw, 96px) 20px 40px">
+    <div style="max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px">
+      <div style="max-width: 320px">
+        <div style="font-size: 17px; font-weight: 600; color: #FFFFFF">ธีรพงษ์การช่าง</div>
+        <p style="margin: 16px 0 0; font-size: 15px; line-height: 1.8">ช่างเฉพาะทางงานกำแพงกันดิน คสล. งานฐานราก และงานโยธา พร้อมงานระบบไฟฟ้า ไฟเบอร์ LAN และ CCTV เป็นบริการเสริมของโครงการ</p>
+      </div>
+      <div>
+        <div style="font-size: 15px; font-weight: 600; color: #FFFFFF">หน้านี้</div>
+        <ul style="list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px">
+          <li><a href="#types" style="color: #E0D9CC" style-hover="color: #FFFFFF">รูปแบบกำแพง</a></li>
+          <li><a href="#spec" style="color: #E0D9CC" style-hover="color: #FFFFFF">สเปกวัสดุ</a></li>
+          <li><a href="#steps" style="color: #E0D9CC" style-hover="color: #FFFFFF">ขั้นตอนงาน</a></li>
+          <li><a href="#price" style="color: #E0D9CC" style-hover="color: #FFFFFF">ปัจจัยราคา</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size: 15px; font-weight: 600; color: #FFFFFF">ติดต่อ</div>
+        <ul style="list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px">
+          <li>โทร {{ phone }}</li>
+          <li>ไลน์ {{ lineId }}</li>
+          <li>work@theeraphong.co.th</li>
+          <li>88/15 ถ.กาญจนาภิเษก บางใหญ่ นนทบุรี 11140</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size: 15px; font-weight: 600; color: #FFFFFF">หน้าอื่น</div>
+        <ul style="list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px">
+          <li><a href="./Services.dc.html" style="color: #E0D9CC" style-hover="color: #FFFFFF">รวมงานบริการ</a></li>
+          <li><a href="./Landing Page.dc.html" style="color: #E0D9CC" style-hover="color: #FFFFFF">กลับหน้าแรก</a></li>
+        </ul>
+      </div>
+    </div>
+    <div style="max-width: 1160px; margin: 64px auto 0; padding-top: 24px; border-top: 1px solid rgba(224,217,204,.2); font-size: 14px">© 2026 ห้างหุ้นส่วนจำกัด ธีรพงษ์การช่าง · เลขผู้เสียภาษี 0125555012345</div>
+  </footer>
+
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <div style="height: 88px"></div>
+  </sc-if>
+  <sc-if value="{{ showBottomBar }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: #FFFFFF; border-top: 1px solid #E0D9CC; padding: 12px 16px; display: flex; align-items: stretch; gap: 16px">
+      <a href="tel:0812345678" style="width: 34%; flex: none; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; background: #F5F1EA; border: 1px solid #33564A; border-radius: 8px; color: #33564A; font-size: 17px; font-weight: 600">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33564A" stroke-width="1.6" stroke-linecap="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a1 1 0 01-1 1A16 16 0 014 5a1 1 0 011-1z" /></svg>โทร
+      </a>
+      <a href="#cta" style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 48px; background: #C1531F; color: #FFFFFF; font-size: 17px; font-weight: 600; border-radius: 8px; text-align: center" style-hover="background: #a8461a; color: #FFFFFF">ส่งรูปหน้างาน</a>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;081-234-5678&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;lineId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;@theeraphong&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { width: typeof window === "undefined" ? 1200 : window.innerWidth, menuOpen: false, pastHero: false };
+
+  componentDidMount() {
+    this._onResize = () => this.setState({ width: window.innerWidth });
+    window.addEventListener("resize", this._onResize);
+    this._onScroll = () => {
+      const hero = document.getElementById("top");
+      const past = window.scrollY > (hero ? hero.offsetHeight - 80 : 400);
+      if (past !== this.state.pastHero) this.setState({ pastHero: past });
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+    this._onResize();
+    this._onScroll();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._onResize);
+    window.removeEventListener("scroll", this._onScroll);
+  }
+
+  renderVals() {
+    const isMobile = this.state.width < 1100;
+    const narrowLayout = this.state.width < 900;
+    return {
+      phone: this.props.phone ?? "081-234-5678",
+      lineId: this.props.lineId ?? "@theeraphong",
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      isMobile,
+      isDesktop: !isMobile,
+      showBottomBar: isMobile && this.state.pastHero,
+      heroCols: narrowLayout ? "1fr" : "54fr 46fr",
+      twoCols: narrowLayout ? "1fr" : "1fr 1fr",
+      threeCols: narrowLayout ? "1fr" : "repeat(3, 1fr)",
+    };
+  }
+}
+</script>
+</body>
+</html>

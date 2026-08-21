@@ -13,20 +13,15 @@
 
                 <div class="mt-4 flex items-center gap-2 text-sm font-semibold tracking-wide text-brand-mid">
                     <span class="h-px w-7 bg-brand-mid"></span>
-                    ช่างเฉพาะทางงานโครงสร้าง · นนทบุรี &amp; ปริมณฑล
+                    งานโครงสร้างเป็นหลัก · ระบบเป็นเสริมในโครงการเดียวกัน
                 </div>
 
                 <h1 class="mt-6 text-[clamp(1.625rem,4.4vw,2.35rem)] font-semibold leading-[1.35] text-brand">
-                    กำแพงกันดิน คสล. และงานฐานราก<br>
-                    ที่คำนวณด้วยหลักวิศวกรรม ตรวจสอบได้ทุกชั้นงาน
+                    งานทั้งหมดที่เรารับ พร้อมสเปกที่ใช้จริงหน้างาน
                 </h1>
 
                 <p class="mt-6 text-[17px] leading-[1.8] text-muted">
-                    ดินสไลด์ กำแพงเอน ร้าวตามแนวเสา — ปัญหาเหล่านี้เกิดจากฐานรากและการบดอัดที่ไม่ได้มาตรฐาน ไม่ใช่จากคอนกรีตที่ผิวสวย เราออกแบบเหล็กเสริมและระบบระบายน้ำหลังกำแพงตามสภาพดินจริงของหน้างานคุณ พร้อมรายงานทดสอบให้ตรวจสอบ
-                </p>
-
-                <p class="mt-4 text-[15px] leading-[1.7] text-brand-mid">
-                    ก่อนฤดูฝน — ตรวจสภาพดินและแนวกำแพงให้ทัน ลดความเสี่ยงดินขยับซ้ำ
+                    กลุ่มงานด้านล่างคือขอบเขตที่ทีมช่างของเราทำเองทั้งกระบวนการ ไม่ส่งต่อผู้รับเหมาช่วง แต่ละงานระบุวัสดุ เกณฑ์ทดสอบ และเอกสารที่ส่งมอบ เพื่อให้เทียบใบเสนอราคาจากหลายเจ้าได้ตรงรายการ
                 </p>
 
                 <div class="mt-10 flex flex-wrap items-center gap-6">
@@ -35,7 +30,7 @@
                         class="inline-flex items-center rounded-lg bg-accent px-[26px] py-4 text-[17px] font-semibold text-white hover:bg-accent-dark hover:text-white"
                         @if ($lineUrl) target="_blank" rel="noopener noreferrer" @endif
                     >ส่งรูปหน้างาน ประเมินฟรี</a>
-                    <a href="{{ route('services') }}" class="border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand">ดูสเปกงานของเรา</a>
+                    <a href="#scope" class="border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand">ดูงานที่รับ / ไม่รับ</a>
                 </div>
 
                 <p class="mt-4 text-[15px] leading-[1.7] text-muted">
@@ -46,7 +41,7 @@
 
         <img
             src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600&q=80&auto=format&fit=crop"
-            alt="งานผูกเหล็กเสริมพื้นก่อนเทคอนกรีตที่หน้างาน"
+            alt="ภาพรวมหน้างานโครงสร้างระหว่างก่อสร้าง"
             class="block size-full min-h-[300px] object-cover"
             width="1600"
             height="1200"

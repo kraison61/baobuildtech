@@ -11,13 +11,7 @@ export default defineConfig({
             fonts: [
                 bunny('IBM Plex Sans Thai', {
                     alias: 'sans',
-                    weights: [400, 500, 600, 700],
-                    subsets: ['latin', 'thai'],
-                    display: 'swap',
-                }),
-                bunny('Anuphan', {
-                    alias: 'display',
-                    weights: [400, 500, 600, 700],
+                    weights: [400, 600],
                     subsets: ['latin', 'thai'],
                     display: 'swap',
                 }),
