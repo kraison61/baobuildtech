@@ -19,7 +19,6 @@
     @yield('content')
 
     <x-front.footer />
-    <x-front.mobile-cta />
     <x-front.to-top />
 
     @stack('scripts')

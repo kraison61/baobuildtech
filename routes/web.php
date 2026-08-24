@@ -1,15 +1,16 @@
 <?php
 
+use App\Http\Controllers\Front\ServiceController;
+use App\Http\Controllers\Front\ServiceItemController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('front.home');
 })->name('home');
 
-Route::get('/services', function () {
-    return view('front.services');
-})->name('services');
-
+Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::get('/services/{serviceSlug}/{itemSlug}', [ServiceItemController::class, 'show'])->name('services.items.show');
+Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
 Route::view('/works', 'front.placeholder', [
     'title' => 'ผลงาน',
     'heading' => 'ผลงาน',

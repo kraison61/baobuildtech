@@ -1,11 +1,9 @@
+@props([
+    'categories',
+])
+
 @php
     use App\Models\ServiceCategory;
-
-    $categories = ServiceCategory::query()
-        ->with(['services' => fn ($q) => $q->where('is_published', true)->orderBy('sort_order')])
-        ->where('is_active', true)
-        ->orderBy('sort_order')
-        ->get();
 
     $isComplementary = static function (ServiceCategory $category): bool {
         return $category->slug === 'it'
@@ -17,7 +15,7 @@
 @endphp
 
 @if ($categories->isNotEmpty())
-    <section class="relative z-[1] -mt-10 bg-transparent px-5 pb-10 lg:pb-12" aria-label="หมวดหมู่งาน">
+    <section class="relative z-[1] -mt-10 bg-transparent pb-10 lg:pb-12" aria-label="หมวดหมู่งาน">
         <x-front.container>
             @if ($primary->isNotEmpty())
                 <div class="grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(240px,1fr))]">

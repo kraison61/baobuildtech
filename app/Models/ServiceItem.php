@@ -13,11 +13,15 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
     'name',
     'slug',
     'description',
+    'headline',
+    'excerpt',
+    'content',
     'cover_image',
     'meta_title',
     'meta_description',
     'sort_order',
     'is_published',
+    'published_at',
 ])]
 class ServiceItem extends Model
 {
@@ -26,6 +30,7 @@ class ServiceItem extends Model
         return [
             'is_published' => 'boolean',
             'sort_order' => 'integer',
+            'published_at' => 'datetime',
         ];
     }
 

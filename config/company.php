@@ -9,9 +9,9 @@
 
 return [
 
-    'legal_name'    => 'ห้างหุ้นส่วนจำกัด ธีรพงษ์การช่าง',
-    'brand_name'    => 'ธีรพงษ์การช่าง',
-    'brand_mark'    => 'TP',
+    'legal_name'    => 'บีโอเอ และเพื่อน',
+    'brand_name'    => 'BOA&Friends',
+    'brand_mark'    => 'BOA',
     'business_type' => 'GeneralContractor',
     'tax_id'        => '0125555012345',
     'founding_year' => '2015',

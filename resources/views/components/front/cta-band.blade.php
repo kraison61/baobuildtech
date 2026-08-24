@@ -10,13 +10,13 @@
 
 <section
     @class([
-        'px-5 py-14 lg:py-16',
+        'py-14 lg:py-16',
         'border-y border-line bg-paper' => $variant === 'paper',
         'bg-white' => $variant === 'white',
         'bg-brand text-white' => $variant === 'brand',
     ])
 >
-    <div class="mx-auto flex max-w-[1160px] flex-col items-start justify-between gap-8 min-[800px]:flex-row min-[800px]:items-center">
+    <x-front.container class="flex flex-col items-start justify-between gap-8 min-[800px]:flex-row min-[800px]:items-center">
         <div class="max-w-[640px]">
             <h2 @class([
                 'text-[clamp(1.375rem,3vw,1.75rem)] font-semibold leading-[1.4]',
@@ -39,5 +39,5 @@
             class="inline-flex shrink-0 items-center rounded-lg bg-accent px-[26px] py-4 text-[17px] font-semibold text-white hover:bg-accent-dark hover:text-white"
             @if ($lineUrl) target="_blank" rel="noopener noreferrer" @endif
         >ส่งรูปหน้างาน ประเมินฟรี</a>
-    </div>
+    </x-front.container>
 </section>

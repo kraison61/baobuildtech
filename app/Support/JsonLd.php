@@ -2,6 +2,10 @@
 
 namespace App\Support;
 
+use App\Models\Service;
+use App\Models\ServiceItem;
+use Illuminate\Support\Collection;
+
 class JsonLd
 {
     /**
@@ -136,6 +140,125 @@ class JsonLd
             '@type' => 'BreadcrumbList',
             '@id' => $pageUrl.'#breadcrumb',
             'itemListElement' => $itemListElement,
+        ];
+    }
+
+    /**
+     * Service entity จากข้อมูลที่แสดงบนหน้าจริง
+     *
+     * @param  Collection<int, \App\Models\ServicePrice>  $prices
+     * @return array<string, mixed>
+     */
+    public static function serviceEntity(Service $service, string $pageUrl, Collection $prices): array
+    {
+        $siteUrl = rtrim((string) config('company.site_url'), '/');
+        $pageUrl = rtrim($pageUrl, '/');
+
+        $entity = [
+            '@type' => 'Service',
+            '@id' => $pageUrl.'#service',
+            'name' => self::cleanText($service->name),
+            'description' => self::cleanText((string) $service->description),
+            'url' => $pageUrl,
+            'provider' => ['@id' => $siteUrl.'#organization'],
+        ];
+
+        if (filled($service->cover_image)) {
+            $entity['image'] = $service->cover_image;
+        }
+
+        $offers = $prices
+            ->filter(static fn ($price) => $price->price_min !== null)
+            ->map(static function ($price): array {
+                return [
+                    '@type' => 'Offer',
+                    'name' => self::cleanText((string) $price->label),
+                    'price' => (float) $price->price_min,
+                    'priceCurrency' => $price->currency ?: 'THB',
+                ];
+            })
+            ->values()
+            ->all();
+
+        if ($offers !== []) {
+            $entity['offers'] = count($offers) === 1 ? $offers[0] : $offers;
+        }
+
+        return $entity;
+    }
+
+    /**
+     * Service entity สำหรับหน้า service_items
+     *
+     * @param  Collection<int, \App\Models\ServicePrice>  $prices
+     * @return array<string, mixed>
+     */
+    public static function serviceItemEntity(ServiceItem $item, string $pageUrl, Collection $prices): array
+    {
+        $siteUrl = rtrim((string) config('company.site_url'), '/');
+        $pageUrl = rtrim($pageUrl, '/');
+
+        $entity = [
+            '@type' => 'Service',
+            '@id' => $pageUrl.'#service',
+            'name' => self::cleanText($item->name),
+            'description' => self::cleanText((string) ($item->excerpt ?: $item->description)),
+            'url' => $pageUrl,
+            'provider' => ['@id' => $siteUrl.'#organization'],
+        ];
+
+        if (filled($item->cover_image)) {
+            $entity['image'] = $item->cover_image;
+        }
+
+        if ($item->service?->service_type) {
+            $entity['serviceType'] = self::cleanText((string) $item->service->service_type);
+        }
+
+        $offers = $prices
+            ->filter(static fn ($price) => $price->price_min !== null)
+            ->map(static function ($price): array {
+                return [
+                    '@type' => 'Offer',
+                    'name' => self::cleanText((string) $price->label),
+                    'price' => (float) $price->price_min,
+                    'priceCurrency' => $price->currency ?: 'THB',
+                ];
+            })
+            ->values()
+            ->all();
+
+        if ($offers !== []) {
+            $entity['offers'] = count($offers) === 1 ? $offers[0] : $offers;
+        }
+
+        return $entity;
+    }
+
+    /**
+     * FAQPage จาก FAQ ที่แสดงบนหน้าจริง
+     *
+     * @param  Collection<int, \App\Models\Faq>  $faqs
+     * @return array<string, mixed>
+     */
+    public static function faqPage(string $pageUrl, Collection $faqs): array
+    {
+        $pageUrl = rtrim($pageUrl, '/');
+
+        return [
+            '@type' => 'FAQPage',
+            '@id' => $pageUrl.'#faq',
+            'mainEntity' => $faqs
+                ->map(static fn ($faq): array => [
+                    '@type' => 'Question',
+                    'name' => self::cleanText($faq->question),
+                    'acceptedAnswer' => [
+                        '@type' => 'Answer',
+                        'text' => self::cleanText($faq->answer),
+                    ],
+                ])
+                ->values()
+                ->all(),
         ];
     }
 }

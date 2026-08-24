@@ -1,0 +1,61 @@
+@props(['item' => null, 'services' => []])
+
+<div class="grid gap-4 sm:grid-cols-2">
+    <div class="sm:col-span-2">
+        <x-ui.label for="service_id">บริการ *</x-ui.label>
+        <x-ui.select name="service_id" id="service_id" required>
+            @foreach ($services as $svc)
+                <option value="{{ $svc->id }}" @selected(old('service_id', $item?->service_id) == $svc->id)>
+                    {{ $svc->category?->name ? $svc->category->name.' › ' : '' }}{{ $svc->name }}
+                </option>
+            @endforeach
+        </x-ui.select>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="name">ชื่อรายการ *</x-ui.label>
+        <x-ui.input type="text" name="name" id="name" :value="old('name', $item?->name)" required />
+    </div>
+    <div>
+        <x-ui.label for="slug">Slug</x-ui.label>
+        <x-ui.input type="text" name="slug" id="slug" :value="old('slug', $item?->slug)" />
+    </div>
+    <div>
+        <x-ui.label for="headline">Headline</x-ui.label>
+        <x-ui.input type="text" name="headline" id="headline" :value="old('headline', $item?->headline)" />
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="excerpt">Excerpt</x-ui.label>
+        <x-ui.textarea name="excerpt" id="excerpt" rows="2">{{ old('excerpt', $item?->excerpt) }}</x-ui.textarea>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="description">คำอธิบายสั้น</x-ui.label>
+        <x-ui.textarea name="description" id="description" rows="3">{{ old('description', $item?->description) }}</x-ui.textarea>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="content">เนื้อหา (HTML)</x-ui.label>
+        <x-ui.textarea name="content" id="content" rows="12" class="font-mono text-xs">{{ old('content', $item?->content) }}</x-ui.textarea>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="cover_image">รูปปก (URL)</x-ui.label>
+        <x-ui.input type="url" name="cover_image" id="cover_image" :value="old('cover_image', $item?->cover_image)" />
+    </div>
+    <div>
+        <x-ui.label for="meta_title">Meta Title</x-ui.label>
+        <x-ui.input type="text" name="meta_title" id="meta_title" :value="old('meta_title', $item?->meta_title)" maxlength="100" />
+    </div>
+    <div>
+        <x-ui.label for="meta_description">Meta Description</x-ui.label>
+        <x-ui.input type="text" name="meta_description" id="meta_description" :value="old('meta_description', $item?->meta_description)" maxlength="160" />
+    </div>
+    <div>
+        <x-ui.label for="sort_order">ลำดับ</x-ui.label>
+        <x-ui.input type="number" name="sort_order" id="sort_order" :value="old('sort_order', $item?->sort_order ?? 0)" min="0" />
+    </div>
+    <div>
+        <x-ui.label for="published_at">วันที่เผยแพร่</x-ui.label>
+        <x-ui.input type="datetime-local" name="published_at" id="published_at" :value="old('published_at', $item?->published_at?->format('Y-m-d\TH:i'))" />
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.checkbox name="is_published" value="1" label="เผยแพร่" :checked="old('is_published', $item?->is_published ?? false)" />
+    </div>
+</div>

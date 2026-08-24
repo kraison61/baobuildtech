@@ -23,7 +23,7 @@
 
 @section('content')
     <main>
-        <section id="top" class="border-b border-line bg-paper px-5 py-20 lg:py-32">
+        <section id="top" class="border-b border-line bg-paper py-20 lg:py-32">
             <x-front.container>
                 <div class="max-w-[680px]">
                     <h1 class="text-[clamp(1.875rem,5.2vw,2.75rem)] font-semibold leading-[1.35] text-brand">

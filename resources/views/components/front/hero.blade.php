@@ -3,9 +3,9 @@
     $lineUrl = \App\Support\Company::lineUrl();
 @endphp
 
-<section id="top" class="border-b border-line bg-paper">
+<section id="top" class="bg-paper">
     <div class="grid items-stretch min-[900px]:grid-cols-[54fr_46fr]">
-        <div class="max-w-full px-5 pt-[clamp(80px,10vw,128px)] pb-[clamp(104px,12vw,168px)] min-[900px]:ps-[max(1.25rem,calc((100vw-1160px)/2))] min-[900px]:pe-[clamp(24px,4vw,64px)]">
+        <div class="max-w-full px-5 pt-[clamp(80px,10vw,128px)] pb-[clamp(64px,8vw,96px)] min-[900px]:ps-[max(1.25rem,calc((100vw-1160px)/2))] min-[900px]:pe-[clamp(24px,4vw,64px)]">
             <div class="max-w-[680px]">
                 <p class="text-[clamp(1.75rem,4vw,2.25rem)] font-semibold leading-tight tracking-tight text-brand">
                     {{ $brand }}

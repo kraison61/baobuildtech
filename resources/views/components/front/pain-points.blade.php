@@ -6,16 +6,17 @@
     ];
 @endphp
 
-<section class="bg-white px-5 pt-20 pb-10 lg:pt-32 lg:pb-12">
-    <div class="mx-auto max-w-[620px]">
-        <h2 class="text-center text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">
-            สิ่งที่เจ้าของที่ดินลาดชันมักเจอ
-        </h2>
-        <div class="mt-10 grid gap-0 border-t border-line">
-            @foreach ($quotes as $quote)
-                <p class="border-b border-line py-6 text-[17px] leading-[1.8] text-ink">{{ $quote }}</p>
-            @endforeach
+<section class="bg-white pt-16 pb-10 lg:pt-24 lg:pb-12">
+    <x-front.container>
+        <div class="mx-auto max-w-[620px]">
+            <h2 class="text-center text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">
+                สิ่งที่เจ้าของที่ดินลาดชันมักเจอ
+            </h2>
+            <div class="mt-10 grid gap-0 border-t border-line">
+                @foreach ($quotes as $quote)
+                    <p class="border-b border-line py-6 text-[17px] leading-[1.8] text-ink">{{ $quote }}</p>
+                @endforeach
+            </div>
         </div>
-    </div>
+    </x-front.container>
 </section>
-

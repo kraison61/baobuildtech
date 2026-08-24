@@ -1,40 +1,70 @@
 @php
-    $cards = [
+    /**
+     * ลำดับตาม trust ladder (งานมูลค่าสูง):
+     * 1 Authority → 2 Evidence → 3 Risk reversal
+     */
+    $steps = [
         [
+            'num' => '01',
+            'outcome' => 'ได้แบบลงนามวิศวกร',
             'title' => 'คำนวณโดยหลักวิศวกรรม',
             'body' => 'แบบโครงสร้างระบุขนาดเหล็กเสริม ระยะเรียง และแรงดันดินด้านหลังกำแพง ลงนามโดยวิศวกรผู้ได้รับใบอนุญาต [เลขที่ใบ กว.]',
-            'paths' => ['M3 20h18M6 20V9l6-4 6 4v11M10 20v-5h4v5'],
         ],
         [
+            'num' => '02',
+            'outcome' => 'ได้รายงานทดสอบเก็บไว้',
             'title' => 'มีรายงานทดสอบการบดอัด',
-            'body' => 'ทดสอบความหนาแน่นชั้นดินถมทุกระยะ 30 ซม. ตามเกณฑ์ [Field Density Test ≥ 95% Modified Proctor] ส่งผลทดสอบให้เจ้าของงานเก็บไว้',
-            'paths' => ['M7 3h10v4H7zM5 7h14v14H5zM9 12h6M9 16h6'],
+            'body' => 'ทดสอบความหนาแน่นชั้นดินถมทุกระยะ 30 ซม. ตามเกณฑ์ [Field Density Test ≥ 95% Modified Proctor] ส่งผลทดสอบให้เจ้าของงาน',
         ],
         [
+            'num' => '03',
+            'outcome' => 'ได้หนังสือรับประกันชัดเจน',
             'title' => 'รับประกันเป็นลายลักษณ์อักษร',
-            'body' => 'หนังสือรับประกันโครงสร้าง [2 ปี] ระบุขอบเขตความเสียหายที่ครอบคลุมและระยะเวลาเข้าแก้ไข ไม่ใช่คำรับปากทางโทรศัพท์',
-            'paths' => ['M12 3l7 3v6c0 4-3 7-7 9-4-2-7-5-7-9V6z', 'M9 12l2 2 4-4'],
+            'body' => 'หนังสือรับประกันโครงสร้าง [2 ปี] ระบุขอบเขตความเสียหายที่ครอบคลุมและระยะเวลาเข้าแก้ไข — ไม่ใช่คำรับปากทางโทรศัพท์',
         ],
     ];
 @endphp
 
-<section class="relative z-[1] -mt-10 px-5 pb-12 lg:pb-16">
-    <div class="mx-auto max-w-[1160px]">
-        <p class="mb-6 text-center text-[15px] font-semibold tracking-wide text-brand-mid">
-            สิ่งที่คุณจะได้ก่อนตัดสินใจจ้าง — ไม่ใช่แค่คำรับปาก
-        </p>
-        <div class="grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
-            @foreach ($cards as $card)
-                <div class="rounded-lg border border-line bg-white p-6">
-                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" class="text-brand-mid" aria-hidden="true">
-                        @foreach ($card['paths'] as $path)
-                            <path d="{{ $path }}" />
-                        @endforeach
-                    </svg>
-                    <h3 class="mt-4 text-[22px] font-semibold text-brand">{{ $card['title'] }}</h3>
-                    <p class="mt-2 text-[17px] leading-[1.8] text-muted">{{ $card['body'] }}</p>
-                </div>
+{{-- ต่อจาก hero บนพื้น paper เดียวกัน = หน่วย “ข้อเสนอ + หลักฐาน” ตาม ELM (central route) --}}
+<section class="border-b border-line bg-paper" aria-labelledby="trust-heading">
+    <x-front.container class="py-[clamp(3rem,6vw,4.5rem)]">
+        <header class="max-w-[40rem]">
+            <div class="flex items-center gap-2 text-[14px] font-semibold tracking-wide text-brand-mid">
+                <span class="h-px w-7 bg-brand-mid" aria-hidden="true"></span>
+                เช็คลิสต์ก่อนตัดสินใจจ้าง
+            </div>
+            <h2 id="trust-heading" class="mt-4 text-[clamp(1.5rem,3.6vw,2rem)] font-semibold leading-[1.35] text-brand">
+                3 สิ่งที่คุณจะได้ก่อนจ้าง — ไม่ใช่แค่คำรับปาก
+            </h2>
+            <p class="mt-4 text-[17px] leading-[1.75] text-muted">
+                งานโครงสร้างตัดสินจากเอกสารที่ตรวจสอบได้ ใช้เทียบกับผู้รับเหมาที่รับปากอย่างเดียว — ถ้าไม่มีทั้งสามอย่าง ความเสี่ยงอยู่ที่เจ้าของงาน
+            </p>
+        </header>
+
+        <ol class="mt-10 grid list-none gap-0 border-t border-line p-0 md:mt-12 md:grid-cols-3">
+            @foreach ($steps as $index => $step)
+                <li @class([
+                    'border-b border-line py-8 md:border-b-0 md:px-8 md:py-10',
+                    'md:border-e md:border-line' => $index < count($steps) - 1,
+                    'md:ps-0' => $index === 0,
+                    'md:pe-0' => $index === count($steps) - 1,
+                ])>
+                    <div class="flex items-baseline justify-between gap-4">
+                        <span class="text-[13px] font-semibold tabular-nums tracking-wide text-brand-mid" aria-hidden="true">{{ $step['num'] }}</span>
+                        <span class="text-[13px] font-semibold text-accent">{{ $step['outcome'] }}</span>
+                    </div>
+                    <h3 class="mt-4 text-[20px] font-semibold leading-snug text-brand sm:text-[22px]">
+                        {{ $step['title'] }}
+                    </h3>
+                    <p class="mt-3 text-[16px] leading-[1.75] text-muted sm:text-[17px] sm:leading-[1.8]">
+                        {{ $step['body'] }}
+                    </p>
+                </li>
             @endforeach
-        </div>
-    </div>
+        </ol>
+
+        <p class="mt-8 max-w-[40rem] text-[15px] leading-[1.7] text-brand-mid md:mt-10">
+            ส่งรูปหน้างานมาประเมินฟรี — เราจะบอกว่าหน้างานคุณต้องใช้ข้อไหนจากทั้งสามข้อนี้ และขาดอะไรอยู่
+        </p>
+    </x-front.container>
 </section>

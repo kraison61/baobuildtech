@@ -1,19 +1,9 @@
+@props([
+    'categories',
+])
+
 @php
     use App\Models\ServiceCategory;
-
-    $categories = ServiceCategory::query()
-        ->with([
-            'services' => fn ($q) => $q
-                ->where('is_published', true)
-                ->orderBy('sort_order')
-                ->with([
-                    'items' => fn ($iq) => $iq->where('is_published', true)->orderBy('sort_order'),
-                    'prices' => fn ($pq) => $pq->where('is_visible', true)->orderBy('sort_order'),
-                ]),
-        ])
-        ->where('is_active', true)
-        ->orderBy('sort_order')
-        ->get();
 
     $isComplementary = static function (ServiceCategory $category): bool {
         return $category->slug === 'it'
@@ -93,7 +83,7 @@
     $index = 0;
 @endphp
 
-<section class="bg-white px-5 py-16 lg:py-24">
+<section class="bg-white py-16 lg:py-24">
     <x-front.container class="grid gap-14">
         @forelse ($categories as $category)
             @php
@@ -158,7 +148,9 @@
                                 ])>
                                     <div class="text-sm font-semibold text-muted tabular-nums">{{ str_pad((string) $index, 2, '0', STR_PAD_LEFT) }}</div>
                                     <h3 class="mt-2 text-[clamp(1.5rem,3.5vw,1.875rem)] font-semibold leading-[1.4] text-brand">
-                                        {{ $service->name }}
+                                        <a href="{{ route('services.show', $service->slug) }}" class="hover:text-brand-mid">
+                                            {{ $service->name }}
+                                        </a>
                                     </h3>
                                     <p class="mt-4 max-w-[460px] text-[17px] leading-[1.8] text-muted">
                                         {{ $service->description }}
@@ -184,11 +176,17 @@
                                         </dl>
                                     @endif
 
-                                    <a
-                                        href="{{ $lineUrl ?? '#cta' }}"
-                                        class="mt-6 inline-flex self-start border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand"
-                                        @if ($lineUrl) target="_blank" rel="noopener noreferrer" @endif
-                                    >ส่งรูปประเมินงาน{{ $service->name }}</a>
+                                    <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
+                                        <a
+                                            href="{{ route('services.show', $service->slug) }}"
+                                            class="inline-flex self-start border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand"
+                                        >ดูรายละเอียด{{ $service->name }}</a>
+                                        <a
+                                            href="{{ $lineUrl ?? '#cta' }}"
+                                            class="inline-flex self-start border-b border-line pb-0.5 text-[17px] font-semibold text-muted hover:text-brand"
+                                            @if ($lineUrl) target="_blank" rel="noopener noreferrer" @endif
+                                        >ส่งรูปประเมิน</a>
+                                    </div>
                                 </div>
                             </div>
 
@@ -197,11 +195,13 @@
                                     <div class="text-[15px] font-semibold text-brand">รายการงานภายใต้{{ $service->name }}</div>
                                     <ul class="mt-4 grid list-none gap-3 p-0 min-[700px]:grid-cols-2">
                                         @foreach ($service->items as $item)
-                                            <li id="{{ $item->slug }}" class="scroll-mt-24 rounded-lg border border-line bg-white p-4">
-                                                <div class="text-[16px] font-semibold text-brand">{{ $item->name }}</div>
-                                                @if ($item->description)
-                                                    <p class="mt-2 text-[14px] leading-[1.7] text-muted">{{ $item->description }}</p>
-                                                @endif
+                                            <li class="rounded-lg border border-line bg-white p-4">
+                                                <a href="{{ route('services.items.show', [$service->slug, $item->slug]) }}" class="block hover:text-brand-mid">
+                                                    <div class="text-[16px] font-semibold text-brand">{{ $item->name }}</div>
+                                                    @if ($item->description)
+                                                        <p class="mt-2 text-[14px] leading-[1.7] text-muted">{{ $item->description }}</p>
+                                                    @endif
+                                                </a>
                                             </li>
                                         @endforeach
                                     </ul>

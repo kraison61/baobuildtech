@@ -3,11 +3,12 @@
     $lineUrl = \App\Support\Company::lineUrl() ?? '#cta';
 @endphp
 
-<div class="h-[88px] min-[1100px]:hidden" aria-hidden="true"></div>
+{{-- spacer แสดงเฉพาะตอนมี bottom CTA (ควบคุมด้วย JS) --}}
+<div class="hidden h-[88px]" aria-hidden="true" data-mobile-cta-spacer></div>
 
 <div
     id="mobile-cta"
-    class="fixed inset-x-0 bottom-0 z-[60] hidden items-stretch gap-4 border-t border-line bg-white px-4 py-3 min-[1100px]:hidden"
+    class="fixed inset-x-0 bottom-0 z-[60] hidden items-stretch gap-4 border-t border-line bg-white px-5 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] min-[1100px]:hidden"
     data-mobile-cta
     hidden
 >

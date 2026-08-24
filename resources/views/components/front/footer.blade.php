@@ -17,7 +17,7 @@
     ];
 @endphp
 
-<footer class="border-t border-sand/20 bg-brand px-5 pt-16 pb-10 text-sand lg:pt-24">
+<footer class="border-t border-sand/20 bg-brand pt-16 pb-10 text-sand lg:pt-24">
     <x-front.container class="grid gap-10 [grid-template-columns:repeat(auto-fit,minmax(220px,1fr))]">
         <div class="max-w-[320px]">
             <div class="text-[17px] font-semibold text-white">{{ $brand }}</div>
@@ -70,7 +70,7 @@
         </div>
     </x-front.container>
 
-    <div class="mx-auto mt-16 max-w-[1160px] border-t border-sand/20 pt-6 text-sm">
+    <x-front.container class="mt-16 border-t border-sand/20 pt-6 text-sm">
         © {{ date('Y') }} {{ $legal }} · เลขผู้เสียภาษี {{ $taxId }}
-    </div>
+    </x-front.container>
 </footer>

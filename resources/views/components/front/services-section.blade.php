@@ -42,7 +42,7 @@
     ];
 @endphp
 
-<section id="services" class="scroll-mt-24 border-y border-line bg-paper px-5 py-16 lg:py-24">
+<section id="services" class="scroll-mt-24 border-y border-line bg-paper py-16 lg:py-24">
     <x-front.container>
         <div class="max-w-[680px]">
             <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">งานโครงสร้างที่เรารับ — พร้อมสเปกกำกับทุกรายการ</h2>

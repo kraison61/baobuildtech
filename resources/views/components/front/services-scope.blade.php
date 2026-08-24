@@ -16,7 +16,7 @@
     ];
 @endphp
 
-<section id="scope" class="scroll-mt-24 bg-brand px-5 py-16 text-white lg:py-24">
+<section id="scope" class="scroll-mt-24 bg-brand py-16 text-white lg:py-24">
     <x-front.container>
         <div class="max-w-[680px]">
             <div class="flex items-center gap-2 text-sm font-semibold tracking-wide text-sand">

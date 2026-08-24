@@ -1,6 +1,6 @@
 <button
     type="button"
-    class="fixed end-4 bottom-[104px] z-[55] hidden size-11 place-items-center rounded-lg border border-line bg-white text-brand shadow-sm hover:border-brand-mid hover:text-brand-mid min-[1100px]:bottom-6"
+    class="fixed end-5 bottom-[max(1.25rem,env(safe-area-inset-bottom))] z-[55] hidden size-11 place-items-center rounded-lg border border-line bg-white text-brand shadow-sm hover:border-brand-mid hover:text-brand-mid sm:end-6 sm:bottom-6"
     aria-label="กลับขึ้นบน"
     data-to-top
     hidden

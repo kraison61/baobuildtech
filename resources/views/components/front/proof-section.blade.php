@@ -25,7 +25,7 @@
     ];
 @endphp
 
-<section id="proof" class="scroll-mt-24 bg-brand px-5 py-20 text-white lg:pt-32 lg:pb-20">
+<section id="proof" class="scroll-mt-24 bg-brand py-20 text-white lg:pt-32 lg:pb-20">
 
     <x-front.container>
         <div class="max-w-[680px]">

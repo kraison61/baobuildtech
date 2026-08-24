@@ -28,7 +28,7 @@
     ];
 @endphp
 
-<section id="cost" class="scroll-mt-24 bg-white px-5 py-16 lg:py-24">
+<section id="cost" class="scroll-mt-24 bg-white py-16 lg:py-24">
     <x-front.container>
         <div class="max-w-[680px]">
             <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">โครงสร้างต้นทุน — เงินของคุณไปอยู่ที่อะไร</h2>
