@@ -47,6 +47,17 @@
         <x-ui.input type="date" name="completed_at" id="completed_at" :value="old('completed_at', $portfolio?->completed_at?->format('Y-m-d'))" />
     </div>
     <div class="sm:col-span-2">
+        <x-ui.label for="coordinates">พิกัด GPS (คัดลอกจาก Google Maps)</x-ui.label>
+        <x-ui.input
+            type="text"
+            name="coordinates"
+            id="coordinates"
+            :value="old('coordinates', $portfolio?->coordinates)"
+            placeholder="13.748436414898316, 100.48145963665914"
+        />
+        <p class="mt-1 text-xs text-slate-500">วางรูปแบบ lat, lng เช่น 13.748436414898316, 100.48145963665914</p>
+    </div>
+    <div class="sm:col-span-2">
         <x-ui.label for="description">รายละเอียด</x-ui.label>
         <x-ui.textarea name="description" id="description" rows="4">{{ old('description', $portfolio?->description) }}</x-ui.textarea>
     </div>

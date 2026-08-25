@@ -1,7 +1,8 @@
 @php
     $phoneDisplay = \App\Support\Company::phoneDisplay();
     $lineId = \App\Support\Company::lineId();
-    $address = config('company.address');
+    $addressDisplay = \App\Support\Company::addressDisplay();
+    $hoursDisplay = \App\Support\Company::hoursDisplay();
     $brand = config('company.brand_name');
     $legal = config('company.legal_name');
     $taxId = config('company.tax_id');
@@ -22,7 +23,7 @@
         <div class="max-w-[320px]">
             <div class="text-[17px] font-semibold text-white">{{ $brand }}</div>
             <p class="mt-3 text-[15px] leading-[1.8]">
-                ช่างเฉพาะทางงานกำแพงกันดิน คสล. งานฐานราก และงานโยธา พร้อมงานระบบไฟฟ้า ไฟเบอร์ LAN และ CCTV เป็นบริการเสริมของโครงการ
+                {{ config('company.description') }}
             </p>
         </div>
 
@@ -35,6 +36,7 @@
                 <li><a href="{{ route('articles') }}" class="text-sand hover:text-white">บทความ</a></li>
                 <li><a href="{{ route('gallery') }}" class="text-sand hover:text-white">คลังภาพผลงาน</a></li>
                 <li><a href="{{ route('about') }}" class="text-sand hover:text-white">เกี่ยวกับเรา</a></li>
+                <li><a href="{{ route('contact') }}" class="text-sand hover:text-white">ติดต่อเรา</a></li>
             </ul>
         </div>
 
@@ -57,14 +59,14 @@
                     <li>ไลน์ {{ $lineId }}</li>
                 @endif
                 <li>{{ $email }}</li>
-                <li>{{ $address['street'] }} {{ $address['district'] }} {{ $address['province'] }} {{ $address['postal_code'] }}</li>
+                <li>{{ $addressDisplay }}</li>
             </ul>
         </div>
 
         <div>
             <div class="text-[15px] font-semibold text-white">เวลาทำการ</div>
             <ul class="mt-3 grid list-none gap-2 p-0 text-[15px]">
-                <li>จันทร์–เสาร์ 8:00–18:00 น.</li>
+                <li>{{ $hoursDisplay }}</li>
                 <li>รับงาน กทม. และปริมณฑล</li>
             </ul>
         </div>

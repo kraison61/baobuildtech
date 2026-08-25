@@ -17,10 +17,16 @@
         ['label' => $item->name],
     ];
 
-    $schemaGraph = \App\Support\JsonLd::pageGraph($pageTitle, $pageUrl, $breadcrumbs);
+    $schemaGraph = \App\Support\JsonLd::pageGraph(
+        $pageTitle,
+        $pageUrl,
+        $breadcrumbs,
+        \App\Support\Company::serviceAreas(includeCountry: false),
+    );
     $schemaGraph[] = \App\Support\JsonLd::serviceItemEntity($item, $pageUrl, $item->prices);
 
     if ($item->faqs->isNotEmpty()) {
+        $schemaGraph[2]['mainEntity'] = ['@id' => rtrim($pageUrl, '/').'#faq'];
         $schemaGraph[] = \App\Support\JsonLd::faqPage($pageUrl, $item->faqs);
     }
 @endphp

@@ -49,6 +49,11 @@ class ServiceItem extends Model
         return $this->hasMany(Portfolio::class);
     }
 
+    public function workImages(): HasMany
+    {
+        return $this->hasMany(WorkImage::class)->orderBy('sort_order');
+    }
+
     public function faqs(): MorphMany
     {
         return $this->morphMany(Faq::class, 'faqable');

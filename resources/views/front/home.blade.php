@@ -1,13 +1,27 @@
 @extends('front.layouts.app')
 
 @php
-    $pageTitle = config('company.brand_name').' — กำแพงกันดิน คสล. และงานฐานราก';
+    $pageTitle = \App\Support\HomeContent::metaTitle();
     $pageUrl = url('/');
-    $schemaGraph = \App\Support\JsonLd::pageGraph($pageTitle, $pageUrl);
+    $schemaFaqs = \App\Support\HomeContent::schemaFaqs();
+    $portfolios = \App\Models\Portfolio::query()
+        ->where('is_published', true)
+        ->with('location')
+        ->latest('completed_at')
+        ->limit(3)
+        ->get();
+
+    $schemaGraph = \App\Support\JsonLd::homepageGraph(
+        $pageTitle,
+        $pageUrl,
+        $schemaFaqs,
+        \App\Support\HomeContent::schemaServiceNames(),
+        \App\Support\HomeContent::serviceAreas(),
+    );
 @endphp
 
 @section('title', $pageTitle)
-@section('meta_description', config('company.description'))
+@section('meta_description', \App\Support\HomeContent::metaDescription())
 
 @push('head')
     <x-front.json-ld :graph="$schemaGraph" />
@@ -15,23 +29,16 @@
 
 @section('content')
     <main>
+        {{-- v2: 11 บล็อก — ทางแยก ไม่ใช่ปลายทาง --}}
         <x-front.hero />
         <x-front.trust-cards />
         <x-front.pain-points />
-        <x-front.cta-band
-            title="เคยเจอแบบนี้มาก่อน? ส่งรูปหน้างานมาประเมินก่อน"
-            body="ตอบกลับภายใน [1] วันทำการ พร้อมข้อสังเกตทางวิศวกรรม — ไม่มีค่าใช้จ่าย และไม่โทรรบกวนหากไม่ได้ขอ"
-            variant="paper"
-        />
+        <x-front.proof-section :portfolios="$portfolios" />
+        <x-front.why-section />
+        <x-front.phases-section />
         <x-front.services-section />
-        <x-front.proof-section />
-        <x-front.cta-band
-            title="ดูหลักฐานแล้ว — ขั้นถัดไปคือส่งรูปหน้างานของคุณ"
-            body="เราประเมินจากสภาพดินและความสูงจริง ไม่เดาจากราคาต่อเมตร — ไม่มีค่าใช้จ่าย และไม่ผูกมัด"
-            variant="white"
-        />
+        <x-front.about-section />
         <x-front.process-section />
-        <x-front.cost-section />
         <x-front.faq-section />
         <x-front.cta-section />
     </main>

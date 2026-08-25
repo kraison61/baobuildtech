@@ -8,6 +8,7 @@
         ['label' => 'ราคาบริการ', 'route' => 'admin.service-prices.index'],
         ['group' => 'เนื้อหา'],
         ['label' => 'ผลงาน', 'route' => 'admin.portfolios.index'],
+        ['label' => 'รูปหน้างาน', 'route' => 'admin.work-images.index'],
         ['label' => 'พื้นที่ให้บริการ', 'route' => 'admin.locations.index'],
         ['label' => 'ผู้เขียน', 'route' => 'admin.authors.index'],
         ['label' => 'บทความ', 'route' => 'admin.posts.index'],

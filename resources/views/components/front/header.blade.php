@@ -7,7 +7,9 @@
     $mark = config('company.brand_mark');
     $navItems = \App\Support\Navigation::items();
     $homeHref = route('home');
-    $ctaHref = request()->routeIs(['home', 'services']) ? '#cta' : route('home').'#cta';
+    $ctaHref = request()->routeIs('home', 'services')
+        ? '#cta'
+        : (request()->routeIs('contact') ? '#form' : route('home').'#cta');
 
     $resolveHref = static function (string $href): string {
         if (str_starts_with($href, 'http') || str_starts_with($href, '#')) {

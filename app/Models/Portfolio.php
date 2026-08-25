@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Support\Coordinates;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -12,6 +13,8 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
     'service_id',
     'service_item_id',
     'location_id',
+    'lat',
+    'lng',
     'title',
     'slug',
     'description',
@@ -27,9 +30,17 @@ class Portfolio extends Model
     protected function casts(): array
     {
         return [
+            'lat' => 'decimal:8',
+            'lng' => 'decimal:8',
             'completed_at' => 'date',
             'is_published' => 'boolean',
         ];
+    }
+
+    /** พิกัดแบบ Google Maps: "lat, lng" */
+    public function getCoordinatesAttribute(): ?string
+    {
+        return Coordinates::format($this->lat, $this->lng);
     }
 
     public function service(): BelongsTo
@@ -50,6 +61,11 @@ class Portfolio extends Model
     public function images(): HasMany
     {
         return $this->hasMany(PortfolioImage::class)->orderBy('sort_order');
+    }
+
+    public function workImages(): HasMany
+    {
+        return $this->hasMany(WorkImage::class)->orderBy('sort_order');
     }
 
     public function faqs(): MorphMany

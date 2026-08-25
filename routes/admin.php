@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ServiceItemController;
 use App\Http\Controllers\Admin\ServicePriceController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\WorkImageController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function (): void {
@@ -34,6 +35,7 @@ Route::middleware('auth')->group(function (): void {
         ->name('portfolios.images.store');
     Route::delete('portfolio-images/{portfolioImage}', [PortfolioImageController::class, 'destroy'])
         ->name('portfolio-images.destroy');
+    Route::resource('work-images', WorkImageController::class)->except(['show']);
     Route::resource('locations', LocationController::class)->except(['show']);
     Route::resource('authors', AuthorController::class)->except(['show']);
     Route::resource('posts', PostController::class)->except(['show']);

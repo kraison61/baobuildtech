@@ -20,10 +20,16 @@
     }
     $visiblePrices = $visiblePrices->unique('id')->values();
 
-    $schemaGraph = \App\Support\JsonLd::pageGraph($pageTitle, $pageUrl, $breadcrumbs);
+    $schemaGraph = \App\Support\JsonLd::pageGraph(
+        $pageTitle,
+        $pageUrl,
+        $breadcrumbs,
+        \App\Support\Company::serviceAreas(includeCountry: false),
+    );
     $schemaGraph[] = \App\Support\JsonLd::serviceEntity($service, $pageUrl, $visiblePrices);
 
     if ($service->faqs->isNotEmpty()) {
+        $schemaGraph[2]['mainEntity'] = ['@id' => rtrim($pageUrl, '/').'#faq'];
         $schemaGraph[] = \App\Support\JsonLd::faqPage($pageUrl, $service->faqs);
     }
 @endphp

@@ -38,4 +38,9 @@ return [
         'href' => '/about',
         'route' => 'about',
     ],
+    [
+        'label' => 'ติดต่อเรา',
+        'href' => '/contact',
+        'route' => 'contact',
+    ],
 ];

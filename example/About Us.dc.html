@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: #FFFFFF; font-family: "IBM Plex Sans Thai", system-ui, sans-serif; color: #1B211E; -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+  * { box-sizing: border-box; }
+  a { color: #33564A; text-decoration: none; }
+  a:hover { color: #1E3A32; }
+</style>
+</helmet>
+
+<div style="max-width: 100%; overflow-x: hidden">
+
+  <header style="position: sticky; top: 0; z-index: 50; background: #1E3A32; border-bottom: 1px solid rgba(224,217,204,.18)">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+      <a href="./Landing Page.dc.html" onClick="{{ closeMenu }}" style="display: flex; align-items: center; gap: 8px; color: #FFFFFF; min-width: 0">
+        <span style="display: grid; place-items: center; width: 34px; height: 34px; flex: none; border: 1px solid rgba(224,217,204,.45); border-radius: 8px; font-size: 13px; font-weight: 600; letter-spacing: .04em">TP</span>
+        <span style="font-size: 17px; font-weight: 600; white-space: nowrap">ธีรพงษ์การช่าง</span>
+      </a>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <nav style="display: flex; align-items: center; gap: 24px; font-size: 15px">
+          <a href="#story" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">ที่มาของเรา</a>
+          <a href="#principles" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">หลักการทำงาน</a>
+          <a href="#team" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">ทีมช่าง</a>
+          <a href="#process" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">ขั้นตอนงาน</a>
+          <a href="./Services.dc.html" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">งานบริการ</a>
+        </nav>
+        <div style="display: flex; align-items: center; gap: 16px">
+          <a href="tel:0812345678" style="color: #FFFFFF; font-size: 15px; font-variant-numeric: tabular-nums; white-space: nowrap">โทร {{ phone }}</a>
+          <a href="#cta" style="display: inline-flex; align-items: center; background: #C1531F; color: #FFFFFF; font-size: 15px; font-weight: 600; padding: 11px 18px; border-radius: 8px; white-space: nowrap" style-hover="background: #a8461a; color: #FFFFFF">ส่งรูปหน้างาน ประเมินฟรี</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; gap: 8px">
+          <a href="tel:0812345678" style="display: inline-flex; align-items: center; min-height: 46px; padding: 0 14px; border: 1px solid rgba(224,217,204,.45); border-radius: 8px; color: #FFFFFF; font-size: 15px; font-variant-numeric: tabular-nums; white-space: nowrap">{{ phone }}</a>
+          <button type="button" onClick="{{ toggleMenu }}" aria-label="เมนู" aria-expanded="{{ menuOpen }}" style="display: grid; place-items: center; width: 46px; height: 46px; flex: none; background: transparent; border: 1px solid rgba(224,217,204,.45); border-radius: 8px; cursor: pointer; padding: 0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </button>
+        </div>
+      </sc-if>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <nav style="border-top: 1px solid rgba(224,217,204,.2); padding: 8px 20px 20px; display: grid; gap: 2px">
+        <a href="#story" onClick="{{ closeMenu }}" style="color: #FFFFFF; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">ที่มาของเรา</a>
+        <a href="#principles" onClick="{{ closeMenu }}" style="color: #FFFFFF; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">หลักการทำงานหน้างาน</a>
+        <a href="#team" onClick="{{ closeMenu }}" style="color: #FFFFFF; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">ทีมช่างและเครื่องจักร</a>
+        <a href="#process" onClick="{{ closeMenu }}" style="color: #FFFFFF; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">ขั้นตอนการทำงาน</a>
+        <a href="#area" onClick="{{ closeMenu }}" style="color: #FFFFFF; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">ข้อมูลบริษัทและพื้นที่รับงาน</a>
+        <a href="./Services.dc.html" onClick="{{ closeMenu }}" style="color: #E0D9CC; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">งานบริการทั้งหมด</a>
+        <a href="./Landing Page.dc.html" onClick="{{ closeMenu }}" style="color: #E0D9CC; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">กลับหน้าแรก</a>
+        <a href="#cta" onClick="{{ closeMenu }}" style="display: flex; align-items: center; justify-content: center; background: #C1531F; color: #FFFFFF; font-size: 17px; font-weight: 600; padding: 16px 20px; border-radius: 8px; margin-top: 6px" style-hover="background: #a8461a; color: #FFFFFF">ส่งรูปหน้างาน ประเมินฟรี</a>
+      </nav>
+    </sc-if>
+  </header>
+
+  <section id="top" style="background: #F5F1EA; border-bottom: 1px solid #E0D9CC">
+    <div style="display: grid; grid-template-columns: {{ heroCols }}; align-items: stretch">
+      <div style="max-width: 100%; padding: clamp(80px, 10vw, 128px) clamp(24px, 4vw, 64px) clamp(104px, 12vw, 168px) max(20px, calc((100vw - 1160px) / 2))">
+        <div style="max-width: 680px">
+          <div style="display: flex; align-items: center; gap: 8px; color: #33564A; font-size: 14px; font-weight: 600; letter-spacing: .06em">
+            <span style="width: 28px; height: 1px; background: #33564A"></span>เกี่ยวกับเรา
+          </div>
+          <h1 style="margin: 24px 0 0; font-size: clamp(30px, 5.2vw, 44px); font-weight: 600; line-height: 1.35; color: #1E3A32">ทีมช่างที่ทำงานโครงสร้างเอง ตั้งแต่ลงเข็มถึงเก็บงาน</h1>
+          <p style="margin: 24px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">ธีรพงษ์การช่างรับงานกำแพงกันดิน คสล. งานฐานราก และงานโยธาในกรุงเทพฯ และปริมณฑล ตั้งแต่ปี [2552] เราทำงานด้วยทีมช่างประจำของตัวเอง ไม่ส่งต่อผู้รับเหมาช่วง และส่งมอบเอกสารตรวจสอบทุกงานที่รับ</p>
+        </div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&q=80&auto=format&fit=crop" alt="หน้างานก่อสร้างโครงสร้างคอนกรีตในเมือง" style="width: 100%; height: 100%; min-height: 300px; object-fit: cover; display: block" />
+    </div>
+  </section>
+
+  <section style="background: transparent; padding: 0 20px clamp(64px, 8vw, 96px); margin-top: -40px; position: relative; z-index: 1">
+    <div style="max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px">
+      <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+        <div style="font-size: clamp(28px, 4vw, 34px); font-weight: 600; color: #1E3A32; font-variant-numeric: tabular-nums">[17] ปี</div>
+        <div style="margin-top: 8px; font-size: 15px; line-height: 1.7; color: #6B6558">รับงานโครงสร้างในเขตกรุงเทพฯ และปริมณฑล</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+        <div style="font-size: clamp(28px, 4vw, 34px); font-weight: 600; color: #1E3A32; font-variant-numeric: tabular-nums">[240+]</div>
+        <div style="margin-top: 8px; font-size: 15px; line-height: 1.7; color: #6B6558">โครงการที่ส่งมอบแล้ว ทั้งงานเอกชนและโรงงาน</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+        <div style="font-size: clamp(28px, 4vw, 34px); font-weight: 600; color: #1E3A32; font-variant-numeric: tabular-nums">[26] คน</div>
+        <div style="margin-top: 8px; font-size: 15px; line-height: 1.7; color: #6B6558">ช่างประจำ ไม่ใช้ผู้รับเหมาช่วงในงานโครงสร้าง</div>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+        <div style="font-size: clamp(28px, 4vw, 34px); font-weight: 600; color: #1E3A32; font-variant-numeric: tabular-nums">100%</div>
+        <div style="margin-top: 8px; font-size: 15px; line-height: 1.7; color: #6B6558">งานที่ส่งมอบพร้อมแบบลงนามและผลทดสอบ</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="story" style="background: #FFFFFF; padding: 0 20px clamp(64px, 8vw, 96px)">
+    <div style="max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: {{ rowCols }}; align-items: stretch; background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; overflow: hidden; min-height: 420px">
+      <div style="position: relative; min-height: 280px; overflow: hidden; order: {{ imgOrder }}">
+        <img src="https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?w=1200&q=80&auto=format&fit=crop" alt="วิศวกรตรวจแบบร่วมกับช่างที่หน้างาน" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block" />
+      </div>
+      <div style="padding: clamp(28px, 4vw, 52px); display: flex; flex-direction: column; justify-content: center; order: {{ textOrder }}">
+        <div style="display: flex; align-items: center; gap: 8px; color: #33564A; font-size: 14px; font-weight: 600; letter-spacing: .06em"><span style="width: 28px; height: 1px; background: #33564A"></span>ที่มาของเรา</div>
+        <h2 style="margin: 24px 0 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #1E3A32">เริ่มจากงานกำแพงกันดินที่ต้องแก้ซ้ำ</h2>
+        <p style="margin: 16px 0 0; max-width: 460px; font-size: 17px; line-height: 1.8; color: #6B6558">ธีรพงษ์การช่างเริ่มจากทีมช่างเล็ก ๆ ที่รับงานซ่อมกำแพงกันดินซึ่งทรุดและร้าวหลังส่งมอบไม่ถึงสองปี สาเหตุที่พบซ้ำ ๆ คือฐานรากไม่ลงตามแบบ ไม่มีระบบระบายน้ำหลังกำแพง และไม่มีเอกสารยืนยันว่าใช้วัสดุอะไร</p>
+        <p style="margin: 16px 0 0; max-width: 460px; font-size: 17px; line-height: 1.8; color: #6B6558">เราจึงตั้งวิธีทำงานของตัวเองขึ้นจากสามอย่างนั้น คำนวณและลงนามโดยวิศวกรก่อนเริ่มงาน เก็บภาพทุกขั้นก่อนเทคอนกรีต และส่งผลทดสอบพร้อมงานทุกครั้ง วิธีนี้ทำให้เราปฏิเสธงานบางประเภทตั้งแต่ต้น แต่งานที่รับไว้เสร็จตามกำหนดและตรวจสอบได้</p>
+        <a href="./Services.dc.html" style="margin-top: 24px; font-size: 17px; font-weight: 600; color: #33564A; border-bottom: 1px solid #33564A; padding-bottom: 2px; align-self: flex-start">ดูขอบเขตงานที่เรารับ</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="principles" style="background: #1E3A32; color: #FFFFFF; padding: clamp(80px, 10vw, 128px) 20px">
+    <div style="max-width: 1160px; margin: 0 auto">
+      <div style="max-width: 680px">
+        <div style="display: flex; align-items: center; gap: 8px; color: #E0D9CC; font-size: 14px; font-weight: 600; letter-spacing: .06em"><span style="width: 28px; height: 1px; background: #E0D9CC"></span>หลักการทำงาน</div>
+        <h2 style="margin: 24px 0 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #FFFFFF">สี่ข้อที่เราไม่ลดให้ ไม่ว่างานจะเร่งแค่ไหน</h2>
+        <p style="margin: 24px 0 0; font-size: 17px; line-height: 1.8; color: #E0D9CC">ทั้งสี่ข้อนี้เขียนไว้ในสัญญาทุกฉบับ ถ้าเจ้าของงานขอให้ข้ามข้อใดข้อหนึ่ง เราจะบอกตรง ๆ ว่ารับงานนั้นไม่ได้</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-top: 40px">
+        <div style="border: 1px solid rgba(224,217,204,.3); border-radius: 8px; padding: 24px">
+          <div style="font-size: 14px; font-weight: 600; color: #E0D9CC; font-variant-numeric: tabular-nums">01</div>
+          <div style="margin-top: 8px; font-size: 22px; font-weight: 600; color: #FFFFFF">แบบต้องลงนามก่อนลงมือ</div>
+          <p style="margin: 12px 0 0; font-size: 15px; line-height: 1.8; color: #E0D9CC">ทุกงานกำแพงและฐานรากคำนวณและลงนามโดยวิศวกร ไม่เริ่มงานจากการประมาณหน้างาน</p>
+        </div>
+        <div style="border: 1px solid rgba(224,217,204,.3); border-radius: 8px; padding: 24px">
+          <div style="font-size: 14px; font-weight: 600; color: #E0D9CC; font-variant-numeric: tabular-nums">02</div>
+          <div style="margin-top: 8px; font-size: 22px; font-weight: 600; color: #FFFFFF">เก็บภาพก่อนปิดงาน</div>
+          <p style="margin: 12px 0 0; font-size: 15px; line-height: 1.8; color: #E0D9CC">เหล็กเสริม ระยะหุ้ม และท่อระบายน้ำถ่ายภาพไว้ทุกช่วงก่อนเทคอนกรีต ส่งให้เจ้าของงานพร้อมรายงาน</p>
+        </div>
+        <div style="border: 1px solid rgba(224,217,204,.3); border-radius: 8px; padding: 24px">
+          <div style="font-size: 14px; font-weight: 600; color: #E0D9CC; font-variant-numeric: tabular-nums">03</div>
+          <div style="margin-top: 8px; font-size: 22px; font-weight: 600; color: #FFFFFF">ไม่ลดเวลาบ่มคอนกรีต</div>
+          <p style="margin: 12px 0 0; font-size: 15px; line-height: 1.8; color: #E0D9CC">แผนงานเผื่อเวลาบ่มไว้แล้ว การเร่งส่งมอบไม่ใช่เหตุผลที่จะถอดไม้แบบเร็วกว่ากำหนด</p>
+        </div>
+        <div style="border: 1px solid rgba(224,217,204,.3); border-radius: 8px; padding: 24px">
+          <div style="font-size: 14px; font-weight: 600; color: #E0D9CC; font-variant-numeric: tabular-nums">04</div>
+          <div style="margin-top: 8px; font-size: 22px; font-weight: 600; color: #FFFFFF">ทีมช่างของเราเอง</div>
+          <p style="margin: 12px 0 0; font-size: 15px; line-height: 1.8; color: #E0D9CC">งานโครงสร้างทำโดยช่างประจำที่ผ่านงานลักษณะเดียวกันมาแล้ว ไม่ส่งต่อผู้รับเหมาช่วง</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="team" style="background: #FFFFFF; padding: clamp(80px, 10vw, 128px) 20px">
+    <div style="max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: {{ rowCols }}; gap: clamp(32px, 5vw, 64px); align-items: start">
+      <div>
+        <div style="display: flex; align-items: center; gap: 8px; color: #33564A; font-size: 14px; font-weight: 600; letter-spacing: .06em"><span style="width: 28px; height: 1px; background: #33564A"></span>ทีมและเครื่องจักร</div>
+        <h2 style="margin: 24px 0 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #1E3A32">ใครอยู่หน้างาน และใช้เครื่องจักรอะไร</h2>
+        <p style="margin: 24px 0 0; max-width: 520px; font-size: 17px; line-height: 1.8; color: #6B6558">ทุกโครงการมีโฟร์แมนประจำหนึ่งคนที่อยู่หน้างานตลอดสัญญา และเป็นคนเดียวที่คุณติดต่อได้ตลอด ไม่ต้องเล่าเรื่องเดิมซ้ำกับคนใหม่</p>
+        <dl style="margin: 32px 0 0; max-width: 520px; display: grid; gap: 12px; border-top: 1px solid #E0D9CC; padding-top: 24px; font-size: 15px; line-height: 1.7">
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">วิศวกรผู้ลงนาม</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">[สามัญวิศวกรโยธา ภย.]</dd></div>
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">โฟร์แมนประจำโครงการ</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">1 คนต่อ 1 หน้างาน</dd></div>
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">ช่างโครงสร้างประจำ</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">[26] คน</dd></div>
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">เครื่องจักรของบริษัท</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">[รถขุด · รถบด · ชุดเจาะเข็ม]</dd></div>
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">ประกันภัยงานก่อสร้าง</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">[CAR ทุกโครงการ]</dd></div>
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">รับประกันผลงาน</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">[2] ปีหลังส่งมอบ</dd></div>
+        </dl>
+      </div>
+      <div style="display: grid; gap: 24px">
+        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&q=80&auto=format&fit=crop" alt="ทีมช่างทำงานโครงสร้างที่หน้างาน" style="width: 100%; height: clamp(220px, 30vw, 300px); object-fit: cover; border-radius: 8px; display: block" />
+        <img src="https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?w=1200&q=80&auto=format&fit=crop" alt="เครื่องจักรปรับพื้นที่ในโครงการ" style="width: 100%; height: clamp(180px, 24vw, 240px); object-fit: cover; border-radius: 8px; display: block" />
+      </div>
+    </div>
+  </section>
+
+  <section id="process" style="background: #F5F1EA; border-top: 1px solid #E0D9CC; border-bottom: 1px solid #E0D9CC; padding: clamp(80px, 10vw, 128px) 20px">
+    <div style="max-width: 1160px; margin: 0 auto">
+      <div style="max-width: 680px">
+        <div style="display: flex; align-items: center; gap: 8px; color: #33564A; font-size: 14px; font-weight: 600; letter-spacing: .06em"><span style="width: 28px; height: 1px; background: #33564A"></span>ขั้นตอนการทำงาน</div>
+        <h2 style="margin: 24px 0 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #1E3A32">ห้าขั้นจากรูปหน้างานถึงส่งมอบ</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin-top: 40px">
+        <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+          <div style="font-size: 14px; font-weight: 600; color: #6B6558; font-variant-numeric: tabular-nums">ขั้นที่ 1</div>
+          <div style="margin-top: 8px; font-size: 19px; font-weight: 600; color: #1E3A32">ดูรูปและประเมินเบื้องต้น</div>
+          <p style="margin: 12px 0 0; font-size: 15px; line-height: 1.8; color: #6B6558">ส่งรูปพื้นที่ ความสูงดิน และแนวเขต ได้ช่วงราคาคร่าว ๆ ภายใน [1] วันทำการ</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+          <div style="font-size: 14px; font-weight: 600; color: #6B6558; font-variant-numeric: tabular-nums">ขั้นที่ 2</div>
+          <div style="margin-top: 8px; font-size: 19px; font-weight: 600; color: #1E3A32">เข้าสำรวจหน้างาน</div>
+          <p style="margin: 12px 0 0; font-size: 15px; line-height: 1.8; color: #6B6558">วัดระดับ ตรวจสภาพชั้นดินและทางเข้าเครื่องจักร ไม่มีค่าใช้จ่ายในพื้นที่ที่เรารับงาน</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+          <div style="font-size: 14px; font-weight: 600; color: #6B6558; font-variant-numeric: tabular-nums">ขั้นที่ 3</div>
+          <div style="margin-top: 8px; font-size: 19px; font-weight: 600; color: #1E3A32">แบบและใบเสนอราคา</div>
+          <p style="margin: 12px 0 0; font-size: 15px; line-height: 1.8; color: #6B6558">ใบเสนอราคาแยกรายการวัสดุและแรงงาน พร้อมแบบที่วิศวกรลงนาม</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+          <div style="font-size: 14px; font-weight: 600; color: #6B6558; font-variant-numeric: tabular-nums">ขั้นที่ 4</div>
+          <div style="margin-top: 8px; font-size: 19px; font-weight: 600; color: #1E3A32">ทำงานและรายงานความคืบหน้า</div>
+          <p style="margin: 12px 0 0; font-size: 15px; line-height: 1.8; color: #6B6558">รายงานภาพหน้างานทุกสัปดาห์ ระบุงานที่เสร็จและงานที่ค้างพร้อมเหตุผล</p>
+        </div>
+        <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+          <div style="font-size: 14px; font-weight: 600; color: #6B6558; font-variant-numeric: tabular-nums">ขั้นที่ 5</div>
+          <div style="margin-top: 8px; font-size: 19px; font-weight: 600; color: #1E3A32">ส่งมอบพร้อมเอกสาร</div>
+          <p style="margin: 12px 0 0; font-size: 15px; line-height: 1.8; color: #6B6558">แบบลงนาม ผลทดสอบลูกปูน ผลบดอัด และภาพก่อนเทคอนกรีตทั้งชุด</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="area" style="background: #FFFFFF; padding: clamp(80px, 10vw, 128px) 20px">
+    <div style="max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: {{ rowCols }}; gap: clamp(32px, 5vw, 64px); align-items: start">
+      <div>
+        <div style="display: flex; align-items: center; gap: 8px; color: #33564A; font-size: 14px; font-weight: 600; letter-spacing: .06em"><span style="width: 28px; height: 1px; background: #33564A"></span>ข้อมูลบริษัท</div>
+        <h2 style="margin: 24px 0 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #1E3A32">ตรวจสอบเราได้ก่อนเซ็นสัญญา</h2>
+        <dl style="margin: 32px 0 0; max-width: 520px; display: grid; gap: 12px; border-top: 1px solid #E0D9CC; padding-top: 24px; font-size: 15px; line-height: 1.7">
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">ชื่อจดทะเบียน</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">หจก. ธีรพงษ์การช่าง</dd></div>
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">เลขผู้เสียภาษี</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right; font-variant-numeric: tabular-nums">0125555012345</dd></div>
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">จดทะเบียนเมื่อ</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">[พ.ศ. 2552]</dd></div>
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">ทุนจดทะเบียน</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">[5,000,000] บาท</dd></div>
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">ที่ตั้งสำนักงาน</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">88/15 ถ.กาญจนาภิเษก บางใหญ่ นนทบุรี</dd></div>
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">เวลาทำการ</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">จันทร์–เสาร์ 8:00–18:00 น.</dd></div>
+        </dl>
+      </div>
+      <div style="background: #F5F1EA; border: 1px solid #E0D9CC; border-radius: 8px; padding: clamp(24px, 3vw, 32px)">
+        <div style="font-size: 15px; font-weight: 600; color: #33564A">พื้นที่รับงาน</div>
+        <ul style="list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 12px; font-size: 17px; line-height: 1.7; color: #1B211E">
+          <li>กรุงเทพมหานคร</li>
+          <li>นนทบุรี</li>
+          <li>ปทุมธานี</li>
+          <li>สมุทรปราการ</li>
+          <li>สมุทรสาคร</li>
+          <li>นครปฐม</li>
+        </ul>
+        <p style="margin: 24px 0 0; padding-top: 24px; border-top: 1px solid #E0D9CC; font-size: 15px; line-height: 1.8; color: #6B6558">โครงการนอกพื้นที่พิจารณาเป็นรายกรณีตามขนาดงาน ถ้างานอยู่ในต่างจังหวัดและมีปริมาณงานตั้งแต่ [1] ไร่ขึ้นไป ติดต่อมาคุยได้</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="cta" style="background: #F5F1EA; border-top: 1px solid #E0D9CC; padding: clamp(80px, 10vw, 128px) 20px">
+    <div style="max-width: 620px; margin: 0 auto; text-align: center">
+      <h2 style="margin: 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #1E3A32">อยากรู้ว่าเราทำงานยังไง ให้ดูหน้างานจริง</h2>
+      <p style="margin: 24px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">ส่งรูปพื้นที่ ความสูงดิน และแนวเขตที่ดินมาทางไลน์ ทีมช่างจะบอกแนวทางงาน ฐานรากที่ควรใช้ และช่วงราคาคร่าว ๆ ก่อนนัดเข้าสำรวจ โดยไม่มีค่าใช้จ่าย</p>
+      <div style="display: flex; justify-content: center; margin-top: 40px">
+        <a href="#cta" style="display: inline-flex; align-items: center; background: #C1531F; color: #FFFFFF; font-size: 17px; font-weight: 600; padding: 16px 26px; border-radius: 8px" style-hover="background: #a8461a; color: #FFFFFF">ส่งรูปหน้างาน ประเมินฟรี</a>
+      </div>
+      <div style="display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 24px; font-size: 17px">
+        <a href="tel:0812345678" style="color: #33564A; font-variant-numeric: tabular-nums; border-bottom: 1px solid #33564A; padding-bottom: 2px">โทร {{ phone }}</a>
+        <span style="color: #6B6558">ไลน์ {{ lineId }}</span>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background: #1E3A32; color: #E0D9CC; border-top: 1px solid rgba(224,217,204,.2); padding: clamp(64px, 8vw, 96px) 20px 40px">
+    <div style="max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px">
+      <div style="max-width: 320px">
+        <div style="font-size: 17px; font-weight: 600; color: #FFFFFF">ธีรพงษ์การช่าง</div>
+        <p style="margin: 16px 0 0; font-size: 15px; line-height: 1.8">ช่างเฉพาะทางงานกำแพงกันดิน คสล. งานฐานราก และงานโยธา พร้อมงานระบบไฟฟ้า ไฟเบอร์ LAN และ CCTV เป็นบริการเสริมของโครงการ</p>
+      </div>
+      <div>
+        <div style="font-size: 15px; font-weight: 600; color: #FFFFFF">เกี่ยวกับเรา</div>
+        <ul style="list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px">
+          <li><a href="#story" style="color: #E0D9CC" style-hover="color: #FFFFFF">ที่มาของเรา</a></li>
+          <li><a href="#principles" style="color: #E0D9CC" style-hover="color: #FFFFFF">หลักการทำงาน</a></li>
+          <li><a href="#team" style="color: #E0D9CC" style-hover="color: #FFFFFF">ทีมและเครื่องจักร</a></li>
+          <li><a href="#process" style="color: #E0D9CC" style-hover="color: #FFFFFF">ขั้นตอนการทำงาน</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size: 15px; font-weight: 600; color: #FFFFFF">ติดต่อ</div>
+        <ul style="list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px">
+          <li>โทร {{ phone }}</li>
+          <li>ไลน์ {{ lineId }}</li>
+          <li>work@theeraphong.co.th</li>
+          <li>88/15 ถ.กาญจนาภิเษก บางใหญ่ นนทบุรี 11140</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size: 15px; font-weight: 600; color: #FFFFFF">หน้าอื่น</div>
+        <ul style="list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px">
+          <li><a href="./Services.dc.html" style="color: #E0D9CC" style-hover="color: #FFFFFF">งานบริการทั้งหมด</a></li>
+          <li><a href="./Landing Page.dc.html" style="color: #E0D9CC" style-hover="color: #FFFFFF">กลับหน้าแรก</a></li>
+          <li>จันทร์–เสาร์ 8:00–18:00 น.</li>
+        </ul>
+      </div>
+    </div>
+    <div style="max-width: 1160px; margin: 64px auto 0; padding-top: 24px; border-top: 1px solid rgba(224,217,204,.2); font-size: 14px">© 2026 ห้างหุ้นส่วนจำกัด ธีรพงษ์การช่าง · เลขผู้เสียภาษี 0125555012345</div>
+  </footer>
+
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <div style="height: 88px"></div>
+  </sc-if>
+  <sc-if value="{{ showBottomBar }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: #FFFFFF; border-top: 1px solid #E0D9CC; padding: 12px 16px; display: flex; align-items: stretch; gap: 16px">
+      <a href="tel:0812345678" style="width: 34%; flex: none; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; background: #F5F1EA; border: 1px solid #33564A; border-radius: 8px; color: #33564A; font-size: 17px; font-weight: 600">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33564A" stroke-width="1.6" stroke-linecap="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a1 1 0 01-1 1A16 16 0 014 5a1 1 0 011-1z" /></svg>โทร
+      </a>
+      <a href="#cta" style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 48px; background: #C1531F; color: #FFFFFF; font-size: 17px; font-weight: 600; border-radius: 8px; text-align: center" style-hover="background: #a8461a; color: #FFFFFF">ส่งรูปหน้างาน</a>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;081-234-5678&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;lineId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;@theeraphong&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { width: typeof window === "undefined" ? 1200 : window.innerWidth, menuOpen: false, pastHero: false };
+
+  componentDidMount() {
+    this._onResize = () => this.setState({ width: window.innerWidth });
+    window.addEventListener("resize", this._onResize);
+    this._onScroll = () => {
+      const hero = document.getElementById("top");
+      const past = window.scrollY > (hero ? hero.offsetHeight - 80 : 400);
+      if (past !== this.state.pastHero) this.setState({ pastHero: past });
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+    this._onResize();
+    this._onScroll();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._onResize);
+    window.removeEventListener("scroll", this._onScroll);
+  }
+
+  renderVals() {
+    const isMobile = this.state.width < 1100;
+    const narrowLayout = this.state.width < 900;
+    return {
+      phone: this.props.phone ?? "081-234-5678",
+      lineId: this.props.lineId ?? "@theeraphong",
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      isMobile,
+      isDesktop: !isMobile,
+      showBottomBar: isMobile && this.state.pastHero,
+      imgOrder: narrowLayout ? 1 : 0,
+      textOrder: narrowLayout ? 2 : 0,
+      heroCols: narrowLayout ? "1fr" : "54fr 46fr",
+      rowCols: narrowLayout ? "1fr" : "1fr 1fr",
+    };
+  }
+}
+
+</script>
+</body>
+</html>

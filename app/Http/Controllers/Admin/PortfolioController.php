@@ -30,7 +30,7 @@ class PortfolioController extends Controller
 
     public function store(PortfolioRequest $request): RedirectResponse
     {
-        $data = $request->validated();
+        $data = $request->safe()->except(['coordinates']);
         $data['slug'] = $this->resolveSlug($data, 'title', Portfolio::class);
 
         Portfolio::query()->create($data);
@@ -50,7 +50,7 @@ class PortfolioController extends Controller
 
     public function update(PortfolioRequest $request, Portfolio $portfolio): RedirectResponse
     {
-        $data = $request->validated();
+        $data = $request->safe()->except(['coordinates']);
         $data['slug'] = $this->resolveSlug($data, 'title', Portfolio::class, $portfolio->id);
 
         $portfolio->update($data);

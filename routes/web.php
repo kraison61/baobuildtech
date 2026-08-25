@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Front\ServiceController;
 use App\Http\Controllers\Front\ServiceItemController;
 use Illuminate\Support\Facades\Route;
@@ -29,8 +30,6 @@ Route::view('/gallery', 'front.placeholder', [
     'description' => 'คลังภาพจากหน้างานจริง ทั้งก่อนระหว่างและหลังก่อสร้าง',
 ])->name('gallery');
 
-Route::view('/about', 'front.placeholder', [
-    'title' => 'เกี่ยวกับเรา',
-    'heading' => 'เกี่ยวกับเรา',
-    'description' => 'เรื่องราวของทีมช่าง ธีรพงษ์การช่าง และแนวทางการทำงานที่ตรวจสอบได้ทุกชั้นงาน',
-])->name('about');
+Route::view('/about', 'front.about')->name('about');
+Route::get('/contact', [ContactController::class, 'show'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');

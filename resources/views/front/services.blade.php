@@ -8,7 +8,12 @@
         ['label' => 'หน้าแรก', 'url' => route('home')],
         ['label' => 'งานบริการ'],
     ];
-    $schemaGraph = \App\Support\JsonLd::pageGraph($pageTitle, $pageUrl, $breadcrumbs);
+    $schemaGraph = \App\Support\JsonLd::pageGraph(
+        $pageTitle,
+        $pageUrl,
+        $breadcrumbs,
+        \App\Support\Company::serviceAreas(includeCountry: false),
+    );
 @endphp
 
 @section('title', $pageTitle)

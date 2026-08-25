@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  body { margin: 0; background: #FFFFFF; font-family: "IBM Plex Sans Thai", system-ui, sans-serif; color: #1B211E; -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+  * { box-sizing: border-box; }
+  a { color: #33564A; text-decoration: none; }
+  a:hover { color: #1E3A32; }
+  input, select, textarea { font-family: inherit; }
+  input::placeholder, textarea::placeholder { color: #9A958A; }
+</style>
+</helmet>
+
+<div style="max-width: 100%; overflow-x: hidden">
+
+  <header style="position: sticky; top: 0; z-index: 50; background: #1E3A32; border-bottom: 1px solid rgba(224,217,204,.18)">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px">
+      <a href="./Landing Page.dc.html" onClick="{{ closeMenu }}" style="display: flex; align-items: center; gap: 8px; color: #FFFFFF; min-width: 0">
+        <span style="display: grid; place-items: center; width: 34px; height: 34px; flex: none; border: 1px solid rgba(224,217,204,.45); border-radius: 8px; font-size: 13px; font-weight: 600; letter-spacing: .04em">TP</span>
+        <span style="font-size: 17px; font-weight: 600; white-space: nowrap">ธีรพงษ์การช่าง</span>
+      </a>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <nav style="display: flex; align-items: center; gap: 24px; font-size: 15px">
+          <a href="#form" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">ขอใบเสนอราคา</a>
+          <a href="#channels" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">ช่องทางติดต่อ</a>
+          <a href="#office" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">ที่ตั้งสำนักงาน</a>
+          <a href="./Services.dc.html" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">งานบริการ</a>
+          <a href="./About Us.dc.html" style="color: #E0D9CC; white-space: nowrap" style-hover="color: #FFFFFF">เกี่ยวกับเรา</a>
+        </nav>
+        <div style="display: flex; align-items: center; gap: 16px">
+          <a href="tel:0812345678" style="color: #FFFFFF; font-size: 15px; font-variant-numeric: tabular-nums; white-space: nowrap">โทร {{ phone }}</a>
+          <a href="#form" style="display: inline-flex; align-items: center; background: #C1531F; color: #FFFFFF; font-size: 15px; font-weight: 600; padding: 11px 18px; border-radius: 8px; white-space: nowrap" style-hover="background: #a8461a; color: #FFFFFF">ส่งรูปหน้างาน ประเมินฟรี</a>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <div style="display: flex; align-items: center; gap: 8px">
+          <a href="tel:0812345678" style="display: inline-flex; align-items: center; min-height: 46px; padding: 0 14px; border: 1px solid rgba(224,217,204,.45); border-radius: 8px; color: #FFFFFF; font-size: 15px; font-variant-numeric: tabular-nums; white-space: nowrap">{{ phone }}</a>
+          <button type="button" onClick="{{ toggleMenu }}" aria-label="เมนู" aria-expanded="{{ menuOpen }}" style="display: grid; place-items: center; width: 46px; height: 46px; flex: none; background: transparent; border: 1px solid rgba(224,217,204,.45); border-radius: 8px; cursor: pointer; padding: 0">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16" /></svg>
+          </button>
+        </div>
+      </sc-if>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <nav style="border-top: 1px solid rgba(224,217,204,.2); padding: 8px 20px 20px; display: grid; gap: 2px">
+        <a href="#form" onClick="{{ closeMenu }}" style="color: #FFFFFF; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">ขอใบเสนอราคา</a>
+        <a href="#channels" onClick="{{ closeMenu }}" style="color: #FFFFFF; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">ช่องทางติดต่อ</a>
+        <a href="#office" onClick="{{ closeMenu }}" style="color: #FFFFFF; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">ที่ตั้งสำนักงานและเวลาทำการ</a>
+        <a href="#faq" onClick="{{ closeMenu }}" style="color: #FFFFFF; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">คำถามก่อนติดต่อ</a>
+        <a href="./Services.dc.html" onClick="{{ closeMenu }}" style="color: #E0D9CC; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">งานบริการทั้งหมด</a>
+        <a href="./About Us.dc.html" onClick="{{ closeMenu }}" style="color: #E0D9CC; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">เกี่ยวกับเรา</a>
+        <a href="./Landing Page.dc.html" onClick="{{ closeMenu }}" style="color: #E0D9CC; font-size: 17px; padding: 14px 0; border-bottom: 1px solid rgba(224,217,204,.18)">กลับหน้าแรก</a>
+        <a href="tel:0812345678" onClick="{{ closeMenu }}" style="display: flex; align-items: center; justify-content: center; background: #C1531F; color: #FFFFFF; font-size: 17px; font-weight: 600; padding: 16px 20px; border-radius: 8px; margin-top: 6px" style-hover="background: #a8461a; color: #FFFFFF">โทรหาทีมช่าง</a>
+      </nav>
+    </sc-if>
+  </header>
+
+  <section id="top" style="background: #F5F1EA; border-bottom: 1px solid #E0D9CC">
+    <div style="display: grid; grid-template-columns: {{ heroCols }}; align-items: stretch">
+      <div style="max-width: 100%; padding: clamp(80px, 10vw, 128px) clamp(24px, 4vw, 64px) clamp(104px, 12vw, 168px) max(20px, calc((100vw - 1160px) / 2))">
+        <div style="max-width: 680px">
+          <div style="display: flex; align-items: center; gap: 8px; color: #33564A; font-size: 14px; font-weight: 600; letter-spacing: .06em">
+            <span style="width: 28px; height: 1px; background: #33564A"></span>ติดต่อเรา
+          </div>
+          <h1 style="margin: 24px 0 0; font-size: clamp(30px, 5.2vw, 44px); font-weight: 600; line-height: 1.35; color: #1E3A32">ส่งรูปหน้างานมาก่อน ได้ช่วงราคาภายในหนึ่งวันทำการ</h1>
+          <p style="margin: 24px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">ไม่ต้องมีแบบก่อสร้างก็คุยได้ ส่งรูปพื้นที่ ความสูงดิน และแนวเขตที่ดินมาทางไลน์หรือกรอกฟอร์มด้านล่าง ทีมช่างจะบอกแนวทางงาน ฐานรากที่ควรใช้ และช่วงราคาคร่าว ๆ ก่อนนัดเข้าสำรวจ โดยไม่มีค่าใช้จ่าย</p>
+        </div>
+      </div>
+      <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80&auto=format&fit=crop" alt="ช่างและเหล็กเสริมที่หน้างานก่อสร้าง" style="width: 100%; height: 100%; min-height: 300px; object-fit: cover; display: block" />
+    </div>
+  </section>
+
+  <section id="channels" style="background: transparent; padding: 0 20px clamp(64px, 8vw, 96px); margin-top: -40px; position: relative; z-index: 1">
+    <div style="max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px">
+      <a href="tel:0812345678" style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px; display: block" style-hover="border-color: #33564A">
+        <div style="font-size: 14px; font-weight: 600; color: #6B6558">โทรหาทีมช่าง</div>
+        <div style="margin-top: 8px; font-size: 22px; font-weight: 600; color: #1E3A32; font-variant-numeric: tabular-nums">{{ phone }}</div>
+        <div style="margin-top: 8px; font-size: 15px; line-height: 1.7; color: #6B6558">จันทร์–เสาร์ 8:00–18:00 น. ตอบเรื่องหน้างานได้ทันที</div>
+      </a>
+      <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+        <div style="font-size: 14px; font-weight: 600; color: #6B6558">ไลน์ (ส่งรูปได้)</div>
+        <div style="margin-top: 8px; font-size: 22px; font-weight: 600; color: #1E3A32">{{ lineId }}</div>
+        <div style="margin-top: 8px; font-size: 15px; line-height: 1.7; color: #6B6558">ช่องทางที่เร็วที่สุดสำหรับส่งรูปพื้นที่และแบบ</div>
+      </div>
+      <a href="mailto:work@theeraphong.co.th" style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px; display: block" style-hover="border-color: #33564A">
+        <div style="font-size: 14px; font-weight: 600; color: #6B6558">อีเมล</div>
+        <div style="margin-top: 8px; font-size: 19px; font-weight: 600; color: #1E3A32; word-break: break-all">work@theeraphong.co.th</div>
+        <div style="margin-top: 8px; font-size: 15px; line-height: 1.7; color: #6B6558">สำหรับงานราชการ งานโรงงาน และเอกสารประกวดราคา</div>
+      </a>
+      <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: 24px">
+        <div style="font-size: 14px; font-weight: 600; color: #6B6558">เวลาตอบกลับ</div>
+        <div style="margin-top: 8px; font-size: 22px; font-weight: 600; color: #1E3A32">ภายใน [1] วันทำการ</div>
+        <div style="margin-top: 8px; font-size: 15px; line-height: 1.7; color: #6B6558">งานที่ส่งเสาร์บ่ายหลัง 15:00 น. ตอบวันจันทร์</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="form" style="background: #FFFFFF; padding: 0 20px clamp(80px, 10vw, 128px)">
+    <div style="max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: {{ formCols }}; gap: clamp(32px, 5vw, 64px); align-items: start">
+
+      <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; padding: clamp(28px, 4vw, 48px)">
+        <div style="display: flex; align-items: center; gap: 8px; color: #33564A; font-size: 14px; font-weight: 600; letter-spacing: .06em"><span style="width: 28px; height: 1px; background: #33564A"></span>ขอใบเสนอราคา</div>
+        <h2 style="margin: 24px 0 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #1E3A32">กรอกห้าช่อง เราจะโทรกลับพร้อมช่วงราคา</h2>
+        <p style="margin: 16px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">ยิ่งบอกความสูงดินและขนาดพื้นที่ชัด เรายิ่งประเมินราคาได้ใกล้ความจริง</p>
+
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top: 32px; background: #F5F1EA; border: 1px solid #33564A; border-radius: 8px; padding: 24px">
+            <div style="font-size: 19px; font-weight: 600; color: #1E3A32">ได้รับข้อมูลแล้ว</div>
+            <p style="margin: 12px 0 0; font-size: 15px; line-height: 1.8; color: #6B6558">ทีมช่างจะติดต่อกลับที่เบอร์ที่ให้ไว้ภายใน [1] วันทำการ ถ้าเร่งด่วน โทรมาที่ {{ phone }} ได้เลย</p>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <form onSubmit="{{ submit }}" style="margin-top: 32px; display: grid; gap: 20px">
+            <label style="display: grid; gap: 8px; font-size: 15px; font-weight: 600; color: #1B211E">ชื่อผู้ติดต่อ
+              <input type="text" name="name" required="required" placeholder="ชื่อ–นามสกุล" style="width: 100%; min-height: 48px; padding: 12px 14px; font-size: 17px; font-weight: 400; color: #1B211E; background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; outline: none" style-focus="border-color: #33564A" />
+            </label>
+            <label style="display: grid; gap: 8px; font-size: 15px; font-weight: 600; color: #1B211E">เบอร์โทรที่ติดต่อได้
+              <input type="tel" name="phone" required="required" inputMode="tel" placeholder="08x-xxx-xxxx" style="width: 100%; min-height: 48px; padding: 12px 14px; font-size: 17px; font-weight: 400; color: #1B211E; background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; outline: none; font-variant-numeric: tabular-nums" style-focus="border-color: #33564A" />
+            </label>
+            <div style="display: grid; grid-template-columns: {{ fieldCols }}; gap: 20px">
+              <label style="display: grid; gap: 8px; font-size: 15px; font-weight: 600; color: #1B211E">ประเภทงาน
+                <select name="job" required="required" style="width: 100%; min-height: 48px; padding: 12px 14px; font-size: 17px; font-weight: 400; color: #1B211E; background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; outline: none" style-focus="border-color: #33564A">
+                  <option value="wall">กำแพงกันดิน คสล.</option>
+                  <option value="foundation">งานฐานรากและเข็ม</option>
+                  <option value="civil">งานโยธาและปรับพื้นที่</option>
+                  <option value="systems">งานระบบไฟฟ้า ไฟเบอร์ LAN CCTV</option>
+                  <option value="other">ยังไม่แน่ใจ</option>
+                </select>
+              </label>
+              <label style="display: grid; gap: 8px; font-size: 15px; font-weight: 600; color: #1B211E">ที่ตั้งหน้างาน
+                <input type="text" name="area" required="required" placeholder="อำเภอ/เขต จังหวัด" style="width: 100%; min-height: 48px; padding: 12px 14px; font-size: 17px; font-weight: 400; color: #1B211E; background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; outline: none" style-focus="border-color: #33564A" />
+              </label>
+            </div>
+            <label style="display: grid; gap: 8px; font-size: 15px; font-weight: 600; color: #1B211E">รายละเอียดหน้างาน
+              <textarea name="detail" rows="5" placeholder="เช่น กำแพงกันดินยาว 40 ม. ดินสูงต่างระดับ 2.5 ม. ติดแนวเขตเพื่อนบ้าน มีทางเข้ารถบรรทุกหกล้อ" style="width: 100%; padding: 12px 14px; font-size: 17px; font-weight: 400; line-height: 1.7; color: #1B211E; background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; outline: none; resize: vertical" style-focus="border-color: #33564A"></textarea>
+            </label>
+            <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 4px">
+              <button type="submit" style="display: inline-flex; align-items: center; justify-content: center; min-height: 52px; background: #C1531F; color: #FFFFFF; font-size: 17px; font-weight: 600; padding: 0 26px; border: none; border-radius: 8px; cursor: pointer" style-hover="background: #a8461a">ส่งข้อมูลขอประเมิน</button>
+              <span style="font-size: 15px; line-height: 1.7; color: #6B6558">หรือส่งรูปทางไลน์ {{ lineId }} ได้เลย</span>
+            </div>
+            <p style="margin: 0; font-size: 14px; line-height: 1.7; color: #6B6558">ข้อมูลที่กรอกใช้สำหรับติดต่อกลับเรื่องงานนี้เท่านั้น เราไม่ส่งต่อให้บุคคลอื่น</p>
+          </form>
+        </sc-if>
+      </div>
+
+      <div style="display: grid; gap: 24px">
+        <div style="background: #1E3A32; color: #FFFFFF; border-radius: 8px; padding: clamp(24px, 3vw, 32px)">
+          <div style="font-size: 15px; font-weight: 600; color: #E0D9CC">เตรียมไว้ก่อนติดต่อ</div>
+          <ul style="list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 12px; font-size: 17px; line-height: 1.7">
+            <li>รูปพื้นที่ 3–4 รูป ถ่ายให้เห็นแนวเขตและระดับดิน</li>
+            <li>ความสูงต่างระดับของดินโดยประมาณ</li>
+            <li>ความยาวแนวกำแพงหรือขนาดพื้นที่เป็นตารางวา/ไร่</li>
+            <li>ทางเข้าหน้างาน รถบรรทุกและเครื่องจักรเข้าได้หรือไม่</li>
+            <li>โฉนดหรือแบบก่อสร้าง ถ้ามี</li>
+          </ul>
+        </div>
+        <div style="background: #F5F1EA; border: 1px solid #E0D9CC; border-radius: 8px; padding: clamp(24px, 3vw, 32px)">
+          <div style="font-size: 15px; font-weight: 600; color: #33564A">พื้นที่รับงาน</div>
+          <p style="margin: 16px 0 0; font-size: 17px; line-height: 1.8; color: #1B211E">กรุงเทพฯ นนทบุรี ปทุมธานี สมุทรปราการ สมุทรสาคร และนครปฐม</p>
+          <p style="margin: 16px 0 0; font-size: 15px; line-height: 1.8; color: #6B6558">โครงการนอกพื้นที่พิจารณาเป็นรายกรณีตามขนาดงาน</p>
+          <a href="./Services.dc.html" style="display: inline-block; margin-top: 24px; font-size: 17px; font-weight: 600; color: #33564A; border-bottom: 1px solid #33564A; padding-bottom: 2px">ดูขอบเขตงานที่เรารับ</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="office" style="background: #F5F1EA; border-top: 1px solid #E0D9CC; border-bottom: 1px solid #E0D9CC; padding: clamp(80px, 10vw, 128px) 20px">
+    <div style="max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: {{ rowCols }}; gap: clamp(32px, 5vw, 64px); align-items: start">
+      <div>
+        <div style="display: flex; align-items: center; gap: 8px; color: #33564A; font-size: 14px; font-weight: 600; letter-spacing: .06em"><span style="width: 28px; height: 1px; background: #33564A"></span>ที่ตั้งสำนักงาน</div>
+        <h2 style="margin: 24px 0 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #1E3A32">เข้ามาคุยที่สำนักงานได้ นัดล่วงหน้าหนึ่งวัน</h2>
+        <p style="margin: 24px 0 0; max-width: 520px; font-size: 17px; line-height: 1.8; color: #6B6558">ทีมช่างส่วนใหญ่อยู่หน้างานในเวลาทำการ ถ้าจะเข้ามาดูตัวอย่างงานและคุยรายละเอียดที่สำนักงาน โทรนัดล่วงหน้าอย่างน้อยหนึ่งวัน</p>
+        <dl style="margin: 32px 0 0; max-width: 520px; display: grid; gap: 12px; border-top: 1px solid #E0D9CC; padding-top: 24px; font-size: 15px; line-height: 1.7">
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">ที่อยู่</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">88/15 ถ.กาญจนาภิเษก บางใหญ่ นนทบุรี 11140</dd></div>
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">เวลาทำการ</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">จันทร์–เสาร์ 8:00–18:00 น.</dd></div>
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">วันหยุด</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">อาทิตย์และวันหยุดนักขัตฤกษ์</dd></div>
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">ที่จอดรถ</dt><dd style="margin: 0; color: #1B211E; font-weight: 600; text-align: right">[มีลานจอดหน้าสำนักงาน]</dd></div>
+          <div style="display: flex; justify-content: space-between; gap: 16px"><dt style="color: #6B6558">แผนที่</dt><dd style="margin: 0; text-align: right"><a href="#office" style="color: #33564A; font-weight: 600; border-bottom: 1px solid #33564A; padding-bottom: 1px">[ลิงก์ Google Maps]</a></dd></div>
+        </dl>
+      </div>
+      <div style="background: #FFFFFF; border: 1px solid #E0D9CC; border-radius: 8px; min-height: clamp(280px, 34vw, 380px); display: grid; place-items: center; padding: 32px; text-align: center">
+        <div>
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#33564A" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z" /><circle cx="12" cy="10" r="2.6" /></svg>
+          <div style="margin-top: 16px; font-size: 17px; font-weight: 600; color: #1E3A32">พื้นที่สำหรับฝังแผนที่</div>
+          <p style="margin: 8px 0 0; font-size: 15px; line-height: 1.8; color: #6B6558">ส่งลิงก์ Google Maps ของสำนักงานมา ผมจะฝังแผนที่จริงลงในกรอบนี้</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" style="background: #FFFFFF; padding: clamp(80px, 10vw, 128px) 20px">
+    <div style="max-width: 1160px; margin: 0 auto">
+      <div style="max-width: 680px">
+        <div style="display: flex; align-items: center; gap: 8px; color: #33564A; font-size: 14px; font-weight: 600; letter-spacing: .06em"><span style="width: 28px; height: 1px; background: #33564A"></span>คำถามก่อนติดต่อ</div>
+        <h2 style="margin: 24px 0 0; font-size: clamp(26px, 4vw, 32px); font-weight: 600; line-height: 1.4; color: #1E3A32">สี่ข้อที่ลูกค้าถามบ่อยที่สุด</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: {{ rowCols }}; gap: 24px; margin-top: 40px">
+        <div style="border-top: 1px solid #E0D9CC; padding-top: 24px">
+          <div style="font-size: 19px; font-weight: 600; color: #1E3A32">ประเมินราคาคิดค่าใช้จ่ายไหม</div>
+          <p style="margin: 12px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">ไม่คิด ทั้งการประเมินจากรูปและการเข้าสำรวจหน้างานในพื้นที่ที่เรารับงาน</p>
+        </div>
+        <div style="border-top: 1px solid #E0D9CC; padding-top: 24px">
+          <div style="font-size: 19px; font-weight: 600; color: #1E3A32">ยังไม่มีแบบก่อสร้าง คุยได้ไหม</div>
+          <p style="margin: 12px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">ได้ ส่งรูปและความสูงดินมาก่อน วิศวกรจะทำแบบและคำนวณให้ในขั้นเสนอราคา</p>
+        </div>
+        <div style="border-top: 1px solid #E0D9CC; padding-top: 24px">
+          <div style="font-size: 19px; font-weight: 600; color: #1E3A32">งานเล็กรับไหม</div>
+          <p style="margin: 12px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">กำแพงกันดินรับตั้งแต่ความยาว [20] เมตรขึ้นไป งานถมบดอัดตั้งแต่ [1] ไร่ขึ้นไป</p>
+        </div>
+        <div style="border-top: 1px solid #E0D9CC; padding-top: 24px">
+          <div style="font-size: 19px; font-weight: 600; color: #1E3A32">เริ่มงานได้เร็วสุดเมื่อไร</div>
+          <p style="margin: 12px 0 0; font-size: 17px; line-height: 1.8; color: #6B6558">ปกติ [3–4] สัปดาห์หลังเซ็นสัญญา ขึ้นกับคิวงานและระยะเวลาทำแบบลงนาม</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer style="background: #1E3A32; color: #E0D9CC; border-top: 1px solid rgba(224,217,204,.2); padding: clamp(64px, 8vw, 96px) 20px 40px">
+    <div style="max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px">
+      <div style="max-width: 320px">
+        <div style="font-size: 17px; font-weight: 600; color: #FFFFFF">ธีรพงษ์การช่าง</div>
+        <p style="margin: 16px 0 0; font-size: 15px; line-height: 1.8">ช่างเฉพาะทางงานกำแพงกันดิน คสล. งานฐานราก และงานโยธา พร้อมงานระบบไฟฟ้า ไฟเบอร์ LAN และ CCTV เป็นบริการเสริมของโครงการ</p>
+      </div>
+      <div>
+        <div style="font-size: 15px; font-weight: 600; color: #FFFFFF">ติดต่อ</div>
+        <ul style="list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px">
+          <li>โทร {{ phone }}</li>
+          <li>ไลน์ {{ lineId }}</li>
+          <li>work@theeraphong.co.th</li>
+          <li>88/15 ถ.กาญจนาภิเษก บางใหญ่ นนทบุรี 11140</li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size: 15px; font-weight: 600; color: #FFFFFF">หน้าอื่น</div>
+        <ul style="list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px">
+          <li><a href="./Services.dc.html" style="color: #E0D9CC" style-hover="color: #FFFFFF">งานบริการทั้งหมด</a></li>
+          <li><a href="./About Us.dc.html" style="color: #E0D9CC" style-hover="color: #FFFFFF">เกี่ยวกับเรา</a></li>
+          <li><a href="./Landing Page.dc.html" style="color: #E0D9CC" style-hover="color: #FFFFFF">กลับหน้าแรก</a></li>
+        </ul>
+      </div>
+      <div>
+        <div style="font-size: 15px; font-weight: 600; color: #FFFFFF">เวลาทำการ</div>
+        <ul style="list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 8px; font-size: 15px">
+          <li>จันทร์–เสาร์ 8:00–18:00 น.</li>
+          <li>รับงาน กทม. และปริมณฑล</li>
+          <li>ตอบกลับภายใน [1] วันทำการ</li>
+        </ul>
+      </div>
+    </div>
+    <div style="max-width: 1160px; margin: 64px auto 0; padding-top: 24px; border-top: 1px solid rgba(224,217,204,.2); font-size: 14px">© 2026 ห้างหุ้นส่วนจำกัด ธีรพงษ์การช่าง · เลขผู้เสียภาษี 0125555012345</div>
+  </footer>
+
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <div style="height: 88px"></div>
+  </sc-if>
+  <sc-if value="{{ showBottomBar }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: #FFFFFF; border-top: 1px solid #E0D9CC; padding: 12px 16px; display: flex; align-items: stretch; gap: 16px">
+      <a href="tel:0812345678" style="width: 34%; flex: none; display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; background: #F5F1EA; border: 1px solid #33564A; border-radius: 8px; color: #33564A; font-size: 17px; font-weight: 600">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#33564A" stroke-width="1.6" stroke-linecap="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a1 1 0 01-1 1A16 16 0 014 5a1 1 0 011-1z" /></svg>โทร
+      </a>
+      <a href="#form" style="flex: 1; display: flex; align-items: center; justify-content: center; min-height: 48px; background: #C1531F; color: #FFFFFF; font-size: 17px; font-weight: 600; border-radius: 8px; text-align: center" style-hover="background: #a8461a; color: #FFFFFF">กรอกฟอร์มขอประเมิน</a>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;081-234-5678&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;lineId&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;@theeraphong&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+class Component extends DCLogic {
+  state = { width: typeof window === "undefined" ? 1200 : window.innerWidth, menuOpen: false, pastHero: false, sent: false };
+
+  componentDidMount() {
+    this._onResize = () => this.setState({ width: window.innerWidth });
+    window.addEventListener("resize", this._onResize);
+    this._onScroll = () => {
+      const hero = document.getElementById("top");
+      const past = window.scrollY > (hero ? hero.offsetHeight - 80 : 400);
+      if (past !== this.state.pastHero) this.setState({ pastHero: past });
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+    this._onResize();
+    this._onScroll();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._onResize);
+    window.removeEventListener("scroll", this._onScroll);
+  }
+
+  renderVals() {
+    const isMobile = this.state.width < 1100;
+    const narrowLayout = this.state.width < 900;
+    return {
+      phone: this.props.phone ?? "081-234-5678",
+      lineId: this.props.lineId ?? "@theeraphong",
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      submit: e => { e.preventDefault(); this.setState({ sent: true }); },
+      isMobile,
+      isDesktop: !isMobile,
+      showBottomBar: isMobile && this.state.pastHero,
+      heroCols: narrowLayout ? "1fr" : "54fr 46fr",
+      rowCols: narrowLayout ? "1fr" : "1fr 1fr",
+      formCols: narrowLayout ? "1fr" : "62fr 38fr",
+      fieldCols: narrowLayout ? "1fr" : "1fr 1fr",
+    };
+  }
+}
+
+</script>
+</body>
+</html>
