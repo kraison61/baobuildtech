@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use App\Models\ServiceCategory;
+use App\Support\ServiceHub\ServiceHubRegistry;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
 class ServiceController extends Controller
@@ -38,10 +40,20 @@ class ServiceController extends Controller
     }
 
     /**
-     * หน้ารายละเอียดบริการแต่ละรายการ
+     * หน้ารายละเอียดบริการ หรือหน้า Hub (ถ้ามีลงทะเบียนใน ServiceHubRegistry)
      */
-    public function show(string $slug): View
+    public function show(string $slug): View|RedirectResponse
     {
+        if ($hub = ServiceHubRegistry::resolve($slug)) {
+            if ($slug !== $hub->slug()) {
+                return redirect()->route('services.show', $hub->slug(), 301);
+            }
+
+            return view('front.service-hub', [
+                'hub' => $hub,
+            ]);
+        }
+
         $service = Service::query()
             ->where('slug', $slug)
             ->where('is_published', true)

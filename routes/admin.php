@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\PortfolioController;
+use App\Http\Controllers\Admin\QuoteRequestController;
 use App\Http\Controllers\Admin\PortfolioImageController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ServiceCategoryController;
@@ -40,4 +41,5 @@ Route::middleware('auth')->group(function (): void {
     Route::resource('authors', AuthorController::class)->except(['show']);
     Route::resource('posts', PostController::class)->except(['show']);
     Route::resource('users', UserController::class)->except(['show']);
+    Route::resource('quote-requests', QuoteRequestController::class)->except(['show']);
 });

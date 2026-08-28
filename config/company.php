@@ -9,9 +9,9 @@
 
 return [
 
-    'legal_name'    => 'บีโอเอ และเพื่อน',
-    'brand_name'    => 'BOA-Buildtech',
-    'brand_mark'    => 'BOA',
+    'legal_name'    => 'บีเอโอ และเพื่อน',
+    'brand_name'    => 'BAO-Buildtech',
+    'brand_mark'    => 'BAO',
     'business_type' => 'GeneralContractor',
     'tax_id'        => '0125555012345',
     'founding_year' => '2026',
@@ -20,8 +20,9 @@ return [
 
     'phone' => '+66615639228',
     'phone_format' => '061-563-9228',
-    'email' => 'work@baobuildtech.co.th',
+    'email' => 'bao.buildtech2011@gmail.com',
     'line_id' => '@baobuildtech',
+    'line_url' => 'https://lin.ee/V2S0HT6',
 
     'logo_url' => env('APP_URL', 'https://example.com').'/images/logo.png',
 
@@ -59,9 +60,9 @@ return [
 
     'social' => [
         'facebook'    => null,
-        'line'        => 'https://page.line.me/theeraphong',
+        'line'        => 'https://lin.ee/V2S0HT6',
         'youtube'     => null,
-        'google_maps' => null,
+        'google_maps' => 'https://maps.app.goo.gl/MvrDLjCYanoYfiDz9',
     ],
 
 ];

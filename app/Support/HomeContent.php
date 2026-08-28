@@ -176,8 +176,10 @@ class HomeContent
             [
                 'title' => 'งานอลูมิเนียมและกระจก',
                 'items' => [
-                    ['label' => 'ประตูหน้าต่างอลูมิเนียมและงานกระจก', 'href' => route('services').'#aluminium'],
-                    ['label' => 'กันสาดและระแนงบังตา', 'href' => route('services').'#aluminium'],
+                    ['label' => 'รับเหมางานอลูมิเนียมครบวงจร', 'href' => route('services.show', 'aluminum-works')],
+                    ['label' => 'ประตูหน้าต่างอลูมิเนียมและงานกระจก', 'href' => route('aluminium-door-window')],
+                    ['label' => 'กั้นห้องกระจกอลูมิเนียม', 'href' => url('/glass-partition')],
+                    ['label' => 'กันสาดและระแนงบังตา', 'href' => url('/aluminium-awning')],
                 ],
             ],
             [

@@ -14,6 +14,7 @@
         ['label' => 'บทความ', 'route' => 'admin.posts.index'],
         ['label' => 'FAQ', 'route' => 'admin.faqs.index'],
         ['group' => 'ระบบ'],
+        ['label' => 'คำขอใบเสนอราคา', 'route' => 'admin.quote-requests.index'],
         ['label' => 'ผู้ใช้', 'route' => 'admin.users.index'],
     ];
 @endphp

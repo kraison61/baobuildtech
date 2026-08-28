@@ -10,6 +10,13 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
+Route::redirect('/services/aluminium-works', '/services/aluminum-works', 301);
+Route::redirect('/aluminium-door-window-installation', '/aluminium-door-window', 301);
+Route::redirect('/services/aluminum-works/aluminium-door-window', '/aluminium-door-window', 301);
+Route::get('/aluminium-door-window', [ServiceItemController::class, 'show'])
+    ->defaults('serviceSlug', 'aluminum-works')
+    ->defaults('itemSlug', 'aluminium-door-window')
+    ->name('aluminium-door-window');
 Route::get('/services/{serviceSlug}/{itemSlug}', [ServiceItemController::class, 'show'])->name('services.items.show');
 Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
 Route::view('/works', 'front.placeholder', [

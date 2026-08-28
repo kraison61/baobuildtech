@@ -36,7 +36,7 @@
     <div class="relative z-[60] mx-auto flex max-w-[1160px] items-center justify-between gap-3 bg-brand px-5 py-3" data-mobile-nav-bar>
         <a href="{{ $homeHref }}" class="flex min-w-0 items-center gap-2 text-white hover:text-white" data-mobile-nav-link>
             <span class="grid size-[34px] shrink-0 place-items-center rounded-lg border border-sand/45 text-[13px] font-semibold tracking-wide">{{ $mark }}</span>
-            <span class="truncate text-[17px] font-semibold">{{ $brand }}</span>
+            
         </a>
 
         {{-- Desktop: เมนูแนวนอน --}}

@@ -4,7 +4,9 @@
     $service = $item->service;
     $headline = $item->headline ?: $item->name;
     $pageTitle = $item->meta_title ?: ($headline.' — '.config('company.brand_name'));
-    $pageUrl = route('services.items.show', [$service->slug, $item->slug]);
+    $pageUrl = $item->slug === 'aluminium-door-window'
+        ? route('aluminium-door-window')
+        : route('services.items.show', [$service->slug, $item->slug]);
     $metaDescription = $item->meta_description ?: \Illuminate\Support\Str::limit(
         strip_tags((string) ($item->excerpt ?: $item->description)),
         160,
