@@ -9,9 +9,9 @@ use Illuminate\View\View;
 class ServiceItemController extends Controller
 {
     /**
-     * หน้า SEO รายละเอียดงานย่อย (service_items)
+     * หน้า SEO รายละเอียดงานย่อย — /services/{categorySlug}/{serviceSlug}/{itemSlug}
      */
-    public function show(string $serviceSlug, string $itemSlug): View
+    public function show(string $categorySlug, string $serviceSlug, string $itemSlug): View
     {
         $item = ServiceItem::query()
             ->where('slug', $itemSlug)
@@ -21,7 +21,9 @@ class ServiceItemController extends Controller
                 static fn ($q) => $q
                     ->where('slug', $serviceSlug)
                     ->where('is_published', true)
-                    ->whereHas('category', static fn ($q) => $q->where('is_active', true))
+                    ->whereHas('category', static fn ($q) => $q
+                        ->where('slug', $categorySlug)
+                        ->where('is_active', true))
             )
             ->with([
                 'service.category',
@@ -45,6 +47,7 @@ class ServiceItemController extends Controller
             ->where('is_published', true)
             ->orderBy('sort_order')
             ->limit(4)
+            ->with('service.category')
             ->get(['id', 'service_id', 'name', 'slug', 'excerpt', 'description', 'cover_image']);
 
         return view('front.service-item', [

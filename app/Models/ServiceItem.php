@@ -58,4 +58,15 @@ class ServiceItem extends Model
     {
         return $this->morphMany(Faq::class, 'faqable');
     }
+
+    public function url(): string
+    {
+        $this->loadMissing('service.category');
+
+        return route('services.items.show', [
+            $this->service->category->slug,
+            $this->service->slug,
+            $this->slug,
+        ]);
+    }
 }

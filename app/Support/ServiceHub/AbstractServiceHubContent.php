@@ -4,15 +4,47 @@ namespace App\Support\ServiceHub;
 
 use App\Contracts\ServiceHubContent;
 use App\Models\Service;
+use App\Models\ServicePrice;
+use Illuminate\Support\Collection;
 
 abstract class AbstractServiceHubContent implements ServiceHubContent
 {
+    /** @var Collection<int, ServicePrice>|null */
+    private ?Collection $visiblePricesCache = null;
+
+    private ?Service $serviceCache = null;
+
+    private ?bool $serviceResolved = null;
+
     /**
      * @return array<int, string>
      */
     public function aliases(): array
     {
         return [];
+    }
+
+    public function categorySlug(): string
+    {
+        $categorySlug = Service::query()
+            ->where('slug', $this->slug())
+            ->where('is_published', true)
+            ->whereHas('category', static fn ($q) => $q->where('is_active', true))
+            ->with('category')
+            ->first()
+            ?->category
+            ?->slug;
+
+        if ($categorySlug === null || $categorySlug === '') {
+            throw new \RuntimeException("Hub [{$this->slug()}] has no published service with active category.");
+        }
+
+        return $categorySlug;
+    }
+
+    public function url(): string
+    {
+        return route('services.show', [$this->categorySlug(), $this->slug()]);
     }
 
     public function heroImage(): ?string
@@ -42,6 +74,10 @@ abstract class AbstractServiceHubContent implements ServiceHubContent
     {
         $sections = ['hero'];
 
+        if ($this->visiblePrices()->isNotEmpty()) {
+            $sections[] = 'price-summary';
+        }
+
         if ($this->highlights() !== []) {
             $sections[] = 'highlights';
         }
@@ -54,7 +90,7 @@ abstract class AbstractServiceHubContent implements ServiceHubContent
             $sections[] = 'cards';
         }
 
-        if ($this->priceRows() !== []) {
+        if ($this->visiblePrices()->isNotEmpty()) {
             $sections[] = 'pricing';
         }
 
@@ -119,7 +155,7 @@ abstract class AbstractServiceHubContent implements ServiceHubContent
     }
 
     /**
-     * @return array<int, array{no: string, title: string, anchor: string, href: string, body: string, image: string, image_alt: string}>
+     * @return array<int, array{no: string, title: string, href: string, body: string, image: string, image_alt: string}>
      */
     public function cards(): array
     {
@@ -142,11 +178,65 @@ abstract class AbstractServiceHubContent implements ServiceHubContent
     }
 
     /**
-     * @return array<int, array{label: string, range: string, unit: string, labor: string}>
+     * @return Collection<int, ServicePrice>
      */
-    public function priceRows(): array
+    public function visiblePrices(): Collection
     {
-        return [];
+        if ($this->visiblePricesCache !== null) {
+            return $this->visiblePricesCache;
+        }
+
+        $service = $this->resolveService();
+
+        if ($service === null) {
+            return $this->visiblePricesCache = collect();
+        }
+
+        $prices = $service->prices;
+
+        foreach ($service->items as $item) {
+            $prices = $prices->concat($item->prices);
+        }
+
+        return $this->visiblePricesCache = $prices->unique('id')->values();
+    }
+
+    /**
+     * @return Collection<int, \App\Models\ServiceItem>
+     */
+    public function publishedItems(): Collection
+    {
+        return $this->resolveService()?->items ?? collect();
+    }
+
+    private function resolveService(): ?Service
+    {
+        if ($this->serviceResolved) {
+            return $this->serviceCache;
+        }
+
+        $this->serviceResolved = true;
+
+        $this->serviceCache = Service::query()
+            ->where('slug', $this->slug())
+            ->where('is_published', true)
+            ->whereHas('category', static fn ($q) => $q->where('is_active', true))
+            ->with([
+                'prices' => static fn ($q) => $q
+                    ->where('is_visible', true)
+                    ->orderBy('sort_order'),
+                'items' => static fn ($q) => $q
+                    ->where('is_published', true)
+                    ->orderBy('sort_order')
+                    ->with([
+                        'prices' => static fn ($q) => $q
+                            ->where('is_visible', true)
+                            ->orderBy('sort_order'),
+                    ]),
+            ])
+            ->first();
+
+        return $this->serviceCache;
     }
 
     /**

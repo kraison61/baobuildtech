@@ -3,6 +3,7 @@
 use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Front\ServiceController;
 use App\Http\Controllers\Front\ServiceItemController;
+use App\Models\ServiceItem;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -10,15 +11,27 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
-Route::redirect('/services/aluminium-works', '/services/aluminum-works', 301);
+
+Route::get('/services/{categorySlug}/{serviceSlug}/{itemSlug}', [ServiceItemController::class, 'show'])
+    ->name('services.items.show');
+
+Route::get('/services/{categorySlug}/{serviceSlug}', [ServiceController::class, 'show'])
+    ->name('services.show');
+
+Route::get('/services/{slug}', [ServiceController::class, 'showLegacy']);
+
 Route::redirect('/aluminium-door-window-installation', '/aluminium-door-window', 301);
-Route::redirect('/services/aluminum-works/aluminium-door-window', '/aluminium-door-window', 301);
-Route::get('/aluminium-door-window', [ServiceItemController::class, 'show'])
-    ->defaults('serviceSlug', 'aluminum-works')
-    ->defaults('itemSlug', 'aluminium-door-window')
-    ->name('aluminium-door-window');
-Route::get('/services/{serviceSlug}/{itemSlug}', [ServiceItemController::class, 'show'])->name('services.items.show');
-Route::get('/services/{slug}', [ServiceController::class, 'show'])->name('services.show');
+
+Route::get('/aluminium-door-window', static function () {
+    $item = ServiceItem::query()
+        ->where('slug', 'aluminium-door-window')
+        ->where('is_published', true)
+        ->with('service.category')
+        ->firstOrFail();
+
+    return redirect($item->url(), 301);
+})->name('aluminium-door-window');
+
 Route::view('/works', 'front.placeholder', [
     'title' => 'ผลงาน',
     'heading' => 'ผลงาน',

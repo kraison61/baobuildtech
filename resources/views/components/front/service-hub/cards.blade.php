@@ -1,5 +1,10 @@
 @props(['hub'])
 
+@php
+    /** @var \App\Contracts\ServiceHubContent $hub */
+    $itemsByUrl = $hub->publishedItems()->keyBy(static fn ($item) => $item->url());
+@endphp
+
 <section id="services" class="scroll-mt-24 bg-white py-16 lg:py-24">
     <x-front.container>
         <x-front.service-hub.section-header
@@ -10,8 +15,12 @@
 
         <div class="mt-10 grid gap-6 min-[700px]:grid-cols-2 lg:grid-cols-3">
             @foreach ($hub->cards() as $card)
+                @php
+                    $cardHref = url($card['href']);
+                    $item = $itemsByUrl->get($cardHref);
+                @endphp
                 <article class="group flex flex-col overflow-hidden rounded-lg border border-line bg-white">
-                    <a href="{{ url($card['href']) }}" class="relative block aspect-4/3 overflow-hidden">
+                    <a href="{{ $cardHref }}" class="relative block aspect-4/3 overflow-hidden">
                         <img
                             src="{{ $card['image'] }}"
                             alt="{{ $card['image_alt'] }}"
@@ -26,13 +35,24 @@
                     </a>
                     <div class="flex flex-1 flex-col p-6">
                         <h3 class="text-[19px] font-semibold leading-[1.4] text-brand">
-                            <a href="{{ url($card['href']) }}" class="hover:text-brand-mid">
-                                {{ $card['anchor'] }}
+                            <a href="{{ $cardHref }}" class="hover:text-brand-mid">
+                                {{ $card['title'] }}
                             </a>
                         </h3>
                         <p class="mt-3 flex-1 text-[15px] leading-[1.7] text-muted">{{ $card['body'] }}</p>
+
+                        @if ($item?->prices->isNotEmpty())
+                            <div class="mt-5 border-t border-line pt-5">
+                                <x-front.service-price-table
+                                    :prices="$item->prices"
+                                    :caption="'ช่วงราคา'.$item->name"
+                                    variant="inline"
+                                />
+                            </div>
+                        @endif
+
                         <a
-                            href="{{ url($card['href']) }}"
+                            href="{{ $cardHref }}"
                             class="mt-5 inline-flex items-center gap-2 text-[15px] font-semibold text-brand-mid hover:text-brand"
                         >
                             ดูรายละเอียด

@@ -22,8 +22,12 @@
                 <div class="mt-4 flex flex-wrap items-center gap-2 text-sm font-semibold tracking-wide text-muted">
                     <a href="{{ route('services') }}" class="text-brand-mid hover:text-brand">รวมงานบริการ</a>
                     <span aria-hidden="true">/</span>
+                    @if ($category)
+                        <a href="{{ route('services') }}#{{ $category->slug }}" class="text-brand-mid hover:text-brand">{{ $category->name }}</a>
+                        <span aria-hidden="true">/</span>
+                    @endif
                     @if ($service)
-                        <a href="{{ route('services.show', $service->slug) }}" class="text-brand-mid hover:text-brand">{{ $service->name }}</a>
+                        <a href="{{ $service->url() }}" class="text-brand-mid hover:text-brand">{{ $service->name }}</a>
                         <span aria-hidden="true">/</span>
                     @endif
                     <span>{{ $item->name }}</span>

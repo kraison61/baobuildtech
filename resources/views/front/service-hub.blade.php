@@ -3,13 +3,14 @@
 @php
     /** @var \App\Contracts\ServiceHubContent $hub */
     $pageTitle = $hub->metaTitle();
-    $pageUrl = route('services.show', $hub->slug());
+    $pageUrl = $hub->url();
     $breadcrumbs = [
         ['label' => 'หน้าแรก', 'url' => route('home')],
         ['label' => 'งานบริการ', 'url' => route('services')],
         ['label' => $hub->breadcrumbLabel()],
     ];
     $siteUrl = rtrim((string) config('company.site_url'), '/');
+    $hubPrices = $hub->visiblePrices();
 
     $schemaGraph = \App\Support\JsonLd::pageGraph(
         $pageTitle,
@@ -27,6 +28,18 @@
         'provider' => ['@id' => $siteUrl.'#organization'],
         'areaServed' => \App\Support\JsonLd::areaServed(\App\Support\Company::serviceAreas()),
         'image' => $hub->heroImage(),
+        'offers' => $hubPrices
+            ->filter(static fn ($price) => $price->price_min !== null)
+            ->map(static function ($price): array {
+                return [
+                    '@type' => 'Offer',
+                    'name' => \App\Support\JsonLd::cleanText((string) $price->label),
+                    'price' => (float) $price->price_min,
+                    'priceCurrency' => $price->currency ?: 'THB',
+                ];
+            })
+            ->values()
+            ->all() ?: null,
     ]);
 
     $faqs = $hub->faqs();

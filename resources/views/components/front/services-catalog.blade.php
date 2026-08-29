@@ -63,22 +63,6 @@
         ],
     ];
 
-    $formatPrice = static function ($price): string {
-        $min = $price->price_min !== null ? number_format((float) $price->price_min) : null;
-        $max = $price->price_max !== null ? number_format((float) $price->price_max) : null;
-        $unit = $price->price_unit ? ' '.$price->price_unit : '';
-
-        if ($min && $max) {
-            return $min.'–'.$max.$unit;
-        }
-
-        if ($min) {
-            return 'เริ่ม '.$min.$unit;
-        }
-
-        return trim($unit) !== '' ? trim($unit) : 'สอบถาม';
-    };
-
     $lineUrl = \App\Support\Company::lineUrl();
     $index = 0;
 @endphp
@@ -148,7 +132,7 @@
                                 ])>
                                     <div class="text-sm font-semibold text-muted tabular-nums">{{ str_pad((string) $index, 2, '0', STR_PAD_LEFT) }}</div>
                                     <h3 class="mt-2 text-[clamp(1.5rem,3.5vw,1.875rem)] font-semibold leading-[1.4] text-brand">
-                                        <a href="{{ route('services.show', $service->slug) }}" class="hover:text-brand-mid">
+                                        <a href="{{ $service->url() }}" class="hover:text-brand-mid">
                                             {{ $service->name }}
                                         </a>
                                     </h3>
@@ -166,19 +150,18 @@
                                             @endforeach
                                         </dl>
                                     @elseif ($visiblePrices->isNotEmpty())
-                                        <dl class="mt-6 grid max-w-[460px] gap-3 border-t border-line pt-6 text-[15px] leading-[1.7]">
-                                            @foreach ($visiblePrices as $price)
-                                                <div class="flex justify-between gap-4">
-                                                    <dt class="text-muted">{{ $price->label }}</dt>
-                                                    <dd class="m-0 text-right font-semibold text-ink tabular-nums">{{ $formatPrice($price) }}</dd>
-                                                </div>
-                                            @endforeach
-                                        </dl>
+                                        <div class="mt-6 max-w-[460px] border-t border-line pt-6">
+                                            <x-front.service-price-table
+                                                :prices="$visiblePrices"
+                                                :caption="'ช่วงราคา'.$service->name"
+                                                variant="inline"
+                                            />
+                                        </div>
                                     @endif
 
                                     <div class="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3">
                                         <a
-                                            href="{{ route('services.show', $service->slug) }}"
+                                            href="{{ $service->url() }}"
                                             class="inline-flex self-start border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand"
                                         >ดูรายละเอียด{{ $service->name }}</a>
                                         <a
@@ -196,10 +179,20 @@
                                     <ul class="mt-4 grid list-none gap-3 p-0 min-[700px]:grid-cols-2">
                                         @foreach ($service->items as $item)
                                             <li class="rounded-lg border border-line bg-white p-4">
-                                                <a href="{{ route('services.items.show', [$service->slug, $item->slug]) }}" class="block hover:text-brand-mid">
+                                                <a href="{{ $item->url() }}" class="block hover:text-brand-mid">
                                                     <div class="text-[16px] font-semibold text-brand">{{ $item->name }}</div>
                                                     @if ($item->description)
                                                         <p class="mt-2 text-[14px] leading-[1.7] text-muted">{{ $item->description }}</p>
+                                                    @endif
+                                                    @if ($item->prices->isNotEmpty())
+                                                        <div class="mt-3 border-t border-line pt-3">
+                                                            <x-front.service-price-table
+                                                                :prices="$item->prices"
+                                                                :caption="'ช่วงราคา'.$item->name"
+                                                                variant="inline"
+                                                                :limit="3"
+                                                            />
+                                                        </div>
                                                     @endif
                                                 </a>
                                             </li>

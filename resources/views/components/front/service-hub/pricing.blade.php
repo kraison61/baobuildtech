@@ -1,5 +1,10 @@
 @props(['hub'])
 
+@php
+    /** @var \App\Contracts\ServiceHubContent $hub */
+    $prices = $hub->visiblePrices();
+@endphp
+
 <section id="pricing" class="scroll-mt-24 border-y border-line bg-paper py-16 lg:py-24">
     <x-front.container>
         <x-front.service-hub.section-header
@@ -8,17 +13,11 @@
             :intro="$hub->pricingIntro()"
         />
 
-        <div class="mt-10 grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr))] sm:gap-6">
-            @foreach ($hub->priceRows() as $row)
-                <div class="rounded-lg border border-line bg-white p-6">
-                    <div class="text-[15px] font-semibold text-muted">{{ $row['label'] }}</div>
-                    <div class="mt-3 text-[clamp(1.375rem,2.5vw,1.75rem)] font-semibold tabular-nums text-brand">
-                        {{ $row['range'] }}
-                        <span class="text-[15px] font-normal text-muted">{{ $row['unit'] }}</span>
-                    </div>
-                    <p class="mt-3 text-[14px] leading-[1.7] text-muted">{{ $row['labor'] }}</p>
-                </div>
-            @endforeach
+        <div class="mt-10 overflow-hidden rounded-lg border border-line bg-white p-4 lg:p-6">
+            <x-front.service-price-table
+                :prices="$prices"
+                :caption="$hub->pricingTitle()"
+            />
         </div>
 
         @if ($hub->priceFactors() !== [])

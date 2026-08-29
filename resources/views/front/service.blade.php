@@ -2,7 +2,7 @@
 
 @php
     $pageTitle = $service->meta_title ?: ($service->name.' — '.config('company.brand_name'));
-    $pageUrl = route('services.show', $service->slug);
+    $pageUrl = $service->url();
     $metaDescription = $service->meta_description ?: \Illuminate\Support\Str::limit(
         strip_tags((string) $service->description),
         160,
@@ -11,6 +11,7 @@
     $breadcrumbs = [
         ['label' => 'หน้าแรก', 'url' => route('home')],
         ['label' => 'งานบริการ', 'url' => route('services')],
+        ['label' => $service->category->name, 'url' => route('services').'#'.$service->category->slug],
         ['label' => $service->name],
     ];
 
@@ -48,10 +49,6 @@
 @section('content')
     <main>
         <x-front.service-hero :service="$service" />
-
-        @if ($visiblePrices->isNotEmpty())
-            <x-front.service-highlights :prices="$visiblePrices" />
-        @endif
 
         <x-front.service-items :service="$service" :items="$service->items" />
 

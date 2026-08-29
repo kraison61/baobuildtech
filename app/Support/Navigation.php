@@ -56,7 +56,8 @@ class Navigation
                     ->with([
                         'items' => static fn ($q) => $q
                             ->where('is_published', true)
-                            ->orderBy('sort_order'),
+                            ->orderBy('sort_order')
+                            ->with('service.category'),
                     ]),
             ])
             ->get();
@@ -70,11 +71,11 @@ class Navigation
                         ->map(static function ($service): array {
                             return [
                                 'label' => $service->name,
-                                'href' => '/services/'.$service->slug,
+                                'href' => $service->url(),
                                 'children' => $service->items
                                     ->map(static fn ($item): array => [
                                         'label' => $item->name,
-                                        'href' => '/services/'.$service->slug.'/'.$item->slug,
+                                        'href' => $item->url(),
                                     ])
                                     ->values()
                                     ->all(),

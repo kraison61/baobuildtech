@@ -14,7 +14,7 @@
         <div class="mt-10 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(240px,1fr))]">
             @foreach ($items as $related)
                 <a
-                    href="{{ route('services.items.show', [$service->slug, $related->slug]) }}"
+                    href="{{ $related->url() }}"
                     class="block rounded-lg border border-line bg-white p-6 hover:border-brand-mid"
                 >
                     <div class="text-[22px] font-semibold text-brand">{{ $related->name }}</div>

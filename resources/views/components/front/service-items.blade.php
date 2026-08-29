@@ -29,7 +29,7 @@
                             >
                         @endif
                         <h3 class="text-[22px] font-semibold text-brand">
-                            <a href="{{ route('services.items.show', [$service->slug, $item->slug]) }}" class="hover:text-brand-mid">
+                            <a href="{{ $item->url() }}" class="hover:text-brand-mid">
                                 {{ $item->name }}
                             </a>
                         </h3>
@@ -38,30 +38,17 @@
                         @endif
 
                         @if ($item->prices->isNotEmpty())
-                            <dl class="mt-6 grid gap-3 border-t border-line pt-6 text-[15px] leading-[1.7]">
-                                @foreach ($item->prices as $price)
-                                    @php
-                                        $min = $price->price_min !== null ? number_format((float) $price->price_min) : null;
-                                        $max = $price->price_max !== null ? number_format((float) $price->price_max) : null;
-                                        $unit = $price->price_unit ? ' '.$price->price_unit : '';
-                                        if ($min && $max) {
-                                            $display = $min.'–'.$max.$unit;
-                                        } elseif ($min) {
-                                            $display = 'เริ่ม '.$min.$unit;
-                                        } else {
-                                            $display = trim($unit) !== '' ? trim($unit) : 'สอบถาม';
-                                        }
-                                    @endphp
-                                    <div class="flex justify-between gap-4">
-                                        <dt class="text-muted">{{ $price->label }}</dt>
-                                        <dd class="m-0 text-right font-semibold tabular-nums text-ink">{{ $display }}</dd>
-                                    </div>
-                                @endforeach
-                            </dl>
+                            <div class="mt-6 border-t border-line pt-6">
+                                <x-front.service-price-table
+                                    :prices="$item->prices"
+                                    :caption="'ช่วงราคา'.$item->name"
+                                    variant="inline"
+                                />
+                            </div>
                         @endif
 
                         <a
-                            href="{{ route('services.items.show', [$service->slug, $item->slug]) }}"
+                            href="{{ $item->url() }}"
                             class="mt-6 inline-flex border-b border-brand-mid pb-0.5 text-[15px] font-semibold text-brand-mid hover:text-brand"
                         >ดูรายละเอียด{{ $item->name }}</a>
                     </article>

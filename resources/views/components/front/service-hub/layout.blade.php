@@ -4,6 +4,7 @@
     /** @var \App\Contracts\ServiceHubContent $hub */
     $sectionComponents = [
         'hero' => 'front.service-hub.hero',
+        'price-summary' => 'front.service-hub.price-summary',
         'highlights' => 'front.service-hub.highlights',
         'jump' => 'front.service-hub.jump',
         'cards' => 'front.service-hub.cards',

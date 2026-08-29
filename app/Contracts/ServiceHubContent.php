@@ -2,12 +2,18 @@
 
 namespace App\Contracts;
 
+use Illuminate\Support\Collection;
+
 /**
  * สัญญาเนื้อหาหน้า Hub บริการ — ใช้ร่วมกับ layout service-hub
  */
 interface ServiceHubContent
 {
     public function slug(): string;
+
+    public function categorySlug(): string;
+
+    public function url(): string;
 
     /**
      * @return array<int, string>
@@ -56,7 +62,7 @@ interface ServiceHubContent
     public function cardsIntro(): string;
 
     /**
-     * @return array<int, array{no: string, title: string, anchor: string, href: string, body: string, image: string, image_alt: string}>
+     * @return array<int, array{no: string, title: string, href: string, body: string, image: string, image_alt: string}>
      */
     public function cards(): array;
 
@@ -67,9 +73,14 @@ interface ServiceHubContent
     public function pricingIntro(): string;
 
     /**
-     * @return array<int, array{label: string, range: string, unit: string, labor: string}>
+     * @return Collection<int, \App\Models\ServicePrice>
      */
-    public function priceRows(): array;
+    public function visiblePrices(): Collection;
+
+    /**
+     * @return Collection<int, \App\Models\ServiceItem>
+     */
+    public function publishedItems(): Collection;
 
     /**
      * @return array<int, string>

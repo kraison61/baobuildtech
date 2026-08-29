@@ -4,9 +4,7 @@
     $service = $item->service;
     $headline = $item->headline ?: $item->name;
     $pageTitle = $item->meta_title ?: ($headline.' — '.config('company.brand_name'));
-    $pageUrl = $item->slug === 'aluminium-door-window'
-        ? route('aluminium-door-window')
-        : route('services.items.show', [$service->slug, $item->slug]);
+    $pageUrl = $item->url();
     $metaDescription = $item->meta_description ?: \Illuminate\Support\Str::limit(
         strip_tags((string) ($item->excerpt ?: $item->description)),
         160,
@@ -15,7 +13,8 @@
     $breadcrumbs = [
         ['label' => 'หน้าแรก', 'url' => route('home')],
         ['label' => 'งานบริการ', 'url' => route('services')],
-        ['label' => $service->name, 'url' => route('services.show', $service->slug)],
+        ['label' => $service->category->name, 'url' => route('services').'#'.$service->category->slug],
+        ['label' => $service->name, 'url' => $service->url()],
         ['label' => $item->name],
     ];
 
@@ -47,10 +46,6 @@
 @section('content')
     <main>
         <x-front.service-item-hero :item="$item" />
-
-        @if ($item->prices->isNotEmpty())
-            <x-front.service-highlights :prices="$item->prices" />
-        @endif
 
         @if (filled($item->content))
             <x-front.service-item-content :item="$item" />

@@ -31,6 +31,11 @@
                     <a href="{{ $hub->heroSecondaryCtaHref() }}" class="inline-flex w-full items-center justify-center border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand min-[480px]:w-auto min-[480px]:justify-start">
                         {{ $hub->heroSecondaryCtaLabel() }}
                     </a>
+                    @if ($hub->visiblePrices()->isNotEmpty())
+                        <a href="#pricing" class="inline-flex w-full items-center justify-center border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand min-[480px]:w-auto min-[480px]:justify-start">
+                            ดูช่วงราคา
+                        </a>
+                    @endif
                 </div>
 
                 <p class="mt-4 text-[15px] leading-[1.7] text-muted">

@@ -20,6 +20,7 @@ Strict separation of concerns between Admin Panel and User Dashboard (Front-end)
   - `resources/views/components/user/` (User-specific)
   - `resources/views/components/front/` (public page)
 - **Routes:** `routes/admin.php`, `routes/user.php`, `routes/web.php` (Loaded via `bootstrap/app.php`).
+- **Service URLs:** `/services/{category}/{service}` และ `/services/{category}/{service}/{item}` เท่านั้น — ใช้ `$service->url()` / `$item->url()` (ดู `.cursor/rules/service-urls.mdc`)
 
 ## 📜 Laravel 13 Guidelines
 - **Blade First:** Heavily utilize Blade directives and components (`<x-ui.card>`).

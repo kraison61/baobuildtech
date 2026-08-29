@@ -10,14 +10,6 @@ class AluminiumWorksHubContent extends AbstractServiceHubContent
 
     private const IMG_DOOR = 'https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=900&q=80&auto=format&fit=crop';
 
-    private const IMG_PARTITION = 'https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=900&q=80&auto=format&fit=crop';
-
-    private const IMG_AWNING = 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80&auto=format&fit=crop';
-
-    private const IMG_PROJECT = 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=900&q=80&auto=format&fit=crop';
-
-    private const IMG_REPAIR = 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=900&q=80&auto=format&fit=crop';
-
     private const IMG_MATERIALS = 'https://images.unsplash.com/photo-1628745776518-f9fdb8eed463?w=1200&q=80&auto=format&fit=crop';
 
     private const IMG_PROCESS = 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80&auto=format&fit=crop';
@@ -106,7 +98,7 @@ class AluminiumWorksHubContent extends AbstractServiceHubContent
 
     public function cardsIntro(): string
     {
-        return 'ครอบคลุมตั้งแต่งานบ้านเดี่ยวถึงโครงการขนาดใหญ่ — แต่ละกลุ่มมีหน้าย่อยอธิบายสเปกและราคาเฉพาะทาง:';
+        return 'งานที่มีหน้ารายละเอียด สเปก และช่วงราคาเฉพาะทาง:';
     }
 
     public function cards(): array
@@ -115,47 +107,10 @@ class AluminiumWorksHubContent extends AbstractServiceHubContent
             [
                 'no' => '01',
                 'title' => 'ประตู–หน้าต่างอลูมิเนียม',
-                'anchor' => 'ประตู-หน้าต่างอลูมิเนียม',
-                'href' => route('aluminium-door-window'),
+                'href' => route('services.items.show', ['architecture', 'aluminum-works', 'aluminium-door-window']),
                 'body' => 'ติดตั้งใหม่และเปลี่ยนของเดิม ทั้งบ้านพักอาศัย อาคารพาณิชย์ และคอนโด',
                 'image' => self::IMG_DOOR,
                 'image_alt' => 'ประตูหน้าต่างอลูมิเนียมบ้านพักอาศัย',
-            ],
-            [
-                'no' => '02',
-                'title' => 'กั้นห้อง–ผนังกระจกอลูมิเนียม',
-                'anchor' => 'กั้นห้องกระจกอลูมิเนียม',
-                'href' => '/glass-partition',
-                'body' => 'แบ่งพื้นที่ในสำนักงาน ร้านค้า หรือบ้าน โดยไม่บดบังแสง',
-                'image' => self::IMG_PARTITION,
-                'image_alt' => 'ผนังกระจกกั้นห้องอลูมิเนียมในสำนักงาน',
-            ],
-            [
-                'no' => '03',
-                'title' => 'กันสาด–ระแนง–งานต่อเติมภายนอก',
-                'anchor' => 'กันสาดอลูมิเนียม',
-                'href' => '/aluminium-awning',
-                'body' => 'กันสาดระเบียง ครัวไทย ทางเดิน และระแนงบังตา พร้อมระบบระบายน้ำ',
-                'image' => self::IMG_AWNING,
-                'image_alt' => 'กันสาดอลูมิเนียมระเบียงบ้าน',
-            ],
-            [
-                'no' => '04',
-                'title' => 'งานอลูมิเนียมโครงการ',
-                'anchor' => 'งานอลูมิเนียมโครงการ',
-                'href' => '/aluminium-project',
-                'body' => 'คอนโด โรงแรม สำนักงาน และโรงงาน รับงานตาม BOQ พร้อมเอกสารครบ',
-                'image' => self::IMG_PROJECT,
-                'image_alt' => 'งานอลูมิเนียมอาคารพาณิชย์และโครงการ',
-            ],
-            [
-                'no' => '05',
-                'title' => 'มุ้งลวด งานเสริม และงานซ่อม',
-                'anchor' => 'มุ้งลวดและงานซ่อม',
-                'href' => route('aluminium-door-window'),
-                'body' => 'ติดมุ้งลวด เปลี่ยนยาแนว ล้อ-บานพับ หรือกระจกแตก งานเล็กรับได้',
-                'image' => self::IMG_REPAIR,
-                'image_alt' => 'งานซ่อมและติดตั้งมุ้งลวดอลูมิเนียม',
             ],
         ];
     }
@@ -168,36 +123,6 @@ class AluminiumWorksHubContent extends AbstractServiceHubContent
     public function pricingIntro(): string
     {
         return 'ราคางานอลูมิเนียมคิดจากพื้นที่กระจกจริง (ตร.ม.) หรือจำนวนบาน ขึ้นกับประเภทงาน ช่วงด้านล่างเป็นค่าวัสดุและติดตั้งโดยประมาณจากงานที่เราทำจริง ราคาสุดท้ายยืนยันหลังวัดหน้างานเท่านั้น';
-    }
-
-    public function priceRows(): array
-    {
-        return [
-            [
-                'label' => 'ประตู-หน้าต่างอลูมิเนียม',
-                'range' => '3,500–8,500',
-                'unit' => 'บาท/ตร.ม.',
-                'labor' => 'ไม่รวม (ค่าแรงติดตั้งประมาณ 800–1,200 บาท/ตร.ม.)',
-            ],
-            [
-                'label' => 'กั้นห้องกระจกอลูมิเนียม',
-                'range' => '4,500–9,500',
-                'unit' => 'บาท/ตร.ม.',
-                'labor' => 'รวมค่าแรงติดตั้ง',
-            ],
-            [
-                'label' => 'กันสาดและระแนงอลูมิเนียม',
-                'range' => '2,800–6,500',
-                'unit' => 'บาท/ตร.ม.',
-                'labor' => 'รวมค่าแรงติดตั้ง',
-            ],
-            [
-                'label' => 'งานอลูมิเนียมโครงการ',
-                'range' => 'ตาม BOQ',
-                'unit' => 'บาท/ตร.ม. หรือบาท/บาน',
-                'labor' => 'แยกรายการในใบเสนอราคา',
-            ],
-        ];
     }
 
     public function priceFactors(): array

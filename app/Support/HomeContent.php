@@ -158,37 +158,35 @@ class HomeContent
             [
                 'title' => 'งานเตรียมพื้นที่และงานโยธา',
                 'items' => [
-                    ['label' => 'เคลียริ่งพื้นที่และรื้อถอน', 'href' => route('services.show', 'survey')],
-                    ['label' => 'ถมดินและปรับระดับ', 'href' => route('services.show', 'survey')],
-                    ['label' => 'ฐานรากและเสาเข็ม', 'href' => route('services.show', 'piles-foundation')],
-                    ['label' => 'กำแพงกันดินและรั้ว', 'href' => route('services.items.show', ['structure', 'retaining-wall'])],
+                    ['label' => 'เคลียริ่งพื้นที่และรื้อถอน', 'href' => route('services.show', ['civil', 'survey'])],
+                    ['label' => 'ถมดินและปรับระดับ', 'href' => route('services.show', ['civil', 'survey'])],
+                    ['label' => 'ฐานรากและเสาเข็ม', 'href' => route('services.show', ['civil', 'piles-foundation'])],
+                    ['label' => 'กำแพงกันดินและรั้ว', 'href' => route('services.items.show', ['civil', 'structure', 'retaining-wall'])],
                 ],
             ],
             [
                 'title' => 'งานก่อสร้างอาคาร',
                 'items' => [
-                    ['label' => 'รับสร้างบ้าน', 'href' => route('services.show', 'structure')],
-                    ['label' => 'อาคารพาณิชย์', 'href' => route('services.show', 'structure')],
-                    ['label' => 'ต่อเติมและปรับปรุง', 'href' => route('services.show', 'construction-mgmt')],
-                    ['label' => 'ออกแบบและขออนุญาต', 'href' => route('services.show', 'survey')],
+                    ['label' => 'รับสร้างบ้าน', 'href' => route('services.show', ['civil', 'structure'])],
+                    ['label' => 'อาคารพาณิชย์', 'href' => route('services.show', ['civil', 'structure'])],
+                    ['label' => 'ต่อเติมและปรับปรุง', 'href' => route('services.show', ['civil', 'construction-mgmt'])],
+                    ['label' => 'ออกแบบและขออนุญาต', 'href' => route('services.show', ['civil', 'survey'])],
                 ],
             ],
             [
                 'title' => 'งานอลูมิเนียมและกระจก',
                 'items' => [
-                    ['label' => 'รับเหมางานอลูมิเนียมครบวงจร', 'href' => route('services.show', 'aluminum-works')],
-                    ['label' => 'ประตูหน้าต่างอลูมิเนียมและงานกระจก', 'href' => route('aluminium-door-window')],
-                    ['label' => 'กั้นห้องกระจกอลูมิเนียม', 'href' => url('/glass-partition')],
-                    ['label' => 'กันสาดและระแนงบังตา', 'href' => url('/aluminium-awning')],
+                    ['label' => 'รับเหมางานอลูมิเนียมครบวงจร', 'href' => route('services.show', ['architecture', 'aluminum-works'])],
+                    ['label' => 'ประตูหน้าต่างอลูมิเนียมและงานกระจก', 'href' => route('services.items.show', ['architecture', 'aluminum-works', 'aluminium-door-window'])],
                 ],
             ],
             [
                 'title' => 'งานระบบและไอที',
                 'items' => [
-                    ['label' => 'ระบบไฟฟ้าอาคาร', 'href' => route('services.show', 'electrical')],
-                    ['label' => 'ประปาและสุขาภิบาล', 'href' => route('services.show', 'sanitation')],
-                    ['label' => 'IT Infrastructure', 'href' => route('services.show', 'network-cabling')],
-                    ['label' => 'กล้องวงจรปิด', 'href' => route('services.show', 'cctv')],
+                    ['label' => 'ระบบไฟฟ้าอาคาร', 'href' => route('services.show', ['it', 'electrical'])],
+                    ['label' => 'ประปาและสุขาภิบาล', 'href' => route('services.show', ['civil', 'sanitation'])],
+                    ['label' => 'IT Infrastructure', 'href' => route('services.show', ['it', 'network-cabling'])],
+                    ['label' => 'กล้องวงจรปิด', 'href' => route('services.show', ['it', 'cctv'])],
                 ],
             ],
         ];

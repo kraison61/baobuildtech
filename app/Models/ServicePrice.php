@@ -35,4 +35,35 @@ class ServicePrice extends Model
     {
         return $this->morphTo();
     }
+
+    public function formattedRange(): string
+    {
+        $min = $this->formattedMin();
+        $max = $this->formattedMax();
+        $unit = $this->price_unit ? ' '.$this->price_unit : '';
+
+        if ($min && $max) {
+            return $min.'–'.$max.$unit;
+        }
+
+        if ($min) {
+            return 'เริ่ม '.$min.$unit;
+        }
+
+        return trim($unit) !== '' ? trim($unit) : 'สอบถาม';
+    }
+
+    public function formattedMin(): ?string
+    {
+        return $this->price_min !== null
+            ? number_format((float) $this->price_min)
+            : null;
+    }
+
+    public function formattedMax(): ?string
+    {
+        return $this->price_max !== null
+            ? number_format((float) $this->price_max)
+            : null;
+    }
 }
