@@ -44,7 +44,7 @@
 @endpush
 
 @section('content')
-    <main>
+    <main class="overflow-x-clip">
         <x-front.service-item-hero :item="$item" />
 
         @if (filled($item->content))

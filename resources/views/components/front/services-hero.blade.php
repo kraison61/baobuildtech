@@ -39,12 +39,16 @@
             </div>
         </div>
 
-        <img
-            src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600&q=80&auto=format&fit=crop"
+        <x-ui.image-slot
+            label="Hero — รวมบริการ"
+            spec="1600×1200"
+            ratio="none"
             alt="ภาพรวมหน้างานโครงสร้างระหว่างก่อสร้าง"
-            class="block size-full min-h-[300px] object-cover"
+            class="size-full min-h-[300px]"
             width="1600"
             height="1200"
-        >
+            loading="eager"
+            fetchpriority="high"
+        />
     </div>
 </section>

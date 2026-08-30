@@ -52,18 +52,17 @@
                         class="group flex w-[min(100%,280px)] shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-line bg-white transition-colors hover:border-brand-mid min-[480px]:w-[300px] min-[768px]:w-[320px] min-[1024px]:w-[340px]"
                     >
                         <a href="{{ route('works') }}" class="block shrink-0 overflow-hidden">
-                            @if ($portfolio->cover_image)
-                                <img
-                                    src="{{ $portfolio->cover_image }}"
-                                    alt="{{ $portfolio->title }}"
-                                    class="aspect-[5/3] w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                                    width="680"
-                                    height="408"
-                                    loading="lazy"
-                                >
-                            @else
-                                <div class="aspect-[5/3] bg-paper" aria-hidden="true"></div>
-                            @endif
+                            <x-ui.image-slot
+                                :src="$portfolio->cover_image"
+                                :label="'ผลงาน — '.$portfolio->title"
+                                spec="680×408"
+                                ratio="5/3"
+                                :alt="$portfolio->title"
+                                class="w-full"
+                                width="680"
+                                height="408"
+                                loading="lazy"
+                            />
                         </a>
 
                         <div class="flex flex-1 flex-col p-5">

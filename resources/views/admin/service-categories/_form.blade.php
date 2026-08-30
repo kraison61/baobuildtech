@@ -20,6 +20,7 @@
     <div class="sm:col-span-2">
         <x-ui.label for="cover_image">รูปปก (URL)</x-ui.label>
         <x-ui.input type="url" name="cover_image" id="cover_image" :value="old('cover_image', $category?->cover_image)" />
+        <p class="mt-1 text-xs text-slate-500">แนะนำ 1200×900 px (4:3)</p>
     </div>
     <div class="sm:col-span-2">
         <x-ui.checkbox name="is_active" value="1" label="เปิดใช้งาน" description="ปิด = ไม่แสดงบนหน้าเว็บ" :checked="old('is_active', $category?->is_active ?? true)" />

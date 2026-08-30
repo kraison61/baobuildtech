@@ -20,15 +20,18 @@
                     $item = $itemsByUrl->get($cardHref);
                 @endphp
                 <article class="group flex flex-col overflow-hidden rounded-lg border border-line bg-white">
-                    <a href="{{ $cardHref }}" class="relative block aspect-4/3 overflow-hidden">
-                        <img
-                            src="{{ $card['image'] }}"
-                            alt="{{ $card['image_alt'] }}"
-                            class="size-full object-cover transition duration-300 group-hover:scale-[1.03]"
+                    <a href="{{ $cardHref }}" class="relative block overflow-hidden">
+                        <x-ui.image-slot
+                            :src="$card['image'] ?? null"
+                            :label="'Card '.$card['no'].' — '.$card['title']"
+                            spec="800×600"
+                            ratio="4/3"
+                            :alt="$card['image_alt']"
+                            class="w-full"
                             width="800"
                             height="600"
                             loading="lazy"
-                        >
+                        />
                         <span class="absolute start-4 top-4 rounded-md bg-brand/90 px-2.5 py-1 text-[13px] font-semibold tabular-nums text-white">
                             {{ $card['no'] }}
                         </span>

@@ -47,7 +47,7 @@ class WorkImageController extends Controller
                 continue;
             }
 
-            $path = $file->store('work-images', 'public');
+            $path = $file->store('work-images', WorkImage::storageDisk());
 
             WorkImage::query()->create([
                 ...$data,
@@ -80,10 +80,11 @@ class WorkImageController extends Controller
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $newPath = $file->store('work-images', 'public');
+            $disk = WorkImage::storageDisk();
+            $newPath = $file->store('work-images', $disk);
 
-            if ($workImage->path !== '' && Storage::disk('public')->exists($workImage->path)) {
-                Storage::disk('public')->delete($workImage->path);
+            if ($workImage->path !== '') {
+                Storage::disk($disk)->delete($workImage->path);
             }
 
             $data['path'] = $newPath;

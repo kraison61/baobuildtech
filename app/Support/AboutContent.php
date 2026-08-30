@@ -33,9 +33,9 @@ class AboutContent
         return 'BOA รับเหมาก่อสร้างครบวงจรในกรุงเทพฯ และปริมณฑล ตั้งแต่ถมดิน ออกแบบ งานโครงสร้าง งานอลูมิเนียมและกระจก จนถึงระบบไฟฟ้า ประปา และ IT Infrastructure — ทีมช่างประจำของตัวเอง ไม่ส่งต่อผู้รับเหมาช่วง และส่งมอบเอกสารตรวจสอบทุกงานที่รับ';
     }
 
-    public static function heroImage(): string
+    public static function heroImage(): ?string
     {
-        return 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1600&q=80&auto=format&fit=crop';
+        return null;
     }
 
     public static function heroImageAlt(): string
@@ -77,9 +77,9 @@ class AboutContent
         ];
     }
 
-    public static function storyImage(): string
+    public static function storyImage(): ?string
     {
-        return 'https://images.unsplash.com/photo-1531834685032-c34bf0d84c77?w=1200&q=80&auto=format&fit=crop';
+        return null;
     }
 
     public static function storyImageAlt(): string
@@ -161,19 +161,23 @@ class AboutContent
     }
 
     /**
-     * @return array<int, array{src: string, alt: string, class: string}>
+     * @return array<int, array{src: ?string, alt: string, label: string, spec: string, class: string}>
      */
     public static function teamImages(): array
     {
         return [
             [
-                'src' => 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1200&q=80&auto=format&fit=crop',
+                'src' => null,
                 'alt' => 'ทีมช่างทำงานโครงสร้างที่หน้างาน',
+                'label' => 'ทีมช่างหน้างาน',
+                'spec' => '1200×800',
                 'class' => 'h-[clamp(220px,30vw,300px)]',
             ],
             [
-                'src' => 'https://images.unsplash.com/photo-1517089596392-fb9a9033e05b?w=1200&q=80&auto=format&fit=crop',
+                'src' => null,
                 'alt' => 'เครื่องจักรปรับพื้นที่ในโครงการ',
+                'label' => 'เครื่องจักรหน้างาน',
+                'spec' => '1200×800',
                 'class' => 'h-[clamp(180px,24vw,240px)]',
             ],
         ];

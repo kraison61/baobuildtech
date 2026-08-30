@@ -38,6 +38,7 @@
     <div class="sm:col-span-2">
         <x-ui.label for="cover_image">รูปปก (URL)</x-ui.label>
         <x-ui.input type="url" name="cover_image" id="cover_image" :value="old('cover_image', $item?->cover_image)" />
+        <p class="mt-1 text-xs text-slate-500">แนะนำ 1600×1200 px (4:3 mobile / 5:4 desktop) — Hero รายการย่อย</p>
     </div>
     <div>
         <x-ui.label for="meta_title">Meta Title</x-ui.label>

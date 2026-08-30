@@ -35,10 +35,16 @@ class WorkImage extends Model
         ];
     }
 
+    /** disk ที่เก็บไฟล์รูปหน้างาน */
+    public static function storageDisk(): string
+    {
+        return (string) config('filesystems.work_images_disk', 'public');
+    }
+
     /** URL สาธารณะของไฟล์ */
     public function getUrlAttribute(): string
     {
-        return Storage::disk('public')->url($this->path);
+        return Storage::disk(static::storageDisk())->url($this->path);
     }
 
     /** พิกัดแบบ Google Maps: "lat, lng" */
@@ -60,9 +66,11 @@ class WorkImage extends Model
     protected static function booted(): void
     {
         static::deleting(function (WorkImage $image): void {
-            if ($image->path !== '' && Storage::disk('public')->exists($image->path)) {
-                Storage::disk('public')->delete($image->path);
+            if ($image->path === '') {
+                return;
             }
+
+            Storage::disk(static::storageDisk())->delete($image->path);
         });
     }
 }

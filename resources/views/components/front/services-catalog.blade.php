@@ -111,18 +111,17 @@
                                     'min-[900px]:order-1' => $index % 2 === 1,
                                     'min-[900px]:order-2' => $index % 2 === 0,
                                 ])>
-                                    @if ($service->cover_image)
-                                        <img
-                                            src="{{ $service->cover_image }}"
-                                            alt="{{ $service->name }}"
-                                            class="absolute inset-0 block size-full object-cover"
-                                            width="1200"
-                                            height="900"
-                                            loading="lazy"
-                                        >
-                                    @else
-                                        <div class="absolute inset-0 bg-paper"></div>
-                                    @endif
+                                    <x-ui.image-slot
+                                        :src="$service->cover_image"
+                                        :label="'Catalog — '.$service->name"
+                                        spec="1200×900"
+                                        ratio="4/3"
+                                        :alt="$service->name"
+                                        class="absolute inset-0 size-full"
+                                        width="1200"
+                                        height="900"
+                                        loading="lazy"
+                                    />
                                 </div>
 
                                 <div @class([

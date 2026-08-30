@@ -6,13 +6,17 @@
     <x-front.container>
         <div class="grid min-h-[420px] overflow-hidden rounded-lg border border-line bg-white min-[900px]:grid-cols-2">
             <div class="relative order-1 min-h-[280px] overflow-hidden min-[900px]:order-0">
-                <img
-                    src="{{ \App\Support\AboutContent::storyImage() }}"
-                    alt="{{ \App\Support\AboutContent::storyImageAlt() }}"
-                    class="absolute inset-0 block size-full object-cover"
+                <x-ui.image-slot
+                    :src="\App\Support\AboutContent::storyImage()"
+                    label="เรื่องราว BOA"
+                    spec="1200×900"
+                    ratio="none"
+                    :alt="\App\Support\AboutContent::storyImageAlt()"
+                    class="absolute inset-0 size-full min-h-[280px]"
                     width="1200"
                     height="900"
-                >
+                    loading="lazy"
+                />
             </div>
             <div class="order-2 flex flex-col justify-center p-[clamp(28px,4vw,52px)]">
                 <div class="flex items-center gap-2 text-sm font-semibold tracking-wide text-brand-mid">

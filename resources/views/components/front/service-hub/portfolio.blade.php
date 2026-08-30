@@ -3,16 +3,17 @@
 <section id="portfolio" class="scroll-mt-24 border-y border-line bg-paper py-16 lg:py-24">
     <x-front.container>
         <div class="grid items-center gap-10 min-[900px]:grid-cols-2">
-            @if ($image = $hub->portfolioImage())
-                <img
-                    src="{{ $image }}"
-                    alt="{{ $hub->portfolioImageAlt() }}"
-                    class="aspect-4/3 w-full rounded-lg object-cover"
-                    width="1200"
-                    height="900"
-                    loading="lazy"
-                >
-            @endif
+            <x-ui.image-slot
+                :src="$hub->portfolioImage()"
+                :label="'ผลงาน — '.$hub->portfolioTitle()"
+                spec="1200×900"
+                ratio="4/3"
+                :alt="$hub->portfolioImageAlt()"
+                class="w-full rounded-lg"
+                width="1200"
+                height="900"
+                loading="lazy"
+            />
 
             <div class="max-w-[560px]">
                 <x-front.service-hub.section-header

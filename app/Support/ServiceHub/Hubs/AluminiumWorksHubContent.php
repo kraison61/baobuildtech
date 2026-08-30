@@ -2,20 +2,11 @@
 
 namespace App\Support\ServiceHub\Hubs;
 
+use App\Support\Company;
 use App\Support\ServiceHub\AbstractServiceHubContent;
 
 class AluminiumWorksHubContent extends AbstractServiceHubContent
 {
-    private const IMG_HERO = 'https://images.unsplash.com/photo-1610120433992-814a4bc1856f?w=1600&q=80&auto=format&fit=crop';
-
-    private const IMG_DOOR = 'https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=900&q=80&auto=format&fit=crop';
-
-    private const IMG_MATERIALS = 'https://images.unsplash.com/photo-1628745776518-f9fdb8eed463?w=1200&q=80&auto=format&fit=crop';
-
-    private const IMG_PROCESS = 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=1200&q=80&auto=format&fit=crop';
-
-    private const IMG_PORTFOLIO = 'https://images.unsplash.com/photo-1600210492496-094fe09443e5?w=1200&q=80&auto=format&fit=crop';
-
     public function slug(): string
     {
         return 'aluminum-works';
@@ -38,7 +29,7 @@ class AluminiumWorksHubContent extends AbstractServiceHubContent
 
     public function metaDescription(): string
     {
-        $phone = \App\Support\Company::phoneDisplay();
+        $phone = Company::phoneDisplay();
 
         return "รับเหมางานอลูมิเนียมครบวงจร ประตู-หน้าต่าง กั้นห้องกระจก กันสาด และงานโครงการ ทีมช่างประจำ ไม่ผ่านนายหน้า วัดหน้างาน+ประเมินราคาฟรี โทร {$phone}";
     }
@@ -59,11 +50,6 @@ class AluminiumWorksHubContent extends AbstractServiceHubContent
         $legal = (string) config('company.legal_name');
 
         return "รับเหมางานอลูมิเนียมจาก {$brand} ({$legal}) ทีมช่างประจำในกรุงเทพฯ ปริมณฑล และรับงานทั่วประเทศ — ประสบการณ์วิศวกรและช่างกว่า 20 ปี ต่างจากร้านกระจกทั่วไป เราเป็นผู้รับเหมาก่อสร้างที่ทำงานโยธาและอลูมิเนียมจบในเจ้าเดียว งานต่อเติมที่ต้องเทพื้น ทำโครงรองรับ หรือเดินระบบไฟไปด้วย ไม่ต้องประสานหลายทีม";
-    }
-
-    public function heroImage(): ?string
-    {
-        return parent::heroImage() ?? self::IMG_HERO;
     }
 
     public function heroImageAlt(): string
@@ -109,7 +95,7 @@ class AluminiumWorksHubContent extends AbstractServiceHubContent
                 'title' => 'ประตู–หน้าต่างอลูมิเนียม',
                 'href' => route('services.items.show', ['architecture', 'aluminum-works', 'aluminium-door-window']),
                 'body' => 'ติดตั้งใหม่และเปลี่ยนของเดิม ทั้งบ้านพักอาศัย อาคารพาณิชย์ และคอนโด',
-                'image' => self::IMG_DOOR,
+                'image' => '',
                 'image_alt' => 'ประตูหน้าต่างอลูมิเนียมบ้านพักอาศัย',
             ],
         ];
@@ -144,11 +130,6 @@ class AluminiumWorksHubContent extends AbstractServiceHubContent
         return 'อลูมิเนียม 1.2 กับ 1.5 มม. และกระจกแต่ละชนิด เลือกตามขนาดช่องเปิด ทิศลม และงบประมาณ — จากหน้างานที่เราทำมา สาเหตุน้ำรั่วส่วนใหญ่มาจากซิลิโคนยาแนวเสื่อมหรือวัดช่องเปิดคลาดเคลื่อน ไม่ใช่ตัวบานเอง';
     }
 
-    public function materialsImage(): ?string
-    {
-        return self::IMG_MATERIALS;
-    }
-
     public function materialsImageAlt(): string
     {
         return 'เปรียบเทียบเส้นอลูมิเนียมหนา 1.2 มม. และ 1.5 มม.';
@@ -181,11 +162,6 @@ class AluminiumWorksHubContent extends AbstractServiceHubContent
     public function processIntro(): string
     {
         return 'ขั้นตอนการทำงานตั้งแต่ติดต่อจนส่งมอบ ใช้เวลารวมประมาณ 12–21 วันทำการสำหรับงานบ้านทั่วไป (ไม่รวมงานโครงการขนาดใหญ่) ทุกขั้นแจ้งกำหนดชัดในสัญญา';
-    }
-
-    public function processImage(): ?string
-    {
-        return self::IMG_PROCESS;
     }
 
     public function processImageAlt(): string
@@ -234,11 +210,6 @@ class AluminiumWorksHubContent extends AbstractServiceHubContent
     public function portfolioIntro(): string
     {
         return 'ดูผลงานอลูมิเนียมจริงพร้อมรูปหน้างานที่หน้าผลงาน หรือส่งรูปพื้นที่มาขอดูตัวอย่างงานใกล้เคียงได้';
-    }
-
-    public function portfolioImage(): ?string
-    {
-        return self::IMG_PORTFOLIO;
     }
 
     public function portfolioImageAlt(): string

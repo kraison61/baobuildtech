@@ -44,15 +44,17 @@
             </div>
         </div>
 
-        @if ($image = $hub->heroImage())
-            <img
-                src="{{ $image }}"
-                alt="{{ $hub->heroImageAlt() }}"
-                class="block size-full min-h-[300px] object-cover"
-                width="1600"
-                height="1200"
-                fetchpriority="high"
-            >
-        @endif
+        <x-ui.image-slot
+            :src="$hub->heroImage()"
+            :label="'Hero — '.$hub->breadcrumbLabel()"
+            spec="1600×1200"
+            ratio="none"
+            :alt="$hub->heroImageAlt()"
+            class="size-full min-h-[300px]"
+            width="1600"
+            height="1200"
+            loading="eager"
+            fetchpriority="high"
+        />
     </div>
 </section>

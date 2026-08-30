@@ -21,16 +21,17 @@
             <div class="mt-10 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
                 @foreach ($portfolios as $portfolio)
                     <article class="overflow-hidden rounded-lg border border-line bg-white">
-                        @if ($portfolio->cover_image)
-                            <img
-                                src="{{ $portfolio->cover_image }}"
-                                alt="{{ $portfolio->title }}"
-                                class="aspect-4/3 w-full object-cover"
-                                width="800"
-                                height="600"
-                                loading="lazy"
-                            >
-                        @endif
+                        <x-ui.image-slot
+                            :src="$portfolio->cover_image"
+                            :label="'ผลงาน — '.$portfolio->title"
+                            spec="800×600"
+                            ratio="4/3"
+                            :alt="$portfolio->title"
+                            class="w-full"
+                            width="800"
+                            height="600"
+                            loading="lazy"
+                        />
                         <div class="p-5">
                             <h3 class="text-[18px] font-semibold text-brand">{{ $portfolio->title }}</h3>
                             @if ($portfolio->location)

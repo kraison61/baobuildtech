@@ -44,18 +44,19 @@
                 @endforeach
             </div>
 
-            @if ($image = $hub->materialsImage())
-                <div class="min-w-0 min-[900px]:sticky min-[900px]:top-28">
-                    <img
-                        src="{{ $image }}"
-                        alt="{{ $hub->materialsImageAlt() }}"
-                        class="aspect-3/4 w-full rounded-lg object-cover"
-                        width="760"
-                        height="1013"
-                        loading="lazy"
-                    >
-                </div>
-            @endif
+            <div class="min-w-0 min-[900px]:sticky min-[900px]:top-28">
+                <x-ui.image-slot
+                    :src="$hub->materialsImage()"
+                    :label="'วัสดุ — '.$hub->materialsTitle()"
+                    spec="760×1013"
+                    ratio="3/4"
+                    :alt="$hub->materialsImageAlt()"
+                    class="w-full rounded-lg"
+                    width="760"
+                    height="1013"
+                    loading="lazy"
+                />
+            </div>
         </div>
     </x-front.container>
 </section>

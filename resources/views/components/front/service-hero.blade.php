@@ -55,16 +55,17 @@
             </div>
         </div>
 
-        @if ($service->cover_image)
-            <img
-                src="{{ $service->cover_image }}"
-                alt="{{ $service->name }}"
-                class="block size-full min-h-[300px] object-cover"
-                width="1600"
-                height="1200"
-            >
-        @else
-            <div class="min-h-[300px] bg-brand/10" aria-hidden="true"></div>
-        @endif
+        <x-ui.image-slot
+            :src="$service->cover_image"
+            :label="'Hero — '.$service->name"
+            spec="1600×1200"
+            ratio="none"
+            :alt="$service->name"
+            class="size-full min-h-[300px]"
+            width="1600"
+            height="1200"
+            loading="eager"
+            fetchpriority="high"
+        />
     </div>
 </section>

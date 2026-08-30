@@ -64,6 +64,7 @@
     <div class="sm:col-span-2">
         <x-ui.label for="cover_image">รูปปก (URL)</x-ui.label>
         <x-ui.input type="url" name="cover_image" id="cover_image" :value="old('cover_image', $portfolio?->cover_image)" />
+        <p class="mt-1 text-xs text-slate-500">แนะนำ 800×600 px (4:3) การ์ดผลงาน · 680×408 px (5:3) carousel</p>
     </div>
     <div>
         <x-ui.label for="meta_title">Meta Title</x-ui.label>

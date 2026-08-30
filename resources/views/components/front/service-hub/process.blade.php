@@ -10,16 +10,17 @@
                     :intro="$hub->processIntro()"
                 />
 
-                @if ($image = $hub->processImage())
-                    <img
-                        src="{{ $image }}"
-                        alt="{{ $hub->processImageAlt() }}"
-                        class="mt-8 aspect-16/10 w-full rounded-lg object-cover min-[900px]:hidden"
-                        width="1200"
-                        height="750"
-                        loading="lazy"
-                    >
-                @endif
+                <x-ui.image-slot
+                    :src="$hub->processImage()"
+                    :label="'ขั้นตอน — '.$hub->processTitle()"
+                    spec="1200×750"
+                    ratio="16/10"
+                    :alt="$hub->processImageAlt()"
+                    class="mt-8 w-full rounded-lg min-[900px]:hidden"
+                    width="1200"
+                    height="750"
+                    loading="lazy"
+                />
 
                 <ol class="mt-10 grid list-none gap-4 p-0">
                     @foreach ($hub->processSteps() as $step)
@@ -39,16 +40,17 @@
                 </ol>
             </div>
 
-            @if ($image = $hub->processImage())
-                <img
-                    src="{{ $image }}"
-                    alt="{{ $hub->processImageAlt() }}"
-                    class="hidden aspect-4/5 w-full rounded-lg object-cover min-[900px]:block"
-                    width="1200"
-                    height="1500"
-                    loading="lazy"
-                >
-            @endif
+            <x-ui.image-slot
+                :src="$hub->processImage()"
+                :label="'ขั้นตอน — '.$hub->processTitle()"
+                spec="1200×1500"
+                ratio="4/5"
+                :alt="$hub->processImageAlt()"
+                class="hidden w-full rounded-lg min-[900px]:block"
+                width="1200"
+                height="1500"
+                loading="lazy"
+            />
         </div>
     </x-front.container>
 </section>

@@ -1,5 +1,23 @@
 <?php
 
+$cloudflareAccountId = env('CLOUDFLARE_ACCOUNT_ID');
+$r2Endpoint = env('AWS_ENDPOINT') ?: ($cloudflareAccountId
+    ? "https://{$cloudflareAccountId}.r2.cloudflarestorage.com"
+    : null);
+
+$r2Base = [
+    'driver' => 's3',
+    'key' => env('AWS_ACCESS_KEY_ID'),
+    'secret' => env('AWS_SECRET_ACCESS_KEY'),
+    'region' => env('AWS_DEFAULT_REGION', 'auto'),
+    'bucket' => env('AWS_BUCKET'),
+    'url' => env('AWS_URL'),
+    'endpoint' => $r2Endpoint,
+    'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+    'throw' => (bool) env('APP_DEBUG', false),
+    'report' => false,
+];
+
 return [
 
     /*
@@ -14,6 +32,17 @@ return [
     */
 
     'default' => env('FILESYSTEM_DISK', 'local'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Work Images Disk
+    |--------------------------------------------------------------------------
+    |
+    | Disk สำหรับอัปโหลดรูปหน้างาน (WorkImage) — ใช้ r2 ใน production
+    |
+    */
+
+    'work_images_disk' => env('WORK_IMAGES_DISK', 'public'),
 
     /*
     |--------------------------------------------------------------------------
@@ -47,17 +76,11 @@ return [
             'report' => false,
         ],
 
-        's3' => [
-            'driver' => 's3',
-            'key' => env('AWS_ACCESS_KEY_ID'),
-            'secret' => env('AWS_SECRET_ACCESS_KEY'),
-            'region' => env('AWS_DEFAULT_REGION'),
-            'bucket' => env('AWS_BUCKET'),
-            'url' => env('AWS_URL'),
-            'endpoint' => env('AWS_ENDPOINT'),
-            'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
-            'throw' => false,
-            'report' => false,
+        's3' => $r2Base,
+
+        'r2' => [
+            ...$r2Base,
+            'visibility' => 'public',
         ],
 
     ],

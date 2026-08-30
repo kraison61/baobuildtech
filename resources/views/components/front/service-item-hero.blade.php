@@ -12,7 +12,7 @@
 @endphp
 
 <section id="top" class="border-b border-line bg-paper">
-    <div class="grid items-stretch min-[900px]:grid-cols-[54fr_46fr]">
+    <div class="grid items-start min-[900px]:grid-cols-[54fr_46fr]">
         <div class="max-w-full px-5 pt-[clamp(80px,10vw,128px)] pb-[clamp(104px,12vw,168px)] min-[900px]:ps-[max(1.25rem,calc((100vw-1160px)/2))] min-[900px]:pe-[clamp(24px,4vw,64px)]">
             <div class="max-w-[680px]">
                 <p class="text-[clamp(1.75rem,4vw,2.25rem)] font-semibold leading-tight tracking-tight text-brand">
@@ -62,16 +62,18 @@
             </div>
         </div>
 
-        @if ($item->cover_image)
-            <img
-                src="{{ $item->cover_image }}"
-                alt="{{ $item->name }}"
-                class="block size-full min-h-[300px] object-cover"
-                width="1600"
-                height="1200"
-            >
-        @else
-            <div class="min-h-[300px] bg-brand/10" aria-hidden="true"></div>
-        @endif
+        <x-ui.image-slot
+            :src="$item->cover_image"
+            :label="'Hero — '.$item->name"
+            spec="1600×1200"
+            ratio="none"
+            ratio-note="4:3 · 5:4 desktop"
+            :alt="$item->name"
+            class="aspect-[4/3] w-full min-[900px]:aspect-[5/4]"
+            width="1600"
+            height="1200"
+            loading="eager"
+            fetchpriority="high"
+        />
     </div>
 </section>

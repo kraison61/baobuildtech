@@ -27,13 +27,17 @@
         </div>
         <div class="grid gap-6">
             @foreach ($images as $image)
-                <img
-                    src="{{ $image['src'] }}"
-                    alt="{{ $image['alt'] }}"
-                    class="{{ $image['class'] }} block w-full rounded-lg object-cover"
+                <x-ui.image-slot
+                    :src="$image['src']"
+                    :label="$image['label']"
+                    :spec="$image['spec']"
+                    ratio="none"
+                    :alt="$image['alt']"
+                    :class="$image['class'].' block w-full rounded-lg'"
                     width="1200"
                     height="800"
-                >
+                    loading="lazy"
+                />
             @endforeach
         </div>
     </x-front.container>

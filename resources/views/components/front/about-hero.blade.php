@@ -14,12 +14,17 @@
                 </p>
             </div>
         </div>
-        <img
-            src="{{ \App\Support\AboutContent::heroImage() }}"
-            alt="{{ \App\Support\AboutContent::heroImageAlt() }}"
-            class="block size-full min-h-[300px] object-cover"
+        <x-ui.image-slot
+            :src="\App\Support\AboutContent::heroImage()"
+            label="Hero — เกี่ยวกับเรา"
+            spec="1600×1200"
+            ratio="none"
+            :alt="\App\Support\AboutContent::heroImageAlt()"
+            class="size-full min-h-[300px]"
             width="1600"
             height="1200"
-        >
+            loading="eager"
+            fetchpriority="high"
+        />
     </div>
 </section>

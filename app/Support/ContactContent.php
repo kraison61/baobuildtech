@@ -36,9 +36,9 @@ class ContactContent
         return 'ไม่ต้องมีแบบก่อสร้างก็คุยได้ ส่งรูปพื้นที่ ความสูงดิน และแนวเขตที่ดินมาทางไลน์หรือกรอกฟอร์มด้านล่าง ทีมช่างจะบอกแนวทางงาน ฐานรากที่ควรใช้ และช่วงราคาคร่าว ๆ ก่อนนัดเข้าสำรวจ โดยไม่มีค่าใช้จ่าย';
     }
 
-    public static function heroImage(): string
+    public static function heroImage(): ?string
     {
-        return 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80&auto=format&fit=crop';
+        return null;
     }
 
     public static function heroImageAlt(): string

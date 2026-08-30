@@ -28,14 +28,17 @@
     <div>
         <x-ui.label for="image_16x9">รูป 16:9 (URL)</x-ui.label>
         <x-ui.input type="url" name="image_16x9" id="image_16x9" :value="old('image_16x9', $post?->image_16x9)" />
+        <p class="mt-1 text-xs text-slate-500">แนะนำ 1200×675 px</p>
     </div>
     <div>
         <x-ui.label for="image_4x3">รูป 4:3 (URL)</x-ui.label>
         <x-ui.input type="url" name="image_4x3" id="image_4x3" :value="old('image_4x3', $post?->image_4x3)" />
+        <p class="mt-1 text-xs text-slate-500">แนะนำ 1200×900 px</p>
     </div>
     <div>
         <x-ui.label for="image_1x1">รูป 1:1 (URL)</x-ui.label>
         <x-ui.input type="url" name="image_1x1" id="image_1x1" :value="old('image_1x1', $post?->image_1x1)" />
+        <p class="mt-1 text-xs text-slate-500">แนะนำ 1200×1200 px</p>
     </div>
     <div>
         <x-ui.label for="published_at">วันที่เผยแพร่</x-ui.label>

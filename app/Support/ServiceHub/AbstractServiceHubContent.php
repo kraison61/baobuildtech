@@ -4,6 +4,7 @@ namespace App\Support\ServiceHub;
 
 use App\Contracts\ServiceHubContent;
 use App\Models\Service;
+use App\Models\ServiceItem;
 use App\Models\ServicePrice;
 use Illuminate\Support\Collection;
 
@@ -55,6 +56,11 @@ abstract class AbstractServiceHubContent implements ServiceHubContent
             ->value('cover_image');
 
         return filled($fromDb) ? (string) $fromDb : null;
+    }
+
+    public function heroImageAlt(): string
+    {
+        return $this->heroTitle();
     }
 
     public function heroSecondaryCtaHref(): string
@@ -202,7 +208,7 @@ abstract class AbstractServiceHubContent implements ServiceHubContent
     }
 
     /**
-     * @return Collection<int, \App\Models\ServiceItem>
+     * @return Collection<int, ServiceItem>
      */
     public function publishedItems(): Collection
     {

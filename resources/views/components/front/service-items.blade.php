@@ -18,16 +18,17 @@
             <div class="mt-10 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
                 @foreach ($items as $item)
                     <article class="scroll-mt-24 rounded-lg border border-line bg-white p-6">
-                        @if ($item->cover_image)
-                            <img
-                                src="{{ $item->cover_image }}"
-                                alt="{{ $item->name }}"
-                                class="mb-5 aspect-4/3 w-full rounded-lg object-cover"
-                                width="800"
-                                height="600"
-                                loading="lazy"
-                            >
-                        @endif
+                        <x-ui.image-slot
+                            :src="$item->cover_image"
+                            :label="'รายการ — '.$item->name"
+                            spec="800×600"
+                            ratio="4/3"
+                            :alt="$item->name"
+                            class="mb-5 w-full rounded-lg"
+                            width="800"
+                            height="600"
+                            loading="lazy"
+                        />
                         <h3 class="text-[22px] font-semibold text-brand">
                             <a href="{{ $item->url() }}" class="hover:text-brand-mid">
                                 {{ $item->name }}
