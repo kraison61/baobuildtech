@@ -3,12 +3,17 @@
 use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Front\ServiceController;
 use App\Http\Controllers\Front\ServiceItemController;
+use App\Http\Controllers\Front\SitemapController;
 use App\Models\ServiceItem;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('front.home');
 })->name('home');
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])->name('sitemap');
+
+Route::get('/robots.txt', [SitemapController::class, 'robots'])->name('robots');
 
 Route::get('/services', [ServiceController::class, 'index'])->name('services');
 
