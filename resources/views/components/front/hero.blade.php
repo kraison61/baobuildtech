@@ -15,7 +15,7 @@
 
                 <div class="mt-4 flex items-center gap-2 text-sm font-semibold tracking-wide text-brand-mid">
                     <span class="h-px w-7 bg-brand-mid"></span>
-                    Build · Assure · Operate
+                    Build · Operate · Assure
                 </div>
 
                 <h1 class="mt-6 text-[clamp(1.625rem,4.4vw,2.35rem)] font-semibold leading-[1.35] text-brand">
@@ -41,7 +41,7 @@
                 </p>
 
                 <p class="mt-8 text-[17px] leading-[1.8] text-muted">
-                    BOA (Build Assure Operate) คือทีมรับเหมาก่อสร้างครบวงจรในกรุงเทพฯ ปริมณฑล และรับงานทั่วประเทศ ดูแลตั้งแต่ถมดิน ออกแบบ งานโครงสร้าง งานอลูมิเนียมและกระจก จนถึงระบบไฟฟ้า ประปา และ IT Infrastructure ในสัญญาเดียว
+                    BOA (Build Operate Assure) คือทีมรับเหมาก่อสร้างครบวงจรในกรุงเทพฯ ปริมณฑล และรับงานทั่วประเทศ ดูแลตั้งแต่ถมดิน ออกแบบ งานโครงสร้าง งานอลูมิเนียมและกระจก จนถึงระบบไฟฟ้า ประปา และ IT Infrastructure ในสัญญาเดียว
                 </p>
                 <p class="mt-4 text-[17px] leading-[1.8] text-muted">
                     ทีมของเรามาจากคนทำงานจริงสามสาย — วิศวกรโยธาที่คุมงานมากว่า 20 ปี ผู้บริหารโครงการระดับองค์กร และผู้เชี่ยวชาญระบบเครือข่าย คุณจึงไม่ต้องเป็นคนกลางคอยประสานช่างหลายเจ้า และไม่ต้องรับความเสี่ยงเองเวลางานต่อไม่ติด
@@ -50,6 +50,7 @@
         </div>
 
         <x-ui.image-slot
+            src="https://pub-b9d717abf918492ebdfeacb62e2977a0.r2.dev/assets/home-hero.webp"
             label="Hero — หน้าแรก"
             spec="1600×1200"
             ratio="none"

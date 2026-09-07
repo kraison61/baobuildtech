@@ -9,22 +9,22 @@
 
 return [
 
-    'legal_name'    => 'บีเอโอ และเพื่อน',
-    'brand_name'    => 'BAO-Buildtech',
-    'brand_mark'    => 'BAO',
+    'legal_name'    => 'บีโอเอ และเพื่อน',
+    'brand_name'    => 'BOA-Buildtech',
+    'brand_mark'    => 'BOA',
     'business_type' => 'GeneralContractor',
     'tax_id'        => '0125555012345',
     'founding_year' => '2026',
-    'site_url'      => env('APP_URL', 'https://example.com'),
+    'site_url'      => env('APP_URL', 'https://boabuildtech.com'),
     'description'   => 'รับเหมาก่อสร้างครบวงจรในกรุงเทพฯ และปริมณฑล ตั้งแต่ถมดิน ออกแบบ งานโครงสร้าง งานอลูมิเนียมและกระจก จนถึงระบบไฟฟ้า ประปา และ IT Infrastructure',
 
-    'phone' => '+66615639228',
-    'phone_format' => '061-563-9228',
+    'phone' => '+66617439900',
+    'phone_format' => '061-743-9900',
     'email' => 'bao.buildtech2011@gmail.com',
     'line_id' => '@baobuildtech',
     'line_url' => 'https://lin.ee/V2S0HT6',
 
-    'logo_url' => env('APP_URL', 'https://example.com').'/images/logo.png',
+    'logo_url' => 'https://pub-b9d717abf918492ebdfeacb62e2977a0.r2.dev/assets/boa-logo.png',
 
     'address' => [
         'street'      => '88/120 หมู่บ้านธัญญาภิรมย์แกรนด์วิลล์ หมู่ 1 ถนนรังสิต-นครนายก ตำบลลำผักกูด',

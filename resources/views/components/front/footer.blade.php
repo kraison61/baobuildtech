@@ -21,7 +21,10 @@
 <footer class="border-t border-sand/20 bg-brand pt-16 pb-10 text-sand lg:pt-24">
     <x-front.container class="grid gap-10 [grid-template-columns:repeat(auto-fit,minmax(220px,1fr))]">
         <div class="max-w-[320px]">
-            <div class="text-[17px] font-semibold text-white">{{ $brand }}</div>
+            <a href="{{ route('home') }}" class="inline-flex items-center gap-3 text-white hover:text-white">
+                <x-ui.logo-mark size="size-11" />
+                <span class="text-[17px] font-semibold">{{ $brand }}</span>
+            </a>
             <p class="mt-3 text-[15px] leading-[1.8]">
                 {{ config('company.description') }}
             </p>

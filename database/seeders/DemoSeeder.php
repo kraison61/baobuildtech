@@ -57,7 +57,7 @@ class DemoSeeder extends Seeder
         User::query()->updateOrCreate(
             ['email' => 'admin@baobuildtech.test'],
             [
-                'name' => 'Admin BAO',
+                'name' => 'Admin BOA',
                 'password' => Hash::make('password'),
                 'email_verified_at' => now(),
             ]

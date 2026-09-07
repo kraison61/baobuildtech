@@ -1,0 +1,16 @@
+@props([
+    'size' => 'size-9',
+])
+
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 64 64"
+    {{ $attributes->class([$size, 'shrink-0']) }}
+    role="img"
+    aria-label="{{ config('company.brand_name') }}"
+>
+    <rect width="64" height="64" rx="14" fill="#1E3A32"/>
+    <rect x="18" y="16" width="7" height="32" fill="#F5F1EA"/>
+    <path d="M25 16h7a8 8 0 0 1 0 16h-7z" fill="#F5F1EA"/>
+    <path d="M25 32h8a8 8 0 0 1 0 16h-8z" fill="#C1531F"/>
+</svg>

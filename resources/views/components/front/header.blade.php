@@ -4,7 +4,6 @@
     $lineId = \App\Support\Company::lineId();
     $lineUrl = \App\Support\Company::lineUrl();
     $brand = config('company.brand_name');
-    $mark = config('company.brand_mark');
     $navItems = \App\Support\Navigation::items();
     $homeHref = route('home');
     $ctaHref = request()->routeIs('home', 'services')
@@ -34,9 +33,8 @@
     ></div>
 
     <div class="relative z-[60] mx-auto flex max-w-[1160px] items-center justify-between gap-3 bg-brand px-5 py-3" data-mobile-nav-bar>
-        <a href="{{ $homeHref }}" class="flex min-w-0 items-center gap-2 text-white hover:text-white" data-mobile-nav-link>
-            <span class="grid size-[34px] shrink-0 place-items-center rounded-lg border border-sand/45 text-[13px] font-semibold tracking-wide">{{ $mark }}</span>
-            
+        <a href="{{ $homeHref }}" class="flex min-w-0 items-center gap-2.5 text-white hover:text-white" data-mobile-nav-link>
+            <x-ui.logo-mark size="size-10" />
         </a>
 
         {{-- Desktop: เมนูแนวนอน --}}
@@ -46,7 +44,7 @@
                     <div class="relative" data-nav-mega>
                         <button
                             type="button"
-                            class="inline-flex items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-2 text-sand hover:text-white {{ $isActive($item['route'] ?? null) ? 'text-white' : '' }}"
+                            class="inline-flex cursor-pointer items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-2 text-sand hover:text-white {{ $isActive($item['route'] ?? null) ? 'text-white' : '' }}"
                             aria-expanded="false"
                             aria-haspopup="true"
                             data-nav-mega-toggle
@@ -61,7 +59,7 @@
                     <div class="group relative" data-nav-dropdown>
                         <button
                             type="button"
-                            class="inline-flex items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-2 text-sand hover:text-white {{ $isActive($item['route'] ?? null) ? 'text-white' : '' }}"
+                            class="inline-flex cursor-pointer items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-2 text-sand hover:text-white {{ $isActive($item['route'] ?? null) ? 'text-white' : '' }}"
                             aria-expanded="false"
                             aria-haspopup="true"
                         >

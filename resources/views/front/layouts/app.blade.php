@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', config('company.legal_name'))</title>
     <meta name="description" content="@yield('meta_description', config('company.description'))">
+    <x-ui.favicons />
     @stack('head')
     @fonts
     @vite(['resources/css/app.css', 'resources/js/app.js'])
