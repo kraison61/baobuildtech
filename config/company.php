@@ -20,9 +20,10 @@ return [
 
     'phone' => '+66617439900',
     'phone_format' => '061-743-9900',
-    'email' => 'bao.buildtech2011@gmail.com',
+    'email' => 'boa.buildtech@gmail.com',
     'line_id' => '@baobuildtech',
-    'line_url' => 'https://lin.ee/V2S0HT6',
+    'line_url' => 'https://lin.ee/ohwR1wC',
+    'line_qr' => 'https://qr-official.line.me/gs/M_062mhmap_BW.png?oat_content=qr',
 
     'logo_url' => 'https://pub-b9d717abf918492ebdfeacb62e2977a0.r2.dev/assets/boa-logo.png',
 
