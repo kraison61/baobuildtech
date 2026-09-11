@@ -18,14 +18,17 @@ return [
     'site_url'      => env('APP_URL', 'https://boabuildtech.com'),
     'description'   => 'รับเหมาก่อสร้างครบวงจรในกรุงเทพฯ และปริมณฑล ตั้งแต่ถมดิน ออกแบบ งานโครงสร้าง งานอลูมิเนียมและกระจก จนถึงระบบไฟฟ้า ประปา และ IT Infrastructure',
 
+    // Cloudflare R2 custom domain — ใช้กับโลโก้และรูป asset สาธารณะ
+    'images_cdn' => rtrim(env('AWS_URL', 'https://images.boabuildtech.com'), '/'),
+
     'phone' => '+66617439900',
     'phone_format' => '061-743-9900',
     'email' => 'boa.buildtech@gmail.com',
-    'line_id' => '@baobuildtech',
+    'line_id' => '@062mhmap',
     'line_url' => 'https://lin.ee/ohwR1wC',
     'line_qr' => 'https://qr-official.line.me/gs/M_062mhmap_BW.png?oat_content=qr',
 
-    'logo_url' => 'https://pub-b9d717abf918492ebdfeacb62e2977a0.r2.dev/assets/boa-logo.png',
+    'logo_url' => rtrim(env('AWS_URL', 'https://images.boabuildtech.com'), '/').'/assets/boa-logo.png',
 
     'address' => [
         'street'      => '88/120 หมู่บ้านธัญญาภิรมย์แกรนด์วิลล์ หมู่ 1 ถนนรังสิต-นครนายก ตำบลลำผักกูด',
@@ -61,7 +64,8 @@ return [
 
     'social' => [
         'facebook'    => null,
-        'line'        => 'https://lin.ee/V2S0HT6',
+        // ต้องตรงกับ line_url ด้านบน — ใช้ใน JSON-LD sameAs
+        'line'        => 'https://lin.ee/ohwR1wC',
         'youtube'     => null,
         'google_maps' => 'https://maps.app.goo.gl/MvrDLjCYanoYfiDz9',
     ],

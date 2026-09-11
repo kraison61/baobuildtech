@@ -14,7 +14,7 @@
         />
 
         <div class="mt-10 overflow-hidden rounded-lg border border-line bg-white p-4 lg:p-6">
-            <x-front.service-price-table
+            <x-front.service.price-table
                 :prices="$prices"
                 :caption="$hub->pricingTitle()"
             />

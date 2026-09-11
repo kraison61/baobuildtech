@@ -48,24 +48,24 @@
 
 @section('content')
     <main>
-        <x-front.service-hero :service="$service" />
+        <x-front.service.hero :service="$service" />
 
-        <x-front.service-items :service="$service" :items="$service->items" />
+        <x-front.service.items :service="$service" :items="$service->items" />
 
         @if ($visiblePrices->isNotEmpty())
-            <x-front.service-prices :service="$service" :prices="$visiblePrices" />
+            <x-front.service.prices :service="$service" :prices="$visiblePrices" />
         @endif
 
         @if ($service->portfolios->isNotEmpty())
-            <x-front.service-works :service="$service" :portfolios="$service->portfolios" />
+            <x-front.service.works :service="$service" :portfolios="$service->portfolios" />
         @endif
 
         @if ($service->faqs->isNotEmpty())
-            <x-front.service-faqs :service="$service" :faqs="$service->faqs" />
+            <x-front.service.faqs :service="$service" :faqs="$service->faqs" />
         @endif
 
         @if ($relatedServices->isNotEmpty())
-            <x-front.service-related :services="$relatedServices" />
+            <x-front.service.related :services="$relatedServices" />
         @endif
 
         <x-front.cta-section

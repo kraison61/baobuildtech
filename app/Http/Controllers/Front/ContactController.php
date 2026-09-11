@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Front\ContactRequest;
+use App\Jobs\NotifyLineQuoteRequestJob;
 use App\Models\QuoteRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -19,7 +20,7 @@ class ContactController extends Controller
     {
         $validated = $request->validated();
 
-        QuoteRequest::query()->create([
+        $quoteRequest = QuoteRequest::query()->create([
             'name' => $validated['name'],
             'phone' => $validated['phone'],
             'job_type' => $validated['job'],
@@ -27,6 +28,8 @@ class ContactController extends Controller
             'detail' => $validated['detail'] ?? null,
             'status' => QuoteRequest::STATUS_PENDING,
         ]);
+
+        NotifyLineQuoteRequestJob::dispatchAfterResponse($quoteRequest);
 
         return redirect()
             ->route('contact')

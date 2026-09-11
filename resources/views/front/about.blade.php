@@ -30,13 +30,13 @@
 
 @section('content')
     <main>
-        <x-front.about-hero />
-        <x-front.about-stats />
-        <x-front.about-story />
-        <x-front.about-principles />
-        <x-front.about-team />
-        <x-front.about-process />
-        <x-front.about-company />
-        <x-front.about-cta />
+        <x-front.about.hero />
+        <x-front.about.stats />
+        <x-front.about.story />
+        <x-front.about.principles />
+        <x-front.about.team />
+        <x-front.about.process />
+        <x-front.about.company />
+        <x-front.about.cta />
     </main>
 @endsection

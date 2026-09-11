@@ -6,6 +6,10 @@
     $lineUrl = \App\Support\Company::lineUrl();
     $phoneDisplay = \App\Support\Company::phoneDisplay();
     $sent = session('contact_sent', false);
+    $lat = config('company.geo.lat');
+    $lng = config('company.geo.lng');
+    $mapsUrl = config('company.social.google_maps');
+    $brand = config('company.brand_name');
 @endphp
 
 <section id="form" class="scroll-mt-24 bg-white pb-20 lg:pb-32">
@@ -139,6 +143,43 @@
         </div>
 
         <div class="grid gap-6">
+            @if (is_numeric($lat) && is_numeric($lng))
+                <div class="relative min-h-[clamp(280px,34vw,420px)] overflow-hidden rounded-lg border border-line bg-line">
+                    <iframe
+                        title="แผนที่ที่ตั้ง {{ $brand }}"
+                        src="https://maps.google.com/maps?q={{ $lat }},{{ $lng }}&z=15&output=embed"
+                        class="absolute inset-0 size-full border-0"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+                @if ($mapsUrl)
+                    <a
+                        href="{{ $mapsUrl }}"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-block border-b border-brand-mid pb-0.5 text-[15px] font-semibold text-brand-mid hover:text-brand"
+                    >เปิดใน Google Maps</a>
+                @endif
+            @elseif ($mapsUrl)
+                <a
+                    href="{{ $mapsUrl }}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="grid min-h-[clamp(280px,34vw,380px)] place-items-center rounded-lg border border-line bg-paper p-8 text-center hover:border-brand-mid"
+                >
+                    <div>
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" class="mx-auto text-brand-mid" aria-hidden="true">
+                            <path d="M12 21s7-6.2 7-11a7 7 0 10-14 0c0 4.8 7 11 7 11z" />
+                            <circle cx="12" cy="10" r="2.6" />
+                        </svg>
+                        <div class="mt-4 text-[17px] font-semibold text-brand">เปิดแผนที่ Google Maps</div>
+                        <p class="mt-2 text-[15px] leading-[1.8] text-muted">ดูที่ตั้งสำนักงานบนแผนที่</p>
+                    </div>
+                </a>
+            @endif
+
             <div class="rounded-lg bg-brand p-6 text-white sm:p-8">
                 <div class="text-[15px] font-semibold text-sand">เตรียมไว้ก่อนติดต่อ</div>
                 <ul class="mt-4 grid list-none gap-3 p-0 text-[17px] leading-[1.7]">

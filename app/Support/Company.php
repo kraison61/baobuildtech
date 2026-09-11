@@ -5,10 +5,17 @@ namespace App\Support;
 class Company
 {
     /**
-     * เบอร์โทรแสดงผล เช่น 081-000-0000
+     * เบอร์โทรแสดงผล เช่น 081-000-0000 — อ้างอิง phone_format จาก config/company.php
      */
     public static function phoneDisplay(?string $e164 = null): string
     {
+        if ($e164 === null) {
+            $formatted = config('company.phone_format');
+            if (filled($formatted)) {
+                return (string) $formatted;
+            }
+        }
+
         $e164 ??= (string) config('company.phone');
         $local = preg_replace('/^\+66/', '0', $e164) ?? $e164;
 
@@ -36,11 +43,11 @@ class Company
     }
 
     /**
-     * URL แชท LINE (หรือ null ถ้ายังไม่มี)
+     * URL แชท LINE — อ้างอิง line_url จาก config/company.php เป็นหลัก
      */
     public static function lineUrl(): ?string
     {
-        $url = config('company.social.line');
+        $url = config('company.line_url') ?: config('company.social.line');
 
         return filled($url) ? (string) $url : null;
     }

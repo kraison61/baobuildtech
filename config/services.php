@@ -35,4 +35,18 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | LINE Official Account (Messaging API)
+    |--------------------------------------------------------------------------
+    |
+    | แจ้งเตือนคำขอใบเสนอราคาไปยังสมาชิก OA ทุกคน (เพื่อนของบัญชี)
+    | ผ่าน Broadcast API — ต้องตั้ง Channel Access Token จาก LINE Developers
+    |
+    */
+    'line' => [
+        'channel_access_token' => env('LINE_CHANNEL_ACCESS_TOKEN'),
+        'enabled' => (bool) env('LINE_NOTIFY_ENABLED', true),
+    ],
+
 ];

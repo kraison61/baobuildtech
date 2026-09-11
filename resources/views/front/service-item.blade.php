@@ -45,26 +45,26 @@
 
 @section('content')
     <main class="overflow-x-clip">
-        <x-front.service-item-hero :item="$item" />
+        <x-front.service-item.hero :item="$item" />
 
         @if (filled($item->content))
-            <x-front.service-item-content :item="$item" />
+            <x-front.service-item.content :item="$item" />
         @endif
 
         @if ($item->prices->isNotEmpty())
-            <x-front.service-prices :service="$item" :prices="$item->prices" />
+            <x-front.service.prices :service="$item" :prices="$item->prices" />
         @endif
 
         @if ($item->portfolios->isNotEmpty())
-            <x-front.service-works :service="$item" :portfolios="$item->portfolios" />
+            <x-front.service.works :service="$item" :portfolios="$item->portfolios" />
         @endif
 
         @if ($item->faqs->isNotEmpty())
-            <x-front.service-faqs :service="$item" :faqs="$item->faqs" />
+            <x-front.service.faqs :service="$item" :faqs="$item->faqs" />
         @endif
 
         @if ($relatedItems->isNotEmpty())
-            <x-front.service-item-related :items="$relatedItems" :service="$service" />
+            <x-front.service-item.related :items="$relatedItems" :service="$service" />
         @endif
 
         <x-front.cta-section

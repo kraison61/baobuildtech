@@ -19,7 +19,7 @@
         </div>
 
         <div class="mt-10">
-            <x-front.service-price-table
+            <x-front.service.price-table
                 :prices="$prices"
                 :caption="'ตารางช่วงราคางาน'.$service->name"
                 variant="dark"

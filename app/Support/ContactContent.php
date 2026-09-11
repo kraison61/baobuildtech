@@ -16,7 +16,7 @@ class ContactContent
     public static function metaDescription(): string
     {
         $phone = Company::phoneDisplay();
-        $line = config('company.line_id');
+        $line = Company::lineId();
 
         return "ติดต่อ BOA โทร {$phone}".($line ? " LINE {$line}" : '').' ส่งรูปหน้างานได้ช่วงราคาภายใน 1 วันทำการ กรุงเทพฯ และปริมณฑล';
     }
@@ -38,12 +38,12 @@ class ContactContent
 
     public static function heroImage(): ?string
     {
-        return null;
+        return rtrim((string) config('company.images_cdn'), '/').'/assets/contact/contact-hero.webp';
     }
 
     public static function heroImageAlt(): string
     {
-        return 'ช่างและเหล็กเสริมที่หน้างานก่อสร้าง';
+        return 'หน้างานถมที่และเตรียมพื้นที่พร้อมรถขุดและอุปกรณ์สำรวจ — '.config('company.brand_name');
     }
 
     /**

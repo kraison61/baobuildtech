@@ -6,7 +6,8 @@
     use App\Models\ServiceCategory;
 
     $isComplementary = static function (ServiceCategory $category): bool {
-        return $category->slug === 'it'
+        return $category->slug === 'mechanical-and-electrical-work'
+            || $category->slug === 'it'
             || str_contains((string) $category->description, 'บริการเสริม');
     };
 

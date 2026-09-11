@@ -40,7 +40,7 @@
 
                         @if ($item->prices->isNotEmpty())
                             <div class="mt-6 border-t border-line pt-6">
-                                <x-front.service-price-table
+                                <x-front.service.price-table
                                     :prices="$item->prices"
                                     :caption="'ช่วงราคา'.$item->name"
                                     variant="inline"

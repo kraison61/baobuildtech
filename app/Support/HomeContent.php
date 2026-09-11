@@ -154,8 +154,8 @@ class HomeContent
             [
                 'title' => 'งานเตรียมพื้นที่และงานโยธา',
                 'items' => [
-                    ['label' => 'เคลียริ่งพื้นที่และรื้อถอน', 'href' => route('services.show', ['civil', 'survey'])],
-                    ['label' => 'ถมดินและปรับระดับ', 'href' => route('services.show', ['civil', 'survey'])],
+                    ['label' => 'เคลียริ่งพื้นที่และรื้อถอน', 'href' => route('services.show', ['civil', 'earthwork'])],
+                    ['label' => 'ถมดินและปรับระดับ', 'href' => route('services.items.show', ['civil', 'earthwork', 'land-filling'])],
                     ['label' => 'ฐานรากและเสาเข็ม', 'href' => route('services.show', ['civil', 'piles-foundation'])],
                     ['label' => 'กำแพงกันดินและรั้ว', 'href' => route('services.items.show', ['civil', 'structure', 'retaining-wall'])],
                 ],
@@ -179,10 +179,10 @@ class HomeContent
             [
                 'title' => 'งานระบบและไอที',
                 'items' => [
-                    ['label' => 'ระบบไฟฟ้าอาคาร', 'href' => route('services.show', ['it', 'electrical'])],
-                    ['label' => 'ประปาและสุขาภิบาล', 'href' => route('services.show', ['civil', 'sanitation'])],
-                    ['label' => 'IT Infrastructure', 'href' => route('services.show', ['it', 'network-cabling'])],
-                    ['label' => 'กล้องวงจรปิด', 'href' => route('services.show', ['it', 'cctv'])],
+                    ['label' => 'ระบบไฟฟ้าอาคาร', 'href' => route('services.show', ['mechanical-and-electrical-work', 'electrical'])],
+                    ['label' => 'ติดตั้งโซล่าเซลล์', 'href' => route('services.items.show', ['mechanical-and-electrical-work', 'electrical', 'solar-cell-installation'])],
+                    ['label' => 'IT Infrastructure', 'href' => route('services.show', ['mechanical-and-electrical-work', 'network-cabling'])],
+                    ['label' => 'กล้องวงจรปิด', 'href' => route('services.show', ['mechanical-and-electrical-work', 'cctv'])],
                 ],
             ],
         ];

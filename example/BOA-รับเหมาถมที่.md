@@ -130,7 +130,7 @@ BOA อยู่ที่ธัญบุรี ปทุมธานี ติ�
 <meta property="og:site_name" content="BOA-Buildtech">
 <meta property="og:title" content="รับเหมาถมที่ ปทุมธานี รังสิต ธัญบุรี | BOA">
 <meta property="og:description" content="รับเหมาถมที่ดิน ปทุมธานี รังสิต ธัญบุรี คิดราคาคิวแน่น บดอัดมีผลทดสอบ สำรวจฟรี โทร 061-743-9900">
-<meta property="og:image" content="https://boabuildtech.com/img/rap-mao-thom-thi-pathumthani.webp">
+<meta property="og:image" content="https://images.boabuildtech.com/img/rap-mao-thom-thi-pathumthani.webp">
 <meta property="og:url" content="https://boabuildtech.com/land-filling-contractor">
 <meta name="twitter:card" content="summary_large_image">
 ```
@@ -441,8 +441,8 @@ BOA-Buildtech (บีโอเอ และเพื่อน) เป็นผ�
       "legalName": "บีโอเอ และเพื่อน",
       "alternateName": "BOA",
       "url": "https://boabuildtech.com",
-      "logo": "https://pub-b9d717abf918492ebdfeacb62e2977a0.r2.dev/assets/boa-logo.png",
-      "image": "https://boabuildtech.com/img/rap-mao-thom-thi-pathumthani.webp",
+      "logo": "https://images.boabuildtech.com/assets/boa-logo.png",
+      "image": "https://images.boabuildtech.com/img/rap-mao-thom-thi-pathumthani.webp",
       "description": "รับเหมาก่อสร้างครบวงจรในกรุงเทพฯ และปริมณฑล ตั้งแต่ถมดิน ออกแบบ งานโครงสร้าง งานอลูมิเนียมและกระจก จนถึงระบบไฟฟ้า ประปา และ IT Infrastructure",
       "taxID": "0125555012345",
       "foundingDate": "2026",
@@ -579,7 +579,7 @@ BOA-Buildtech (บีโอเอ และเพื่อน) เป็นผ�
     {
       "@type": "ImageObject",
       "@id": "https://boabuildtech.com/land-filling-contractor#primaryimage",
-      "url": "https://boabuildtech.com/img/rap-mao-thom-thi-pathumthani.webp",
+      "url": "https://images.boabuildtech.com/img/rap-mao-thom-thi-pathumthani.webp",
       "width": 1200,
       "height": 630,
       "caption": "รถบดสั่นสะเทือนบดอัดดินถมเป็นชั้น งานรับเหมาถมที่ ธัญบุรี ปทุมธานี โดย BOA-Buildtech"
@@ -617,13 +617,13 @@ BOA-Buildtech (บีโอเอ และเพื่อน) เป็นผ�
 
 ```html
 <!-- รูปแรก above-the-fold — เป็น LCP element -->
-<img src="/img/rap-mao-thom-thi-pathumthani.webp"
+<img src="https://images.boabuildtech.com/img/rap-mao-thom-thi-pathumthani.webp"
      alt="รถบดสั่นสะเทือนบดอัดดินถมชั้นละ 25 ซม. งานรับเหมาถมที่ ธัญบุรี ปทุมธานี โดย BOA-Buildtech"
      width="1200" height="630"
      fetchpriority="high" loading="eager" decoding="async">
 
 <!-- รูปที่เหลือ below-the-fold -->
-<img src="/img/field-density-test-din-thom.webp"
+<img src="https://images.boabuildtech.com/img/field-density-test-din-thom.webp"
      alt="การทดสอบความแน่นภาคสนามบนชั้นดินถมที่บดอัดแล้ว"
      width="800" height="600"
      loading="lazy" decoding="async">
@@ -690,7 +690,7 @@ BOA-Buildtech (บีโอเอ และเพื่อน) เป็นผ�
 
 | รายการ | ค่าที่ถูกต้อง |
 |---|---|
-| `robots.txt` | ต้องไม่ block `/land-filling-contractor` และไม่ block `/img/` |
+| `robots.txt` | ต้องไม่ block `/land-filling-contractor` และไม่ block `images.boabuildtech.com` |
 | Meta robots | `index, follow, max-image-preview:large, max-snippet:-1` |
 | X-Robots-Tag | ตรวจด้วย `curl -I https://boabuildtech.com/land-filling-contractor` ต้องไม่มี noindex |
 | Canonical | ชี้มาที่ตัวเอง |

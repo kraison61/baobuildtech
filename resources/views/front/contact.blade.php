@@ -54,10 +54,10 @@
 
 @section('content')
     <main>
-        <x-front.contact-hero />
-        <x-front.contact-channels />
-        <x-front.contact-form />
-        <x-front.contact-office />
-        <x-front.contact-faq />
+        <x-front.contact.hero />
+        <x-front.contact.channels />
+        <x-front.contact.form />
+        <x-front.contact.office />
+        <x-front.contact.faq />
     </main>
 @endsection

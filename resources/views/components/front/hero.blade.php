@@ -50,7 +50,7 @@
         </div>
 
         <x-ui.image-slot
-            src="https://pub-b9d717abf918492ebdfeacb62e2977a0.r2.dev/assets/home-hero.webp"
+            src="{{ config('company.images_cdn') }}/assets/home-hero.webp"
             label="Hero — หน้าแรก"
             spec="1600×1200"
             ratio="none"

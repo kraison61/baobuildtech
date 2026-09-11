@@ -35,12 +35,12 @@ class AboutContent
 
     public static function heroImage(): ?string
     {
-        return null;
+        return rtrim((string) config('company.images_cdn'), '/').'/assets/about/about-hero.webp';
     }
 
     public static function heroImageAlt(): string
     {
-        return 'หน้างานก่อสร้างโครงสร้างคอนกรีตในเมือง';
+        return 'วิศวกรตรวจแบบก่อสร้างพร้อมหมวกนิรภัยและแผนผังอาคาร — '.config('company.brand_name');
     }
 
     /**
@@ -79,12 +79,12 @@ class AboutContent
 
     public static function storyImage(): ?string
     {
-        return null;
+        return rtrim((string) config('company.images_cdn'), '/').'/assets/about/about-story.webp';
     }
 
     public static function storyImageAlt(): string
     {
-        return 'วิศวกรตรวจแบบร่วมกับช่างที่หน้างาน';
+        return 'ทีมวิศวกรและเจ้าหน้าที่ร่วมตรวจแบบก่อสร้างบนโต๊ะทำงาน — '.config('company.brand_name');
     }
 
     public static function principlesEyebrow(): string

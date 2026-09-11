@@ -36,8 +36,8 @@
         <x-front.proof-section :portfolios="$portfolios" />
         <x-front.why-section />
         <x-front.phases-section />
-        <x-front.services-section />
-        <x-front.about-section />
+        <x-front.services.section />
+        <x-front.about.section />
         <x-front.process-section />
         <x-front.faq-section />
         <x-front.cta-section />

@@ -6,7 +6,8 @@
     use App\Models\ServiceCategory;
 
     $isComplementary = static function (ServiceCategory $category): bool {
-        return $category->slug === 'it'
+        return $category->slug === 'mechanical-and-electrical-work'
+            || $category->slug === 'it'
             || str_contains((string) $category->description, 'บริการเสริม');
     };
 
@@ -150,7 +151,7 @@
                                         </dl>
                                     @elseif ($visiblePrices->isNotEmpty())
                                         <div class="mt-6 max-w-[460px] border-t border-line pt-6">
-                                            <x-front.service-price-table
+                                            <x-front.service.price-table
                                                 :prices="$visiblePrices"
                                                 :caption="'ช่วงราคา'.$service->name"
                                                 variant="inline"
@@ -185,7 +186,7 @@
                                                     @endif
                                                     @if ($item->prices->isNotEmpty())
                                                         <div class="mt-3 border-t border-line pt-3">
-                                                            <x-front.service-price-table
+                                                            <x-front.service.price-table
                                                                 :prices="$item->prices"
                                                                 :caption="'ช่วงราคา'.$item->name"
                                                                 variant="inline"
