@@ -42,4 +42,9 @@ class Post extends Model
     {
         return $this->morphMany(Faq::class, 'faqable');
     }
+
+    public function url(): string
+    {
+        return route('blog.show', $this->slug);
+    }
 }

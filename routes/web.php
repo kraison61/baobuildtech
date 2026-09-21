@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Front\ContactController;
+use App\Http\Controllers\Front\PostController;
 use App\Http\Controllers\Front\ServiceController;
 use App\Http\Controllers\Front\ServiceItemController;
 use App\Http\Controllers\Front\SitemapController;
@@ -43,11 +44,9 @@ Route::view('/works', 'front.placeholder', [
     'description' => 'รวมโครงการที่เราเคยรับผิดชอบ พร้อมรายละเอียดขอบเขตงานและหลักฐานหน้างาน',
 ])->name('works');
 
-Route::view('/articles', 'front.placeholder', [
-    'title' => 'บทความ',
-    'heading' => 'บทความ',
-    'description' => 'บทความความรู้เรื่องกำแพงกันดิน ฐานราก งานโยธา และระบบในโครงการ',
-])->name('articles');
+Route::get('/blog', [PostController::class, 'index'])->name('blog.index');
+Route::get('/blog/{slug}', [PostController::class, 'show'])->name('blog.show');
+Route::permanentRedirect('/articles', '/blog');
 
 Route::view('/gallery', 'front.placeholder', [
     'title' => 'คลังภาพผลงาน',

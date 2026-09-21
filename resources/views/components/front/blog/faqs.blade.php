@@ -1,5 +1,4 @@
 @props([
-    'service',
     'faqs',
 ])
 
@@ -7,16 +6,12 @@
     <x-front.container>
         <div class="mx-auto max-w-[680px]">
             <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">
-                @if ($service->slug === 'house-demolition')
-                    คำถามที่พบบ่อยเกี่ยวกับการรื้อถอน
-                @else
-                    คำถามเฉพาะงาน{{ $service->name }}
-                @endif
+                คำถามที่พบบ่อยเกี่ยวกับโซล่าเซลล์ภาคประชาชน
             </h2>
 
             <div class="mt-10 grid gap-4">
                 @foreach ($faqs as $faq)
-                    <details name="service-faq" class="group rounded-lg border border-line bg-white px-6 py-1">
+                    <details name="blog-faq" class="group rounded-lg border border-line bg-white px-6 py-1">
                         <summary class="flex cursor-pointer list-none items-center justify-between gap-6 py-[18px] text-[17px] font-semibold text-brand [&::-webkit-details-marker]:hidden">
                             {{ $faq->question }}
                             <span class="text-[20px] leading-none text-brand-mid transition-transform duration-200 group-open:rotate-45" aria-hidden="true">+</span>

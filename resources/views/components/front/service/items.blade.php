@@ -8,22 +8,39 @@
         <x-front.container>
             <div class="max-w-[680px]">
                 <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">
-                    รายการงานภายใต้{{ $service->name }}
+                    @if ($service->slug === 'house-demolition')
+                        รับรื้อถอนอะไรได้บ้าง?
+                    @else
+                        รายการงานภายใต้{{ $service->name }}
+                    @endif
                 </h2>
                 <p class="mt-6 text-[17px] leading-[1.8] text-muted">
-                    เลือกรูปแบบจากสภาพหน้างานและความต้องการใช้งาน ไม่ใช่จากราคาที่ถูกที่สุด
+                    @if ($service->slug === 'house-demolition')
+                        รับรื้อถอนสิ่งปลูกสร้างที่อยู่อาศัยและอาคารพาณิชย์ขนาดเล็กถึงกลาง เลือกวิธีรื้อจากสภาพหน้างานและสิ่งที่จะทำต่อ ไม่ใช่เลือกวิธีที่ถูกที่สุดอย่างเดียว
+                    @else
+                        เลือกรูปแบบจากสภาพหน้างานและความต้องการใช้งาน ไม่ใช่จากราคาที่ถูกที่สุด
+                    @endif
                 </p>
             </div>
 
             <div class="mt-10 grid gap-6 [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]">
                 @foreach ($items as $item)
+                    @php
+                        $itemAlt = match ($item->slug) {
+                            'townhouse' => 'ค้ำยันผนังร่วมก่อนทุบตึกแถว 3 ชั้น ป้องกันบ้านข้างเคียงร้าว',
+                            'wooden-house' => 'รื้อบ้านไม้เก่าและคัดแยกไม้ที่นำกลับไปขายได้ หักจากค่ารื้อถอน',
+                            'interior-demolition' => 'ทุบผนังและรื้อห้องน้ำเดิมเพื่อรีโนเวท แยกผนังรับน้ำหนักไว้',
+                            'site-clearing' => 'พื้นที่หลังรื้อถอนบ้านที่ขนเศษและปรับหน้าดินแล้ว พร้อมถมที่และสร้างใหม่',
+                            default => $item->name,
+                        };
+                    @endphp
                     <article class="scroll-mt-24 rounded-lg border border-line bg-white p-6">
                         <x-ui.image-slot
                             :src="$item->cover_image"
                             :label="'รายการ — '.$item->name"
                             spec="800×600"
                             ratio="4/3"
-                            :alt="$item->name"
+                            :alt="$itemAlt"
                             class="mb-5 w-full rounded-lg"
                             width="800"
                             height="600"

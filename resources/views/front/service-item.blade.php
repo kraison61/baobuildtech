@@ -10,6 +10,8 @@
         160,
         ''
     );
+    $publishedAt = $item->published_at ?? $item->created_at;
+    $modifiedAt = $item->updated_at ?? $publishedAt;
     $breadcrumbs = [
         ['label' => 'หน้าแรก', 'url' => route('home')],
         ['label' => 'งานบริการ', 'url' => route('services')],
@@ -23,6 +25,10 @@
         $pageUrl,
         $breadcrumbs,
         \App\Support\Company::serviceAreas(includeCountry: false),
+        webPageExtra: [
+            'datePublished' => $publishedAt?->toIso8601String(),
+            'dateModified' => $modifiedAt?->toIso8601String(),
+        ],
     );
     $schemaGraph[] = \App\Support\JsonLd::serviceItemEntity($item, $pageUrl, $item->prices);
 
@@ -34,6 +40,7 @@
 
 @section('title', $pageTitle)
 @section('meta_description', $metaDescription)
+@section('canonical', $pageUrl)
 
 @section('breadcrumb')
     <x-front.breadcrumb :items="$breadcrumbs" />
@@ -69,7 +76,9 @@
 
         <x-front.cta-section
             title="ส่งรูปหน้างานมาประเมินงาน{{ $item->name }}"
-            body="ส่งรูปพื้นที่และความต้องการมาทางไลน์ ทีมช่างจะตอบกลับภายใน [1] วันทำการ พร้อมข้อสังเกตและช่วงราคาคร่าว ๆ — ไม่มีค่าใช้จ่าย และไม่โทรรบกวนหากไม่ได้ขอ"
+            :body="$item->slug === 'townhouse'
+                ? 'ส่งรูปหน้าตึก ผนังที่ติดบ้านข้าง ปากซอย และตำแหน่งบน Google Maps มาทางไลน์ ทีมช่างจะตอบกลับภายใน 1 วันทำการ พร้อมข้อสังเกตและช่วงราคาคร่าว ๆ รับงานหลักในปทุมธานี นนทบุรี และกรุงเทพฯ ไม่มีค่าใช้จ่าย และไม่โทรรบกวนหากไม่ได้ขอ'
+                : 'ส่งรูปพื้นที่และความต้องการมาทางไลน์ ทีมช่างจะตอบกลับภายใน 1 วันทำการ พร้อมข้อสังเกตและช่วงราคาคร่าว ๆ — ไม่มีค่าใช้จ่าย และไม่โทรรบกวนหากไม่ได้ขอ'"
             variant="paper"
         />
     </main>

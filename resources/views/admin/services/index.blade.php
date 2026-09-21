@@ -13,6 +13,7 @@
                         <th class="px-4 py-3 font-medium">ชื่อ</th>
                         <th class="px-4 py-3 font-medium">หมวดหมู่</th>
                         <th class="px-4 py-3 font-medium">รายการ</th>
+                        <th class="px-4 py-3 font-medium">Hub</th>
                         <th class="px-4 py-3 font-medium">สถานะ</th>
                         <th class="px-4 py-3 font-medium"></th>
                     </tr>
@@ -27,6 +28,13 @@
                             <td class="px-4 py-3 text-slate-300">{{ $service->category?->name ?? '—' }}</td>
                             <td class="px-4 py-3">{{ $service->items_count }}</td>
                             <td class="px-4 py-3">
+                                @if (filled($service->content))
+                                    <x-ui.badge>มี content</x-ui.badge>
+                                @else
+                                    <span class="text-slate-500">—</span>
+                                @endif
+                            </td>
+                            <td class="px-4 py-3">
                                 <x-ui.badge :variant="$service->is_published ? 'success' : 'warning'">
                                     {{ $service->is_published ? 'เผยแพร่' : 'แบบร่าง' }}
                                 </x-ui.badge>
@@ -39,7 +47,7 @@
                             </td>
                         </tr>
                     @empty
-                        <tr><td colspan="5" class="px-4 py-8 text-center text-slate-500">ยังไม่มีข้อมูล</td></tr>
+                        <tr><td colspan="6" class="px-4 py-8 text-center text-slate-500">ยังไม่มีข้อมูล</td></tr>
                     @endforelse
                 </tbody>
             </table>

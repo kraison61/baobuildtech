@@ -27,4 +27,14 @@
         <priority>0.7</priority>
     </url>
 @endforeach
+@foreach ($posts as $post)
+    <url>
+        <loc>{{ $post->url() }}</loc>
+@if ($post->updated_at)
+        <lastmod>{{ $post->updated_at->toAtomString() }}</lastmod>
+@endif
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+@endforeach
 </urlset>

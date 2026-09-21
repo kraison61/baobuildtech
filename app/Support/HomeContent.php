@@ -154,7 +154,7 @@ class HomeContent
             [
                 'title' => 'งานเตรียมพื้นที่และงานโยธา',
                 'items' => [
-                    ['label' => 'เคลียริ่งพื้นที่และรื้อถอน', 'href' => route('services.show', ['civil', 'earthwork'])],
+                    ['label' => 'งานเคลียร์ริ่งพื้นที่', 'href' => route('services.items.show', ['civil', 'earthwork', 'land-clearing'])],
                     ['label' => 'ถมดินและปรับระดับ', 'href' => route('services.items.show', ['civil', 'earthwork', 'land-filling'])],
                     ['label' => 'ฐานรากและเสาเข็ม', 'href' => route('services.show', ['civil', 'piles-foundation'])],
                     ['label' => 'กำแพงกันดินและรั้ว', 'href' => route('services.items.show', ['civil', 'structure', 'retaining-wall'])],

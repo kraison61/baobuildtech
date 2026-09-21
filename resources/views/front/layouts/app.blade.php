@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', config('company.legal_name'))</title>
     <meta name="description" content="@yield('meta_description', config('company.description'))">
+    <link rel="canonical" href="@yield('canonical', url()->current())">
     <x-ui.favicons />
     @stack('head')
     @fonts

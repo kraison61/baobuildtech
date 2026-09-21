@@ -9,11 +9,11 @@
 
 return [
 
-    'legal_name'    => 'บีโอเอ และเพื่อน',
+    'legal_name'    => 'BOA Buildtech',
     'brand_name'    => 'BOA-Buildtech',
     'brand_mark'    => 'BOA',
     'business_type' => 'GeneralContractor',
-    'tax_id'        => '0125555012345',
+    'tax_id'        => '1100700685135',
     'founding_year' => '2026',
     'site_url'      => env('APP_URL', 'https://boabuildtech.com'),
     'description'   => 'รับเหมาก่อสร้างครบวงจรในกรุงเทพฯ และปริมณฑล ตั้งแต่ถมดิน ออกแบบ งานโครงสร้าง งานอลูมิเนียมและกระจก จนถึงระบบไฟฟ้า ประปา และ IT Infrastructure',

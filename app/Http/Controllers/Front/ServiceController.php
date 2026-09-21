@@ -30,11 +30,11 @@ class ServiceController extends Controller
                             ->orderBy('sort_order')
                             ->with([
                                 'prices' => static fn ($q) => $q
-                                    ->where('is_visible', true)
+                                    ->forPublicDisplay()
                                     ->orderBy('sort_order'),
                             ]),
                         'prices' => static fn ($q) => $q
-                            ->where('is_visible', true)
+                            ->forPublicDisplay()
                             ->orderBy('sort_order'),
                     ]),
             ])
@@ -83,16 +83,14 @@ class ServiceController extends Controller
 
     private function showService(string $categorySlug, string $serviceSlug): View|RedirectResponse
     {
-        if ($hub = ServiceHubRegistry::resolve($serviceSlug)) {
+        $hub = ServiceHubRegistry::resolve($serviceSlug);
+
+        if ($hub !== null) {
             $canonicalCategory = $hub->categorySlug();
 
             if ($categorySlug !== $canonicalCategory || $serviceSlug !== $hub->slug()) {
                 return redirect()->route('services.show', [$canonicalCategory, $hub->slug()], 301);
             }
-
-            return view('front.service-hub', [
-                'hub' => $hub,
-            ]);
         }
 
         $service = Service::query()
@@ -108,11 +106,11 @@ class ServiceController extends Controller
                     ->orderBy('sort_order')
                     ->with([
                         'prices' => static fn ($q) => $q
-                            ->where('is_visible', true)
+                            ->forPublicDisplay()
                             ->orderBy('sort_order'),
                     ]),
                 'prices' => static fn ($q) => $q
-                    ->where('is_visible', true)
+                    ->forPublicDisplay()
                     ->orderBy('sort_order'),
                 'faqs' => static fn ($q) => $q
                     ->where('is_active', true)
@@ -125,6 +123,23 @@ class ServiceController extends Controller
             ])
             ->firstOrFail();
 
+        // มี HTML ใน DB → ใช้หน้ารายละเอียดบริการ (แก้ผ่าน Admin ได้)
+        if (filled($service->content)) {
+            return $this->serviceDetailView($service);
+        }
+
+        // ยังไม่มี HTML — fallback หน้า Hub จาก PHP
+        if ($hub) {
+            return view('front.service-hub', [
+                'hub' => $hub,
+            ]);
+        }
+
+        return $this->serviceDetailView($service);
+    }
+
+    private function serviceDetailView(Service $service): View
+    {
         $relatedServices = Service::query()
             ->where('category_id', $service->category_id)
             ->whereKeyNot($service->id)

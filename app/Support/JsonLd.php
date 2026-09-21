@@ -2,6 +2,8 @@
 
 namespace App\Support;
 
+use App\Models\Author;
+use App\Models\Post;
 use App\Models\Service;
 use App\Models\ServiceItem;
 use Illuminate\Support\Collection;
@@ -310,11 +312,15 @@ class JsonLd
         $entity = [
             '@type' => 'Service',
             '@id' => $pageUrl.'#service',
-            'name' => self::cleanText($service->name),
+            'name' => self::cleanText($service->headline ?: $service->name),
             'description' => self::cleanText((string) $service->description),
             'url' => $pageUrl,
             'provider' => ['@id' => $siteUrl.'#organization'],
         ];
+
+        if (filled($service->service_type)) {
+            $entity['serviceType'] = self::cleanText((string) $service->service_type);
+        }
 
         if (filled($service->cover_image)) {
             $entity['image'] = $service->cover_image;
@@ -413,5 +419,92 @@ class JsonLd
                 ->values()
                 ->all(),
         ];
+    }
+
+    /**
+     * Person จาก Author ที่แสดงบนหน้าบทความ
+     * อ้างอิง: https://schema.org/Person — @id ตาม docs/SCHEMA-SPEC.md
+     *
+     * @return array<string, mixed>
+     */
+    public static function personEntity(Author $author): array
+    {
+        $siteUrl = rtrim((string) config('company.site_url'), '/');
+
+        $entity = [
+            '@type' => 'Person',
+            '@id' => $siteUrl.'/author/'.$author->slug.'#person',
+            'name' => self::cleanText($author->name),
+            'url' => $siteUrl.'/author/'.$author->slug,
+        ];
+
+        if (filled($author->job_title)) {
+            $entity['jobTitle'] = self::cleanText((string) $author->job_title);
+        }
+
+        if (filled($author->bio)) {
+            $entity['description'] = self::cleanText((string) $author->bio);
+        }
+
+        if (filled($author->avatar)) {
+            $entity['image'] = $author->avatar;
+        }
+
+        $entity['worksFor'] = ['@id' => $siteUrl.'#organization'];
+
+        return $entity;
+    }
+
+    /**
+     * Article จาก Post ที่แสดงบนหน้าจริง
+     * อ้างอิง: https://schema.org/Article — headline ต้องตรง H1
+     *
+     * @return array<string, mixed>
+     */
+    public static function articleEntity(Post $post, string $pageUrl): array
+    {
+        $siteUrl = rtrim((string) config('company.site_url'), '/');
+        $pageUrl = rtrim($pageUrl, '/');
+        $post->loadMissing('author');
+
+        $images = array_values(array_filter([
+            $post->image_16x9,
+            $post->image_4x3,
+            $post->image_1x1,
+        ]));
+
+        $entity = [
+            '@type' => 'Article',
+            '@id' => $pageUrl.'#article',
+            'headline' => self::cleanText($post->title),
+            'description' => self::cleanText((string) ($post->excerpt ?: $post->meta_description)),
+            'url' => $pageUrl,
+            'inLanguage' => 'th-TH',
+            'mainEntityOfPage' => ['@id' => $pageUrl.'#webpage'],
+            'publisher' => ['@id' => $siteUrl.'#organization'],
+        ];
+
+        if ($images !== []) {
+            $entity['image'] = count($images) === 1 ? $images[0] : $images;
+        }
+
+        if ($post->author) {
+            $entity['author'] = ['@id' => $siteUrl.'/author/'.$post->author->slug.'#person'];
+        }
+
+        if ($post->published_at) {
+            $entity['datePublished'] = $post->published_at->toIso8601String();
+        }
+
+        $modified = $post->updated_at ?? $post->published_at;
+        if ($modified) {
+            $entity['dateModified'] = $modified->toIso8601String();
+        }
+
+        if ($post->word_count) {
+            $entity['wordCount'] = (int) $post->word_count;
+        }
+
+        return $entity;
     }
 }

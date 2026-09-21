@@ -18,7 +18,9 @@ class ServiceRequest extends FormRequest
             'category_id' => ['required', 'exists:service_categories,id'],
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255'],
+            'headline' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
+            'content' => ['nullable', 'string'],
             'excerpt' => ['nullable', 'string', 'max:500'],
             'cover_image' => ['nullable', 'string', 'max:500'],
             'service_type' => ['nullable', 'string', 'max:255'],
@@ -32,9 +34,12 @@ class ServiceRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
+        $content = $this->input('content');
+
         $this->merge([
             'is_published' => $this->boolean('is_published'),
             'sort_order' => $this->input('sort_order', 0),
+            'content' => is_string($content) && trim($content) !== '' ? $content : null,
         ]);
     }
 }

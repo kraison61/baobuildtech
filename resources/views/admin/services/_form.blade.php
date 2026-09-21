@@ -13,6 +13,11 @@
         <x-ui.label for="name">ชื่อบริการ *</x-ui.label>
         <x-ui.input type="text" name="name" id="name" :value="old('name', $service?->name)" required />
     </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="headline">หัวข้อ H1 (optional)</x-ui.label>
+        <x-ui.input type="text" name="headline" id="headline" :value="old('headline', $service?->headline)" maxlength="255" />
+        <p class="mt-1 text-xs text-slate-500">ว่าง = ใช้ชื่อบริการ · ใช้เมื่อต้องการ H1 ยาวกว่าชื่อในเมนู/breadcrumb</p>
+    </div>
     <div>
         <x-ui.label for="slug">Slug</x-ui.label>
         <x-ui.input type="text" name="slug" id="slug" :value="old('slug', $service?->slug)" />
@@ -28,6 +33,11 @@
     <div class="sm:col-span-2">
         <x-ui.label for="description">คำอธิบาย</x-ui.label>
         <x-ui.textarea name="description" id="description" rows="4">{{ old('description', $service?->description) }}</x-ui.textarea>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="content">เนื้อหา (HTML)</x-ui.label>
+        <x-ui.textarea name="content" id="content" rows="16" class="font-mono text-xs">{{ old('content', $service?->content) }}</x-ui.textarea>
+        <p class="mt-1 text-xs text-slate-500">เหมือน service item — รองรับ h2/h3, ตาราง, รายการ · ว่าง = ไม่แสดงบล็อกเนื้อหา</p>
     </div>
     <div class="sm:col-span-2">
         <x-ui.label for="cover_image">รูปปก (URL)</x-ui.label>

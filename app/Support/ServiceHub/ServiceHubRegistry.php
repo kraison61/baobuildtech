@@ -4,6 +4,7 @@ namespace App\Support\ServiceHub;
 
 use App\Contracts\ServiceHubContent;
 use App\Support\ServiceHub\Hubs\AluminiumWorksHubContent;
+use App\Support\ServiceHub\Hubs\PilesFoundationHubContent;
 use InvalidArgumentException;
 
 class ServiceHubRegistry
@@ -11,19 +12,28 @@ class ServiceHubRegistry
     /**
      * @var array<int, class-string<ServiceHubContent>>
      */
-    private const HUBS = [
+    private const PHP_HUBS = [
         AluminiumWorksHubContent::class,
+        PilesFoundationHubContent::class,
     ];
+
+    /**
+     * @return array<int, ServiceHubContent>
+     */
+    public static function phpHubs(): array
+    {
+        return array_map(
+            static fn (string $class): ServiceHubContent => app($class),
+            self::PHP_HUBS,
+        );
+    }
 
     /**
      * @return array<int, ServiceHubContent>
      */
     public static function all(): array
     {
-        return array_map(
-            static fn (string $class): ServiceHubContent => app($class),
-            self::HUBS,
-        );
+        return self::phpHubs();
     }
 
     public static function resolve(string $slug): ?ServiceHubContent
@@ -42,7 +52,7 @@ class ServiceHubRegistry
         return self::resolve($slug) !== null;
     }
 
-  /**
+    /**
      * @return array<int, string>
      */
     public static function slugs(): array

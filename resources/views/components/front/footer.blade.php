@@ -10,7 +10,7 @@
 
     $services = [
         ['label' => 'สำรวจ', 'href' => route('services').'#survey'],
-        ['label' => 'เสาเข็มและฐานราก', 'href' => route('services').'#piles-foundation'],
+        ['label' => 'เสาเข็มและฐานราก', 'href' => route('services.show', ['civil', 'piles-foundation'])],
         ['label' => 'โครงสร้าง', 'href' => route('services').'#structure'],
         ['label' => 'ระบบไฟฟ้า', 'href' => route('services').'#electrical'],
         ['label' => 'สายสัญญาณ', 'href' => route('services').'#network-cabling'],
@@ -36,7 +36,7 @@
                 <li><a href="{{ route('home') }}" class="text-sand hover:text-white">หน้าแรก</a></li>
                 <li><a href="{{ route('services') }}" class="text-sand hover:text-white">งานบริการ</a></li>
                 <li><a href="{{ route('works') }}" class="text-sand hover:text-white">ผลงาน</a></li>
-                <li><a href="{{ route('articles') }}" class="text-sand hover:text-white">บทความ</a></li>
+                <li><a href="{{ route('blog.index') }}" class="text-sand hover:text-white">บทความ</a></li>
                 <li><a href="{{ route('gallery') }}" class="text-sand hover:text-white">คลังภาพผลงาน</a></li>
                 <li><a href="{{ route('about') }}" class="text-sand hover:text-white">เกี่ยวกับเรา</a></li>
                 <li><a href="{{ route('contact') }}" class="text-sand hover:text-white">ติดต่อเรา</a></li>

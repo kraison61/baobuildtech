@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
@@ -34,6 +35,38 @@ class ServicePrice extends Model
     public function priceable(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    /**
+     * ราคาที่แสดงบน front ได้ — is_visible และเจ้าของเผยแพร่แล้ว
+     * (service_item ต้องมี service แม่เผยแพร่ด้วย)
+     */
+    public function scopeForPublicDisplay(Builder $query): Builder
+    {
+        return $query
+            ->where('is_visible', true)
+            ->where(function (Builder $q): void {
+                $q->where(function (Builder $q): void {
+                    $q->where('priceable_type', 'service')
+                        ->whereHasMorph(
+                            'priceable',
+                            [Service::class],
+                            static fn (Builder $owner) => $owner->where('is_published', true),
+                        );
+                })->orWhere(function (Builder $q): void {
+                    $q->where('priceable_type', 'service_item')
+                        ->whereHasMorph(
+                            'priceable',
+                            [ServiceItem::class],
+                            static fn (Builder $owner) => $owner
+                                ->where('is_published', true)
+                                ->whereHas(
+                                    'service',
+                                    static fn (Builder $s) => $s->where('is_published', true),
+                                ),
+                        );
+                });
+            });
     }
 
     public function formattedRange(): string

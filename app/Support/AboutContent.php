@@ -77,6 +77,21 @@ class AboutContent
         ];
     }
 
+    /**
+     * เปิดเผยความสัมพันธ์กับเว็บในเครือ — ลิงก์กลับ theeraphong.com ได้เฉพาะหน้านี้
+     *
+     * @return array{before: string, link_text: string, link_url: string, after: string}
+     */
+    public static function affiliateDisclosure(): array
+    {
+        return [
+            'before' => config('company.brand_name').' (บีโอเอ บิลด์เทค) ดำเนินงานร่วมกับ ',
+            'link_text' => 'บจก.ธีรพงษ์ เซอร์วิส',
+            'link_url' => 'https://theeraphong.com',
+            'after' => ' โดยแบ่งสายบริการและพื้นที่รับงานให้ชัดเจน — BOA-Buildtech โฟกัสงานอลูมิเนียม โซล่าเซลล์ รื้อถอน/รีโนเวท และถมที่ในโซนปทุมธานี–รังสิต–ธัญบุรี–ลำลูกกา',
+        ];
+    }
+
     public static function storyImage(): ?string
     {
         return rtrim((string) config('company.images_cdn'), '/').'/assets/about/about-story.webp';

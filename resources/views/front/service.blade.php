@@ -50,10 +50,26 @@
     <main>
         <x-front.service.hero :service="$service" />
 
-        <x-front.service.items :service="$service" :items="$service->items" />
+        @if ($service->slug === 'house-demolition')
+            <x-front.service.items :service="$service" :items="$service->items" />
 
-        @if ($visiblePrices->isNotEmpty())
-            <x-front.service.prices :service="$service" :prices="$visiblePrices" />
+            @if ($visiblePrices->isNotEmpty())
+                <x-front.service.prices :service="$service" :prices="$visiblePrices" />
+            @endif
+
+            @if (filled($service->content))
+                <x-front.service.content :service="$service" />
+            @endif
+        @else
+            @if (filled($service->content))
+                <x-front.service.content :service="$service" />
+            @endif
+
+            <x-front.service.items :service="$service" :items="$service->items" />
+
+            @if ($visiblePrices->isNotEmpty())
+                <x-front.service.prices :service="$service" :prices="$visiblePrices" />
+            @endif
         @endif
 
         @if ($service->portfolios->isNotEmpty())
@@ -69,8 +85,10 @@
         @endif
 
         <x-front.cta-section
-            title="ส่งรูปหน้างานมาประเมินงาน{{ $service->name }}"
-            body="ส่งรูปพื้นที่และความต้องการมาทางไลน์ ทีมช่างจะตอบกลับภายใน [1] วันทำการ พร้อมข้อสังเกตและช่วงราคาคร่าว ๆ — ไม่มีค่าใช้จ่าย และไม่โทรรบกวนหากไม่ได้ขอ"
+            :title="$service->slug === 'house-demolition' ? 'ส่งรูปหน้างาน ประเมินราคารื้อถอนฟรี' : 'ส่งรูปหน้างานมาประเมินงาน'.$service->name"
+            :body="$service->slug === 'house-demolition'
+                ? 'ส่งรูปบ้าน ทางเข้าซอย และสิ่งที่อยากทำหลังรื้อมาทางไลน์ ทีมวิศวกรจะตอบกลับภายใน 1 วันทำการ พร้อมข้อสังเกตและช่วงราคาคร่าว ๆ — ไม่มีค่าใช้จ่าย และไม่โทรรบกวนหากไม่ได้ขอ'
+                : 'ส่งรูปพื้นที่และความต้องการมาทางไลน์ ทีมช่างจะตอบกลับภายใน 1 วันทำการ พร้อมข้อสังเกตและช่วงราคาคร่าว ๆ — ไม่มีค่าใช้จ่าย และไม่โทรรบกวนหากไม่ได้ขอ'"
             variant="paper"
         />
     </main>

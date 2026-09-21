@@ -6,6 +6,11 @@
     $brand = config('company.brand_name');
     $lineUrl = \App\Support\Company::lineUrl();
     $category = $service->category;
+    $headline = $service->headline ?: $service->name;
+    $heroAlt = match ($service->slug) {
+        'house-demolition' => 'ทีมงาน '.$brand.' ใช้รถแบคโฮรื้อถอนบ้านเดี่ยว 2 ชั้น ที่ธัญบุรี ปทุมธานี',
+        default => $service->name,
+    };
 @endphp
 
 <section id="top" class="border-b border-line bg-paper">
@@ -27,7 +32,7 @@
                 </div>
 
                 <h1 class="mt-6 text-[clamp(1.625rem,4.4vw,2.35rem)] font-semibold leading-[1.35] text-brand">
-                    {{ $service->name }}
+                    {{ $headline }}
                 </h1>
 
                 @if ($service->description)
@@ -50,7 +55,7 @@
                 </div>
 
                 <p class="mt-4 text-[15px] leading-[1.7] text-muted">
-                    ตอบกลับภายใน [1] วันทำการ · ไม่มีค่าใช้จ่าย · ไม่โทรรบกวนหากไม่ได้ขอ
+                    ตอบกลับภายใน 1 วันทำการ · ไม่มีค่าใช้จ่าย · ไม่โทรรบกวนหากไม่ได้ขอ
                 </p>
             </div>
         </div>
@@ -60,7 +65,7 @@
             :label="'Hero — '.$service->name"
             spec="1600×1200"
             ratio="none"
-            :alt="$service->name"
+            :alt="$heroAlt"
             class="size-full min-h-[300px]"
             width="1600"
             height="1200"

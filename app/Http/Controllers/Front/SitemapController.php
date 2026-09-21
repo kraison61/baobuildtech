@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
 use App\Models\Service;
 use App\Models\ServiceItem;
 use Illuminate\Http\Response;
@@ -15,7 +16,7 @@ class SitemapController extends Controller
             ['loc' => route('home'), 'priority' => '1.0', 'changefreq' => 'weekly'],
             ['loc' => route('services'), 'priority' => '0.9', 'changefreq' => 'weekly'],
             ['loc' => route('works'), 'priority' => '0.7', 'changefreq' => 'weekly'],
-            ['loc' => route('articles'), 'priority' => '0.7', 'changefreq' => 'weekly'],
+            ['loc' => route('blog.index'), 'priority' => '0.7', 'changefreq' => 'weekly'],
             ['loc' => route('gallery'), 'priority' => '0.6', 'changefreq' => 'weekly'],
             ['loc' => route('about'), 'priority' => '0.6', 'changefreq' => 'monthly'],
             ['loc' => route('contact'), 'priority' => '0.8', 'changefreq' => 'monthly'],
@@ -42,8 +43,16 @@ class SitemapController extends Controller
             ->orderBy('id')
             ->get();
 
+        $posts = Post::query()
+            ->where('is_published', true)
+            ->whereNotNull('published_at')
+            ->where('published_at', '<=', now())
+            ->orderByDesc('published_at')
+            ->orderByDesc('id')
+            ->get();
+
         return response()
-            ->view('front.sitemap', compact('static', 'services', 'items'))
+            ->view('front.sitemap', compact('static', 'services', 'items', 'posts'))
             ->header('Content-Type', 'application/xml; charset=UTF-8');
     }
 

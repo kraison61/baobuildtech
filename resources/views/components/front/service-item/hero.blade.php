@@ -37,6 +37,19 @@
                     {{ $headline }}
                 </h1>
 
+                @php
+                    $publishedAt = $item->published_at ?? $item->created_at;
+                    $modifiedAt = $item->updated_at ?? $publishedAt;
+                @endphp
+                @if ($publishedAt)
+                    <p class="mt-4 text-[15px] leading-[1.7] text-muted">
+                        <time datetime="{{ $publishedAt->toIso8601String() }}">เผยแพร่ {{ $publishedAt->locale('th')->translatedFormat('j F') }} {{ $publishedAt->year + 543 }}</time>
+                        @if ($modifiedAt && (! $publishedAt || ! $modifiedAt->equalTo($publishedAt)))
+                            · <time datetime="{{ $modifiedAt->toIso8601String() }}">อัปเดต {{ $modifiedAt->locale('th')->translatedFormat('j F') }} {{ $modifiedAt->year + 543 }}</time>
+                        @endif
+                    </p>
+                @endif
+
                 @if ($lead)
                     <p class="mt-6 text-[17px] leading-[1.8] text-muted">
                         {{ $lead }}
@@ -57,7 +70,7 @@
                 </div>
 
                 <p class="mt-4 text-[15px] leading-[1.7] text-muted">
-                    ตอบกลับภายใน [1] วันทำการ · ไม่มีค่าใช้จ่าย · ไม่โทรรบกวนหากไม่ได้ขอ
+                    ตอบกลับภายใน 1 วันทำการ · ไม่มีค่าใช้จ่าย · ไม่โทรรบกวนหากไม่ได้ขอ
                 </p>
             </div>
         </div>
@@ -68,7 +81,9 @@
             spec="1600×1200"
             ratio="none"
             ratio-note="4:3 · 5:4 desktop"
-            :alt="$item->name"
+            :alt="$item->slug === 'townhouse'
+                ? 'ทีม '.config('company.brand_name').' รื้อถอนทาวน์เฮาส์และตึกแถวในปทุมธานี'
+                : $item->name"
             class="aspect-[4/3] w-full min-[900px]:aspect-[5/4]"
             width="1600"
             height="1200"

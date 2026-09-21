@@ -28,7 +28,7 @@ class ServiceItemController extends Controller
             ->with([
                 'service.category',
                 'prices' => static fn ($q) => $q
-                    ->where('is_visible', true)
+                    ->forPublicDisplay()
                     ->orderBy('sort_order'),
                 'faqs' => static fn ($q) => $q
                     ->where('is_active', true)

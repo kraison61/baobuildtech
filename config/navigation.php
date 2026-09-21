@@ -25,8 +25,8 @@ return [
     ],
     [
         'label' => 'บทความ',
-        'href' => '/articles',
-        'route' => 'articles',
+        'href' => '/blog',
+        'route' => 'blog.index',
     ],
     [
         'label' => 'คลังภาพผลงาน',

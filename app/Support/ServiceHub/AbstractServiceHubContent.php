@@ -215,7 +215,7 @@ abstract class AbstractServiceHubContent implements ServiceHubContent
         return $this->resolveService()?->items ?? collect();
     }
 
-    private function resolveService(): ?Service
+    protected function resolveService(): ?Service
     {
         if ($this->serviceResolved) {
             return $this->serviceCache;
@@ -229,20 +229,29 @@ abstract class AbstractServiceHubContent implements ServiceHubContent
             ->whereHas('category', static fn ($q) => $q->where('is_active', true))
             ->with([
                 'prices' => static fn ($q) => $q
-                    ->where('is_visible', true)
+                    ->forPublicDisplay()
                     ->orderBy('sort_order'),
                 'items' => static fn ($q) => $q
                     ->where('is_published', true)
                     ->orderBy('sort_order')
                     ->with([
                         'prices' => static fn ($q) => $q
-                            ->where('is_visible', true)
+                            ->forPublicDisplay()
                             ->orderBy('sort_order'),
                     ]),
             ])
             ->first();
 
         return $this->serviceCache;
+    }
+
+    /**
+     * บังคับใช้ Service ที่โหลดแล้ว (เช่น จาก DatabaseServiceHubContent)
+     */
+    protected function bindService(Service $service): void
+    {
+        $this->serviceCache = $service;
+        $this->serviceResolved = true;
     }
 
     /**
