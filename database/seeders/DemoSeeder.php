@@ -305,17 +305,17 @@ class DemoSeeder extends Seeder
                 'is_published' => true,
             ],
 
-            // เสาเข็มและฐานราก
+            // เสาเข็มและฐานราก — เนื้อหาเต็มรัน UpdateSteelScrewPileContentSeeder
             [
                 'service' => 'piles-foundation',
-                'name' => 'กดเสาเข็ม',
-                'slug' => 'driven-pile',
-                'description' => 'กดเสาเข็มตามแบบวิศวกร พร้อมบันทึกความลึกและแรงปฏิกิริยาทุกต้น',
+                'name' => 'เสาเข็มเหล็ก',
+                'slug' => 'steel-screw-pile',
+                'description' => 'เสาเข็มเหล็กเกลียวและไมโครไพล์เหล็ก ราคาอ้างอิง รับน้ำหนัก ข้อดีข้อจำกัด และขั้นตอนติดตั้ง ปทุมธานี–นนทบุรี',
                 'cover_image' => null,
-                'meta_title' => 'กดเสาเข็ม',
-                'meta_description' => 'รับกดเสาเข็มพร้อมรายงานหน้างาน',
+                'meta_title' => 'เสาเข็มเหล็ก ราคา รับน้ำหนัก ดีไหม? ครบจบปี 2569 | BOA-Buildtech',
+                'meta_description' => 'เสาเข็มเหล็ก ราคาเท่าไหร่ รับน้ำหนักกี่ตัน ดีไหม? สรุปจากเอกสารราชการและผลทดสอบ ASTM พร้อมทีมประเมินหน้างานปทุมธานี–นนทบุรี ทัก LINE',
                 'sort_order' => 1,
-                'is_published' => false,
+                'is_published' => true,
             ],
             [
                 'service' => 'piles-foundation',
@@ -524,7 +524,7 @@ class DemoSeeder extends Seeder
 
             if (isset($pageFields[$row['slug']])) {
                 $fields = $pageFields[$row['slug']];
-                if (($fields['content'] ?? null) === null) {
+                if (($fields['content'] ?? null) === null && $row['slug'] === 'retaining-wall') {
                     $fields['content'] = $this->retainingWallPageContent();
                 }
                 $row = array_merge($fields, $row);
@@ -713,13 +713,13 @@ HTML;
                 'sort_order' => 7,
             ],
             [
-                'priceable' => $items['driven-pile'],
+                'priceable' => $items['steel-screw-pile'],
                 'price_type' => 'unit',
-                'label' => 'กดเสาเข็ม',
-                'price_min' => 70,
-                'price_max' => null,
-                'price_unit' => 'บาท/ม.',
-                'note' => 'ราคาเริ่มต้น — ขึ้นกับขนาดเสาและความลึก',
+                'label' => 'เสาเข็มเหล็ก — ราคาอ้างอิงตัวเสา (ไม่รวมติดตั้ง)',
+                'price_min' => 6100,
+                'price_max' => 85000,
+                'price_unit' => 'บาท/ต้น',
+                'note' => 'ราคาอ้างอิงบัญชีนวัตกรรมไทย KEMREX FS — ไม่ใช่ราคาติดตั้ง BOA',
                 'is_visible' => false,
                 'sort_order' => 1,
             ],

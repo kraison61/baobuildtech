@@ -229,7 +229,7 @@ class BoaContentCleanupPhase1
     {
         $count = 0;
 
-        $itemSlugs = ['driven-pile'];
+        $itemSlugs = [];
         foreach ($itemSlugs as $slug) {
             $row = DB::table('service_items')->where('slug', $slug)->first(['id', 'is_published', 'published_at']);
             if (! $row || ! (bool) $row->is_published) {
@@ -296,7 +296,7 @@ class BoaContentCleanupPhase1
             $count += $this->hidePricesFor($backup, 'service', (int) $service->id);
         }
 
-        $itemSlugs = ['retaining-wall', 'steel-plaster-fence', 'concrete-pour', 'septic-tank', 'driven-pile'];
+        $itemSlugs = ['retaining-wall', 'steel-plaster-fence', 'concrete-pour', 'septic-tank', 'steel-screw-pile'];
         foreach ($itemSlugs as $slug) {
             $item = ServiceItem::query()->where('slug', $slug)->first();
             if (! $item) {

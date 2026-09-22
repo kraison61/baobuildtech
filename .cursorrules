@@ -22,6 +22,13 @@ Strict separation of concerns between Admin Panel and User Dashboard (Front-end)
 - **Routes:** `routes/admin.php`, `routes/user.php`, `routes/web.php` (Loaded via `bootstrap/app.php`).
 - **Service URLs:** `/services/{category}/{service}` และ `/services/{category}/{service}/{item}` เท่านั้น — ใช้ `$service->url()` / `$item->url()` (ดู `.cursor/rules/service-urls.mdc`)
 
+## 🔗 Internal Links & Base URL
+Internal link ทุกชนิดต้องอิง `APP_URL` จาก `.env` (`config('app.url')`) — ห้าม hardcode domain / host
+- **ใช้:** `route()`, `url()`, `asset()`, `$model->url()`, `config('app.url')` — helpers เหล่านี้ resolve จาก `APP_URL`
+- **ห้าม:** `'http://localhost:8000/...'`, `'https://baobuildtech.com/...'`, หรือ domain อื่นแบบ string ตรงๆ
+- **Canonical / Open Graph / JSON-LD / sitemap / email:** absolute URL ต้องมาจาก helper ด้านบนเท่านั้น ไม่เขียน host เอง
+- เปลี่ยน environment = แก้แค่ `APP_URL` ใน `.env` ให้ครบ ไม่ต้องแก้โค้ด
+
 ## 📜 Laravel 13 Guidelines
 - **Blade First:** Heavily utilize Blade directives and components (`<x-ui.card>`).
 - **Database:** Optimize Eloquent for SQLite. Strictly avoid N+1 issues (`with()`, `load()`, `withCount()`), use `chunk()`/`lazy()` for large datasets.
