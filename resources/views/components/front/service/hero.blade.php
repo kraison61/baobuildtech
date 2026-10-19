@@ -9,6 +9,7 @@
     $headline = $service->headline ?: $service->name;
     $heroAlt = match ($service->slug) {
         'house-demolition' => 'ทีมงาน '.$brand.' ใช้รถแบคโฮรื้อถอนบ้านเดี่ยว 2 ชั้น ที่ธัญบุรี ปทุมธานี',
+        'shop-design' => 'งานออกแบบและตกแต่งร้านค้าโดย '.$brand.' — ภาพรวมหน้าร้านและบรรยากาศภายใน',
         default => $service->name,
     };
 @endphp
