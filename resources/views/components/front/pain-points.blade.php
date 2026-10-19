@@ -45,7 +45,7 @@
             <a
                 href="{{ $lineUrl ?? '#cta' }}"
                 class="inline-flex items-center rounded-lg bg-accent px-[26px] py-4 text-[17px] font-semibold text-white hover:bg-accent-dark hover:text-white"
-                @if ($lineUrl) target="_blank" rel="noopener noreferrer" @endif
+                @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="pain-points" @endif
             >ปรึกษาฟรี ไม่ผูกมัด</a>
         </div>
     </x-front.container>

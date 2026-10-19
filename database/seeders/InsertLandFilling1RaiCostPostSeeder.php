@@ -57,15 +57,36 @@ class InsertLandFilling1RaiCostPostSeeder extends Seeder
             ->with('category')
             ->first();
 
-        $fillingUrl = $fillingItem?->url()
-            ?? url('/services/civil/earthwork/land-filling');
-        $clearingUrl = $clearingItem?->url()
-            ?? url('/services/civil/earthwork/land-clearing');
-        $pilesUrl = $pilesService?->url()
-            ?? url('/services/civil/piles-foundation');
-        $retainingUrl = $retainingItem?->url();
-        $worksUrl = route('works');
-        $contactUrl = route('contact');
+        // ลิงก์ในเนื้อหา HTML ต้องเป็น relative path — ห้ามฝัง APP_URL จาก env ตอน seed
+        $fillingUrl = $fillingItem
+            ? route('services.items.show', [
+                $fillingItem->service->category->slug,
+                $fillingItem->service->slug,
+                $fillingItem->slug,
+            ], absolute: false)
+            : '/services/civil/earthwork/land-filling';
+        $clearingUrl = $clearingItem
+            ? route('services.items.show', [
+                $clearingItem->service->category->slug,
+                $clearingItem->service->slug,
+                $clearingItem->slug,
+            ], absolute: false)
+            : '/services/civil/earthwork/land-clearing';
+        $pilesUrl = $pilesService
+            ? route('services.show', [
+                $pilesService->category->slug,
+                $pilesService->slug,
+            ], absolute: false)
+            : '/services/civil/piles-foundation';
+        $retainingUrl = $retainingItem
+            ? route('services.items.show', [
+                $retainingItem->service->category->slug,
+                $retainingItem->service->slug,
+                $retainingItem->slug,
+            ], absolute: false)
+            : null;
+        $worksUrl = route('works', absolute: false);
+        $contactUrl = route('contact', absolute: false);
 
         $image = $fillingItem?->cover_image
             ?: rtrim((string) config('company.images_cdn'), '/').'/assets/service-items/hero-land-filling.webp';

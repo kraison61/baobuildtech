@@ -38,8 +38,14 @@ class UpdateSolarRooftopCitizenPostSeeder extends Seeder
             ->with('service.category')
             ->first();
 
-        $solarUrl = $solarItem?->url()
-            ?? rtrim((string) config('company.site_url'), '/').'/services/mechanical-and-electrical-work/electrical/solar-cell-installation';
+        // ลิงก์ในเนื้อหา HTML ต้องเป็น relative path — ห้ามฝัง APP_URL จาก env ตอน seed
+        $solarUrl = $solarItem
+            ? route('services.items.show', [
+                $solarItem->service->category->slug,
+                $solarItem->service->slug,
+                $solarItem->slug,
+            ], absolute: false)
+            : '/services/mechanical-and-electrical-work/electrical/solar-cell-installation';
 
         $author = Author::query()->updateOrCreate(
             ['slug' => 'boa-electrical-team'],

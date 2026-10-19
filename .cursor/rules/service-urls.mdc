@@ -1,0 +1,45 @@
+---
+description: โครงสร้าง URL หน้างานบริการ (ServiceCategory → Service → ServiceItem)
+alwaysApply: true
+---
+
+# Service URL Structure
+
+Front-end URLs ต้องสะท้อน hierarchy ใน DB เสมอ:
+
+| หน้า | Pattern | Route name |
+|---|---|---|
+| รวมบริการ | `/services` | `services` |
+| บริการ / Hub | `/services/{categorySlug}/{serviceSlug}` | `services.show` |
+| รายการย่อย | `/services/{categorySlug}/{serviceSlug}/{itemSlug}` | `services.items.show` |
+
+**ตัวอย่าง:** `/services/civil/structure/retaining-wall`
+
+## กฎสร้าง link
+
+- ใช้ `$service->url()` และ `$item->url()` จาก Model — **ห้าม** hardcode path หรือใช้ slug แค่ 1–2 segment
+- Service Hub ใช้ `$hub->url()` (implements `ServiceHubContent`)
+- ถ้าไม่มี Model instance (เช่น static menu) ใช้ `route()` ครบ 2 หรือ 3 params ตามตารางด้านบน
+- JSON-LD / canonical / breadcrumb ต้องใช้ URL เดียวกับ `$model->url()`
+
+## กฎ route & controller
+
+- Route 3 segment ต้องประกาศ **ก่อน** route 2 segment ใน `routes/web.php`
+- `ServiceController::showLegacy` และ legacy 2-segment ใน `show()` มีไว้ **301 redirect เท่านั้น** — ห้ามสร้าง feature ใหม่บน URL เก่า
+- ห้ามสร้าง root-level URL สำหรับ service item (เช่น `/aluminium-door-window`) — redirect 301 ไป canonical
+- Query ต้อง validate `category.slug` + `service.slug` (+ `item.slug`) และ `is_published` / `is_active`
+
+## ห้ามทำ
+
+```php
+// ❌ URL เก่า / slug ไม่ครบ
+route('services.show', $service->slug)
+route('services.items.show', [$service->slug, $item->slug])
+url('/services/structure')
+
+// ✅
+$service->url()
+$item->url()
+route('services.show', [$categorySlug, $serviceSlug])
+route('services.items.show', [$categorySlug, $serviceSlug, $itemSlug])
+```

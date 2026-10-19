@@ -31,9 +31,9 @@
                     <a
                         href="{{ $lineUrl ?? '#cta' }}"
                         class="inline-flex items-center rounded-lg bg-accent px-[26px] py-4 text-[17px] font-semibold text-white hover:bg-accent-dark hover:text-white"
-                        @if ($lineUrl) target="_blank" rel="noopener noreferrer" @endif
+                        @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="home-hero" @endif
                     >ส่งรูปหน้างานทางไลน์ — ประเมินราคาเบื้องต้นฟรี</a>
-                    <a href="{{ $phoneHref }}" class="border-b border-brand-mid pb-0.5 text-[17px] font-semibold tabular-nums text-brand-mid hover:text-brand">โทรคุยกับวิศวกร {{ $phoneDisplay }}</a>
+                    <a href="{{ $phoneHref }}" class="border-b border-brand-mid pb-0.5 text-[17px] font-semibold tabular-nums text-brand-mid hover:text-brand" data-cta="phone" data-cta-source="home-hero">โทรคุยกับวิศวกร {{ $phoneDisplay }}</a>
                 </div>
 
                 <p class="mt-4 text-[14px] leading-[1.7] text-muted sm:text-[15px]">

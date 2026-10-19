@@ -18,11 +18,11 @@
                 <a
                     href="{{ $lineUrl ?? route('contact') }}"
                     class="inline-flex items-center rounded-lg bg-accent px-[26px] py-4 text-[17px] font-semibold text-white hover:bg-accent-dark hover:text-white"
-                    @if ($lineUrl) target="_blank" rel="noopener noreferrer" @endif
+                    @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="about-cta" @endif
                 >ส่งรูปหน้างาน ประเมินฟรี</a>
             </div>
             <div class="mt-6 flex flex-wrap justify-center gap-6 text-[17px]">
-                <a href="{{ $phoneHref }}" class="border-b border-brand-mid pb-0.5 tabular-nums text-brand-mid hover:text-brand">โทร {{ $phoneDisplay }}</a>
+                <a href="{{ $phoneHref }}" class="border-b border-brand-mid pb-0.5 tabular-nums text-brand-mid hover:text-brand" data-cta="phone" data-cta-source="about-cta">โทร {{ $phoneDisplay }}</a>
                 @if ($lineId)
                     <span class="text-muted">ไลน์ {{ $lineId }}</span>
                 @endif

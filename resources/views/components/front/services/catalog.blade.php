@@ -167,7 +167,7 @@
                                         <a
                                             href="{{ $lineUrl ?? '#cta' }}"
                                             class="inline-flex self-start border-b border-line pb-0.5 text-[17px] font-semibold text-muted hover:text-brand"
-                                            @if ($lineUrl) target="_blank" rel="noopener noreferrer" @endif
+                                            @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="services-catalog" @endif
                                         >ส่งรูปประเมิน</a>
                                     </div>
                                 </div>

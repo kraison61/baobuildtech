@@ -47,7 +47,7 @@ class ContactContent
     }
 
     /**
-     * @return array<int, array{label: string, value: string, hint: string, href?: string|null, external?: bool}>
+     * @return array<int, array{label: string, value: string, hint: string, href?: string|null, external?: bool, cta?: string|null}>
      */
     public static function channels(): array
     {
@@ -64,6 +64,7 @@ class ContactContent
                 'hint' => $hours.' ตอบเรื่องหน้างานได้ทันที',
                 'href' => Company::phoneHref(),
                 'external' => false,
+                'cta' => 'phone',
             ],
             $lineId ? [
                 'label' => 'ไลน์ (ส่งรูปได้)',
@@ -71,6 +72,7 @@ class ContactContent
                 'hint' => 'ช่องทางที่เร็วที่สุดสำหรับส่งรูปพื้นที่และแบบ',
                 'href' => $lineUrl,
                 'external' => filled($lineUrl),
+                'cta' => filled($lineUrl) ? 'line' : null,
             ] : null,
             $email !== '' ? [
                 'label' => 'อีเมล',

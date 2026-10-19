@@ -1,0 +1,77 @@
+---
+description: Internal link ทุกชนิดต้องอิง APP_URL จาก .env — ห้าม hardcode domain
+alwaysApply: true
+---
+
+# Internal Links & APP_URL
+
+Base URL ของโปรเจกต์มาจาก `APP_URL` ใน `.env` เท่านั้น (`config('app.url')`)
+
+เปลี่ยน environment (local → production) = แก้แค่ `APP_URL` ใน `.env` — **ห้าม** แก้โค้ดให้มี domain ตายตัว
+
+## Production checklist
+
+ขึ้น production ต้องตั้งใน `.env` ให้ตรงโดเมนจริง เช่น:
+
+```env
+APP_URL=https://baobuildtech.com
+```
+
+- ห้ามเหลือ `http://localhost:8000` บน production
+- หลังเปลี่ยน `APP_URL` ให้ `php artisan config:clear` (หรือ rebuild config cache)
+- ตรวจ canonical / OG / JSON-LD / sitemap ว่าออกเป็นโดเมน production
+
+## ใช้
+
+| Helper | ใช้เมื่อ |
+|---|---|
+| `route('name', …)` | ลิงก์ไป named route |
+| `url('/path')` / `url()->current()` | absolute URL จาก path |
+| `asset('…')` | CSS / JS / ไฟล์ใน `public/` |
+| `$model->url()` | canonical URL ของ model (service, item, post ฯลฯ) |
+| `config('app.url')` | ต่อ path เองเมื่อไม่มี helper ที่เหมาะสม |
+
+## ห้าม
+
+```php
+// ❌ hardcode host / domain
+'http://localhost:8000/contact'
+'https://baobuildtech.com/services/civil/structure'
+href="https://baobuildtech.com/blog"
+
+// ✅
+route('contact')
+$service->url()
+url('/blog')
+```
+
+## ครอบคลุม
+
+- ลิงก์ใน Blade / Component / Controller redirect
+- Canonical, Open Graph, Twitter card
+- JSON-LD / Structured Data (`sameAs` ของบริษัทยกเว้น — เป็น URL ภายนอกจริง)
+- Sitemap, email body, LINE notify message ที่ชี้กลับเว็บเรา
+- `data-*` / meta ที่เก็บ absolute URL ของเว็บนี้
+
+## เนื้อหา HTML ใน DB / Seeder
+
+ลิงก์ภายในที่เก็บใน `content` / `body` (seed หรือ CMS) ต้องเป็น **relative path** เท่านั้น
+
+```php
+// ❌ absolute จาก APP_URL ตอน seed → ฝัง localhost ติดไป production
+$item->url()
+route('services.show', [...])
+url('/services/...')
+
+// ✅
+route('services.show', [...], absolute: false)
+'/services/civil/earthwork/land-filling'
+```
+
+`$model->url()` / `route()` แบบ absolute ใช้ได้เฉพาะตอน render หน้า (canonical, sitemap, JSON-LD)
+
+## หมายเหตุ
+
+- External URL (LINE OA, Facebook, Google Maps) ใช้ค่าจาก `config/company.php` ได้ตามปกติ
+- Relative path ในหน้าเดียวกัน (`#cta`, `#form`) ใช้ได้ — ไม่เกี่ยวกับ `APP_URL`
+- Service URL hierarchy ดูเพิ่มที่ `.cursor/rules/service-urls.mdc`

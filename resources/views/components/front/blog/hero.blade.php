@@ -5,7 +5,7 @@
 @php
     $brand = config('company.brand_name');
     $lineUrl = \App\Support\Company::lineUrl();
-    $cover = $post->image_16x9 ?: $post->image_4x3 ?: $post->image_1x1;
+    $cover = $post->imageUrl('4x3') ?? $post->imageUrl();
     $publishedAt = $post->published_at ?? $post->created_at;
     $modifiedAt = $post->updated_at ?? $publishedAt;
 @endphp
@@ -48,7 +48,7 @@
                     <a
                         href="{{ $lineUrl ?? '#cta' }}"
                         class="inline-flex items-center rounded-lg bg-accent px-[26px] py-4 text-[17px] font-semibold text-white hover:bg-accent-dark hover:text-white"
-                        @if ($lineUrl) target="_blank" rel="noopener noreferrer" @endif
+                        @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="blog-hero" @endif
                     >ปรึกษาทีมช่างทางไลน์</a>
                     <a href="#content" class="border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand">อ่านรายละเอียด</a>
                 </div>

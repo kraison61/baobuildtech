@@ -26,7 +26,7 @@
                     <a
                         href="{{ $lineUrl ?? '#quote' }}"
                         class="inline-flex w-full items-center justify-center rounded-lg bg-accent px-[26px] py-4 text-[17px] font-semibold text-white hover:bg-accent-dark hover:text-white min-[480px]:w-auto"
-                        @if ($lineUrl) target="_blank" rel="noopener noreferrer" @endif
+                        @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="service-hub-hero" @endif
                     >ส่งรูปหน้างาน ประเมินฟรี</a>
                     <a href="{{ $hub->heroSecondaryCtaHref() }}" class="inline-flex w-full items-center justify-center border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand min-[480px]:w-auto min-[480px]:justify-start">
                         {{ $hub->heroSecondaryCtaLabel() }}

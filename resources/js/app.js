@@ -1,4 +1,40 @@
 (() => {
+    // บันทึกการกดไลน์ / โทร ลงฐานข้อมูล
+    const ctaEndpoint = document.querySelector('meta[name="cta-clicks-url"]')?.content
+        || '/cta-clicks';
+    const csrfToken = () => document.querySelector('meta[name="csrf-token"]')?.content ?? '';
+
+    document.addEventListener('click', (event) => {
+        const el = event.target.closest('[data-cta]');
+        if (! el) return;
+
+        const channel = el.getAttribute('data-cta');
+        if (channel !== 'line' && channel !== 'phone') return;
+
+        const payload = {
+            channel,
+            source: el.getAttribute('data-cta-source') || 'unknown',
+            page_url: `${window.location.pathname}${window.location.search}`.slice(0, 500),
+        };
+
+        try {
+            fetch(ctaEndpoint, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    'X-CSRF-TOKEN': csrfToken(),
+                    'X-Requested-With': 'XMLHttpRequest',
+                },
+                body: JSON.stringify(payload),
+                keepalive: true,
+                credentials: 'same-origin',
+            }).catch(() => {});
+        } catch {
+            // ไม่บล็อกการเปิด tel: / LINE
+        }
+    });
+
     // Accordion ในเมนูมือถือ
     document.querySelectorAll('[data-nav-accordion]').forEach((item) => {
         const toggle = item.querySelector(':scope > [data-nav-accordion-toggle]');

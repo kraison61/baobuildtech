@@ -207,7 +207,15 @@ HTML;
             ->with('service.category')
             ->first();
 
-        return $item?->url();
+        if (! $item) {
+            return null;
+        }
+
+        return route('services.items.show', [
+            $item->service->category->slug,
+            $item->service->slug,
+            $item->slug,
+        ], absolute: false);
     }
 
     private function publishedServiceUrl(string $slug): ?string
@@ -218,6 +226,13 @@ HTML;
             ->with('category')
             ->first();
 
-        return $service?->url();
+        if (! $service) {
+            return null;
+        }
+
+        return route('services.show', [
+            $service->category->slug,
+            $service->slug,
+        ], absolute: false);
     }
 }

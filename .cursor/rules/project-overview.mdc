@@ -1,0 +1,21 @@
+---
+description: ภาพรวม project conventions ที่ AI ต้องรู้ทุก session
+globs: []
+alwaysApply: true
+---
+
+# Project Conventions
+
+## Docs ที่ต้องอ่านก่อนทำงาน
+
+| งาน | ไฟล์ |
+|---|---|
+| JSON-LD / Structured Data | `docs/SCHEMA-SPEC.md` |
+| URL หน้างานบริการ | `.cursor/rules/service-urls.mdc` |
+| Internal link / APP_URL | `.cursor/rules/app-url.mdc` |
+
+## กฎทั่วไป
+
+- อ่าน doc ที่เกี่ยวข้องก่อนเขียนโค้ดใหม่เสมอ
+- ใช้ภาษาไทยสำหรับ comment และ commit message
+- เปิด `is_published` / `is_active` เป็น false = ห้าม expose ข้อมูลนั้น

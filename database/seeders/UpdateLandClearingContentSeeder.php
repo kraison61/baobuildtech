@@ -250,6 +250,14 @@ HTML;
             ->with('service.category')
             ->first();
 
-        return $item?->url();
+        if (! $item) {
+            return null;
+        }
+
+        return route('services.items.show', [
+            $item->service->category->slug,
+            $item->service->slug,
+            $item->slug,
+        ], absolute: false);
     }
 }

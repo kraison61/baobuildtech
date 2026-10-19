@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Front\ContactController;
+use App\Http\Controllers\Front\CtaClickController;
 use App\Http\Controllers\Front\PostController;
 use App\Http\Controllers\Front\ServiceController;
 use App\Http\Controllers\Front\ServiceItemController;
@@ -57,3 +58,6 @@ Route::view('/gallery', 'front.placeholder', [
 Route::view('/about', 'front.about')->name('about');
 Route::get('/contact', [ContactController::class, 'show'])->name('contact');
 Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+Route::post('/cta-clicks', [CtaClickController::class, 'store'])
+    ->middleware('throttle:60,1')
+    ->name('cta-clicks.store');

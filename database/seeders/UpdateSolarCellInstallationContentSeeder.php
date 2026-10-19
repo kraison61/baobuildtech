@@ -32,8 +32,6 @@ class UpdateSolarCellInstallationContentSeeder extends Seeder
         $brand = config('company.brand_name');
         $phone = config('company.phone_format');
         $lineId = config('company.line_id');
-        $siteUrl = rtrim((string) config('company.site_url'), '/');
-
         $item = ServiceItem::query()->updateOrCreate(
             ['slug' => 'solar-cell-installation'],
             [
@@ -42,7 +40,7 @@ class UpdateSolarCellInstallationContentSeeder extends Seeder
                 'description' => 'ร้านติดตั้งโซล่าเซลล์บ้าน On-Grid/Hybrid ราคาพร้อม VAT รับประกันแผง 30 ปี สำรวจหน้างานฟรี ปทุมธานี นนทบุรี กรุงเทพฯ',
                 'headline' => 'ร้านติดตั้งโซล่าเซลล์ ปทุมธานี นนทบุรี กรุงเทพฯ ราคาพร้อม VAT รับประกันแผง 30 ปี',
                 'excerpt' => "{$brand} เป็นร้านติดตั้งโซล่าเซลล์และ Solar Rooftop ครบวงจร สำหรับบ้านพักอาศัยและอาคารพาณิชย์ในปทุมธานี นนทบุรี กรุงเทพฯ และปริมณฑล ระบบ On-Grid เริ่มต้น 142,600 บาทพร้อม VAT สำหรับขนาด 3 kW และระบบ Hybrid เก็บพลังงานใช้กลางคืนเริ่มต้น 142,600 บาท ทุกระบบใช้อินเวอร์เตอร์ Solis รับประกันแผงโซล่าเซลล์ 30 ปี อินเวอร์เตอร์ 10 ปี และแบตเตอรี่ 10 ปี ออกใบกำกับภาษีอิเล็กทรอนิกส์ (E-TAX Invoice) ให้ทุกงาน สำหรับใช้ลดหย่อนภาษีได้สูงสุด 200,000 บาท สำรวจหน้างานและเสนอราคาฟรี",
-                'content' => $this->contentHtml($brand, $phone, $lineId, $siteUrl, $imageBase),
+                'content' => $this->contentHtml($brand, $phone, $lineId, $imageBase),
                 'cover_image' => $coverImage,
                 'meta_title' => "ร้านติดตั้งโซล่าเซลล์ ราคาพร้อม VAT ปทุมธานี | {$brand}",
                 'meta_description' => 'ร้านติดตั้งโซล่าเซลล์บ้าน On-Grid/Hybrid เริ่ม 142,600 บาทพร้อม VAT รับประกันแผง 30 ปี อินเวอร์เตอร์ 10 ปี ลดหย่อนภาษีได้ 200,000 บาท สำรวจหน้างานฟรี',
@@ -115,7 +113,7 @@ class UpdateSolarCellInstallationContentSeeder extends Seeder
         $this->command?->info('URL: '.$item->url());
     }
 
-    private function contentHtml(string $brand, string $phone, string $lineId, string $siteUrl, string $imageBase): string
+    private function contentHtml(string $brand, string $phone, string $lineId, string $imageBase): string
     {
         $workPhotos = $this->workPhotosHtml($brand, $imageBase);
 
@@ -296,7 +294,7 @@ class UpdateSolarCellInstallationContentSeeder extends Seeder
 <ul>
 <li><strong>โทร:</strong> {$phone}</li>
 <li><strong>LINE:</strong> {$lineId}</li>
-<li><strong>เว็บไซต์:</strong> {$siteUrl}</li>
+<li><strong>เว็บไซต์:</strong> <a href="/">{$brand}</a></li>
 </ul>
 <p><strong>พื้นที่ให้บริการ:</strong> ปทุมธานี (เมืองปทุมธานี คลองหลวง ธัญบุรี ลำลูกกา รังสิต ลาดหลุมแก้ว สามโคก หนองเสือ) · นนทบุรี (เมืองนนทบุรี บางใหญ่ บางบัวทอง ปากเกร็ด บางกรวย ไทรน้อย) · กรุงเทพมหานครทุกเขต · สมุทรปราการ · นครปฐม</p>
 <p><strong>{$brand}</strong> — ร้านติดตั้งโซล่าเซลล์และ Solar Rooftop ครบวงจร On-Grid · Hybrid · Hybrid All in One · แบตเตอรี่สำรองไฟ พร้อมบริการยื่นขออนุญาตและบริการหลังการขาย</p>

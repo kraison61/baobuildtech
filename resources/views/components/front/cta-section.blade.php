@@ -43,7 +43,7 @@
                 <a
                     href="{{ $lineUrl ?? '#cta' }}"
                     class="inline-flex items-center rounded-lg bg-accent px-[26px] py-4 text-[17px] font-semibold text-white hover:bg-accent-dark hover:text-white"
-                    @if ($lineUrl) target="_blank" rel="noopener noreferrer" @endif
+                    @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="cta-section" @endif
                 >ทักไลน์ ส่งรูปหน้างาน ประเมินฟรี</a>
                 <a
                     href="{{ $phoneHref }}"
@@ -52,6 +52,8 @@
                         'border-sand/50 text-white hover:text-white' => $variant === 'brand',
                         'border-brand-mid text-brand-mid hover:text-brand' => $variant === 'paper',
                     ])
+                    data-cta="phone"
+                    data-cta-source="cta-section"
                 >โทรคุยกับวิศวกร {{ $phoneDisplay }}</a>
             </div>
 

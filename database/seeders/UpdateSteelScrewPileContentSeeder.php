@@ -43,7 +43,7 @@ class UpdateSteelScrewPileContentSeeder extends Seeder
         $lineId = (string) config('company.line_id');
         $lineUrl = (string) config('company.line_url');
 
-        $hubUrl = $parent->url();
+        $hubUrl = route('services.show', [$parent->category->slug, $parent->slug], absolute: false);
         $micropileUrl = $this->publishedItemUrl('micropile')
             ?: '/services/civil/piles-foundation/micropile';
 
@@ -270,6 +270,14 @@ HTML;
             ->with('service.category')
             ->first();
 
-        return $item?->url();
+        if (! $item) {
+            return null;
+        }
+
+        return route('services.items.show', [
+            $item->service->category->slug,
+            $item->service->slug,
+            $item->slug,
+        ], absolute: false);
     }
 }

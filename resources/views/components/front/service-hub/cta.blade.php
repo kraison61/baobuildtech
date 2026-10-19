@@ -29,6 +29,8 @@
                 <a
                     href="{{ $phoneHref }}"
                     class="inline-flex w-full items-center justify-center rounded-lg bg-white px-6 py-4 text-[17px] font-semibold text-brand hover:bg-paper min-[520px]:w-auto"
+                    data-cta="phone"
+                    data-cta-source="service-hub-cta"
                 >
                     โทร {{ $phoneDisplay }}
                 </a>
@@ -38,6 +40,8 @@
                         target="_blank"
                         rel="noopener noreferrer"
                         class="inline-flex w-full items-center justify-center rounded-lg border border-sand/40 px-6 py-4 text-[17px] font-semibold text-white hover:bg-white/10 min-[520px]:w-auto"
+                        data-cta="line"
+                        data-cta-source="service-hub-cta"
                     >
                         LINE {{ $lineId }}
                     </a>

@@ -45,7 +45,7 @@
                     <a
                         href="{{ $lineUrl ?? '#cta' }}"
                         class="inline-flex items-center rounded-lg bg-accent px-[26px] py-4 text-[17px] font-semibold text-white hover:bg-accent-dark hover:text-white"
-                        @if ($lineUrl) target="_blank" rel="noopener noreferrer" @endif
+                        @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="service-hero" @endif
                     >ส่งรูปหน้างาน ประเมินฟรี</a>
                     @if ($service->items->isNotEmpty())
                         <a href="#items" class="border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand">ดูรายการงาน</a>

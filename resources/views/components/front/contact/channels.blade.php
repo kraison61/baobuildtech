@@ -10,6 +10,7 @@
                     href="{{ $channel['href'] }}"
                     class="block rounded-lg border border-line bg-white p-6 hover:border-brand-mid"
                     @if ($channel['external'] ?? false) target="_blank" rel="noopener noreferrer" @endif
+                    @if ($channel['cta'] ?? null) data-cta="{{ $channel['cta'] }}" data-cta-source="contact-channels" @endif
                 >
                     <div class="text-sm font-semibold text-muted">{{ $channel['label'] }}</div>
                     <div @class([

@@ -27,7 +27,9 @@ Internal link ทุกชนิดต้องอิง `APP_URL` จาก `.e
 - **ใช้:** `route()`, `url()`, `asset()`, `$model->url()`, `config('app.url')` — helpers เหล่านี้ resolve จาก `APP_URL`
 - **ห้าม:** `'http://localhost:8000/...'`, `'https://baobuildtech.com/...'`, หรือ domain อื่นแบบ string ตรงๆ
 - **Canonical / Open Graph / JSON-LD / sitemap / email:** absolute URL ต้องมาจาก helper ด้านบนเท่านั้น ไม่เขียน host เอง
-- เปลี่ยน environment = แก้แค่ `APP_URL` ใน `.env` ให้ครบ ไม่ต้องแก้โค้ด
+- เปลี่ยน environment (local → production) = แก้แค่ `APP_URL` ใน `.env` ให้ครบ ไม่ต้องแก้โค้ด
+- **Production:** ตั้ง `APP_URL=https://your-domain.com` แล้ว `php artisan config:clear` — รายละเอียดดู `.cursor/rules/app-url.mdc`
+- **HTML ใน DB/Seeder:** ลิงก์ภายในต้องเป็น relative path (`route(..., absolute: false)`) — ห้ามฝัง `$model->url()` ตอน seed
 
 ## 📜 Laravel 13 Guidelines
 - **Blade First:** Heavily utilize Blade directives and components (`<x-ui.card>`).

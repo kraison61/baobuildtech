@@ -23,7 +23,7 @@
         webPageExtra: [
             'datePublished' => $publishedAt?->toIso8601String(),
             'dateModified' => $modifiedAt?->toIso8601String(),
-            'primaryImageOfPage' => filled($post->image_16x9) ? $post->image_16x9 : null,
+            'primaryImageOfPage' => $post->imageUrl(),
             'mainEntity' => ['@id' => rtrim($pageUrl, '/').'#article'],
         ],
     );

@@ -127,7 +127,7 @@
                             <span class="text-[15px] leading-[1.7] text-muted">
                                 หรือส่งรูปทางไลน์
                                 @if ($lineUrl)
-                                    <a href="{{ $lineUrl }}" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-mid hover:text-brand">{{ $lineId }}</a>
+                                    <a href="{{ $lineUrl }}" target="_blank" rel="noopener noreferrer" class="font-semibold text-brand-mid hover:text-brand" data-cta="line" data-cta-source="contact-form">{{ $lineId }}</a>
                                 @else
                                     {{ $lineId }}
                                 @endif

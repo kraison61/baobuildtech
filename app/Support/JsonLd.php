@@ -467,11 +467,7 @@ class JsonLd
         $pageUrl = rtrim($pageUrl, '/');
         $post->loadMissing('author');
 
-        $images = array_values(array_filter([
-            $post->image_16x9,
-            $post->image_4x3,
-            $post->image_1x1,
-        ]));
+        $images = $post->imageUrls();
 
         $entity = [
             '@type' => 'Article',

@@ -48,7 +48,7 @@
                         @foreach ($posts as $post)
                             <a href="{{ $post->url() }}" class="group block hover:no-underline">
                                 <x-ui.image-slot
-                                    :src="$post->image_16x9 ?: $post->image_4x3"
+                                    :src="$post->imageUrl()"
                                     :alt="$post->title"
                                     :label="$post->title"
                                     ratio="16/9"
