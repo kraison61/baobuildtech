@@ -12,6 +12,12 @@
                 <p class="mt-4 text-[17px] leading-[1.8] text-sand">
                     ตัวเลขด้านล่างเป็นช่วงประมาณการ 350–800 บาท/ตร.ม. จากงานที่ทำจริง ราคาสุดท้ายยืนยันหลังสำรวจหน้างาน
                 </p>
+            @elseif ($service->slug === 'retaining-wall')
+                {{-- H2 ราคาอยู่ใน content แล้ว — ส่วนนี้สรุปตัวเลขต่อเมตร --}}
+                <p class="text-sm font-semibold tracking-wide text-sand">สรุปราคาเริ่มต้นต่อเมตร</p>
+                <p class="mt-4 text-[17px] leading-[1.8] text-sand">
+                    ตัวแอลเริ่ม 3,500 บาท/เมตร แบบเสาเข็มไอ + สเตย์ + แผ่นกันดิน 4,500–8,500 บาท/เมตร รวมวัสดุและติดตั้ง ยังไม่รวม VAT ราคาจริงยืนยันหลังวิศวกรสำรวจหน้างาน
+                </p>
             @else
                 <div class="flex items-center gap-2 text-sm font-semibold tracking-wide text-sand">
                     <span class="h-px w-7 bg-sand"></span>

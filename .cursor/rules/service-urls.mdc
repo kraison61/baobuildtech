@@ -1,9 +1,23 @@
 ---
-description: โครงสร้าง URL หน้างานบริการ (ServiceCategory → Service → ServiceItem)
+description: โครงสร้าง URL หน้างานบริการ + ห้ามเปลี่ยน route/URL เพราะกระทบ SEO
 alwaysApply: true
 ---
 
 # Service URL Structure
+
+## ⛔ SEO LOCK — ห้ามเปลี่ยน route / URL โดยเด็ดขาด
+
+URL และ route name ของหน้าบริการเป็น **สัญญา SEO ที่ล็อกแล้ว** — indexed, shared, และถูกอ้างใน JSON-LD / sitemap / canonical
+
+**ห้ามทำโดยเด็ดขาด (แม้ refactor, rename, cleanup, หรือ “ทำให้สั้นลง”):**
+- เปลี่ยน path pattern (`/services/...`)
+- เปลี่ยนจำนวน segment หรือลำดับ `{category}/{service}/{item}`
+- เปลี่ยน route name (`services`, `services.show`, `services.items.show`)
+- เปลี่ยน slug ที่ publish แล้วใน DB (category / service / item)
+- สร้าง URL ใหม่แล้วทิ้งของเก่าโดยไม่มี 301
+- ย้ายหน้าบริการไป root-level หรือ path อื่น
+
+ถ้าต้องเปลี่ยนจริง ๆ (กรณีพิเศษเท่านั้น): **ถามผู้ใช้ก่อนเสมอ** + ต้องมีแผน 301 redirect ครบทุก URL เก่า → ใหม่ และอัปเดต sitemap / canonical / JSON-LD ให้สอดคล้อง
 
 Front-end URLs ต้องสะท้อน hierarchy ใน DB เสมอ:
 

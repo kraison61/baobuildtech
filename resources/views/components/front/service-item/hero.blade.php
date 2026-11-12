@@ -61,7 +61,7 @@
                         href="{{ $lineUrl ?? '#cta' }}"
                         class="inline-flex items-center rounded-lg bg-accent px-[26px] py-4 text-[17px] font-semibold text-white hover:bg-accent-dark hover:text-white"
                         @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="service-item-hero" @endif
-                    >ส่งรูปหน้างาน ประเมินฟรี</a>
+                    >{{ $item->slug === 'buy-old-air-conditioner' ? 'ส่งรูปแอร์ทาง LINE' : 'ส่งรูปหน้างาน ประเมินฟรี' }}</a>
                     @if (filled($item->content))
                         <a href="#content" class="border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand">อ่านรายละเอียด</a>
                     @elseif ($item->prices->isNotEmpty())
@@ -83,7 +83,11 @@
             ratio-note="4:3 · 5:4 desktop"
             :alt="$item->slug === 'townhouse'
                 ? 'ทีม '.config('company.brand_name').' รื้อถอนทาวน์เฮาส์และตึกแถวในปทุมธานี'
-                : $item->name"
+                : ($item->slug === 'retaining-wall'
+                    ? 'กำแพงกันดินตัวแอล สูง 1 เมตร ฐาน 60 ซม. หนา 20 ซม. งาน '.config('company.brand_name')
+                    : ($item->slug === 'buy-old-air-conditioner'
+                        ? 'ช่างร้านรับซื้อแอร์เก่า '.config('company.brand_name').' ถอดคอยล์ร้อนแอร์ 12000 BTU ที่บ้านลูกค้า รังสิต ปทุมธานี'
+                        : $item->name))"
             class="aspect-[4/3] w-full min-[900px]:aspect-[5/4]"
             width="1600"
             height="1200"
