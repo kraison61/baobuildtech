@@ -11,8 +11,8 @@
     $publishedAt = $post->published_at ?? $post->created_at;
     $modifiedAt = $post->updated_at ?? $publishedAt;
     $breadcrumbs = [
-        ['label' => 'หน้าแรก', 'url' => route('home')],
-        ['label' => 'บทความ', 'url' => route('blog.index')],
+        ['label' => __('ui.home'), 'url' => \App\Support\Locale::route('home')],
+        ['label' => __('ui.blog'), 'url' => \App\Support\Locale::route('blog.index')],
         ['label' => $post->title],
     ];
 

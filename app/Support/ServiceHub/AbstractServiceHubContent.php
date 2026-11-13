@@ -6,6 +6,7 @@ use App\Contracts\ServiceHubContent;
 use App\Models\Service;
 use App\Models\ServiceItem;
 use App\Models\ServicePrice;
+use App\Support\Locale;
 use Illuminate\Support\Collection;
 
 abstract class AbstractServiceHubContent implements ServiceHubContent
@@ -45,7 +46,7 @@ abstract class AbstractServiceHubContent implements ServiceHubContent
 
     public function url(): string
     {
-        return route('services.show', [$this->categorySlug(), $this->slug()]);
+        return Locale::route('services.show', [$this->categorySlug(), $this->slug()]);
     }
 
     public function heroImage(): ?string
@@ -70,7 +71,7 @@ abstract class AbstractServiceHubContent implements ServiceHubContent
 
     public function heroSecondaryCtaLabel(): string
     {
-        return 'ดูประเภทงาน';
+        return Locale::pick('ดูประเภทงาน', 'View work types');
     }
 
     /**

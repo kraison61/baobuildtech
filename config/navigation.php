@@ -3,43 +3,44 @@
 /**
  * เมนูนำทางหน้าเว็บสาธารณะ
  * รายการ source=services จะ hydrate sections จาก DB (Category → Service → Item)
+ * label_key อ้างอิง lang/th/ui.php และ lang/en/ui.php
  */
 
 return [
     [
-        'label' => 'หน้าแรก',
+        'label_key' => 'ui.home',
         'href' => '/',
         'route' => 'home',
     ],
     [
-        'label' => 'งานบริการ',
+        'label_key' => 'ui.services',
         'href' => '/services',
         'route' => 'services',
         'mega' => true,
         'source' => 'services',
     ],
     [
-        'label' => 'ผลงาน',
+        'label_key' => 'ui.works',
         'href' => '/works',
         'route' => 'works',
     ],
     [
-        'label' => 'บทความ',
+        'label_key' => 'ui.blog',
         'href' => '/blog',
         'route' => 'blog.index',
     ],
     [
-        'label' => 'คลังภาพผลงาน',
+        'label_key' => 'ui.gallery',
         'href' => '/gallery',
         'route' => 'gallery',
     ],
     [
-        'label' => 'เกี่ยวกับเรา',
+        'label_key' => 'ui.about',
         'href' => '/about',
         'route' => 'about',
     ],
     [
-        'label' => 'ติดต่อเรา',
+        'label_key' => 'ui.contact',
         'href' => '/contact',
         'route' => 'contact',
     ],

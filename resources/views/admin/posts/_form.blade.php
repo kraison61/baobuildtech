@@ -90,6 +90,31 @@
         <x-ui.label for="meta_description">Meta Description</x-ui.label>
         <x-ui.input type="text" name="meta_description" id="meta_description" :value="old('meta_description', $post?->meta_description)" maxlength="160" />
     </div>
+
+    <div class="sm:col-span-2 mt-2 border-t border-slate-200 pt-4">
+        <h3 class="text-sm font-semibold text-slate-700">English</h3>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="title_en">Title (EN)</x-ui.label>
+        <x-ui.input type="text" name="title_en" id="title_en" :value="old('title_en', $post?->title_en)" />
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="excerpt_en">Excerpt (EN)</x-ui.label>
+        <x-ui.textarea name="excerpt_en" id="excerpt_en" rows="2">{{ old('excerpt_en', $post?->excerpt_en) }}</x-ui.textarea>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="body_en">Body HTML (EN)</x-ui.label>
+        <x-ui.textarea name="body_en" id="body_en" rows="12" class="font-mono text-xs">{{ old('body_en', $post?->body_en) }}</x-ui.textarea>
+    </div>
+    <div>
+        <x-ui.label for="meta_title_en">Meta Title (EN)</x-ui.label>
+        <x-ui.input type="text" name="meta_title_en" id="meta_title_en" :value="old('meta_title_en', $post?->meta_title_en)" maxlength="100" />
+    </div>
+    <div>
+        <x-ui.label for="meta_description_en">Meta Description (EN)</x-ui.label>
+        <x-ui.input type="text" name="meta_description_en" id="meta_description_en" :value="old('meta_description_en', $post?->meta_description_en)" maxlength="160" />
+    </div>
+
     <div class="sm:col-span-2">
         <x-ui.checkbox name="is_published" value="1" label="เผยแพร่" :checked="old('is_published', $post?->is_published ?? false)" />
     </div>

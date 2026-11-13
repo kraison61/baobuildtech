@@ -19,7 +19,7 @@
                 </p>
 
                 <div class="mt-4 flex flex-wrap items-center gap-2 text-sm font-semibold tracking-wide text-muted">
-                    <a href="{{ route('blog.index') }}" class="text-brand-mid hover:text-brand">บทความ</a>
+                    <a href="{{ \App\Support\Locale::route('blog.index') }}" class="text-brand-mid hover:text-brand">{{ __('ui.blog') }}</a>
                 </div>
 
                 <h1 class="mt-6 text-[clamp(1.625rem,4.4vw,2.35rem)] font-semibold leading-[1.35] text-brand">
@@ -31,9 +31,9 @@
                         @if ($post->author)
                             โดย {{ $post->author->name }} ·
                         @endif
-                        <time datetime="{{ $publishedAt->toIso8601String() }}">เผยแพร่ {{ $publishedAt->locale('th')->translatedFormat('j F Y') }}</time>
+                        <time datetime="{{ $publishedAt->toIso8601String() }}">{{ __('ui.published') }} {{ $publishedAt->locale(app()->getLocale())->translatedFormat('j F Y') }}</time>
                         @if ($modifiedAt && (! $publishedAt || ! $modifiedAt->equalTo($publishedAt)))
-                            · <time datetime="{{ $modifiedAt->toIso8601String() }}">อัปเดต {{ $modifiedAt->locale('th')->translatedFormat('j F Y') }}</time>
+                            · <time datetime="{{ $modifiedAt->toIso8601String() }}">{{ __('ui.updated') }} {{ $modifiedAt->locale(app()->getLocale())->translatedFormat('j F Y') }}</time>
                         @endif
                     </p>
                 @endif

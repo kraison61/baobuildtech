@@ -1,11 +1,13 @@
 @props([
-    'title' => 'เล่าให้เราฟังก่อนก็ได้ ยังไม่ต้องตัดสินใจอะไรทั้งนั้น',
-    'body' => 'ส่งรูปที่ดิน แบบบ้าน หรือรูปช่องประตูหน้าต่างที่อยากเปลี่ยน มาทางไลน์ เราจะดูให้ว่าเป็นไปได้แค่ไหน ต้องเตรียมงบประมาณเท่าไหร่ และมีอะไรควรระวังตั้งแต่ตอนนี้ ถ้าต้องการตัวเลขจริง เราเข้าไปดูหน้างานและทำใบเสนอราคาพร้อม BOQ ให้ โดยไม่มีค่าใช้จ่ายและไม่ผูกมัด',
+    'title' => null,
+    'body' => null,
     'variant' => 'brand',
     'withAnchor' => true,
 ])
 
 @php
+    $title = $title ?? \App\Support\HomeContent::ctaTitle();
+    $body = $body ?? \App\Support\HomeContent::ctaBody();
     $phoneDisplay = \App\Support\Company::phoneDisplay();
     $phoneHref = \App\Support\Company::phoneHref();
     $lineId = \App\Support\Company::lineId();
@@ -44,7 +46,7 @@
                     href="{{ $lineUrl ?? '#cta' }}"
                     class="inline-flex items-center rounded-lg bg-accent px-[26px] py-4 text-[17px] font-semibold text-white hover:bg-accent-dark hover:text-white"
                     @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="cta-section" @endif
-                >ทักไลน์ ส่งรูปหน้างาน ประเมินฟรี</a>
+                >{{ \App\Support\HomeContent::ctaLine() }}</a>
                 <a
                     href="{{ $phoneHref }}"
                     @class([
@@ -54,7 +56,7 @@
                     ])
                     data-cta="phone"
                     data-cta-source="cta-section"
-                >โทรคุยกับวิศวกร {{ $phoneDisplay }}</a>
+                >{{ \App\Support\HomeContent::ctaPhone() }} {{ $phoneDisplay }}</a>
             </div>
 
             <ul @class([
@@ -63,15 +65,15 @@
                 'text-muted' => $variant === 'paper',
             ])>
                 <li>
-                    โทร {{ $phoneDisplay }}
+                    {{ \App\Support\HomeContent::ctaPhoneLabel() }} {{ $phoneDisplay }}
                     @if ($lineId)
                         · LINE {{ $lineId }}
                     @endif
                     @if ($email)
-                        · อีเมล {{ $email }}
+                        · {{ \App\Support\HomeContent::ctaEmailLabel() }} {{ $email }}
                     @endif
                 </li>
-                <li>เวลาทำการ {{ $hours }}@if ($address !== '') · ที่อยู่ {{ $address }}@endif</li>
+                <li>{{ \App\Support\HomeContent::ctaHoursLabel() }} {{ $hours }}@if ($address !== '') · {{ \App\Support\HomeContent::ctaAddressLabel() }} {{ $address }}@endif</li>
             </ul>
         </div>
     </x-front.container>

@@ -33,7 +33,7 @@
                 <p class="mt-4 max-w-[460px] text-[17px] leading-[1.8] text-muted">
                     {{ $affiliate['before'] }}<a href="{{ $affiliate['link_url'] }}" class="font-semibold text-brand-mid underline-offset-2 hover:underline" rel="noopener noreferrer" target="_blank">{{ $affiliate['link_text'] }}</a>{{ $affiliate['after'] }}
                 </p>
-                <a href="{{ route('services') }}" class="mt-6 self-start border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand">
+                <a href="{{ \App\Support\Locale::route('services') }}" class="mt-6 self-start border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand">
                     ดูขอบเขตงานที่เรารับ
                 </a>
             </div>

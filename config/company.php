@@ -17,12 +17,13 @@ return [
     'founding_year' => '2026',
     'site_url'      => env('APP_URL', 'https://boabuildtech.com'),
     'description'   => 'รับเหมาก่อสร้างครบวงจรในกรุงเทพฯ และปริมณฑล ตั้งแต่ถมดิน ออกแบบ งานโครงสร้าง งานอลูมิเนียมและกระจก จนถึงระบบไฟฟ้า ประปา และ IT Infrastructure',
+    'description_en' => 'Full-service construction contractor in Bangkok and surrounding provinces — from land filling and design to structural works, aluminium and glass, electrical, plumbing, and IT infrastructure',
 
     // Cloudflare R2 custom domain — ใช้กับโลโก้และรูป asset สาธารณะ
     'images_cdn' => rtrim(env('AWS_URL', 'https://images.boabuildtech.com'), '/'),
 
-    'phone' => '+66617439900',
-    'phone_format' => '061-743-9900',
+    'phone' => '+66615639228',
+    'phone_format' => '061-563-9228',
     'email' => 'boa.buildtech@gmail.com',
     'line_id' => '@062mhmap',
     'line_url' => 'https://lin.ee/ohwR1wC',
@@ -34,6 +35,14 @@ return [
         'street'      => '88/120 หมู่บ้านธัญญาภิรมย์แกรนด์วิลล์ หมู่ 1 ถนนรังสิต-นครนายก ตำบลลำผักกูด',
         'district'    => 'อำเภอธัญบุรี',
         'province'    => 'จังหวัดปทุมธานี',
+        'postal_code' => '12110',
+        'country'     => 'TH',
+    ],
+
+    'address_en' => [
+        'street'      => '88/120 Thanyapirom Grandville Village, Moo 1, Rangsit–Nakhon Nayok Rd, Lam Phak Kut',
+        'district'    => 'Thanyaburi District',
+        'province'    => 'Pathum Thani',
         'postal_code' => '12110',
         'country'     => 'TH',
     ],
@@ -60,6 +69,16 @@ return [
         'สมุทรสาคร',
         'นครปฐม',
         'ประเทศไทย',
+    ],
+
+    'area_served_en' => [
+        'Bangkok',
+        'Nonthaburi',
+        'Pathum Thani',
+        'Samut Prakan',
+        'Samut Sakhon',
+        'Nakhon Pathom',
+        'Thailand',
     ],
 
     'social' => [

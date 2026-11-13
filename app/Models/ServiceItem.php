@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasTranslations;
+use App\Support\Locale;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,20 +13,37 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
 #[Fillable([
     'service_id',
     'name',
+    'name_en',
     'slug',
     'description',
+    'description_en',
     'headline',
+    'headline_en',
     'excerpt',
+    'excerpt_en',
     'content',
+    'content_en',
     'cover_image',
     'meta_title',
+    'meta_title_en',
     'meta_description',
+    'meta_description_en',
     'sort_order',
     'is_published',
     'published_at',
 ])]
 class ServiceItem extends Model
 {
+    use HasTranslations;
+
+    public function translatedAttributes(): array
+    {
+        return [
+            'name', 'description', 'headline', 'excerpt', 'content',
+            'meta_title', 'meta_description',
+        ];
+    }
+
     protected function casts(): array
     {
         return [
@@ -63,7 +82,7 @@ class ServiceItem extends Model
     {
         $this->loadMissing('service.category');
 
-        return route('services.items.show', [
+        return Locale::route('services.items.show', [
             $this->service->category->slug,
             $this->service->slug,
             $this->slug,

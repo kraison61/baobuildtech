@@ -6,7 +6,7 @@
     <x-front.container>
         <div class="max-w-[680px]">
             <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">
-                ทำไมเจ้าของงานถึงเลือก BOA
+                {{ \App\Support\HomeContent::whyTitle() }}
             </h2>
         </div>
 

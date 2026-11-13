@@ -18,10 +18,21 @@ class Navigation
      */
     public static function items(): array
     {
-        return Cache::remember(self::CACHE_KEY, self::CACHE_TTL_SECONDS, function () {
+        $locale = Locale::current();
+
+        return Cache::remember(self::CACHE_KEY.'.'.$locale, self::CACHE_TTL_SECONDS, function () use ($locale) {
+            app()->setLocale($locale);
+
             $items = config('navigation', []);
 
             return array_map(static function (array $item): array {
+                $item['label'] = __($item['label_key'] ?? 'ui.home');
+
+                $route = $item['route'] ?? null;
+                if (is_string($route) && $route !== '') {
+                    $item['href'] = Locale::route($route, absolute: false);
+                }
+
                 if (($item['source'] ?? null) === 'services') {
                     $item['sections'] = self::serviceSections();
                 }
@@ -36,6 +47,9 @@ class Navigation
      */
     public static function forgetCache(): void
     {
+        foreach (Locale::supported() as $locale) {
+            Cache::forget(self::CACHE_KEY.'.'.$locale);
+        }
         Cache::forget(self::CACHE_KEY);
     }
 
@@ -62,11 +76,13 @@ class Navigation
             ])
             ->get();
 
+        $servicesIndex = Locale::route('services', absolute: false);
+
         return $categories
-            ->map(static function (ServiceCategory $category): array {
+            ->map(static function (ServiceCategory $category) use ($servicesIndex): array {
                 return [
                     'label' => $category->name,
-                    'href' => '/services#'.$category->slug,
+                    'href' => $servicesIndex.'#'.$category->slug,
                     'groups' => $category->services
                         ->map(static function ($service): array {
                             return [

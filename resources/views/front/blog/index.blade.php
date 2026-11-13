@@ -1,12 +1,15 @@
 @extends('front.layouts.app')
 
 @php
-    $pageTitle = 'บทความ — '.config('company.brand_name');
-    $pageUrl = route('blog.index');
-    $metaDescription = 'บทความความรู้เรื่องงานก่อสร้าง ระบบไฟฟ้า โซล่าเซลล์ และเงื่อนไขโครงการจากทีมช่าง '.config('company.brand_name');
+    $pageTitle = __('ui.blog').' — '.config('company.brand_name');
+    $pageUrl = \App\Support\Locale::route('blog.index');
+    $metaDescription = \App\Support\Locale::pick(
+        'บทความความรู้เรื่องงานก่อสร้าง ระบบไฟฟ้า โซล่าเซลล์ และเงื่อนไขโครงการจากทีมช่าง '.config('company.brand_name'),
+        'Practical articles on construction, electrical systems, solar, and project requirements from the '.config('company.brand_name').' crew',
+    );
     $breadcrumbs = [
-        ['label' => 'หน้าแรก', 'url' => route('home')],
-        ['label' => 'บทความ'],
+        ['label' => __('ui.home'), 'url' => \App\Support\Locale::route('home')],
+        ['label' => __('ui.blog')],
     ];
     $schemaGraph = \App\Support\JsonLd::pageGraph($pageTitle, $pageUrl, $breadcrumbs);
 @endphp
@@ -68,7 +71,7 @@
                                 @if ($post->published_at)
                                     <p class="mt-3 text-[14px] text-muted">
                                         <time datetime="{{ $post->published_at->toIso8601String() }}">
-                                            {{ $post->published_at->locale('th')->translatedFormat('j F Y') }}
+                                            {{ $post->published_at->locale(app()->getLocale())->translatedFormat('j F Y') }}
                                         </time>
                                     </p>
                                 @endif

@@ -1,0 +1,28 @@
+<?php
+
+return [
+    'home' => 'Home',
+    'services' => 'Services',
+    'works' => 'Work',
+    'blog' => 'Articles',
+    'gallery' => 'Gallery',
+    'about' => 'About',
+    'contact' => 'Contact',
+    'nav_main' => 'Main menu',
+    'cta_free_quote' => 'Free estimate',
+    'cta_contact' => 'Contact us',
+    'price_from' => 'From',
+    'price_ask' => 'Ask us',
+    'published' => 'Published',
+    'updated' => 'Updated',
+    'works_title' => 'Our Work',
+    'works_heading' => 'Our Work',
+    'works_description' => 'Projects we have delivered, with scope details and on-site evidence',
+    'gallery_title' => 'Photo Gallery',
+    'gallery_heading' => 'Photo Gallery',
+    'gallery_description' => 'Photos from real job sites — before, during, and after construction',
+    'placeholder_body' => 'This page is being prepared and will be updated soon',
+    'lang_th' => 'ไทย',
+    'lang_en' => 'EN',
+    'switch_language' => 'Switch language',
+];

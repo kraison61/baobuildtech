@@ -3,6 +3,8 @@
     $phoneHref = \App\Support\Company::phoneHref();
     $phoneDisplay = \App\Support\Company::phoneDisplay();
     $lineUrl = \App\Support\Company::lineUrl();
+    $heroImageLabel = \App\Support\HomeContent::heroImageLabel();
+    $heroImageAlt = \App\Support\HomeContent::heroImageAlt();
 @endphp
 
 <section id="top" class="bg-paper">
@@ -19,12 +21,12 @@
                 </div>
 
                 <h1 class="mt-6 text-[clamp(1.625rem,4.4vw,2.35rem)] font-semibold leading-[1.35] text-brand">
-                    รับเหมาก่อสร้างครบวงจร กรุงเทพฯ และปริมณฑล — วิศวกรลงหน้างานเอง จบครบในสัญญาเดียว
+                    {{ \App\Support\HomeContent::heroHeadline() }}
                 </h1>
 
                 <p class="mt-5 text-[18px] font-semibold leading-[1.55] text-ink sm:text-[19px]">
-                    ตั้งแต่ที่ดินเปล่าจนถึงวันเข้าอยู่ โครงสร้าง อลูมิเนียม ไฟฟ้า ประปา และระบบไอที อยู่ในความรับผิดชอบทีมเดียว
-                    <span class="mt-2 block text-brand-mid">งวดงานผูกกับเนื้องานที่ตรวจได้ และทุกสัญญากันงวดสุดท้ายไว้จนหลังตรวจรับ</span>
+                    {{ \App\Support\HomeContent::heroLead() }}
+                    <span class="mt-2 block text-brand-mid">{{ \App\Support\HomeContent::heroLeadAccent() }}</span>
                 </p>
 
                 <div class="mt-8 flex flex-wrap items-center gap-6">
@@ -32,29 +34,29 @@
                         href="{{ $lineUrl ?? '#cta' }}"
                         class="inline-flex items-center rounded-lg bg-accent px-[26px] py-4 text-[17px] font-semibold text-white hover:bg-accent-dark hover:text-white"
                         @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="home-hero" @endif
-                    >ส่งรูปหน้างานทางไลน์ — ประเมินราคาเบื้องต้นฟรี</a>
-                    <a href="{{ $phoneHref }}" class="border-b border-brand-mid pb-0.5 text-[17px] font-semibold tabular-nums text-brand-mid hover:text-brand" data-cta="phone" data-cta-source="home-hero">โทรคุยกับวิศวกร {{ $phoneDisplay }}</a>
+                    >{{ \App\Support\HomeContent::heroCtaPrimary() }}</a>
+                    <a href="{{ $phoneHref }}" class="border-b border-brand-mid pb-0.5 text-[17px] font-semibold tabular-nums text-brand-mid hover:text-brand" data-cta="phone" data-cta-source="home-hero">{{ \App\Support\HomeContent::heroCtaPhone() }} {{ $phoneDisplay }}</a>
                 </div>
 
                 <p class="mt-4 text-[14px] leading-[1.7] text-muted sm:text-[15px]">
-                    ประเมินหน้างานฟรีในกรุงเทพฯ-ปริมณฑล · ไม่ผูกมัด · ขอดูสำเนาใบอนุญาตวิศวกรได้ก่อนตัดสินใจ
+                    {{ \App\Support\HomeContent::heroNote() }}
                 </p>
 
                 <p class="mt-8 text-[17px] leading-[1.8] text-muted">
-                    BOA (Build Operate Assure) คือทีมรับเหมาก่อสร้างครบวงจรในกรุงเทพฯ ปริมณฑล และรับงานทั่วประเทศ ดูแลตั้งแต่ถมดิน ออกแบบ งานโครงสร้าง งานอลูมิเนียมและกระจก จนถึงระบบไฟฟ้า ประปา และ IT Infrastructure ในสัญญาเดียว
+                    {{ \App\Support\HomeContent::heroBody1() }}
                 </p>
                 <p class="mt-4 text-[17px] leading-[1.8] text-muted">
-                    ทีมของเรามาจากคนทำงานจริงสามสาย — วิศวกรโยธาที่คุมงานมากว่า 20 ปี ผู้บริหารโครงการระดับองค์กร และผู้เชี่ยวชาญระบบเครือข่าย คุณจึงไม่ต้องเป็นคนกลางคอยประสานช่างหลายเจ้า และไม่ต้องรับความเสี่ยงเองเวลางานต่อไม่ติด
+                    {{ \App\Support\HomeContent::heroBody2() }}
                 </p>
             </div>
         </div>
 
         <x-ui.image-slot
             src="{{ config('company.images_cdn') }}/assets/home-hero.webp"
-            label="Hero — หน้าแรก"
+            :label="$heroImageLabel"
             spec="1600×1200"
             ratio="none"
-            alt="ทีมวิศวกร BOA ตรวจงานโครงสร้างบ้านพักอาศัย กรุงเทพฯ"
+            :alt="$heroImageAlt"
             class="size-full min-h-[300px]"
             width="1600"
             height="1200"

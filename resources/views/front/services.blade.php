@@ -1,12 +1,15 @@
 @extends('front.layouts.app')
 
 @php
-    $pageTitle = 'งานบริการ — '.config('company.brand_name');
-    $pageUrl = route('services');
-    $metaDescription = 'รวมงานบริการกำแพงกันดิน คสล. ฐานราก งานโยธา และงานระบบ พร้อมสเปกวัสดุและเกณฑ์ทดสอบที่ใช้จริงหน้างาน';
+    $pageTitle = __('ui.services').' — '.config('company.brand_name');
+    $pageUrl = \App\Support\Locale::route('services');
+    $metaDescription = \App\Support\Locale::pick(
+        'รวมงานบริการกำแพงกันดิน คสล. ฐานราก งานโยธา และงานระบบ พร้อมสเปกวัสดุและเกณฑ์ทดสอบที่ใช้จริงหน้างาน',
+        'Retaining walls, RC works, foundations, civil works, and building systems — with material specs and on-site test criteria',
+    );
     $breadcrumbs = [
-        ['label' => 'หน้าแรก', 'url' => route('home')],
-        ['label' => 'งานบริการ'],
+        ['label' => __('ui.home'), 'url' => \App\Support\Locale::route('home')],
+        ['label' => __('ui.services')],
     ];
     $schemaGraph = \App\Support\JsonLd::pageGraph(
         $pageTitle,

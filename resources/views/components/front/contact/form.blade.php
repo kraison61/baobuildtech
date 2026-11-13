@@ -36,7 +36,7 @@
             @else
                 <form
                     method="post"
-                    action="{{ route('contact.store') }}"
+                    action="{{ \App\Support\Locale::route('contact.store') }}"
                     class="mt-8 grid gap-5"
                 >
                     @csrf
@@ -196,7 +196,7 @@
                 <p class="mt-4 text-[15px] leading-[1.8] text-muted">
                     โครงการนอกพื้นที่พิจารณาเป็นรายกรณีตามขนาดงาน
                 </p>
-                <a href="{{ route('services') }}" class="mt-6 inline-block border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand">
+                <a href="{{ \App\Support\Locale::route('services') }}" class="mt-6 inline-block border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand">
                     ดูขอบเขตงานที่เรารับ
                 </a>
             </div>

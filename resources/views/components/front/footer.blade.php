@@ -7,44 +7,55 @@
     $legal = config('company.legal_name');
     $taxId = config('company.tax_id');
     $email = config('company.email');
+    $servicesIndex = \App\Support\Locale::route('services');
 
-    $services = [
-        ['label' => 'สำรวจ', 'href' => route('services').'#survey'],
-        ['label' => 'เสาเข็มและฐานราก', 'href' => route('services.show', ['civil', 'piles-foundation'])],
-        ['label' => 'โครงสร้าง', 'href' => route('services').'#structure'],
-        ['label' => 'ระบบไฟฟ้า', 'href' => route('services').'#electrical'],
-        ['label' => 'สายสัญญาณ', 'href' => route('services').'#network-cabling'],
-        ['label' => 'กล้องวงจรปิด', 'href' => route('services').'#cctv'],
-    ];
+    $services = \App\Support\Locale::pickAny(
+        [
+            ['label' => 'สำรวจ', 'href' => $servicesIndex.'#survey'],
+            ['label' => 'เสาเข็มและฐานราก', 'href' => \App\Support\Locale::route('services.show', ['civil', 'piles-foundation'])],
+            ['label' => 'โครงสร้าง', 'href' => $servicesIndex.'#structure'],
+            ['label' => 'ระบบไฟฟ้า', 'href' => $servicesIndex.'#electrical'],
+            ['label' => 'สายสัญญาณ', 'href' => $servicesIndex.'#network-cabling'],
+            ['label' => 'กล้องวงจรปิด', 'href' => $servicesIndex.'#cctv'],
+        ],
+        [
+            ['label' => 'Survey', 'href' => $servicesIndex.'#survey'],
+            ['label' => 'Piles & foundation', 'href' => \App\Support\Locale::route('services.show', ['civil', 'piles-foundation'])],
+            ['label' => 'Structure', 'href' => $servicesIndex.'#structure'],
+            ['label' => 'Electrical', 'href' => $servicesIndex.'#electrical'],
+            ['label' => 'Network cabling', 'href' => $servicesIndex.'#network-cabling'],
+            ['label' => 'CCTV', 'href' => $servicesIndex.'#cctv'],
+        ],
+    );
 @endphp
 
 <footer class="border-t border-sand/20 bg-brand pt-16 pb-10 text-sand lg:pt-24">
     <x-front.container class="grid gap-10 [grid-template-columns:repeat(auto-fit,minmax(220px,1fr))]">
         <div class="max-w-[320px]">
-            <a href="{{ route('home') }}" class="inline-flex items-center gap-3 text-white hover:text-white">
+            <a href="{{ \App\Support\Locale::route('home') }}" class="inline-flex items-center gap-3 text-white hover:text-white">
                 <x-ui.logo-mark size="size-11" />
                 <span class="text-[17px] font-semibold">{{ $brand }}</span>
             </a>
             <p class="mt-3 text-[15px] leading-[1.8]">
-                {{ config('company.description') }}
+                {{ \App\Support\Company::description() }}
             </p>
         </div>
 
         <div>
-            <div class="text-[15px] font-semibold text-white">เมนู</div>
+            <div class="text-[15px] font-semibold text-white">{{ \App\Support\Locale::pick('เมนู', 'Menu') }}</div>
             <ul class="mt-3 grid list-none gap-2 p-0 text-[15px]">
-                <li><a href="{{ route('home') }}" class="text-sand hover:text-white">หน้าแรก</a></li>
-                <li><a href="{{ route('services') }}" class="text-sand hover:text-white">งานบริการ</a></li>
-                <li><a href="{{ route('works') }}" class="text-sand hover:text-white">ผลงาน</a></li>
-                <li><a href="{{ route('blog.index') }}" class="text-sand hover:text-white">บทความ</a></li>
-                <li><a href="{{ route('gallery') }}" class="text-sand hover:text-white">คลังภาพผลงาน</a></li>
-                <li><a href="{{ route('about') }}" class="text-sand hover:text-white">เกี่ยวกับเรา</a></li>
-                <li><a href="{{ route('contact') }}" class="text-sand hover:text-white">ติดต่อเรา</a></li>
+                <li><a href="{{ \App\Support\Locale::route('home') }}" class="text-sand hover:text-white">{{ __('ui.home') }}</a></li>
+                <li><a href="{{ \App\Support\Locale::route('services') }}" class="text-sand hover:text-white">{{ __('ui.services') }}</a></li>
+                <li><a href="{{ \App\Support\Locale::route('works') }}" class="text-sand hover:text-white">{{ __('ui.works') }}</a></li>
+                <li><a href="{{ \App\Support\Locale::route('blog.index') }}" class="text-sand hover:text-white">{{ __('ui.blog') }}</a></li>
+                <li><a href="{{ \App\Support\Locale::route('gallery') }}" class="text-sand hover:text-white">{{ __('ui.gallery') }}</a></li>
+                <li><a href="{{ \App\Support\Locale::route('about') }}" class="text-sand hover:text-white">{{ __('ui.about') }}</a></li>
+                <li><a href="{{ \App\Support\Locale::route('contact') }}" class="text-sand hover:text-white">{{ __('ui.contact') }}</a></li>
             </ul>
         </div>
 
         <div>
-            <div class="text-[15px] font-semibold text-white">งานที่รับ</div>
+            <div class="text-[15px] font-semibold text-white">{{ \App\Support\Locale::pick('งานที่รับ', 'What we do') }}</div>
             <ul class="mt-3 grid list-none gap-2 p-0 text-[15px]">
                 @foreach ($services as $item)
                     <li>
@@ -55,27 +66,24 @@
         </div>
 
         <div>
-            <div class="text-[15px] font-semibold text-white">ติดต่อ</div>
+            <div class="text-[15px] font-semibold text-white">{{ __('ui.contact') }}</div>
             <ul class="mt-3 grid list-none gap-2 p-0 text-[15px]">
-                <li>โทร {{ $phoneDisplay }}</li>
+                <li>{{ \App\Support\Locale::pick('โทร', 'Call') }} {{ $phoneDisplay }}</li>
                 @if ($lineId)
-                    <li>ไลน์ {{ $lineId }}</li>
+                    <li>LINE {{ $lineId }}</li>
                 @endif
-                <li>{{ $email }}</li>
+                @if ($email)
+                    <li>{{ $email }}</li>
+                @endif
+                <li>{{ $hoursDisplay }}</li>
                 <li>{{ $addressDisplay }}</li>
             </ul>
+            <p class="mt-4 text-[13px] leading-[1.7] text-sand/70">
+                {{ $legal }}
+                @if ($taxId)
+                    · {{ \App\Support\Locale::pick('เลขผู้เสียภาษี', 'Tax ID') }} {{ $taxId }}
+                @endif
+            </p>
         </div>
-
-        <div>
-            <div class="text-[15px] font-semibold text-white">เวลาทำการ</div>
-            <ul class="mt-3 grid list-none gap-2 p-0 text-[15px]">
-                <li>{{ $hoursDisplay }}</li>
-                <li>รับงาน กทม. และปริมณฑล</li>
-            </ul>
-        </div>
-    </x-front.container>
-
-    <x-front.container class="mt-16 border-t border-sand/20 pt-6 text-sm">
-        © {{ date('Y') }} {{ $legal }} · เลขผู้เสียภาษี {{ $taxId }}
     </x-front.container>
 </footer>

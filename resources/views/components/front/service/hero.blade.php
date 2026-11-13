@@ -10,6 +10,7 @@
     $heroAlt = match ($service->slug) {
         'house-demolition' => 'ทีมงาน '.$brand.' ใช้รถแบคโฮรื้อถอนบ้านเดี่ยว 2 ชั้น ที่ธัญบุรี ปทุมธานี',
         'shop-design' => 'งานออกแบบและตกแต่งร้านค้าโดย '.$brand.' — ภาพรวมหน้าร้านและบรรยากาศภายใน',
+        'buy-old-air-conditioner' => 'รถกระบะบรรทุกแอร์เก่าที่ถอดจากหน้างาน — ร้านรับซื้อแอร์เก่า '.$brand,
         default => $service->name,
     };
 @endphp
@@ -23,10 +24,10 @@
                 </p>
 
                 <div class="mt-4 flex flex-wrap items-center gap-2 text-sm font-semibold tracking-wide text-muted">
-                    <a href="{{ route('services') }}" class="text-brand-mid hover:text-brand">รวมงานบริการ</a>
+                    <a href="{{ \App\Support\Locale::route('services') }}" class="text-brand-mid hover:text-brand">{{ __('ui.services') }}</a>
                     <span aria-hidden="true">/</span>
                     @if ($category)
-                        <a href="{{ route('services') }}#{{ $category->slug }}" class="text-brand-mid hover:text-brand">{{ $category->name }}</a>
+                        <a href="{{ \App\Support\Locale::route('services') }}#{{ $category->slug }}" class="text-brand-mid hover:text-brand">{{ $category->name }}</a>
                         <span aria-hidden="true">/</span>
                     @endif
                     <span>{{ $service->name }}</span>

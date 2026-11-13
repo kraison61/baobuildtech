@@ -17,6 +17,19 @@
         <x-ui.label for="bio">ประวัติ</x-ui.label>
         <x-ui.textarea name="bio" id="bio" rows="4">{{ old('bio', $author?->bio) }}</x-ui.textarea>
     </div>
+
+    <div class="sm:col-span-2 mt-2 border-t border-slate-200 pt-4">
+        <h3 class="text-sm font-semibold text-slate-700">English</h3>
+    </div>
+    <div>
+        <x-ui.label for="job_title_en">Job Title (EN)</x-ui.label>
+        <x-ui.input type="text" name="job_title_en" id="job_title_en" :value="old('job_title_en', $author?->job_title_en)" />
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="bio_en">Bio (EN)</x-ui.label>
+        <x-ui.textarea name="bio_en" id="bio_en" rows="4">{{ old('bio_en', $author?->bio_en) }}</x-ui.textarea>
+    </div>
+
     <div class="sm:col-span-2">
         <x-ui.label for="avatar">รูปโปรไฟล์ (URL)</x-ui.label>
         <x-ui.input type="url" name="avatar" id="avatar" :value="old('avatar', $author?->avatar)" />

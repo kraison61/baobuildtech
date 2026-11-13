@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Front\ContactRequest;
 use App\Jobs\NotifyLineQuoteRequestJob;
 use App\Models\QuoteRequest;
+use App\Support\Locale;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -32,7 +33,7 @@ class ContactController extends Controller
         NotifyLineQuoteRequestJob::dispatchAfterResponse($quoteRequest);
 
         return redirect()
-            ->route('contact')
+            ->route(Locale::routeName('contact'))
             ->with('contact_sent', true)
             ->withFragment('form');
     }

@@ -48,6 +48,39 @@
         <x-ui.label for="meta_description">Meta Description</x-ui.label>
         <x-ui.input type="text" name="meta_description" id="meta_description" :value="old('meta_description', $item?->meta_description)" maxlength="160" />
     </div>
+
+    <div class="sm:col-span-2 mt-2 border-t border-slate-200 pt-4">
+        <h3 class="text-sm font-semibold text-slate-700">English</h3>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="name_en">Name (EN)</x-ui.label>
+        <x-ui.input type="text" name="name_en" id="name_en" :value="old('name_en', $item?->name_en)" />
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="headline_en">Headline (EN)</x-ui.label>
+        <x-ui.input type="text" name="headline_en" id="headline_en" :value="old('headline_en', $item?->headline_en)" />
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="excerpt_en">Excerpt (EN)</x-ui.label>
+        <x-ui.textarea name="excerpt_en" id="excerpt_en" rows="2">{{ old('excerpt_en', $item?->excerpt_en) }}</x-ui.textarea>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="description_en">Description (EN)</x-ui.label>
+        <x-ui.textarea name="description_en" id="description_en" rows="3">{{ old('description_en', $item?->description_en) }}</x-ui.textarea>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="content_en">Content HTML (EN)</x-ui.label>
+        <x-ui.textarea name="content_en" id="content_en" rows="12" class="font-mono text-xs">{{ old('content_en', $item?->content_en) }}</x-ui.textarea>
+    </div>
+    <div>
+        <x-ui.label for="meta_title_en">Meta Title (EN)</x-ui.label>
+        <x-ui.input type="text" name="meta_title_en" id="meta_title_en" :value="old('meta_title_en', $item?->meta_title_en)" maxlength="100" />
+    </div>
+    <div>
+        <x-ui.label for="meta_description_en">Meta Description (EN)</x-ui.label>
+        <x-ui.input type="text" name="meta_description_en" id="meta_description_en" :value="old('meta_description_en', $item?->meta_description_en)" maxlength="160" />
+    </div>
+
     <div>
         <x-ui.label for="sort_order">ลำดับ</x-ui.label>
         <x-ui.input type="number" name="sort_order" id="sort_order" :value="old('sort_order', $item?->sort_order ?? 0)" min="0" />

@@ -6,7 +6,7 @@
 <section id="process" class="scroll-mt-24 border-b border-line bg-white py-16 lg:py-24">
     <x-front.container>
         <div class="max-w-[680px]">
-            <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">เริ่มงานกับเรายังไง</h2>
+            <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">{{ \App\Support\HomeContent::processTitle() }}</h2>
         </div>
 
         <ol class="mt-10 grid list-none gap-4 p-0">

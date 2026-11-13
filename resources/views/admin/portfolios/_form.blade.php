@@ -58,8 +58,12 @@
         <p class="mt-1 text-xs text-slate-500">วางรูปแบบ lat, lng เช่น 13.748436414898316, 100.48145963665914</p>
     </div>
     <div class="sm:col-span-2">
-        <x-ui.label for="description">รายละเอียด</x-ui.label>
+        <x-ui.label for="description">รายละเอียดสั้น</x-ui.label>
         <x-ui.textarea name="description" id="description" rows="4">{{ old('description', $portfolio?->description) }}</x-ui.textarea>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="content">เนื้อหาเต็ม (HTML)</x-ui.label>
+        <x-ui.textarea name="content" id="content" rows="12">{{ old('content', $portfolio?->content) }}</x-ui.textarea>
     </div>
     <div class="sm:col-span-2">
         <x-ui.label for="cover_image">รูปปก (URL)</x-ui.label>
@@ -74,6 +78,35 @@
         <x-ui.label for="meta_description">Meta Description</x-ui.label>
         <x-ui.input type="text" name="meta_description" id="meta_description" :value="old('meta_description', $portfolio?->meta_description)" maxlength="160" />
     </div>
+
+    <div class="sm:col-span-2 mt-2 border-t border-slate-200 pt-4">
+        <h3 class="text-sm font-semibold text-slate-700">English</h3>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="title_en">Title (EN)</x-ui.label>
+        <x-ui.input type="text" name="title_en" id="title_en" :value="old('title_en', $portfolio?->title_en)" />
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="client_name_en">Client Name (EN)</x-ui.label>
+        <x-ui.input type="text" name="client_name_en" id="client_name_en" :value="old('client_name_en', $portfolio?->client_name_en)" />
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="description_en">Description (EN)</x-ui.label>
+        <x-ui.textarea name="description_en" id="description_en" rows="4">{{ old('description_en', $portfolio?->description_en) }}</x-ui.textarea>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="content_en">Content (EN HTML)</x-ui.label>
+        <x-ui.textarea name="content_en" id="content_en" rows="12">{{ old('content_en', $portfolio?->content_en) }}</x-ui.textarea>
+    </div>
+    <div>
+        <x-ui.label for="meta_title_en">Meta Title (EN)</x-ui.label>
+        <x-ui.input type="text" name="meta_title_en" id="meta_title_en" :value="old('meta_title_en', $portfolio?->meta_title_en)" maxlength="100" />
+    </div>
+    <div>
+        <x-ui.label for="meta_description_en">Meta Description (EN)</x-ui.label>
+        <x-ui.input type="text" name="meta_description_en" id="meta_description_en" :value="old('meta_description_en', $portfolio?->meta_description_en)" maxlength="160" />
+    </div>
+
     <div class="sm:col-span-2">
         <x-ui.checkbox name="is_published" value="1" label="เผยแพร่" :checked="old('is_published', $portfolio?->is_published ?? false)" />
     </div>

@@ -52,6 +52,43 @@
         <x-ui.label for="meta_description">Meta Description</x-ui.label>
         <x-ui.input type="text" name="meta_description" id="meta_description" :value="old('meta_description', $service?->meta_description)" maxlength="160" />
     </div>
+
+    <div class="sm:col-span-2 mt-2 border-t border-slate-200 pt-4">
+        <h3 class="text-sm font-semibold text-slate-700">English</h3>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="name_en">Name (EN)</x-ui.label>
+        <x-ui.input type="text" name="name_en" id="name_en" :value="old('name_en', $service?->name_en)" />
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="headline_en">Headline (EN)</x-ui.label>
+        <x-ui.input type="text" name="headline_en" id="headline_en" :value="old('headline_en', $service?->headline_en)" maxlength="255" />
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="excerpt_en">Excerpt (EN)</x-ui.label>
+        <x-ui.textarea name="excerpt_en" id="excerpt_en" rows="2">{{ old('excerpt_en', $service?->excerpt_en) }}</x-ui.textarea>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="description_en">Description (EN)</x-ui.label>
+        <x-ui.textarea name="description_en" id="description_en" rows="4">{{ old('description_en', $service?->description_en) }}</x-ui.textarea>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="content_en">Content HTML (EN)</x-ui.label>
+        <x-ui.textarea name="content_en" id="content_en" rows="16" class="font-mono text-xs">{{ old('content_en', $service?->content_en) }}</x-ui.textarea>
+    </div>
+    <div>
+        <x-ui.label for="service_type_en">Service Type (EN)</x-ui.label>
+        <x-ui.input type="text" name="service_type_en" id="service_type_en" :value="old('service_type_en', $service?->service_type_en)" />
+    </div>
+    <div>
+        <x-ui.label for="meta_title_en">Meta Title (EN)</x-ui.label>
+        <x-ui.input type="text" name="meta_title_en" id="meta_title_en" :value="old('meta_title_en', $service?->meta_title_en)" maxlength="100" />
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="meta_description_en">Meta Description (EN)</x-ui.label>
+        <x-ui.input type="text" name="meta_description_en" id="meta_description_en" :value="old('meta_description_en', $service?->meta_description_en)" maxlength="160" />
+    </div>
+
     <div>
         <x-ui.label for="sort_order">ลำดับ</x-ui.label>
         <x-ui.input type="number" name="sort_order" id="sort_order" :value="old('sort_order', $service?->sort_order ?? 0)" min="0" />

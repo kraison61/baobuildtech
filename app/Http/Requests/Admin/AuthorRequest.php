@@ -18,8 +18,10 @@ class AuthorRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255'],
             'bio' => ['nullable', 'string'],
+            'bio_en' => ['nullable', 'string'],
             'avatar' => ['nullable', 'string', 'max:500'],
             'job_title' => ['nullable', 'string', 'max:255'],
+            'job_title_en' => ['nullable', 'string', 'max:255'],
             'social_links' => ['nullable', 'string'],
             'is_active' => ['boolean'],
         ];

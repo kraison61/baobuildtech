@@ -5,7 +5,7 @@
 <section id="services" class="scroll-mt-24 border-b border-line bg-white py-16 lg:py-24">
     <x-front.container>
         <div class="max-w-[680px]">
-            <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">บริการของเรา</h2>
+            <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">{{ \App\Support\HomeContent::servicesTitle() }}</h2>
         </div>
 
         <div class="mt-12 grid gap-10 min-[900px]:grid-cols-2 xl:grid-cols-4">
@@ -26,8 +26,7 @@
         </div>
 
         <p class="mt-10 max-w-[720px] text-[17px] leading-[1.8] text-muted">
-            <strong class="font-semibold text-ink">รับเป็นงานเดี่ยวได้ทุกรายการ</strong>
-            ไม่จำเป็นต้องจ้างครบวงจร ลูกค้าจำนวนมากเริ่มจากงานเล็กอย่างเปลี่ยนประตูหน้าต่างอลูมิเนียมหรือถมดินก่อน แล้วค่อยกลับมาคุยเรื่องงานใหญ่ทีหลัง
+            <strong class="font-semibold text-ink">{{ \App\Support\HomeContent::servicesNoteLead() }}</strong>{{ \App\Support\HomeContent::servicesNoteBody() }}
         </p>
     </x-front.container>
 </section>

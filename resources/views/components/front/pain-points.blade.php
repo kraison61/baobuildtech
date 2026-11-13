@@ -8,7 +8,7 @@
     <x-front.container>
         <div class="max-w-[720px]">
             <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">
-                ก่อนเซ็นสัญญากับผู้รับเหมา คุณกำลังกังวลเรื่องพวกนี้อยู่ใช่ไหม
+                {{ \App\Support\HomeContent::painTitle() }}
             </h2>
 
             <ul class="mt-8 grid list-none gap-0 border-t border-line p-0">
@@ -18,7 +18,7 @@
             </ul>
 
             <p class="mt-8 text-[17px] leading-[1.8] text-muted">
-                ทั้งหมดนี้คือเหตุผลที่ BOA ถูกตั้งขึ้นมา และเราออกแบบวิธีทำงานเพื่อปิดช่องทีละข้อ
+                {{ \App\Support\HomeContent::painOutro() }}
             </p>
         </div>
 
@@ -26,8 +26,8 @@
             <table class="w-full min-w-[560px] border-collapse text-[17px]">
                 <thead>
                     <tr>
-                        <th class="border-b border-line py-3.5 pr-4 text-left font-semibold text-muted">สิ่งที่คุณกลัว</th>
-                        <th class="border-b border-line py-3.5 pl-4 text-left font-semibold text-brand">วิธีที่ BOA ปิดช่อง</th>
+                        <th class="border-b border-line py-3.5 pr-4 text-left font-semibold text-muted">{{ \App\Support\HomeContent::painFearCol() }}</th>
+                        <th class="border-b border-line py-3.5 pl-4 text-left font-semibold text-brand">{{ \App\Support\HomeContent::painFixCol() }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,7 +46,7 @@
                 href="{{ $lineUrl ?? '#cta' }}"
                 class="inline-flex items-center rounded-lg bg-accent px-[26px] py-4 text-[17px] font-semibold text-white hover:bg-accent-dark hover:text-white"
                 @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="pain-points" @endif
-            >ปรึกษาฟรี ไม่ผูกมัด</a>
+            >{{ \App\Support\HomeContent::painCta() }}</a>
         </div>
     </x-front.container>
 </section>

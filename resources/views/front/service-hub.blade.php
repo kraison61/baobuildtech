@@ -5,8 +5,8 @@
     $pageTitle = $hub->metaTitle();
     $pageUrl = $hub->url();
     $breadcrumbs = [
-        ['label' => 'หน้าแรก', 'url' => route('home')],
-        ['label' => 'งานบริการ', 'url' => route('services')],
+        ['label' => __('ui.home'), 'url' => \App\Support\Locale::route('home')],
+        ['label' => __('ui.services'), 'url' => \App\Support\Locale::route('services')],
         ['label' => $hub->breadcrumbLabel()],
     ];
     $siteUrl = rtrim((string) config('company.site_url'), '/');

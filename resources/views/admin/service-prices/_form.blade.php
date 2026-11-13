@@ -43,6 +43,23 @@
             <x-ui.label for="note">หมายเหตุ</x-ui.label>
             <x-ui.textarea name="note" id="note" rows="2">{{ old('note', $price?->note) }}</x-ui.textarea>
         </div>
+
+        <div class="sm:col-span-2 mt-2 border-t border-slate-200 pt-4">
+            <h3 class="text-sm font-semibold text-slate-700">English</h3>
+        </div>
+        <div class="sm:col-span-2">
+            <x-ui.label for="label_en">Label (EN)</x-ui.label>
+            <x-ui.input type="text" name="label_en" id="label_en" :value="old('label_en', $price?->label_en)" />
+        </div>
+        <div>
+            <x-ui.label for="price_unit_en">Unit (EN)</x-ui.label>
+            <x-ui.input type="text" name="price_unit_en" id="price_unit_en" :value="old('price_unit_en', $price?->price_unit_en)" placeholder="THB/sq.m." />
+        </div>
+        <div class="sm:col-span-2">
+            <x-ui.label for="note_en">Note (EN)</x-ui.label>
+            <x-ui.textarea name="note_en" id="note_en" rows="2">{{ old('note_en', $price?->note_en) }}</x-ui.textarea>
+        </div>
+
         <div>
             <x-ui.label for="sort_order">ลำดับ</x-ui.label>
             <x-ui.input type="number" name="sort_order" id="sort_order" :value="old('sort_order', $price?->sort_order ?? 0)" min="0" />

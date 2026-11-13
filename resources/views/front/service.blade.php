@@ -9,9 +9,9 @@
         ''
     );
     $breadcrumbs = [
-        ['label' => 'หน้าแรก', 'url' => route('home')],
-        ['label' => 'งานบริการ', 'url' => route('services')],
-        ['label' => $service->category->name, 'url' => route('services').'#'.$service->category->slug],
+        ['label' => __('ui.home'), 'url' => \App\Support\Locale::route('home')],
+        ['label' => __('ui.services'), 'url' => \App\Support\Locale::route('services')],
+        ['label' => $service->category->name, 'url' => \App\Support\Locale::route('services').'#'.$service->category->slug],
         ['label' => $service->name],
     ];
 

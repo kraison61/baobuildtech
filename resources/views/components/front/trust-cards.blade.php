@@ -2,7 +2,7 @@
     $stats = \App\Support\HomeContent::stats();
 @endphp
 
-<section class="border-b border-line bg-brand" aria-label="ตัวเลขสำคัญ">
+<section class="border-b border-line bg-brand" aria-label="{{ \App\Support\HomeContent::trustAria() }}">
     <x-front.container class="grid gap-px py-0 [grid-template-columns:repeat(auto-fit,minmax(180px,1fr))] sm:grid-cols-3">
         @foreach ($stats as $stat)
             <div class="bg-brand px-2 py-8 text-center sm:py-10">

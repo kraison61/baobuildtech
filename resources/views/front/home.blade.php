@@ -2,7 +2,7 @@
 
 @php
     $pageTitle = \App\Support\HomeContent::metaTitle();
-    $pageUrl = url('/');
+    $pageUrl = \App\Support\Locale::route('home');
     $schemaFaqs = \App\Support\HomeContent::schemaFaqs();
     $portfolios = \App\Models\Portfolio::query()
         ->where('is_published', true)

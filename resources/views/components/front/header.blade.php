@@ -5,10 +5,13 @@
     $lineUrl = \App\Support\Company::lineUrl();
     $brand = config('company.brand_name');
     $navItems = \App\Support\Navigation::items();
-    $homeHref = route('home');
-    $ctaHref = request()->routeIs('home', 'services')
+    $homeHref = \App\Support\Locale::route('home');
+    $ctaHref = request()->routeIs('home', 'en.home', 'services', 'en.services')
         ? '#cta'
-        : (request()->routeIs('contact') ? '#form' : route('home').'#cta');
+        : (request()->routeIs('contact', 'en.contact') ? '#form' : \App\Support\Locale::route('home').'#cta');
+    $locale = \App\Support\Locale::current();
+    $thUrl = \App\Support\Locale::alternateUrl('th');
+    $enUrl = \App\Support\Locale::alternateUrl('en');
 
     $resolveHref = static function (string $href): string {
         if (str_starts_with($href, 'http') || str_starts_with($href, '#')) {
@@ -19,7 +22,11 @@
     };
 
     $isActive = static function (?string $routeName): bool {
-        return $routeName !== null && request()->routeIs($routeName);
+        if ($routeName === null) {
+            return false;
+        }
+
+        return request()->routeIs($routeName, 'en.'.$routeName);
     };
 @endphp
 
@@ -32,19 +39,22 @@
         aria-hidden="true"
     ></div>
 
-    <div class="relative z-[60] mx-auto flex max-w-[1160px] items-center justify-between gap-3 bg-brand px-5 py-3" data-mobile-nav-bar>
-        <a href="{{ $homeHref }}" class="flex min-w-0 items-center gap-2.5 text-white hover:text-white" data-mobile-nav-link>
+    <div class="relative z-[60] mx-auto flex max-w-[1160px] items-center gap-3 bg-brand px-5 py-3 min-[1100px]:gap-4" data-mobile-nav-bar>
+        <a href="{{ $homeHref }}" class="flex shrink-0 items-center gap-2.5 text-white hover:text-white" data-mobile-nav-link aria-label="{{ config('company.brand_name') }}">
             <x-ui.logo-mark size="size-10" />
         </a>
 
-        {{-- Desktop: เมนูแนวนอน --}}
-        <nav class="hidden items-center gap-1 text-[14px] min-[1100px]:flex xl:gap-2 xl:text-[15px]" aria-label="เมนูหลัก">
+        {{-- Desktop: เมนูแนวนอน (ไม่แสดง Home — โลโก้ลิงก์หน้าแรกอยู่แล้ว) --}}
+        <nav class="hidden min-w-0 flex-1 items-center justify-center gap-0.5 text-[13px] min-[1100px]:flex xl:gap-1.5 xl:text-[14px]" aria-label="{{ __('ui.nav_main') }}">
             @foreach ($navItems as $item)
+                @if (($item['route'] ?? null) === 'home')
+                    @continue
+                @endif
                 @if (! empty($item['mega']) && ! empty($item['sections']))
                     <div class="relative" data-nav-mega>
                         <button
                             type="button"
-                            class="inline-flex cursor-pointer items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-2 text-sand hover:text-white {{ $isActive($item['route'] ?? null) ? 'text-white' : '' }}"
+                            class="inline-flex cursor-pointer items-center gap-1 whitespace-nowrap rounded-lg px-2 py-2 text-sand hover:text-white xl:px-2.5 {{ $isActive($item['route'] ?? null) ? 'text-white' : '' }}"
                             aria-expanded="false"
                             aria-haspopup="true"
                             data-nav-mega-toggle
@@ -59,7 +69,7 @@
                     <div class="group relative" data-nav-dropdown>
                         <button
                             type="button"
-                            class="inline-flex cursor-pointer items-center gap-1 whitespace-nowrap rounded-lg px-2.5 py-2 text-sand hover:text-white {{ $isActive($item['route'] ?? null) ? 'text-white' : '' }}"
+                            class="inline-flex cursor-pointer items-center gap-1 whitespace-nowrap rounded-lg px-2 py-2 text-sand hover:text-white xl:px-2.5 {{ $isActive($item['route'] ?? null) ? 'text-white' : '' }}"
                             aria-expanded="false"
                             aria-haspopup="true"
                         >
@@ -86,7 +96,7 @@
                     <a
                         href="{{ $resolveHref($item['href']) }}"
                         @class([
-                            'whitespace-nowrap rounded-lg px-2.5 py-2 text-sand hover:text-white',
+                            'whitespace-nowrap rounded-lg px-2 py-2 text-sand hover:text-white xl:px-2.5',
                             'text-white' => $isActive($item['route'] ?? null),
                         ])
                     >{{ $item['label'] }}</a>
@@ -94,10 +104,15 @@
             @endforeach
         </nav>
 
-        {{-- Desktop: โทร + CTA --}}
-        <div class="hidden items-center gap-3 min-[1100px]:flex">
-            <a href="{{ $phoneHref }}" class="whitespace-nowrap text-[14px] text-white tabular-nums hover:text-white xl:text-[15px]" data-cta="phone" data-cta-source="header">โทร {{ $phoneDisplay }}</a>
-            <a href="{{ $ctaHref }}" class="inline-flex items-center rounded-lg bg-accent px-4 py-[11px] text-[14px] font-semibold whitespace-nowrap text-white hover:bg-accent-dark hover:text-white xl:px-[18px] xl:text-[15px]">ส่งรูปหน้างาน ประเมินฟรี</a>
+        {{-- Desktop: ภาษา + โทร + CTA --}}
+        <div class="ms-auto hidden shrink-0 items-center gap-2 min-[1100px]:flex xl:gap-3">
+            <div class="flex items-center gap-1 text-[12px] font-semibold tracking-wide xl:text-[13px]" role="group" aria-label="{{ __('ui.switch_language') }}">
+                <a href="{{ $thUrl }}" @class(['rounded px-1.5 py-1', $locale === 'th' ? 'bg-white/15 text-white' : 'text-sand hover:text-white']) hreflang="th" lang="th">{{ __('ui.lang_th') }}</a>
+                <span class="text-sand/50" aria-hidden="true">|</span>
+                <a href="{{ $enUrl }}" @class(['rounded px-1.5 py-1', $locale === 'en' ? 'bg-white/15 text-white' : 'text-sand hover:text-white']) hreflang="en" lang="en">{{ __('ui.lang_en') }}</a>
+            </div>
+            <a href="{{ $phoneHref }}" class="hidden whitespace-nowrap text-[14px] text-white tabular-nums hover:text-white xl:inline" data-cta="phone" data-cta-source="header">{{ $phoneDisplay }}</a>
+            <a href="{{ $ctaHref }}" class="inline-flex items-center rounded-lg bg-accent px-3.5 py-[11px] text-[13px] font-semibold whitespace-nowrap text-white hover:bg-accent-dark hover:text-white xl:px-4 xl:text-[14px]">{{ __('ui.cta_free_quote') }}</a>
         </div>
 
         {{-- Mobile: ไอคอนโทร / ไลน์ / hamburger --}}
@@ -156,7 +171,7 @@
                             <section>
                                 <div class="mb-5 flex items-end justify-between gap-4 border-b border-line pb-3">
                                     <div>
-                                        <div class="text-sm font-semibold tracking-wide text-muted">หมวดหมู่งาน</div>
+                                        <div class="text-sm font-semibold tracking-wide text-muted">{{ \App\Support\Locale::pick('หมวดหมู่งาน', 'Service categories') }}</div>
                                         <a href="{{ $resolveHref($section['href']) }}" class="text-[20px] font-semibold text-brand hover:text-brand-dark">
                                             {{ $section['label'] }}
                                         </a>
@@ -186,9 +201,9 @@
                         @endforeach
                     </div>
                     <div class="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-5">
-                        <p class="text-[14px] text-muted">รวมงานโยธาและงานไอทีในโครงการเดียวกัน — ทีมช่างทำเองทั้งกระบวนการ</p>
+                        <p class="text-[14px] text-muted">{{ \App\Support\Locale::pick('รวมงานโยธาและงานไอทีในโครงการเดียวกัน — ทีมช่างทำเองทั้งกระบวนการ', 'Civil works and IT under one project — our crew handles the full process') }}</p>
                         <a href="{{ $resolveHref($item['href']) }}" class="inline-flex items-center gap-1 text-[15px] font-semibold text-brand-mid hover:text-brand">
-                            ดูงานบริการทั้งหมด
+                            {{ \App\Support\Locale::pick('ดูงานบริการทั้งหมด', 'View all services') }}
                             <span aria-hidden="true">→</span>
                         </a>
                     </div>
@@ -222,7 +237,7 @@
                         </button>
                         <div class="hidden pb-3 ps-1" data-nav-accordion-panel hidden>
                             <a href="{{ $resolveHref($item['href']) }}" class="block py-2.5 text-[15px] text-sand hover:text-white" data-mobile-nav-link>
-                                ดูงานบริการทั้งหมด
+                                {{ \App\Support\Locale::pick('ดูงานบริการทั้งหมด', 'View all services') }}
                             </a>
                             @foreach ($item['sections'] as $section)
                                 <div class="mt-2 border-t border-sand/12 pt-2" data-nav-accordion>
@@ -299,8 +314,13 @@
             @endforeach
         </div>
 
-        <a href="{{ $phoneHref }}" class="mt-2 block py-3.5 text-[17px] text-sand tabular-nums hover:text-white" data-mobile-nav-link data-cta="phone" data-cta-source="header-drawer">
-            โทร {{ $phoneDisplay }}
+        <div class="mt-2 flex items-center gap-2 border-b border-sand/18 py-3 text-[15px] font-semibold" role="group" aria-label="{{ __('ui.switch_language') }}">
+            <a href="{{ $thUrl }}" @class([$locale === 'th' ? 'text-white' : 'text-sand hover:text-white']) hreflang="th" lang="th" data-mobile-nav-link>{{ __('ui.lang_th') }}</a>
+            <span class="text-sand/50" aria-hidden="true">|</span>
+            <a href="{{ $enUrl }}" @class([$locale === 'en' ? 'text-white' : 'text-sand hover:text-white']) hreflang="en" lang="en" data-mobile-nav-link>{{ __('ui.lang_en') }}</a>
+        </div>
+        <a href="{{ $phoneHref }}" class="block py-3.5 text-[17px] text-sand tabular-nums hover:text-white" data-mobile-nav-link data-cta="phone" data-cta-source="header-drawer">
+            {{ \App\Support\Locale::pick('โทร', 'Call') }} {{ $phoneDisplay }}
         </a>
         @if ($lineUrl || $lineId)
             <a

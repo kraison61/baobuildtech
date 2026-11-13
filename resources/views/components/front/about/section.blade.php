@@ -6,13 +6,13 @@
     <x-front.container>
         <div class="max-w-[720px]">
             <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">
-                BOA คือใคร
+                {{ \App\Support\HomeContent::aboutTitle() }}
             </h2>
             <p class="mt-6 text-[17px] leading-[1.8] text-muted">
-                BOA ย่อมาจาก <strong class="font-semibold text-ink">Build Operate Assure</strong> สะท้อนวิธีทำงานสามขั้นของเรา คือสร้างให้ได้มาตรฐาน ส่งมอบระบบที่ใช้งานได้จริง และตรวจสอบให้มั่นใจ
+                {!! \App\Support\HomeContent::aboutP1Html() !!}
             </p>
             <p class="mt-4 text-[17px] leading-[1.8] text-muted">
-                ปัญหาที่เจ้าของงานเจอบ่อยที่สุดคือ ผู้รับเหมาโครงสร้างจบงานแล้วโยนต่อให้เจ้าของบ้านไปหาช่างอลูมิเนียม ช่างไฟ ช่างเน็ต ช่างกล้องเอง พอมีปัญหาก็โทษกันไปมา BOA ตั้งขึ้นมาเพื่อปิดช่องนี้โดยเฉพาะ
+                {{ \App\Support\HomeContent::aboutP2() }}
             </p>
         </div>
 

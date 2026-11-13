@@ -135,7 +135,7 @@ class JsonLd
             'url' => $siteUrl.'/',
             'name' => self::cleanText((string) config('company.brand_name')),
             'publisher' => ['@id' => $siteUrl.'#organization'],
-            'inLanguage' => 'th-TH',
+            'inLanguage' => \App\Support\Locale::inLanguage(),
         ];
     }
 
@@ -475,7 +475,7 @@ class JsonLd
             'headline' => self::cleanText($post->title),
             'description' => self::cleanText((string) ($post->excerpt ?: $post->meta_description)),
             'url' => $pageUrl,
-            'inLanguage' => 'th-TH',
+            'inLanguage' => \App\Support\Locale::inLanguage(),
             'mainEntityOfPage' => ['@id' => $pageUrl.'#webpage'],
             'publisher' => ['@id' => $siteUrl.'#organization'],
         ];

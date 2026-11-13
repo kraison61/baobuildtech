@@ -17,9 +17,12 @@ class PostRequest extends FormRequest
         return [
             'author_id' => ['required', 'exists:authors,id'],
             'title' => ['required', 'string', 'max:255'],
+            'title_en' => ['nullable', 'string', 'max:255'],
             'slug' => ['nullable', 'string', 'max:255'],
             'excerpt' => ['nullable', 'string', 'max:500'],
+            'excerpt_en' => ['nullable', 'string', 'max:500'],
             'body' => ['nullable', 'string'],
+            'body_en' => ['nullable', 'string'],
             'image_16x9_file' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:3072'],
             'image_4x3_file' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:3072'],
             'image_1x1_file' => ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:3072'],
@@ -28,7 +31,9 @@ class PostRequest extends FormRequest
             'remove_image_1x1' => ['boolean'],
             'published_at' => ['nullable', 'date'],
             'meta_title' => ['nullable', 'string', 'max:100'],
+            'meta_title_en' => ['nullable', 'string', 'max:100'],
             'meta_description' => ['nullable', 'string', 'max:160'],
+            'meta_description_en' => ['nullable', 'string', 'max:160'],
             'is_published' => ['boolean'],
         ];
     }
@@ -51,11 +56,14 @@ class PostRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
+        $bodyEn = $this->input('body_en');
+
         $this->merge([
             'is_published' => $this->boolean('is_published'),
             'remove_image_16x9' => $this->boolean('remove_image_16x9'),
             'remove_image_4x3' => $this->boolean('remove_image_4x3'),
             'remove_image_1x1' => $this->boolean('remove_image_1x1'),
+            'body_en' => is_string($bodyEn) && trim($bodyEn) !== '' ? $bodyEn : null,
         ]);
     }
 }

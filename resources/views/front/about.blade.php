@@ -2,10 +2,10 @@
 
 @php
     $pageTitle = \App\Support\AboutContent::metaTitle();
-    $pageUrl = route('about');
+    $pageUrl = \App\Support\Locale::route('about');
     $breadcrumbs = [
-        ['label' => 'หน้าแรก', 'url' => route('home')],
-        ['label' => 'เกี่ยวกับเรา'],
+        ['label' => __('ui.home'), 'url' => \App\Support\Locale::route('home')],
+        ['label' => __('ui.about')],
     ];
     $siteUrl = rtrim((string) config('company.site_url'), '/');
     $schemaGraph = \App\Support\JsonLd::pageGraph(

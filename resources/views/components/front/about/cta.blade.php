@@ -16,7 +16,7 @@
             </p>
             <div class="mt-10 flex justify-center">
                 <a
-                    href="{{ $lineUrl ?? route('contact') }}"
+                    href="{{ $lineUrl ?? \App\Support\Locale::route('contact') }}"
                     class="inline-flex items-center rounded-lg bg-accent px-[26px] py-4 text-[17px] font-semibold text-white hover:bg-accent-dark hover:text-white"
                     @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="about-cta" @endif
                 >ส่งรูปหน้างาน ประเมินฟรี</a>

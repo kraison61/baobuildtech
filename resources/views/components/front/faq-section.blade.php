@@ -5,7 +5,7 @@
 <section id="faq" class="scroll-mt-24 bg-white py-16 lg:py-24">
     <x-front.container>
         <div class="mx-auto max-w-[680px]">
-            <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">คำถามที่พบบ่อย</h2>
+            <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">{{ \App\Support\HomeContent::faqTitle() }}</h2>
 
             <div class="mt-10 grid gap-4">
                 @foreach ($faqs as $faq)

@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasTranslations;
+use App\Support\Locale;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,20 +13,32 @@ use Illuminate\Support\Facades\Storage;
 #[Fillable([
     'author_id',
     'title',
+    'title_en',
     'slug',
     'excerpt',
+    'excerpt_en',
     'body',
+    'body_en',
     'image_16x9',
     'image_4x3',
     'image_1x1',
     'published_at',
     'meta_title',
+    'meta_title_en',
     'meta_description',
+    'meta_description_en',
     'word_count',
     'is_published',
 ])]
 class Post extends Model
 {
+    use HasTranslations;
+
+    public function translatedAttributes(): array
+    {
+        return ['title', 'excerpt', 'body', 'meta_title', 'meta_description'];
+    }
+
     protected function casts(): array
     {
         return [
@@ -107,7 +121,7 @@ class Post extends Model
 
     public function url(): string
     {
-        return route('blog.show', $this->slug);
+        return Locale::route('blog.show', $this->slug);
     }
 
     protected static function booted(): void
@@ -117,7 +131,7 @@ class Post extends Model
             $paths = [];
 
             foreach (['image_16x9', 'image_4x3', 'image_1x1'] as $column) {
-                $path = static::pathFromUrl($post->{$column});
+                $path = static::pathFromUrl($post->getAttributes()[$column] ?? null);
                 if ($path !== null) {
                     $paths[$path] = true;
                 }

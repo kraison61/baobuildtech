@@ -2,7 +2,9 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasTranslations;
 use App\Support\Coordinates;
+use App\Support\Locale;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -16,17 +18,31 @@ use Illuminate\Database\Eloquent\Relations\MorphMany;
     'lat',
     'lng',
     'title',
+    'title_en',
     'slug',
     'description',
+    'description_en',
+    'content',
+    'content_en',
     'cover_image',
     'client_name',
+    'client_name_en',
     'completed_at',
     'meta_title',
+    'meta_title_en',
     'meta_description',
+    'meta_description_en',
     'is_published',
 ])]
 class Portfolio extends Model
 {
+    use HasTranslations;
+
+    public function translatedAttributes(): array
+    {
+        return ['title', 'description', 'content', 'client_name', 'meta_title', 'meta_description'];
+    }
+
     protected function casts(): array
     {
         return [
@@ -71,5 +87,10 @@ class Portfolio extends Model
     public function faqs(): MorphMany
     {
         return $this->morphMany(Faq::class, 'faqable');
+    }
+
+    public function url(): string
+    {
+        return Locale::route('works.show', $this->slug);
     }
 }

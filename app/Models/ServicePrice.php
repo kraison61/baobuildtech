@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasTranslations;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -12,16 +13,26 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
     'priceable_id',
     'price_type',
     'label',
+    'label_en',
     'price_min',
     'price_max',
     'price_unit',
+    'price_unit_en',
     'currency',
     'note',
+    'note_en',
     'is_visible',
     'sort_order',
 ])]
 class ServicePrice extends Model
 {
+    use HasTranslations;
+
+    public function translatedAttributes(): array
+    {
+        return ['label', 'price_unit', 'note'];
+    }
+
     protected function casts(): array
     {
         return [
@@ -80,10 +91,10 @@ class ServicePrice extends Model
         }
 
         if ($min) {
-            return 'เริ่ม '.$min.$unit;
+            return __('ui.price_from').' '.$min.$unit;
         }
 
-        return trim($unit) !== '' ? trim($unit) : 'สอบถาม';
+        return trim($unit) !== '' ? trim($unit) : __('ui.price_ask');
     }
 
     public function formattedMin(): ?string

@@ -21,7 +21,9 @@ class FaqRequest extends FormRequest
             ])],
             'faqable_id' => ['required', 'integer', 'min:1'],
             'question' => ['required', 'string', 'max:500'],
+            'question_en' => ['nullable', 'string', 'max:500'],
             'answer' => ['required', 'string'],
+            'answer_en' => ['nullable', 'string'],
             'sort_order' => ['nullable', 'integer', 'min:0'],
             'is_active' => ['boolean'],
         ];

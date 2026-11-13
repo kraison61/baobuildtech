@@ -17,6 +17,19 @@
         <x-ui.label for="description">คำอธิบาย</x-ui.label>
         <x-ui.textarea name="description" id="description" rows="3">{{ old('description', $category?->description) }}</x-ui.textarea>
     </div>
+
+    <div class="sm:col-span-2 mt-2 border-t border-slate-200 pt-4">
+        <h3 class="text-sm font-semibold text-slate-700">English</h3>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="name_en">Name (EN)</x-ui.label>
+        <x-ui.input type="text" name="name_en" id="name_en" :value="old('name_en', $category?->name_en)" />
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="description_en">Description (EN)</x-ui.label>
+        <x-ui.textarea name="description_en" id="description_en" rows="3">{{ old('description_en', $category?->description_en) }}</x-ui.textarea>
+    </div>
+
     <div class="sm:col-span-2">
         <x-ui.label for="cover_image">รูปปก (URL)</x-ui.label>
         <x-ui.input type="url" name="cover_image" id="cover_image" :value="old('cover_image', $category?->cover_image)" />

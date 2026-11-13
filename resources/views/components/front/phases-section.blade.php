@@ -6,7 +6,7 @@
     <x-front.container>
         <div class="max-w-[720px]">
             <h2 class="text-[clamp(1.625rem,4vw,2rem)] font-semibold leading-[1.4] text-brand">
-                จากที่ดินเปล่าถึงวันเข้าอยู่ — 8 ขั้นตอนที่เราดูแลให้
+                {{ \App\Support\HomeContent::phasesTitle() }}
             </h2>
         </div>
 
@@ -14,7 +14,7 @@
         <div class="mt-10 overflow-x-auto pb-2 [scrollbar-width:thin]">
             <ol
                 class="mx-auto flex w-max list-none items-stretch gap-3 p-0"
-                aria-label="8 ขั้นตอนจากที่ดินเปล่าถึงวันเข้าอยู่"
+                aria-label="{{ \App\Support\HomeContent::phasesAria() }}"
             >
                 @foreach ($phases as $index => $phase)
                     <li class="flex shrink-0 items-center gap-3">
@@ -94,10 +94,10 @@
         </div>
 
         <p class="mt-8 text-[17px] leading-[1.8] text-muted">
-            รับครบทั้ง 8 ขั้นในสัญญาเดียว หรือเลือกจ้างเฉพาะบางขั้นก็ได้
+            {{ \App\Support\HomeContent::phasesNote() }}
         </p>
-        <a href="{{ route('services') }}" class="mt-4 inline-block border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand">
-            ดูรายละเอียดแต่ละขั้นตอน
+        <a href="{{ \App\Support\Locale::route('services') }}" class="mt-4 inline-block border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand">
+            {{ \App\Support\HomeContent::phasesCta() }}
         </a>
     </x-front.container>
 </section>

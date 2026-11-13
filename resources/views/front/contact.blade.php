@@ -2,10 +2,10 @@
 
 @php
     $pageTitle = \App\Support\ContactContent::metaTitle();
-    $pageUrl = route('contact');
+    $pageUrl = \App\Support\Locale::route('contact');
     $breadcrumbs = [
-        ['label' => 'หน้าแรก', 'url' => route('home')],
-        ['label' => 'ติดต่อเรา'],
+        ['label' => __('ui.home'), 'url' => \App\Support\Locale::route('home')],
+        ['label' => __('ui.contact')],
     ];
     $orgExtra = [];
 

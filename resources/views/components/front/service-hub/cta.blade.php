@@ -47,7 +47,7 @@
                     </a>
                 @endif
                 <a
-                    href="{{ route('contact') }}"
+                    href="{{ \App\Support\Locale::route('contact') }}"
                     class="inline-flex w-full items-center justify-center rounded-lg border border-sand/40 px-6 py-4 text-[17px] font-semibold text-white hover:bg-white/10 min-[520px]:w-auto"
                 >
                     กรอกฟอร์มขอใบเสนอราคา

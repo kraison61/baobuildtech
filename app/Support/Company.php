@@ -52,12 +52,19 @@ class Company
         return filled($url) ? (string) $url : null;
     }
 
+    public static function description(): string
+    {
+        return Locale::isEnglish()
+            ? (string) (config('company.description_en') ?: config('company.description'))
+            : (string) config('company.description');
+    }
+
     /**
      * ที่อยู่แสดงผลบรรทัดเดียว จาก config/company.php
      */
     public static function addressDisplay(): string
     {
-        $address = config('company.address', []);
+        $address = self::addressArray();
 
         return trim(implode(' ', array_filter([
             $address['street'] ?? null,
@@ -68,13 +75,28 @@ class Company
     }
 
     /**
+     * @return array<string, mixed>
+     */
+    public static function addressArray(): array
+    {
+        if (Locale::isEnglish()) {
+            $en = config('company.address_en');
+            if (is_array($en) && $en !== []) {
+                return $en;
+            }
+        }
+
+        return config('company.address', []);
+    }
+
+    /**
      * PostalAddress สำหรับ JSON-LD จาก config/company.php
      *
      * @return array<string, string>
      */
     public static function postalAddress(): array
     {
-        $address = config('company.address', []);
+        $address = self::addressArray();
 
         return array_filter([
             '@type' => 'PostalAddress',
@@ -96,9 +118,9 @@ class Company
         $close = (string) config('company.hours.close_time', '18:00');
 
         $label = match (true) {
-            $days === ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] => 'จันทร์–เสาร์',
-            $days === ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] => 'จันทร์–ศุกร์',
-            default => 'เวลาทำการ',
+            $days === ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'] => Locale::pick('จันทร์–เสาร์', 'Mon–Sat'),
+            $days === ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] => Locale::pick('จันทร์–ศุกร์', 'Mon–Fri'),
+            default => Locale::pick('เวลาทำการ', 'Business hours'),
         };
 
         return $label.' '.$open.'–'.$close;
@@ -214,12 +236,15 @@ class Company
     public static function serviceAreas(bool $includeCountry = true): array
     {
         /** @var array<int, string> $areas */
-        $areas = config('company.area_served', []);
+        $areas = Locale::isEnglish()
+            ? (config('company.area_served_en') ?: config('company.area_served', []))
+            : config('company.area_served', []);
 
         if (! $includeCountry) {
+            $country = Locale::isEnglish() ? 'Thailand' : 'ประเทศไทย';
             $areas = array_values(array_filter(
                 $areas,
-                static fn (string $name): bool => $name !== 'ประเทศไทย',
+                static fn (string $name): bool => $name !== $country,
             ));
         }
 

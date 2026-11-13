@@ -20,10 +20,10 @@
                 </p>
 
                 <div class="mt-4 flex flex-wrap items-center gap-2 text-sm font-semibold tracking-wide text-muted">
-                    <a href="{{ route('services') }}" class="text-brand-mid hover:text-brand">รวมงานบริการ</a>
+                    <a href="{{ \App\Support\Locale::route('services') }}" class="text-brand-mid hover:text-brand">{{ __('ui.services') }}</a>
                     <span aria-hidden="true">/</span>
                     @if ($category)
-                        <a href="{{ route('services') }}#{{ $category->slug }}" class="text-brand-mid hover:text-brand">{{ $category->name }}</a>
+                        <a href="{{ \App\Support\Locale::route('services') }}#{{ $category->slug }}" class="text-brand-mid hover:text-brand">{{ $category->name }}</a>
                         <span aria-hidden="true">/</span>
                     @endif
                     @if ($service)
@@ -43,9 +43,9 @@
                 @endphp
                 @if ($publishedAt)
                     <p class="mt-4 text-[15px] leading-[1.7] text-muted">
-                        <time datetime="{{ $publishedAt->toIso8601String() }}">เผยแพร่ {{ $publishedAt->locale('th')->translatedFormat('j F') }} {{ $publishedAt->year + 543 }}</time>
+                        <time datetime="{{ $publishedAt->toIso8601String() }}">{{ __('ui.published') }} {{ $publishedAt->locale(app()->getLocale())->translatedFormat(\App\Support\Locale::isEnglish() ? 'j F Y' : 'j F') }}@unless(\App\Support\Locale::isEnglish()) {{ $publishedAt->year + 543 }}@endunless</time>
                         @if ($modifiedAt && (! $publishedAt || ! $modifiedAt->equalTo($publishedAt)))
-                            · <time datetime="{{ $modifiedAt->toIso8601String() }}">อัปเดต {{ $modifiedAt->locale('th')->translatedFormat('j F') }} {{ $modifiedAt->year + 543 }}</time>
+                            · <time datetime="{{ $modifiedAt->toIso8601String() }}">{{ __('ui.updated') }} {{ $modifiedAt->locale(app()->getLocale())->translatedFormat(\App\Support\Locale::isEnglish() ? 'j F Y' : 'j F') }}@unless(\App\Support\Locale::isEnglish()) {{ $modifiedAt->year + 543 }}@endunless</time>
                         @endif
                     </p>
                 @endif
