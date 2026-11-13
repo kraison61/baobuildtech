@@ -58,8 +58,12 @@
         <p class="mt-1 text-xs text-slate-500">วางรูปแบบ lat, lng เช่น 13.748436414898316, 100.48145963665914</p>
     </div>
     <div class="sm:col-span-2">
-        <x-ui.label for="description">รายละเอียด</x-ui.label>
+        <x-ui.label for="description">รายละเอียดสั้น</x-ui.label>
         <x-ui.textarea name="description" id="description" rows="4">{{ old('description', $portfolio?->description) }}</x-ui.textarea>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="content">เนื้อหาเต็ม (HTML)</x-ui.label>
+        <x-ui.textarea name="content" id="content" rows="12">{{ old('content', $portfolio?->content) }}</x-ui.textarea>
     </div>
     <div class="sm:col-span-2">
         <x-ui.label for="cover_image">รูปปก (URL)</x-ui.label>
@@ -89,6 +93,10 @@
     <div class="sm:col-span-2">
         <x-ui.label for="description_en">Description (EN)</x-ui.label>
         <x-ui.textarea name="description_en" id="description_en" rows="4">{{ old('description_en', $portfolio?->description_en) }}</x-ui.textarea>
+    </div>
+    <div class="sm:col-span-2">
+        <x-ui.label for="content_en">Content (EN HTML)</x-ui.label>
+        <x-ui.textarea name="content_en" id="content_en" rows="12">{{ old('content_en', $portfolio?->content_en) }}</x-ui.textarea>
     </div>
     <div>
         <x-ui.label for="meta_title_en">Meta Title (EN)</x-ui.label>

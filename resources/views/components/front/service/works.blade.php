@@ -51,7 +51,7 @@
                         data-carousel-slide
                         class="group flex w-[min(100%,280px)] shrink-0 snap-start flex-col overflow-hidden rounded-lg border border-line bg-white transition-colors hover:border-brand-mid min-[480px]:w-[300px] min-[768px]:w-[320px] min-[1024px]:w-[340px]"
                     >
-                        <a href="{{ \App\Support\Locale::route('works') }}" class="block shrink-0 overflow-hidden">
+                        <a href="{{ $portfolio->url() }}" class="block shrink-0 overflow-hidden">
                             <x-ui.image-slot
                                 :src="$portfolio->cover_image"
                                 :label="'ผลงาน — '.$portfolio->title"
@@ -78,7 +78,7 @@
                             @endif
 
                             <h3 class="mt-3 text-[17px] font-semibold leading-snug text-brand">
-                                <a href="{{ \App\Support\Locale::route('works') }}" class="line-clamp-2 hover:text-brand-mid">{{ $portfolio->title }}</a>
+                                <a href="{{ $portfolio->url() }}" class="line-clamp-2 hover:text-brand-mid">{{ $portfolio->title }}</a>
                             </h3>
 
                             @if ($portfolio->description)
@@ -92,9 +92,9 @@
                             @endif
 
                             <a
-                                href="{{ \App\Support\Locale::route('works') }}"
+                                href="{{ $portfolio->url() }}"
                                 class="mt-4 inline-flex self-start border-b border-brand-mid pb-0.5 text-[14px] font-semibold text-brand-mid group-hover:text-brand"
-                            >ดูรายละเอียด</a>
+                            >{{ \App\Support\Locale::pick('ดูรายละเอียด', 'View details') }}</a>
                         </div>
                     </article>
                 @endforeach

@@ -20,6 +20,7 @@ Strict separation of concerns between Admin Panel and User Dashboard (Front-end)
   - `resources/views/components/user/` (User-specific)
   - `resources/views/components/front/` (public page)
 - **Routes:** `routes/admin.php`, `routes/user.php`, `routes/web.php` (Loaded via `bootstrap/app.php`).
+- **SEO URL LOCK:** ห้ามเปลี่ยน public route / URL / slug ที่กระทบ SEO โดยเด็ดขาด (home, services, works, blog, gallery, about, contact, sitemap และ prefix `/en`) — ดู `.cursor/rules/seo-url-lock.mdc`
 - **Service URLs (SEO LOCK):** `/services/{category}/{service}` และ `/services/{category}/{service}/{item}` เท่านั้น — ใช้ `$service->url()` / `$item->url()` — **ห้ามเปลี่ยน route / URL / slug ที่ publish แล้วโดยเด็ดขาด** (กระทบ SEO) ดู `.cursor/rules/service-urls.mdc`
 
 ## 🔗 Internal Links & Base URL

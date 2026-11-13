@@ -5,6 +5,8 @@ alwaysApply: true
 
 # Service URL Structure
 
+กฎนี้เป็นรายละเอียดของหน้าบริการ ภายใต้กฎเหล็กทุก public URL ใน `.cursor/rules/seo-url-lock.mdc`
+
 ## ⛔ SEO LOCK — ห้ามเปลี่ยน route / URL โดยเด็ดขาด
 
 URL และ route name ของหน้าบริการเป็น **สัญญา SEO ที่ล็อกแล้ว** — indexed, shared, และถูกอ้างใน JSON-LD / sitemap / canonical

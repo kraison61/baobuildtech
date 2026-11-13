@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Models\Portfolio;
 use App\Models\Post;
 use App\Models\Service;
 use App\Models\ServiceItem;
@@ -65,8 +66,14 @@ class SitemapController extends Controller
             ->orderByDesc('id')
             ->get();
 
+        $portfolios = Portfolio::query()
+            ->where('is_published', true)
+            ->orderByDesc('completed_at')
+            ->orderByDesc('id')
+            ->get();
+
         return response()
-            ->view('front.sitemap', compact('static', 'services', 'items', 'posts'))
+            ->view('front.sitemap', compact('static', 'services', 'items', 'posts', 'portfolios'))
             ->header('Content-Type', 'application/xml; charset=UTF-8');
     }
 

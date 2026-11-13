@@ -1,0 +1,41 @@
+---
+description: กฎเหล็ก — ห้ามเปลี่ยน public route/URL/slug ที่กระทบ SEO โดยเด็ดขาด
+alwaysApply: true
+---
+
+# SEO URL LOCK
+
+Public URL ที่ index ได้, อยู่ใน sitemap, canonical, JSON-LD, หรือถูกแชร์แล้ว คือสัญญา SEO — **ห้ามเปลี่ยนโดยเด็ดขาด**
+
+ครอบคลุมทั้งไทย (ไม่มี prefix) และอังกฤษ (`/en/...`) รวม route name ที่ generate URL เหล่านั้น
+
+## ห้ามทำ แม้ refactor / rename / cleanup / ทำให้สั้นลง
+
+- เปลี่ยน path, prefix ภาษา, จำนวนหรือลำดับ segment
+- เปลี่ยน route name ของหน้า public (`home`, `services`, `services.show`, `services.items.show`, `works`, `works.show`, `blog.index`, `blog.show`, `gallery`, `about`, `contact`, `sitemap`, `robots` และคู่ `en.*`)
+- เปลี่ยน slug ที่ publish แล้ว (category, service, item, portfolio, post)
+- ลบ route หรือทิ้ง URL เก่าโดยไม่มี 301
+- เปลี่ยนปลายทางของ 301 ที่มีอยู่ (`/articles` → `/blog`, `/aluminium-door-window-installation`, `/aluminium-door-window`)
+- hardcode path ใหม่แทน `$model->url()` / `route()`
+
+รายละเอียดหน้าบริการ: `.cursor/rules/service-urls.mdc`
+
+## ทำได้
+
+- เพิ่ม route **ใหม่** ที่ไม่แทนที่ URL เดิม
+- ย้าย logic ใน controller โดย path, route name, และ slug เดิมคงที่
+- route `/admin` ที่ไม่อยู่ sitemap และไม่ถูกลิงก์จากหน้า public
+
+## ถ้าต้องเปลี่ยนจริง
+
+**ถามผู้ใช้ก่อนเสมอ** แล้วต้องมี 301 ครบทุก URL เก่า → ใหม่ พร้อมอัปเดต sitemap, canonical, JSON-LD, และลิงก์ภายในในรอบเดียวกัน ห้ามลงมือเอง
+
+```php
+// ❌ เปลี่ยน path หรือ name ที่ publish แล้ว
+Route::get('/portfolio/{slug}', ...)->name('works.show');
+Route::get('/services/{slug}', ...)->name('services.show');
+
+// ✅ path และ name เดิม
+Route::get('/works/{slug}', ...)->name('works.show');
+$post->url();
+```

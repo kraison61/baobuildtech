@@ -11,6 +11,7 @@ alwaysApply: true
 | งาน | ไฟล์ |
 |---|---|
 | JSON-LD / Structured Data | `docs/SCHEMA-SPEC.md` |
+| SEO URL lock (ทุกหน้า public) | `.cursor/rules/seo-url-lock.mdc` |
 | URL หน้างานบริการ | `.cursor/rules/service-urls.mdc` |
 | Internal link / APP_URL | `.cursor/rules/app-url.mdc` |
 
@@ -19,4 +20,4 @@ alwaysApply: true
 - อ่าน doc ที่เกี่ยวข้องก่อนเขียนโค้ดใหม่เสมอ
 - ใช้ภาษาไทยสำหรับ comment และ commit message
 - เปิด `is_published` / `is_active` เป็น false = ห้าม expose ข้อมูลนั้น
-- **SEO LOCK:** ห้ามเปลี่ยน route / URL / slug ของหน้าบริการโดยเด็ดขาด — ดู `.cursor/rules/service-urls.mdc`
+- **SEO LOCK:** ห้ามเปลี่ยน public route / URL / slug ที่ publish แล้วโดยเด็ดขาด (หน้าบ้านทั้งไทยและ `/en`) — ดู `.cursor/rules/seo-url-lock.mdc`

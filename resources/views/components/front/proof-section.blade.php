@@ -22,28 +22,30 @@
                 @foreach ($portfolios as $portfolio)
                     @php $proofLabel = \App\Support\HomeContent::proofEyebrow().' — '.$portfolio->title; @endphp
                     <article class="overflow-hidden rounded-lg border border-line bg-white">
-                        <x-ui.image-slot
-                            :src="$portfolio->cover_image"
-                            :label="$proofLabel"
-                            spec="800×600"
-                            ratio="4/3"
-                            :alt="$portfolio->title"
-                            class="w-full"
-                            width="800"
-                            height="600"
-                            loading="lazy"
-                        />
-                        <div class="p-5">
-                            <h3 class="text-[18px] font-semibold text-brand">{{ $portfolio->title }}</h3>
-                            @if ($portfolio->location)
-                                <p class="mt-2 text-[15px] text-muted">
-                                    {{ $portfolio->location->name }}
-                                    @if ($portfolio->completed_at)
-                                        · {{ \App\Support\HomeContent::proofDelivered() }} {{ $portfolio->completed_at->locale(app()->getLocale())->translatedFormat('M Y') }}
-                                    @endif
-                                </p>
-                            @endif
-                        </div>
+                        <a href="{{ $portfolio->url() }}" class="block hover:no-underline">
+                            <x-ui.image-slot
+                                :src="$portfolio->cover_image"
+                                :label="$proofLabel"
+                                spec="800×600"
+                                ratio="4/3"
+                                :alt="$portfolio->title"
+                                class="w-full"
+                                width="800"
+                                height="600"
+                                loading="lazy"
+                            />
+                            <div class="p-5">
+                                <h3 class="text-[18px] font-semibold text-brand">{{ $portfolio->title }}</h3>
+                                @if ($portfolio->location)
+                                    <p class="mt-2 text-[15px] text-muted">
+                                        {{ $portfolio->location->name }}
+                                        @if ($portfolio->completed_at)
+                                            · {{ \App\Support\HomeContent::proofDelivered() }} {{ $portfolio->completed_at->locale(app()->getLocale())->translatedFormat('M Y') }}
+                                        @endif
+                                    </p>
+                                @endif
+                            </div>
+                        </a>
                     </article>
                 @endforeach
             </div>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Front\ContactController;
 use App\Http\Controllers\Front\CtaClickController;
+use App\Http\Controllers\Front\PortfolioController;
 use App\Http\Controllers\Front\PostController;
 use App\Http\Controllers\Front\ServiceController;
 use App\Http\Controllers\Front\ServiceItemController;
@@ -34,11 +35,8 @@ $frontRoutes = function (): void {
         return redirect($item->url(), 301);
     })->name('aluminium-door-window');
 
-    Route::view('/works', 'front.placeholder', [
-        'titleKey' => 'ui.works_title',
-        'headingKey' => 'ui.works_heading',
-        'descriptionKey' => 'ui.works_description',
-    ])->name('works');
+    Route::get('/works', [PortfolioController::class, 'index'])->name('works');
+    Route::get('/works/{slug}', [PortfolioController::class, 'show'])->name('works.show');
 
     Route::get('/blog', [PostController::class, 'index'])->name('blog.index');
     Route::get('/blog/{slug}', [PostController::class, 'show'])->name('blog.show');
