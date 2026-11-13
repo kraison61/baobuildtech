@@ -19,3 +19,4 @@ alwaysApply: true
 - อ่าน doc ที่เกี่ยวข้องก่อนเขียนโค้ดใหม่เสมอ
 - ใช้ภาษาไทยสำหรับ comment และ commit message
 - เปิด `is_published` / `is_active` เป็น false = ห้าม expose ข้อมูลนั้น
+- **SEO LOCK:** ห้ามเปลี่ยน route / URL / slug ของหน้าบริการโดยเด็ดขาด — ดู `.cursor/rules/service-urls.mdc`

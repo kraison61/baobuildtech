@@ -117,8 +117,8 @@ class UpdateLandFillingContentSeeder extends Seeder
     private function contentHtml(string $brand, string $taxId, ?string $retainingWallUrl): string
     {
         $retainingWallLink = $retainingWallUrl
-            ? "<a href=\"{$retainingWallUrl}\">กำแพงกันดิน</a>"
-            : 'กำแพงกันดิน';
+            ? "<a href=\"{$retainingWallUrl}\">กำแพงกันดินสำเร็จรูป ราคา</a>"
+            : 'กำแพงกันดินสำเร็จรูป ราคา';
 
         return <<<HTML
 <h2>รับเหมาถมที่ราคาเท่าไหร่ คิดราคาอย่างไรถึงจะไม่บานปลาย</h2>

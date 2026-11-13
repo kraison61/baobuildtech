@@ -61,22 +61,4 @@
         <priority>0.6</priority>
     </url>
 @endforeach
-@foreach ($portfolios as $portfolio)
-    <url>
-        <loc>{{ route('works.show', $portfolio->slug) }}</loc>
-@if ($portfolio->updated_at)
-        <lastmod>{{ $portfolio->updated_at->toAtomString() }}</lastmod>
-@endif
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-    <url>
-        <loc>{{ route('en.works.show', $portfolio->slug) }}</loc>
-@if ($portfolio->updated_at)
-        <lastmod>{{ $portfolio->updated_at->toAtomString() }}</lastmod>
-@endif
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
-    </url>
-@endforeach
 </urlset>

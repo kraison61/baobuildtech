@@ -10,7 +10,6 @@
     $heroAlt = match ($service->slug) {
         'house-demolition' => 'ทีมงาน '.$brand.' ใช้รถแบคโฮรื้อถอนบ้านเดี่ยว 2 ชั้น ที่ธัญบุรี ปทุมธานี',
         'shop-design' => 'งานออกแบบและตกแต่งร้านค้าโดย '.$brand.' — ภาพรวมหน้าร้านและบรรยากาศภายใน',
-        'buy-old-air-conditioner' => 'รถกระบะบรรทุกแอร์เก่าที่ถอดจากหน้างาน — ร้านรับซื้อแอร์เก่า '.$brand,
         default => $service->name,
     };
 @endphp

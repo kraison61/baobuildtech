@@ -28,8 +28,6 @@ class PortfolioRequest extends FormRequest
             'slug' => ['nullable', 'string', 'max:255'],
             'description' => ['nullable', 'string'],
             'description_en' => ['nullable', 'string'],
-            'content' => ['nullable', 'string'],
-            'content_en' => ['nullable', 'string'],
             'cover_image' => ['nullable', 'string', 'max:500'],
             'client_name' => ['nullable', 'string', 'max:255'],
             'client_name_en' => ['nullable', 'string', 'max:255'],

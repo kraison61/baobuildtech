@@ -30,7 +30,7 @@ class TranslateContentToEnCommand extends Command
             'title_en', 'excerpt_en', 'meta_title_en', 'meta_description_en', 'body_en',
         ],
         'portfolios' => [
-            'title_en', 'description_en', 'content_en', 'client_name_en', 'meta_title_en', 'meta_description_en',
+            'title_en', 'description_en', 'client_name_en', 'meta_title_en', 'meta_description_en',
         ],
         'locations' => [
             'name_en', 'province_en', 'district_en', 'description_en',
