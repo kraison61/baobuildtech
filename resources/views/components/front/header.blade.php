@@ -157,37 +157,56 @@
         </div>
     </div>
 
-    {{-- Desktop mega menu --}}
+    {{-- Desktop mega menu — 4 หมวดตามลำดับโปรเจกต์ --}}
     @foreach ($navItems as $item)
         @if (! empty($item['mega']) && ! empty($item['sections']))
+            @php
+                $bottomBar = $item['bottom_bar'] ?? null;
+                $lineUrl = \App\Support\Company::lineUrl();
+                $sectionCount = count($item['sections']);
+            @endphp
             <div
                 class="hidden border-t border-line bg-white shadow-lg"
                 data-nav-mega-panel
                 hidden
             >
                 <div class="mx-auto max-w-[1160px] px-5 py-8">
-                    <div class="grid gap-10 lg:grid-cols-2">
+                    @if (! empty($item['intro']))
+                        <p class="mb-6 text-[15px] font-semibold text-brand">{{ $item['intro'] }}</p>
+                    @endif
+                    <div @class([
+                        'grid gap-8',
+                        'lg:grid-cols-2' => $sectionCount <= 2,
+                        'lg:grid-cols-3' => $sectionCount === 3,
+                        'lg:grid-cols-4' => $sectionCount >= 4,
+                    ])>
                         @foreach ($item['sections'] as $section)
                             <section>
-                                <div class="mb-5 flex items-end justify-between gap-4 border-b border-line pb-3">
-                                    <div>
-                                        <div class="text-sm font-semibold tracking-wide text-muted">{{ \App\Support\Locale::pick('หมวดหมู่งาน', 'Service categories') }}</div>
-                                        <a href="{{ $resolveHref($section['href']) }}" class="text-[20px] font-semibold text-brand hover:text-brand-dark">
-                                            {{ $section['label'] }}
-                                        </a>
+                                <div class="mb-4 border-b border-line pb-3">
+                                    <div class="text-sm font-semibold tabular-nums text-muted">
+                                        {{ str_pad((string) ($section['number'] ?? $loop->iteration), 2, '0', STR_PAD_LEFT) }}
                                     </div>
+                                    <a href="{{ $resolveHref($section['href']) }}" class="mt-1 block text-[17px] font-semibold leading-snug text-brand hover:text-brand-dark">
+                                        {{ $section['label'] }}
+                                    </a>
+                                    @if (! empty($section['description']))
+                                        <p class="mt-1.5 text-[13px] leading-[1.55] text-muted">{{ $section['description'] }}</p>
+                                    @endif
+                                    @if (! empty($section['badge']))
+                                        <p class="mt-2 text-[12px] font-semibold text-brand-mid">{{ $section['badge'] }}</p>
+                                    @endif
                                 </div>
-                                <div class="grid gap-6 sm:grid-cols-2">
+                                <div class="grid gap-5">
                                     @foreach ($section['groups'] as $group)
                                         <div>
-                                            <a href="{{ $resolveHref($group['href']) }}" class="text-[15px] font-semibold text-brand hover:text-brand-dark">
+                                            <a href="{{ $resolveHref($group['href']) }}" class="text-[14px] font-semibold text-brand hover:text-brand-dark">
                                                 {{ $group['label'] }}
                                             </a>
                                             @if (! empty($group['children']))
-                                                <ul class="mt-3 grid list-none gap-2 p-0">
+                                                <ul class="mt-2 grid list-none gap-1.5 p-0">
                                                     @foreach ($group['children'] as $child)
                                                         <li>
-                                                            <a href="{{ $resolveHref($child['href']) }}" class="block text-[14px] leading-[1.6] text-muted hover:text-brand">
+                                                            <a href="{{ $resolveHref($child['href']) }}" class="block text-[13px] leading-[1.55] text-muted hover:text-brand">
                                                                 {{ $child['label'] }}
                                                             </a>
                                                         </li>
@@ -201,11 +220,25 @@
                         @endforeach
                     </div>
                     <div class="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-5">
-                        <p class="text-[14px] text-muted">{{ \App\Support\Locale::pick('รวมงานโยธาและงานไอทีในโครงการเดียวกัน — ทีมช่างทำเองทั้งกระบวนการ', 'Civil works and IT under one project — our crew handles the full process') }}</p>
-                        <a href="{{ $resolveHref($item['href']) }}" class="inline-flex items-center gap-1 text-[15px] font-semibold text-brand-mid hover:text-brand">
-                            {{ \App\Support\Locale::pick('ดูงานบริการทั้งหมด', 'View all services') }}
-                            <span aria-hidden="true">→</span>
-                        </a>
+                        <div class="min-w-0 max-w-[640px]">
+                            <p class="text-[14px] text-muted">{{ $bottomBar['text'] ?? '' }}</p>
+                            @if (! empty($bottomBar['mgmt']))
+                                <a href="{{ $resolveHref($bottomBar['mgmt']['href']) }}" class="mt-1 inline-block text-[13px] font-semibold text-brand-mid hover:text-brand">
+                                    {{ $bottomBar['mgmt']['label'] }}
+                                </a>
+                            @endif
+                        </div>
+                        <div class="flex flex-wrap items-center gap-4">
+                            <a
+                                href="{{ $lineUrl ?? $ctaHref }}"
+                                class="inline-flex items-center rounded-lg bg-accent px-4 py-2.5 text-[14px] font-semibold text-white hover:bg-accent-dark hover:text-white"
+                                @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="nav-mega" @endif
+                            >{{ $bottomBar['cta'] ?? \App\Support\Locale::pick('ส่งรูปหน้างาน ประเมินฟรี', 'Send a site photo — free estimate') }}</a>
+                            <a href="{{ $resolveHref($item['href']) }}" class="inline-flex items-center gap-1 text-[14px] font-semibold text-brand-mid hover:text-brand">
+                                {{ \App\Support\Locale::pick('ดูงานบริการทั้งหมด', 'View all services') }}
+                                <span aria-hidden="true">→</span>
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -239,48 +272,41 @@
                             <a href="{{ $resolveHref($item['href']) }}" class="block py-2.5 text-[15px] text-sand hover:text-white" data-mobile-nav-link>
                                 {{ \App\Support\Locale::pick('ดูงานบริการทั้งหมด', 'View all services') }}
                             </a>
-                            @foreach ($item['sections'] as $section)
-                                <div class="mt-2 border-t border-sand/12 pt-2" data-nav-accordion>
-                                    <button
-                                        type="button"
-                                        class="flex w-full items-center justify-between gap-3 py-2.5 text-start text-[16px] font-semibold text-white"
-                                        aria-expanded="false"
-                                        data-nav-accordion-toggle
-                                    >
-                                        <span>{{ $section['label'] }}</span>
-                                        <svg class="size-3.5 shrink-0 transition" data-nav-accordion-icon viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-                                            <path d="M2.5 4.5 6 8l3.5-3.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </button>
-                                    <div class="hidden pb-2 ps-3" data-nav-accordion-panel hidden>
-                                        <a href="{{ $resolveHref($section['href']) }}" class="block py-2 text-[15px] text-sand hover:text-white" data-mobile-nav-link>
-                                            ดูทั้งหมด — {{ $section['label'] }}
-                                        </a>
-                                        @foreach ($section['groups'] as $group)
-                                            <div class="border-t border-sand/10" data-nav-accordion>
-                                                <button
-                                                    type="button"
-                                                    class="flex w-full items-center justify-between gap-3 py-2 text-start text-[15px] text-white"
-                                                    aria-expanded="false"
-                                                    data-nav-accordion-toggle
-                                                >
-                                                    <span>{{ $group['label'] }}</span>
-                                                    <svg class="size-3 shrink-0 transition" data-nav-accordion-icon viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-                                                        <path d="M2.5 4.5 6 8l3.5-3.5" stroke-linecap="round" stroke-linejoin="round" />
-                                                    </svg>
-                                                </button>
-                                                <div class="hidden pb-2 ps-3" data-nav-accordion-panel hidden>
-                                                    @foreach ($group['children'] ?? [] as $child)
-                                                        <a href="{{ $resolveHref($child['href']) }}" class="block py-1.5 text-[14px] text-sand hover:text-white" data-mobile-nav-link>
-                                                            {{ $child['label'] }}
-                                                        </a>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        @endforeach
+                            <div data-nav-accordion-exclusive>
+                                @foreach ($item['sections'] as $section)
+                                    <div class="mt-2 border-t border-sand/12 pt-2" data-nav-accordion>
+                                        <button
+                                            type="button"
+                                            class="flex w-full items-center justify-between gap-3 py-2.5 text-start text-[15px] font-semibold text-white"
+                                            aria-expanded="false"
+                                            data-nav-accordion-toggle
+                                        >
+                                            <span>
+                                                <span class="me-1.5 tabular-nums text-sand">{{ $section['number'] ?? $loop->iteration }}.</span>
+                                                {{ $section['label'] }}
+                                            </span>
+                                            <svg class="size-3.5 shrink-0 transition" data-nav-accordion-icon viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                                                <path d="M2.5 4.5 6 8l3.5-3.5" stroke-linecap="round" stroke-linejoin="round" />
+                                            </svg>
+                                        </button>
+                                        <div class="hidden pb-2 ps-3" data-nav-accordion-panel hidden>
+                                            @if (! empty($section['description']))
+                                                <p class="py-1 text-[13px] leading-[1.5] text-sand/80">{{ $section['description'] }}</p>
+                                            @endif
+                                            @foreach ($section['groups'] as $group)
+                                                <a href="{{ $resolveHref($group['href']) }}" class="block py-2 text-[15px] text-sand hover:text-white" data-mobile-nav-link>
+                                                    {{ $group['label'] }}
+                                                </a>
+                                                @foreach ($group['children'] ?? [] as $child)
+                                                    <a href="{{ $resolveHref($child['href']) }}" class="block py-1.5 ps-3 text-[14px] text-sand/90 hover:text-white" data-mobile-nav-link>
+                                                        {{ $child['label'] }}
+                                                    </a>
+                                                @endforeach
+                                            @endforeach
+                                        </div>
                                     </div>
-                                </div>
-                            @endforeach
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 @elseif (! empty($item['children']))

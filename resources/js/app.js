@@ -35,20 +35,35 @@
         }
     });
 
-    // Accordion ในเมนูมือถือ
-    document.querySelectorAll('[data-nav-accordion]').forEach((item) => {
+    // Accordion ในเมนูมือถือ (หมวดบริการเปิดได้ทีละหมวด)
+    const setAccordionOpen = (item, open) => {
         const toggle = item.querySelector(':scope > [data-nav-accordion-toggle]');
         const panel = item.querySelector(':scope > [data-nav-accordion-panel]');
         const icon = item.querySelector(':scope > [data-nav-accordion-toggle] [data-nav-accordion-icon]');
 
         if (! toggle || ! panel) return;
 
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        panel.hidden = ! open;
+        panel.classList.toggle('hidden', ! open);
+        icon?.classList.toggle('rotate-180', open);
+    };
+
+    document.querySelectorAll('[data-nav-accordion]').forEach((item) => {
+        const toggle = item.querySelector(':scope > [data-nav-accordion-toggle]');
+        if (! toggle) return;
+
         toggle.addEventListener('click', () => {
             const open = toggle.getAttribute('aria-expanded') !== 'true';
-            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-            panel.hidden = ! open;
-            panel.classList.toggle('hidden', ! open);
-            icon?.classList.toggle('rotate-180', open);
+            const exclusiveRoot = item.parentElement?.closest('[data-nav-accordion-exclusive]');
+
+            if (open && exclusiveRoot) {
+                exclusiveRoot.querySelectorAll(':scope > [data-nav-accordion]').forEach((sibling) => {
+                    if (sibling !== item) setAccordionOpen(sibling, false);
+                });
+            }
+
+            setAccordionOpen(item, open);
         });
     });
 

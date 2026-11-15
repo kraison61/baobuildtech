@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 use App\Models\ServiceItem;
+use App\Support\ServiceDisplayGroups;
 use App\Support\ServiceHub\ServiceHubRegistry;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -13,35 +14,12 @@ use Illuminate\View\View;
 class ServiceController extends Controller
 {
     /**
-     * หน้ารวมงานบริการ — แสดงเฉพาะหมวดที่ active และบริการที่เผยแพร่
+     * หน้ารวมงานบริการ — จัดตามหมวดแสดงผลฝั่งลูกค้า (URL/slug เดิม)
      */
     public function index(): View
     {
-        $categories = ServiceCategory::query()
-            ->where('is_active', true)
-            ->orderBy('sort_order')
-            ->with([
-                'services' => static fn ($q) => $q
-                    ->where('is_published', true)
-                    ->orderBy('sort_order')
-                    ->with([
-                        'items' => static fn ($q) => $q
-                            ->where('is_published', true)
-                            ->orderBy('sort_order')
-                            ->with([
-                                'prices' => static fn ($q) => $q
-                                    ->forPublicDisplay()
-                                    ->orderBy('sort_order'),
-                            ]),
-                        'prices' => static fn ($q) => $q
-                            ->forPublicDisplay()
-                            ->orderBy('sort_order'),
-                    ]),
-            ])
-            ->get();
-
         return view('front.services', [
-            'categories' => $categories,
+            'sections' => ServiceDisplayGroups::catalogSections(),
         ]);
     }
 

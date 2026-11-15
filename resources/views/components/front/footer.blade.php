@@ -7,26 +7,7 @@
     $legal = config('company.legal_name');
     $taxId = config('company.tax_id');
     $email = config('company.email');
-    $servicesIndex = \App\Support\Locale::route('services');
-
-    $services = \App\Support\Locale::pickAny(
-        [
-            ['label' => 'สำรวจ', 'href' => $servicesIndex.'#survey'],
-            ['label' => 'เสาเข็มและฐานราก', 'href' => \App\Support\Locale::route('services.show', ['civil', 'piles-foundation'])],
-            ['label' => 'โครงสร้าง', 'href' => $servicesIndex.'#structure'],
-            ['label' => 'ระบบไฟฟ้า', 'href' => $servicesIndex.'#electrical'],
-            ['label' => 'สายสัญญาณ', 'href' => $servicesIndex.'#network-cabling'],
-            ['label' => 'กล้องวงจรปิด', 'href' => $servicesIndex.'#cctv'],
-        ],
-        [
-            ['label' => 'Survey', 'href' => $servicesIndex.'#survey'],
-            ['label' => 'Piles & foundation', 'href' => \App\Support\Locale::route('services.show', ['civil', 'piles-foundation'])],
-            ['label' => 'Structure', 'href' => $servicesIndex.'#structure'],
-            ['label' => 'Electrical', 'href' => $servicesIndex.'#electrical'],
-            ['label' => 'Network cabling', 'href' => $servicesIndex.'#network-cabling'],
-            ['label' => 'CCTV', 'href' => $servicesIndex.'#cctv'],
-        ],
-    );
+    $services = \App\Support\ServiceDisplayGroups::footerLinks();
 @endphp
 
 <footer class="border-t border-sand/20 bg-brand pt-16 pb-10 text-sand lg:pt-24">

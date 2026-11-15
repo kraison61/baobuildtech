@@ -1,16 +1,8 @@
 @props([
-    'categories',
+    'sections',
 ])
 
 @php
-    use App\Models\ServiceCategory;
-
-    $isComplementary = static function (ServiceCategory $category): bool {
-        return $category->slug === 'mechanical-and-electrical-work'
-            || $category->slug === 'it'
-            || str_contains((string) $category->description, 'บริการเสริม');
-    };
-
     /** สเปกวัสดุ/เกณฑ์ต่อบริการ — ค่า placeholder แก้ทีหลังได้ */
     $specsBySlug = [
         'structure' => [
@@ -58,7 +50,6 @@
         ],
         'cctv' => [
             ['label' => 'ขอบเขต', 'value' => 'สำรวจจุด · เดินสาย · ตั้งค่า'],
-            ['label' => 'รุ่นกล้อง', 'value' => '[ยี่ห้อ/รุ่นตามที่ตกลง]'],
             ['label' => 'เงื่อนไข', 'value' => 'ทำร่วมกับงานโครงสร้าง'],
             ['label' => 'เอกสารส่งมอบ', 'value' => 'ผังจุดติดตั้ง + คู่มือ'],
         ],
@@ -70,37 +61,30 @@
 
 <section class="bg-white py-16 lg:py-24">
     <x-front.container class="grid gap-14">
-        @forelse ($categories as $category)
-            @php
-                $complementary = $isComplementary($category);
-            @endphp
-            <div id="{{ $category->slug }}" class="scroll-mt-24">
+        @forelse ($sections as $section)
+            <div id="{{ $section['key'] }}" class="scroll-mt-24">
                 <div class="mb-8 max-w-[680px]">
-                    @if ($complementary)
-                        <div class="text-sm font-semibold tracking-wide text-brand-mid">บริการเสริม · {{ $category->name }}</div>
-                        <h2 class="mt-2 text-[clamp(1.625rem,4vw,2rem)] font-semibold text-brand">
-                            งานระบบในโครงการเดียวกัน
-                        </h2>
-                        <p class="mt-3 text-[17px] leading-[1.8] text-muted">
-                            รับเฉพาะเมื่อทำร่วมกับงานโครงสร้าง ไม่รับงานระบบเดี่ยวแยกสัญญา
-                        </p>
-                    @else
-                        <div class="text-sm font-semibold tracking-wide text-muted">{{ $category->name }}</div>
-                        <h2 class="mt-2 text-[clamp(1.625rem,4vw,2rem)] font-semibold text-brand">
-                            งานภายใต้{{ $category->name }}
-                        </h2>
-                        @if ($category->description)
-                            <p class="mt-3 text-[17px] leading-[1.8] text-muted">{{ $category->description }}</p>
+                    <div class="text-sm font-semibold tracking-wide text-muted tabular-nums">
+                        {{ str_pad((string) $section['number'], 2, '0', STR_PAD_LEFT) }}
+                        @if (! empty($section['badge']))
+                            <span class="ms-2 text-brand-mid">{{ $section['badge'] }}</span>
                         @endif
+                    </div>
+                    <h2 class="mt-2 text-[clamp(1.625rem,4vw,2rem)] font-semibold text-brand">
+                        {{ $section['label'] }}
+                    </h2>
+                    @if (! empty($section['description']))
+                        <p class="mt-3 text-[17px] leading-[1.8] text-muted">{{ $section['description'] }}</p>
                     @endif
                 </div>
 
                 <div class="grid gap-10">
-                    @foreach ($category->services as $service)
+                    @foreach ($section['services'] as $service)
                         @php
                             $index++;
                             $specs = $specsBySlug[$service->slug] ?? [];
                             $visiblePrices = $service->prices;
+                            $serviceLabel = \App\Support\ServiceDisplayGroups::displayLabel($service->slug, $service->name);
                         @endphp
                         <article
                             id="{{ $service->slug }}"
@@ -114,10 +98,10 @@
                                 ])>
                                     <x-ui.image-slot
                                         :src="$service->cover_image"
-                                        :label="'Catalog — '.$service->name"
+                                        :label="'Catalog — '.$serviceLabel"
                                         spec="1200×900"
                                         ratio="4/3"
-                                        :alt="$service->name"
+                                        :alt="$serviceLabel"
                                         class="absolute inset-0 size-full"
                                         width="1200"
                                         height="900"
@@ -133,7 +117,7 @@
                                     <div class="text-sm font-semibold text-muted tabular-nums">{{ str_pad((string) $index, 2, '0', STR_PAD_LEFT) }}</div>
                                     <h3 class="mt-2 text-[clamp(1.5rem,3.5vw,1.875rem)] font-semibold leading-[1.4] text-brand">
                                         <a href="{{ $service->url() }}" class="hover:text-brand-mid">
-                                            {{ $service->name }}
+                                            {{ $serviceLabel }}
                                         </a>
                                     </h3>
                                     <p class="mt-4 max-w-[460px] text-[17px] leading-[1.8] text-muted">
@@ -153,7 +137,7 @@
                                         <div class="mt-6 max-w-[460px] border-t border-line pt-6">
                                             <x-front.service.price-table
                                                 :prices="$visiblePrices"
-                                                :caption="'ช่วงราคา'.$service->name"
+                                                :caption="'ช่วงราคา'.$serviceLabel"
                                                 variant="inline"
                                             />
                                         </div>
@@ -163,24 +147,29 @@
                                         <a
                                             href="{{ $service->url() }}"
                                             class="inline-flex self-start border-b border-brand-mid pb-0.5 text-[17px] font-semibold text-brand-mid hover:text-brand"
-                                        >ดูรายละเอียด{{ $service->name }}</a>
+                                        >{{ \App\Support\Locale::pick('ดูรายละเอียด', 'View details') }}</a>
                                         <a
                                             href="{{ $lineUrl ?? '#cta' }}"
                                             class="inline-flex self-start border-b border-line pb-0.5 text-[17px] font-semibold text-muted hover:text-brand"
                                             @if ($lineUrl) target="_blank" rel="noopener noreferrer" data-cta="line" data-cta-source="services-catalog" @endif
-                                        >ส่งรูปประเมิน</a>
+                                        >{{ \App\Support\Locale::pick('ส่งรูปประเมิน', 'Send a photo') }}</a>
                                     </div>
                                 </div>
                             </div>
 
                             @if ($service->items->isNotEmpty())
                                 <div class="border-t border-line bg-paper/60 px-5 py-6 min-[900px]:px-8">
-                                    <div class="text-[15px] font-semibold text-brand">รายการงานภายใต้{{ $service->name }}</div>
+                                    <div class="text-[15px] font-semibold text-brand">
+                                        {{ \App\Support\Locale::pick('รายการงานภายใต้', 'Items under') }}{{ $serviceLabel }}
+                                    </div>
                                     <ul class="mt-4 grid list-none gap-3 p-0 min-[700px]:grid-cols-2">
                                         @foreach ($service->items as $item)
+                                            @php
+                                                $itemLabel = \App\Support\ServiceDisplayGroups::displayLabel($item->slug, $item->name);
+                                            @endphp
                                             <li class="rounded-lg border border-line bg-white p-4">
                                                 <a href="{{ $item->url() }}" class="block hover:text-brand-mid">
-                                                    <div class="text-[16px] font-semibold text-brand">{{ $item->name }}</div>
+                                                    <div class="text-[16px] font-semibold text-brand">{{ $itemLabel }}</div>
                                                     @if ($item->description)
                                                         <p class="mt-2 text-[14px] leading-[1.7] text-muted">{{ $item->description }}</p>
                                                     @endif
@@ -188,7 +177,7 @@
                                                         <div class="mt-3 border-t border-line pt-3">
                                                             <x-front.service.price-table
                                                                 :prices="$item->prices"
-                                                                :caption="'ช่วงราคา'.$item->name"
+                                                                :caption="'ช่วงราคา'.$itemLabel"
                                                                 variant="inline"
                                                                 :limit="3"
                                                             />
@@ -205,7 +194,7 @@
                 </div>
             </div>
         @empty
-            <p class="text-[17px] text-muted">ยังไม่มีข้อมูลบริการที่เผยแพร่</p>
+            <p class="text-[17px] text-muted">{{ \App\Support\Locale::pick('ยังไม่มีข้อมูลบริการที่เผยแพร่', 'No published services yet') }}</p>
         @endforelse
     </x-front.container>
 </section>

@@ -252,76 +252,71 @@ class HomeContent
         $item = static fn (string $c, string $s, string $i): string => Locale::route('services.items.show', [$c, $s, $i]);
         $svc = static fn (string $c, string $s): string => Locale::route('services.show', [$c, $s]);
 
+        // ลิงก์เฉพาะหน้าที่ publish แล้ว — ไม่ชี้ไป survey/structure/cctv ที่ยังไม่เปิด
         return Locale::pickAny(
             [
                 [
-                    'title' => 'งานเตรียมพื้นที่และงานโยธา',
+                    'title' => 'รื้อถอน & เตรียมที่ดิน',
                     'items' => [
-                        ['label' => 'งานเคลียร์ริ่งพื้นที่', 'href' => $item('civil', 'earthwork', 'land-clearing')],
-                        ['label' => 'ถมดินและปรับระดับ', 'href' => $item('civil', 'earthwork', 'land-filling')],
-                        ['label' => 'ฐานรากและเสาเข็ม', 'href' => $svc('civil', 'piles-foundation')],
-                        ['label' => 'กำแพงกันดินและรั้ว', 'href' => $item('civil', 'structure', 'retaining-wall')],
+                        ['label' => 'รับรื้อถอนบ้าน', 'href' => $svc('civil', 'house-demolition')],
+                        ['label' => 'รับเคลียร์ริ่งพื้นที่', 'href' => $item('civil', 'earthwork', 'land-clearing')],
+                        ['label' => 'รับเหมาถมที่', 'href' => $item('civil', 'earthwork', 'land-filling')],
+                        ['label' => 'รับซื้อแอร์เก่าจากงานรื้อ', 'href' => $svc('mechanical-and-electrical-work', 'buy-old-air-conditioner')],
                     ],
                 ],
                 [
-                    'title' => 'งานก่อสร้างอาคาร',
+                    'title' => 'ฐานรากและโครงสร้าง',
                     'items' => [
-                        ['label' => 'รับสร้างบ้าน', 'href' => $svc('civil', 'structure')],
-                        ['label' => 'อาคารพาณิชย์', 'href' => $svc('civil', 'structure')],
-                        ['label' => 'ต่อเติมและปรับปรุง', 'href' => $svc('civil', 'construction-mgmt')],
-                        ['label' => 'ออกแบบและขออนุญาต', 'href' => $svc('civil', 'survey')],
+                        ['label' => 'รับทำเสาเข็ม', 'href' => $svc('civil', 'piles-foundation')],
+                        ['label' => 'เสาเข็มเหล็ก', 'href' => $item('civil', 'piles-foundation', 'steel-screw-pile')],
                     ],
                 ],
                 [
-                    'title' => 'งานอลูมิเนียมและกระจก',
+                    'title' => 'งานสถาปัตย์ปิดงาน',
                     'items' => [
-                        ['label' => 'รับเหมางานอลูมิเนียมครบวงจร', 'href' => $svc('architecture', 'aluminum-works')],
-                        ['label' => 'ประตูหน้าต่างอลูมิเนียมและงานกระจก', 'href' => $item('architecture', 'aluminum-works', 'aluminium-door-window')],
+                        ['label' => 'รับติดตั้งประตูหน้าต่างอลูมิเนียม', 'href' => $item('architecture', 'aluminum-works', 'aluminium-door-window')],
+                        ['label' => 'รับติดตั้งกันสาด', 'href' => $item('architecture', 'aluminum-works', 'awning')],
+                        ['label' => 'รับออกแบบและต่อเติมร้าน', 'href' => $svc('architecture', 'shop-design')],
                     ],
                 ],
                 [
-                    'title' => 'งานระบบและไอที',
+                    'title' => 'งานระบบในโครงการเดียวกัน',
                     'items' => [
-                        ['label' => 'ระบบไฟฟ้าอาคาร', 'href' => $svc('mechanical-and-electrical-work', 'electrical')],
-                        ['label' => 'ติดตั้งโซล่าเซลล์', 'href' => $item('mechanical-and-electrical-work', 'electrical', 'solar-cell-installation')],
-                        ['label' => 'IT Infrastructure', 'href' => $svc('mechanical-and-electrical-work', 'network-cabling')],
-                        ['label' => 'กล้องวงจรปิด', 'href' => $svc('mechanical-and-electrical-work', 'cctv')],
+                        ['label' => 'รับเดินระบบไฟฟ้า', 'href' => $svc('mechanical-and-electrical-work', 'electrical')],
+                        ['label' => 'รับติดตั้งโซล่าเซลล์', 'href' => $item('mechanical-and-electrical-work', 'electrical', 'solar-cell-installation')],
                     ],
                 ],
             ],
             [
                 [
-                    'title' => 'Site preparation & civil works',
+                    'title' => 'Demolition & site prep',
                     'items' => [
+                        ['label' => 'House demolition', 'href' => $svc('civil', 'house-demolition')],
                         ['label' => 'Land clearing', 'href' => $item('civil', 'earthwork', 'land-clearing')],
-                        ['label' => 'Land filling & grading', 'href' => $item('civil', 'earthwork', 'land-filling')],
-                        ['label' => 'Foundation & piles', 'href' => $svc('civil', 'piles-foundation')],
-                        ['label' => 'Retaining walls & fencing', 'href' => $item('civil', 'structure', 'retaining-wall')],
+                        ['label' => 'Land filling', 'href' => $item('civil', 'earthwork', 'land-filling')],
+                        ['label' => 'Buy used ACs from demolition', 'href' => $svc('mechanical-and-electrical-work', 'buy-old-air-conditioner')],
                     ],
                 ],
                 [
-                    'title' => 'Building construction',
+                    'title' => 'Foundation & structure',
                     'items' => [
-                        ['label' => 'House construction', 'href' => $svc('civil', 'structure')],
-                        ['label' => 'Commercial buildings', 'href' => $svc('civil', 'structure')],
-                        ['label' => 'Extensions & renovation', 'href' => $svc('civil', 'construction-mgmt')],
-                        ['label' => 'Design & permits', 'href' => $svc('civil', 'survey')],
+                        ['label' => 'Pile foundation work', 'href' => $svc('civil', 'piles-foundation')],
+                        ['label' => 'Steel piles', 'href' => $item('civil', 'piles-foundation', 'steel-screw-pile')],
                     ],
                 ],
                 [
-                    'title' => 'Aluminium & glass',
+                    'title' => 'Architectural finishing',
                     'items' => [
-                        ['label' => 'Full aluminium contracting', 'href' => $svc('architecture', 'aluminum-works')],
-                        ['label' => 'Aluminium doors, windows & glazing', 'href' => $item('architecture', 'aluminum-works', 'aluminium-door-window')],
+                        ['label' => 'Aluminium doors & windows', 'href' => $item('architecture', 'aluminum-works', 'aluminium-door-window')],
+                        ['label' => 'Aluminium awnings', 'href' => $item('architecture', 'aluminum-works', 'awning')],
+                        ['label' => 'Shop design & fit-out', 'href' => $svc('architecture', 'shop-design')],
                     ],
                 ],
                 [
-                    'title' => 'Systems & IT',
+                    'title' => 'Systems in the same project',
                     'items' => [
-                        ['label' => 'Building electrical systems', 'href' => $svc('mechanical-and-electrical-work', 'electrical')],
+                        ['label' => 'Electrical systems', 'href' => $svc('mechanical-and-electrical-work', 'electrical')],
                         ['label' => 'Solar installation', 'href' => $item('mechanical-and-electrical-work', 'electrical', 'solar-cell-installation')],
-                        ['label' => 'IT Infrastructure', 'href' => $svc('mechanical-and-electrical-work', 'network-cabling')],
-                        ['label' => 'CCTV', 'href' => $svc('mechanical-and-electrical-work', 'cctv')],
                     ],
                 ],
             ],
@@ -636,19 +631,19 @@ class HomeContent
 
     public static function servicesTitle(): string
     {
-        return Locale::pick('บริการของเรา', 'Our services');
+        return Locale::pick('งานบริการ — คุณกำลังจะเริ่มอะไร?', 'Services — where are you starting?');
     }
 
     public static function servicesNoteLead(): string
     {
-        return Locale::pick('รับเป็นงานเดี่ยวได้ทุกรายการ', 'Every item can be hired on its own');
+        return Locale::pick('เริ่มจากขั้นไหนก็ได้', 'Start at any stage');
     }
 
     public static function servicesNoteBody(): string
     {
         return Locale::pick(
-            ' ไม่จำเป็นต้องจ้างครบวงจร ลูกค้าจำนวนมากเริ่มจากงานเล็กอย่างเปลี่ยนประตูหน้าต่างอลูมิเนียมหรือถมดินก่อน แล้วค่อยกลับมาคุยเรื่องงานใหญ่ทีหลัง',
-            ' — a full package is optional. Many clients start with a smaller job such as aluminium doors and windows or land filling, then return for larger work later',
+            ' — รื้อถอน ถมที่ เสาเข็ม อลูมิเนียม จ้างแยกได้ งานระบบรับเมื่อทำร่วมโครงสร้างในโครงการเดียวกัน ลูกค้าจำนวนมากเริ่มจากงานเล็กก่อน แล้วค่อยกลับมาคุยงานใหญ่ทีหลัง',
+            ' — demolition, filling, piles, and aluminium can be hired alone. Systems are accepted with structural work in the same project. Many clients start small, then return for larger work.',
         );
     }
 

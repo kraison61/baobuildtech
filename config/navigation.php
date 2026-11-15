@@ -2,7 +2,7 @@
 
 /**
  * เมนูนำทางหน้าเว็บสาธารณะ
- * รายการ source=services จะ hydrate sections จาก DB (Category → Service → Item)
+ * รายการ source=services จะ hydrate sections จาก ServiceDisplayGroups (IA ฝั่งลูกค้า + URL เดิม)
  * label_key อ้างอิง lang/th/ui.php และ lang/en/ui.php
  */
 
